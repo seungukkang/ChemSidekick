@@ -44,6 +44,8 @@ def _table(t: Table) -> RichTable:
 
 def render_result(result: ToolResult, console: Console) -> None:
     console.print(Text(result.answer, style="bold"))
+    for h in result.highlights:
+        console.print(Text.assemble((f"  {h.label}: ", "dim"), (h.value, "")))
 
     for f in result.formulas:
         console.print(Text("  " + f.text))

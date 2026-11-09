@@ -12,10 +12,23 @@ from chemsidekick.tools.reference.element import (
 )
 
 
-def props(query: str) -> dict[str, object]:
-    """The 'Properties' table of an element card, as {property: value}."""
+def card_rows(query: str) -> dict[str, list[object]]:
+    """All property rows of an element card (from every section), as {property: row}."""
     result = element(ElementInput(query=query))
-    return {row[0]: row[1] for row in result.tables[0].rows}
+    return {
+        row[0]: row
+        for t in result.tables
+        if t.columns == ["Property", "Value", "Check"]
+        for row in t.rows
+    }
+
+
+def props(query: str) -> dict[str, object]:
+    return {k: row[1] for k, row in card_rows(query).items()}
+
+
+def table(result, title_start: str):
+    return next(t for t in result.tables if t.title.startswith(title_start))
 
 
 def test_all_118_elements_present_in_order():
@@ -82,22 +95,22 @@ def test_known_values(symbol, weight, en):
 def test_card_contents():
     fe = props("Fe")
     assert fe["Standard atomic weight"] == "55.845(2)"
-    assert fe["Electron configuration"] == "[Ar] 3d⁶ 4s²"
-    assert fe["Group / Period / Block"] == "8 / 4 / d"
+    assert fe["Ground-state configuration"] == "[Ar] 3d⁶ 4s²"
+    assert fe["Group · Period · Block"] == "8 · 4 · d"
     assert fe["Oxidation states (main)"] == "+2, +3"
 
 
 def test_isotopes_sorted_by_abundance():
     result = element(ElementInput(query="C"))
-    isotopes = result.tables[1]
+    isotopes = table(result, "Natural isotopes")
     assert [row[0] for row in isotopes.rows] == ["12C", "13C"]
 
 
 def test_no_standard_weight_uses_longest_lived_isotope():
     tc = props("Tc")
-    assert tc["Standard atomic weight"] == "— (no standard atomic weight)"
+    assert tc["Standard atomic weight"] == "none (no stable isotopes)"
     result = element(ElementInput(query="Tc"))
-    assert result.tables[1].title.startswith("Longest-lived isotope")
+    assert table(result, "Longest-lived isotope")
 
 
 def test_typo_suggests_close_match():
@@ -208,11 +221,11 @@ def test_configurations_are_unverified_with_two_agreeing_sources():
 
 def test_card_shows_check_column_and_numbered_references():
     result = element(ElementInput(query="Fe"))
-    checks = {row[0]: row[2] for row in result.tables[0].rows}
+    checks = {k: row[2] for k, row in card_rows("Fe").items()}
     assert checks["Standard atomic weight"] == "✓ 2,3,4"
     assert checks["Atomic number"] == "def 1"
-    assert checks["Electron configuration"].startswith("? ")
-    assert result.tables[0].minor_columns == [2]
+    assert checks["Ground-state configuration"].startswith("? ")
+    assert all(t.minor_columns for t in result.tables)
     assert result.sources[0].startswith("[1] ")
     assert any("Prohaska" in s for s in result.sources)
     # The legend is a footnote, not a warning.
@@ -222,7 +235,7 @@ def test_card_shows_check_column_and_numbered_references():
 
 def test_partial_value_check_mark():
     result = element(ElementInput(query="Sc"))
-    checks = {row[0]: row[2] for row in result.tables[0].rows}
+    checks = {k: row[2] for k, row in card_rows("Sc").items()}
     assert checks["Standard atomic weight"] == "≈ 2,4"
     # The older edition is still listed among the references.
     assert any("2013 edition" in s for s in result.sources)
@@ -241,3 +254,21 @@ def test_lookup_is_fast():
     for q in ["H", "iron", "26", "Og"]:
         element(ElementInput(query=q))
     assert time.perf_counter() - start < 0.1
+
+
+def test_card_highlights_key_values():
+    result = element(ElementInput(query="Fe"))
+    hl = {h.label: h for h in result.highlights}
+    assert hl["Standard atomic weight"].value == "55.845(2)"
+    assert hl["Electron configuration"].value == "[Ar] 3d⁶ 4s²"
+    assert hl["Group · Period · Block"].value == "8 · 4 · d"
+    assert "✓ 2,3,4" in hl["Standard atomic weight"].note
+
+
+def test_periodic_table_cells_have_number_block_and_tooltip():
+    t = element(ElementInput()).tables[0]
+    fe = t.cells["Fe"]
+    assert (fe.top, fe.tag) == ("26", "d")
+    assert "Iron" in fe.tooltip and "55.845(2)" in fe.tooltip
+    assert set(t.tags) == {"s", "p", "d", "f"}
+    assert t.cells["Ce"].tag == "f" and t.cells["Na"].tag == "s"

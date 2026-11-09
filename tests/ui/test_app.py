@@ -28,7 +28,8 @@ def test_lookup_shows_answer_tables_and_references(app):
     app.button(key="FormSubmitter:form-element-Run").click().run()
     assert not app.exception
     assert any("Fe · Iron · Z = 26" in m.value for m in app.markdown)
-    assert len(app.dataframe) == 2  # properties + isotopes
+    tables = [m.value for m in app.markdown if 'class="csk-table' in m.value]
+    assert len(tables) == 4  # identity, electronic structure, chemical properties, isotopes
     assert any("Prohaska" in c.value for c in app.caption)
 
 
@@ -98,7 +99,11 @@ def test_new_tools_show_up_in_grid_by_category_and_search():
 
 
 def _cell(app, symbol):
-    return next(b for b in app.button if b.key and b.key.startswith("act-") and b.label == symbol)
+    return next(
+        b
+        for b in app.button
+        if b.key and b.key.startswith("act-") and b.label.split("\n")[-1] == symbol
+    )
 
 
 def test_periodic_table_is_shown_on_open(app):

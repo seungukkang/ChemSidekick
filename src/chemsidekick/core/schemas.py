@@ -89,6 +89,14 @@ class Constant(_Model):
 Cell = str | int | float | None
 
 
+class CellInfo(_Model):
+    """Extra display information for one cell of a clickable table (e.g. a periodic table)."""
+
+    top: str = ""  # small text above the value, e.g. the atomic number
+    tag: str = ""  # a group used for coloring, e.g. "d" for d-block; see Table.tags
+    tooltip: str = ""  # shown on hover
+
+
 class Table(_Model):
     title: str = ""
     columns: list[str]
@@ -101,6 +109,9 @@ class Table(_Model):
     # where clicking "Fe" opens the iron card). Interfaces without clicks ignore it.
     action_field: str | None = None
     action_columns: list[int] = []
+    # Display extras for clickable tables: per cell text, and the meaning of each tag.
+    cells: dict[str, CellInfo] = {}
+    tags: dict[str, str] = {}
 
     @model_validator(mode="after")
     def _check(self) -> "Table":
@@ -123,11 +134,20 @@ class Artifact(_Model):
     title: str = ""
 
 
+class Highlight(_Model):
+    """A key value shown prominently under the answer (e.g. atomic weight)."""
+
+    label: str
+    value: str
+    note: str = ""  # shown on hover, e.g. how the value was verified
+
+
 class ToolResult(_Model):
     """What every tool returns."""
 
     # Answer
     answer: str
+    highlights: list[Highlight] = []
     # Evidence
     formulas: list[Formula] = []
     constants: list[Constant] = []

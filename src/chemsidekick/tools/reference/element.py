@@ -19,7 +19,14 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 from chemsidekick.core.registry import tool
-from chemsidekick.core.schemas import ElementQuery, Table, ToolError, ToolResult
+from chemsidekick.core.schemas import (
+    CellInfo,
+    ElementQuery,
+    Highlight,
+    Table,
+    ToolError,
+    ToolResult,
+)
 
 Element = dict[str, Any]
 
@@ -167,45 +174,84 @@ CHECK_LEGEND = (
 )
 
 
+def _weight_text(el: Element) -> str:
+    w = el["atomic_weight"]
+    return "none (no stable isotopes)" if w["text"] == "none" else w["text"]
+
+
+def _check_note(f: dict[str, Any], refs: _Refs) -> str:
+    """Hover text for a highlight, e.g. 'Check ✓ 2,3,4 (see References)'."""
+    return f"Check {_check(f, refs)} (see References)"
+
+
 def _element_card(el: Element) -> ToolResult:
     refs = _Refs()
     iupac = refs.cite(["iupac-definition"])
     identity = refs.cite(el["identity_refs"])
     group = el["group"] if el["group"] is not None else "—"
+    w, conf, ox = el["atomic_weight"], el["config"], el["oxidation_states"]
+    en, radius = el["en_pauling"], el["covalent_radius_pm"]
+    position = f"{group} · {el['period']} · {el['block']}"
 
-    w = el["atomic_weight"]
-    weight_text = "— (no standard atomic weight)" if w["text"] == "none" else w["text"]
-    conf = el["config"]
-    ox = el["oxidation_states"]
-    rows: list[list[Any]] = [
-        ["Atomic number", el["z"], f"def {iupac}"],
-        ["Symbol", el["symbol"], f"✓ {identity}"],
-        ["Name (IUPAC)", el["name"], f"✓ {identity}"],
-        ["Standard atomic weight", weight_text, _check(w, refs)],
-        [
-            "Group / Period / Block",
-            f"{group} / {el['period']} / {el['block']}",
-            f"def {iupac}",
-        ],
-        ["Electron configuration", superscript_config(conf["value"]), _check(conf, refs)],
-        ["Full configuration", superscript_config(conf["full"]), _check(conf, refs)],
-        [
-            "Electronegativity (Pauling)",
-            _or_dash(el["en_pauling"]["value"]),
-            _check(el["en_pauling"], refs),
-        ],
-        [
-            "Covalent radius",
-            _or_dash(el["covalent_radius_pm"]["value"], " pm"),
-            _check(el["covalent_radius_pm"], refs),
-        ],
-        ["Oxidation states (main)", _states(ox["value"]["main"]), _check(ox, refs)],
-        ["Oxidation states (other known)", _states(ox["value"]["other"]), _check(ox, refs)],
+    highlights = [
+        Highlight(
+            label="Standard atomic weight", value=_weight_text(el), note=_check_note(w, refs)
+        ),
+        Highlight(
+            label="Electron configuration",
+            value=superscript_config(conf["value"]),
+            note=_check_note(conf, refs),
+        ),
+        Highlight(label="Group · Period · Block", value=position, note=f"Definition [{iupac}]"),
+        Highlight(
+            label="Electronegativity (Pauling)",
+            value=_or_dash(en["value"]),
+            note=_check_note(en, refs),
+        ),
     ]
+
+    columns = ["Property", "Value", "Check"]
     tables = [
         Table(
-            title="Properties", columns=["Property", "Value", "Check"], rows=rows, minor_columns=[2]
-        )
+            title="Identity",
+            columns=columns,
+            minor_columns=[2],
+            rows=[
+                ["Atomic number", el["z"], f"def {iupac}"],
+                ["Symbol", el["symbol"], f"✓ {identity}"],
+                ["Name (IUPAC)", el["name"], f"✓ {identity}"],
+                ["Standard atomic weight", _weight_text(el), _check(w, refs)],
+                ["Group · Period · Block", position, f"def {iupac}"],
+            ],
+        ),
+        Table(
+            title="Chemical properties",
+            columns=columns,
+            minor_columns=[2],
+            rows=[
+                ["Electronegativity (Pauling)", _or_dash(en["value"]), _check(en, refs)],
+                [
+                    "Covalent radius (single bond)",
+                    _or_dash(radius["value"], " pm"),
+                    _check(radius, refs),
+                ],
+                ["Oxidation states (main)", _states(ox["value"]["main"]), _check(ox, refs)],
+                ["Oxidation states (other known)", _states(ox["value"]["other"]), _check(ox, refs)],
+            ],
+        ),  # fmt: skip
+        Table(
+            title="Electronic structure",
+            columns=columns,
+            minor_columns=[2],
+            rows=[
+                [
+                    "Ground-state configuration",
+                    superscript_config(conf["value"]),
+                    _check(conf, refs),
+                ],
+                ["Full configuration", superscript_config(conf["full"]), _check(conf, refs)],
+            ],
+        ),
     ]
 
     if el["isotopes"]:
@@ -247,6 +293,7 @@ def _element_card(el: Element) -> ToolResult:
     meta = _dataset()["meta"]
     return ToolResult(
         answer=f"{el['symbol']} · {el['name']} · Z = {el['z']}",
+        highlights=highlights,
         tables=tables,
         assumptions=["Ground state of the neutral, isolated atom."],
         notes=[CHECK_LEGEND],
@@ -257,6 +304,9 @@ def _element_card(el: Element) -> ToolResult:
         ],
         data={"element": el},
     )
+
+
+BLOCKS = {"s": "s-block", "p": "p-block", "d": "d-block", "f": "f-block"}
 
 
 def _periodic_table() -> ToolResult:
@@ -281,6 +331,14 @@ def _periodic_table() -> ToolResult:
     rows.append([""] * len(columns))
     rows.append(f_row("Ln", lanthanides))
     rows.append(f_row("An", actinides))
+    cells = {
+        el["symbol"]: CellInfo(
+            top=str(el["z"]),
+            tag=el["block"],
+            tooltip=f"{el['name']} · Z = {el['z']} · standard atomic weight {_weight_text(el)}",
+        )
+        for el in elements
+    }
     refs = _dataset()["meta"]["references"]
     return ToolResult(
         answer=f"Periodic table · {len(elements)} elements",
@@ -291,9 +349,15 @@ def _periodic_table() -> ToolResult:
                 rows=rows,
                 action_field="query",
                 action_columns=list(range(1, len(columns))),
+                cells=cells,
+                tags=BLOCKS,
             )
         ],
-        assumptions=["18-column layout with La and Ac in group 3."],
+        assumptions=[
+            "18-column layout with La and Ac in group 3; Ln = lanthanoids Ce–Lu, "
+            "An = actinoids Th–Lr."
+        ],
+        notes=["Click an element to open its card. Colors show the block (s, p, d, f)."],
         sources=[f"[1] {refs['iupac-definition']['citation']}"],
         data={"symbols": [el["symbol"] for el in elements]},
     )
