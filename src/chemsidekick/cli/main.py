@@ -265,6 +265,7 @@ def build_app(registry: Registry) -> typer.Typer:
             "--server.port", str(port),
             "--server.address", "localhost",
             "--browser.gatherUsageStats", "false",
+            "--server.showEmailPrompt", "false",  # no first-run email question
         ]  # fmt: skip
         raise typer.Exit(subprocess.call(cmd))
 
