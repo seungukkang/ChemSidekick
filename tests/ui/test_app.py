@@ -92,3 +92,26 @@ def test_new_tools_show_up_in_grid_by_category_and_search():
     assert [t.name for t in visible_tools(reg, ALL, "")] == ["viewer", "lookup"]
     assert [t.name for t in visible_tools(reg, "Structure", "")] == ["viewer"]
     assert [t.name for t in visible_tools(reg, "Reference", "geometry")] == ["viewer"]
+
+
+# --- Start view: periodic table with clickable elements ------------------------
+
+
+def _cell(app, symbol):
+    return next(b for b in app.button if b.key and b.key.startswith("act-") and b.label == symbol)
+
+
+def test_periodic_table_is_shown_on_open(app):
+    assert any("Periodic table · 118 elements" in m.value for m in app.markdown)
+    assert sum(1 for b in app.button if b.key and b.key.startswith("act-")) == 118
+
+
+def test_clicking_an_element_opens_its_card_and_back_returns(app):
+    _cell(app, "Fe").click().run()
+    assert not app.exception
+    assert any("Fe · Iron · Z = 26" in m.value for m in app.markdown)
+    assert app.text_input(key="in-element-query").value == "Fe"
+
+    next(b for b in app.button if b.key == "back").click().run()
+    assert any("Periodic table · 118 elements" in m.value for m in app.markdown)
+    assert app.text_input(key="in-element-query").value == ""

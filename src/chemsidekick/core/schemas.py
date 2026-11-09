@@ -96,6 +96,11 @@ class Table(_Model):
     # Indexes of columns that are for reference only (e.g. a "Check" column);
     # interfaces draw them narrow and dimmed.
     minor_columns: list[int] = []
+    # Clickable cells: clicking a cell in `action_columns` runs the same tool again
+    # with input field `action_field` set to the cell's text (e.g. a periodic table
+    # where clicking "Fe" opens the iron card). Interfaces without clicks ignore it.
+    action_field: str | None = None
+    action_columns: list[int] = []
 
     @model_validator(mode="after")
     def _check(self) -> "Table":

@@ -104,6 +104,7 @@ def _declare(reg: Registry, **overrides):
         ({"resources": "huge"}, "resources must be"),
         ({"number": 1}, "ID REF-01 is already used by 'echo'"),
         ({"number": 0}, "between 1 and 99"),
+        ({"resources": "medium", "start_view": "Start"}, "only allowed for light tools"),
     ],
 )
 def test_invalid_declarations_fail_immediately(overrides, message):

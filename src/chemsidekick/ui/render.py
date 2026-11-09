@@ -3,6 +3,7 @@ answer -> evidence (formulas, constants, assumptions, references) -> details.
 """
 
 import re
+from collections.abc import Callable
 from pathlib import Path
 
 import pandas as pd
@@ -64,7 +65,31 @@ def _table(t: Table) -> None:
     )
 
 
-def render_result(result: ToolResult, key: str = "result") -> None:
+OnAction = Callable[[str, str], None]
+
+
+def _action_grid(t: Table, key: str, on_action: OnAction) -> None:
+    """A table whose cells are buttons (e.g. a periodic table): one click runs the tool."""
+    clickable = set(t.action_columns)
+    for r, row in enumerate(t.rows):
+        if not any(row):
+            st.write("")  # blank spacer row
+            continue
+        cols = st.columns(len(t.columns), gap=None)
+        for c, (col, value) in enumerate(zip(cols, row, strict=True)):
+            text = "" if value is None else str(value)
+            with col:
+                if c in clickable and text:
+                    st.button(text, key=f"act-{key}-{r}-{c}", on_click=on_action,
+                              args=(t.action_field, text), width="stretch")  # fmt: skip
+                elif text:
+                    st.markdown(f"<div class='csk-row-label'>{text}</div>", unsafe_allow_html=True)
+
+
+def render_result(
+    result: ToolResult, key: str = "result", on_action: OnAction | None = None
+) -> None:
+    """Draw a result. `on_action(field, value)` handles clicks on clickable tables."""
     st.markdown(f"### {escape_markdown(result.answer)}")
 
     # Warnings are about this input or result, so they stay prominent.
@@ -77,7 +102,10 @@ def render_result(result: ToolResult, key: str = "result") -> None:
     for t in result.tables:
         if t.title:
             st.markdown(f"**{escape_markdown(t.title)}**")
-        _table(t)
+        if t.action_field and on_action:
+            _action_grid(t, key, on_action)
+        else:
+            _table(t)
     for s in result.structures:
         st.caption(f"3D structure: {s.frames[0].n_atoms} atoms, {len(s.frames)} frame(s)")
     for i, a in enumerate(result.artifacts):

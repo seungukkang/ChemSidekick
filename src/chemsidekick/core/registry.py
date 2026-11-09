@@ -66,6 +66,10 @@ class ToolSpec:
     timeout: Callable[[BaseModel], float] | None = None
     # Optional: Material Symbols icon name for the UI grid, e.g. "science".
     icon: str = ""
+    # Optional: name of the view shown when the tool is opened in the UI. If set,
+    # the tool runs once with its default input (light tools only), e.g. the
+    # element tool shows the periodic table.
+    start_view: str = ""
 
     @property
     def id(self) -> str:
@@ -95,6 +99,7 @@ class Registry:
         requires: list[str] | tuple[str, ...] = (),
         timeout: Callable[[BaseModel], float] | None = None,
         icon: str = "",
+        start_view: str = "",
     ) -> Callable[[ToolFunc], ToolFunc]:
         """Decorator that registers a tool function."""
 
@@ -112,6 +117,7 @@ class Registry:
                 func=func,
                 timeout=timeout,
                 icon=icon,
+                start_view=start_view,
             )
             self.register(spec)
             return func
@@ -136,6 +142,8 @@ class Registry:
             raise RegistryError(
                 f"tool {spec.name!r}: resources must be one of {', '.join(RESOURCE_LEVELS)}"
             )
+        if spec.start_view and spec.resources != "light":
+            raise RegistryError(f"tool {spec.name!r}: start_view is only allowed for light tools")
         if not 1 <= spec.number <= 99:
             raise RegistryError(f"tool {spec.name!r}: number must be between 1 and 99")
         for other in self._tools.values():

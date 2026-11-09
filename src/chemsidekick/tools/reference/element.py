@@ -41,6 +41,7 @@ class ElementInput(BaseModel):
     category="reference",
     keywords=["periodic table", "atomic weight", "electron configuration", "isotope"],
     icon="science",
+    start_view="Periodic table",
 )
 def element(inp: ElementInput) -> ToolResult:
     if inp.query is None:
@@ -283,7 +284,15 @@ def _periodic_table() -> ToolResult:
     refs = _dataset()["meta"]["references"]
     return ToolResult(
         answer=f"Periodic table · {len(elements)} elements",
-        tables=[Table(title="", columns=columns, rows=rows)],
+        tables=[
+            Table(
+                title="",
+                columns=columns,
+                rows=rows,
+                action_field="query",
+                action_columns=list(range(1, len(columns))),
+            )
+        ],
         assumptions=["18-column layout with La and Ac in group 3."],
         sources=[f"[1] {refs['iupac-definition']['citation']}"],
         data={"symbols": [el["symbol"] for el in elements]},

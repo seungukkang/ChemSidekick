@@ -5,6 +5,9 @@ icons (name shown on hover), and the selected tool's form and result below.
 Everything is generated from the tool registry.
 """
 
+import tempfile
+from pathlib import Path
+
 import streamlit as st
 from pydantic import ValidationError
 
@@ -29,6 +32,12 @@ div[class*="st-key-tool-"] button {
 }
 div[class*="st-key-tool-"] button p { font-size: 1.4rem; font-weight: 600; }
 div[class*="st-key-selected-"] button { border: 2px solid var(--primary-color, #ff4b4b); }
+/* Clickable table cells (e.g. periodic table): compact buttons. */
+div[class*="st-key-act-"] button {
+    min-height: 34px; height: 34px; padding: 0 2px; border-radius: 6px;
+}
+div[class*="st-key-act-"] button p { font-size: .85rem; font-weight: 600; }
+.csk-row-label { opacity: .5; font-size: .8rem; line-height: 34px; text-align: center; }
 </style>
 """
 
@@ -65,6 +74,7 @@ def _grid(tools: list[ToolSpec]) -> None:
                 if _icon_button(spec, st.session_state.get("tool") == spec.name):
                     st.session_state["tool"] = spec.name
                     st.session_state.pop("last", None)
+                    st.session_state.pop("pending", None)
                     st.rerun()
 
 
@@ -93,9 +103,45 @@ def _run(spec: ToolSpec, values: dict) -> None:
     st.session_state["last"] = (spec.name, number, outcome.result.model_dump_json())
 
 
+def _start_view(spec: ToolSpec) -> None:
+    """Run a light tool with its default input to show its start view (not kept as a result)."""
+    try:
+        outcome = run_tool(
+            spec, spec.input_model(), workdir=Path(tempfile.mkdtemp(prefix="csk-start-"))
+        )
+    except (ToolError, RunError, ValidationError) as e:
+        st.error(str(e))
+        return
+    st.session_state["last"] = (spec.name, None, outcome.result.model_dump_json())
+
+
+def _defaults(spec: ToolSpec) -> dict:
+    return {w.name: w.default for w in widget_specs(spec.input_model)}
+
+
+def _on_action(spec: ToolSpec):
+    """Click on a table cell: put the value into the input field and run the tool."""
+
+    def handler(field: str, value: str) -> None:
+        st.session_state[f"in-{spec.name}-{field}"] = value
+        st.session_state["pending"] = (spec.name, {**_defaults(spec), field: value})
+
+    return handler
+
+
+def _back_to_start(spec: ToolSpec) -> None:
+    for w in widget_specs(spec.input_model):
+        st.session_state[f"in-{spec.name}-{w.name}"] = w.default if w.default is not None else ""
+    st.session_state.pop("last", None)
+
+
 def _tool_page(spec: ToolSpec) -> None:
     st.markdown(f"#### {spec.title} · `{spec.id}`")
     st.caption(spec.summary)
+
+    pending = st.session_state.pop("pending", None)
+    if pending and pending[0] == spec.name:
+        _run(spec, pending[1])
     with st.form(key=f"form-{spec.name}"):
         values = {
             w.name: draw(w, key=f"in-{spec.name}-{w.name}") for w in widget_specs(spec.input_model)
@@ -113,10 +159,18 @@ def _tool_page(spec: ToolSpec) -> None:
             _run(spec, values)
 
     last = st.session_state.get("last")
+    if spec.start_view and not (last and last[0] == spec.name):
+        _start_view(spec)
+        last = st.session_state.get("last")
     if last and last[0] == spec.name:
         _, number, payload = last
         result = ToolResult.model_validate_json(payload)
-        render_result(result, key=f"r{number}")
+        if number is None:  # the start view: nothing to save
+            render_result(result, key="start", on_action=_on_action(spec))
+            return
+        if spec.start_view:
+            st.button(f"← {spec.start_view}", key="back", on_click=_back_to_start, args=(spec,))
+        render_result(result, key=f"r{number}", on_action=_on_action(spec))
         left, right = st.columns([1, 4])
         with left:
             if st.button("Save", key=f"save-{number}"):
