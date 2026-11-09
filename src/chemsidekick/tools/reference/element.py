@@ -29,7 +29,7 @@ class ElementInput(BaseModel):
         default=None,
         description="Symbol, English name, or atomic number (e.g. Fe, iron, 26). "
         "Leave empty for the full periodic table.",
-        json_schema_extra={"positional": True},
+        json_schema_extra={"positional": True, "label": "Element"},
     )
 
 
@@ -40,6 +40,7 @@ class ElementInput(BaseModel):
     summary="Element properties, electron configuration, isotopes; or the periodic table",
     category="reference",
     keywords=["periodic table", "atomic weight", "electron configuration", "isotope"],
+    icon="science",
 )
 def element(inp: ElementInput) -> ToolResult:
     if inp.query is None:
@@ -211,7 +212,7 @@ def _element_card(el: Element) -> ToolResult:
         tables.append(
             Table(
                 title="Natural isotopes",
-                columns=["Isotope", "Mass (u)", "Check", "Abundance (%)", "Check"],
+                columns=["Isotope", "Mass (u)", "Mass check", "Abundance (%)", "Abundance check"],
                 rows=[
                     [
                         f"{i['mass_number']}{el['symbol']}",

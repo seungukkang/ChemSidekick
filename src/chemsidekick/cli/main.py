@@ -1,11 +1,12 @@
 """Entry point for the `csk` command.
 
-Built-in commands (list, search, recent, save, doctor) are defined here. Every tool in the
+Built-in commands (list, search, recent, save, doctor, ui) are defined here. Every tool in the
 registry becomes a `csk <tool>` command automatically: its options are
 generated from the tool's Pydantic input model.
 """
 
 import inspect
+import subprocess
 import sys
 import types
 import typing
@@ -252,6 +253,20 @@ def build_app(registry: Registry) -> typer.Typer:
         except LookupError as e:
             _fail(str(e))
         console.print(f"Saved to {dest}", highlight=False)
+
+    @app.command("ui")
+    def ui(
+        port: int = typer.Option(8501, "--port", help="Port for the local web server."),
+    ) -> None:
+        """Open the ChemSidekick web interface in your browser."""
+        app_file = Path(__file__).resolve().parents[1] / "ui" / "app.py"
+        cmd = [
+            sys.executable, "-m", "streamlit", "run", str(app_file),
+            "--server.port", str(port),
+            "--server.address", "localhost",
+            "--browser.gatherUsageStats", "false",
+        ]  # fmt: skip
+        raise typer.Exit(subprocess.call(cmd))
 
     @app.command("doctor")
     def doctor_cmd() -> None:

@@ -64,6 +64,8 @@ class ToolSpec:
     func: ToolFunc
     # Optional: time limit (s) computed from the input, e.g. more isomers -> more time.
     timeout: Callable[[BaseModel], float] | None = None
+    # Optional: Material Symbols icon name for the UI grid, e.g. "science".
+    icon: str = ""
 
     @property
     def id(self) -> str:
@@ -92,6 +94,7 @@ class Registry:
         resources: Resources = "light",
         requires: list[str] | tuple[str, ...] = (),
         timeout: Callable[[BaseModel], float] | None = None,
+        icon: str = "",
     ) -> Callable[[ToolFunc], ToolFunc]:
         """Decorator that registers a tool function."""
 
@@ -108,6 +111,7 @@ class Registry:
                 input_model=_input_model_of(func),
                 func=func,
                 timeout=timeout,
+                icon=icon,
             )
             self.register(spec)
             return func
