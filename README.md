@@ -6,7 +6,7 @@ A personal toolbox of small chemistry calculators and visualizers, available fro
 
 ## Planned tools (v0.1.0)
 
-- **periodic**: quick element lookup and periodic table
+- **element**: quick element lookup and periodic table
 - **xyz**: paste XYZ coordinates → interactive 3D view
 - **stereo**: SMILES → all stereoisomers as 2D images and 3D structures
 

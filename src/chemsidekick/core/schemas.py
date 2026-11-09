@@ -23,6 +23,14 @@ ElementQuery = Annotated[str, StringConstraints(strip_whitespace=True, min_lengt
 """An element symbol, English name, or atomic number, e.g. "Fe", "iron", "26"."""
 
 
+class ToolError(Exception):
+    """An error caused by the user's input, with a message meant for the user.
+
+    Tools raise this (e.g. "Unknown element 'Iorn'. Did you mean: Fe (Iron)?").
+    Interfaces show the message as-is, without a traceback.
+    """
+
+
 class _Model(BaseModel):
     # Reject unknown fields so that typos fail loudly instead of being ignored.
     model_config = ConfigDict(extra="forbid")
@@ -116,6 +124,7 @@ class ToolResult(_Model):
     formulas: list[Formula] = []
     constants: list[Constant] = []
     assumptions: list[str] = []
+    sources: list[str] = []
     # Details
     tables: list[Table] = []
     structures: list[Structure3D] = []

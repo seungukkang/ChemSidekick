@@ -1,0 +1,4963 @@
+{
+ "meta": {
+  "source": "mendeleev 1.3.0",
+  "covalent_radius": "Pyykkö & Atsumi (2009), single-bond radii",
+  "oxidation_states": "mendeleev 'main' and 'extended' categories",
+  "generated": "2026-11-10"
+ },
+ "elements": [
+  {
+   "z": 1,
+   "symbol": "H",
+   "name": "Hydrogen",
+   "aliases": [],
+   "atomic_weight": 1.008,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 1,
+   "period": 1,
+   "block": "s",
+   "config": "1s1",
+   "config_full": "1s1",
+   "en_pauling": 2.2,
+   "covalent_radius_pm": 32.0,
+   "oxidation_states_main": [
+    -1,
+    1
+   ],
+   "oxidation_states_other": [],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 1,
+     "mass": 1.007825031898,
+     "abundance": 99.9855
+    },
+    {
+     "mass_number": 2,
+     "mass": 2.014101777844,
+     "abundance": 0.0145
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 2,
+   "symbol": "He",
+   "name": "Helium",
+   "aliases": [],
+   "atomic_weight": 4.002602,
+   "atomic_weight_uncertainty": 2e-06,
+   "standard_weight": true,
+   "group": 18,
+   "period": 1,
+   "block": "s",
+   "config": "1s2",
+   "config_full": "1s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 46.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 4,
+     "mass": 4.00260325413,
+     "abundance": 99.9998
+    },
+    {
+     "mass_number": 3,
+     "mass": 3.01602932197,
+     "abundance": 0.0002
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 3,
+   "symbol": "Li",
+   "name": "Lithium",
+   "aliases": [],
+   "atomic_weight": 6.94,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 1,
+   "period": 2,
+   "block": "s",
+   "config": "[He] 2s1",
+   "config_full": "1s2 2s1",
+   "en_pauling": 0.98,
+   "covalent_radius_pm": 133.0,
+   "oxidation_states_main": [
+    1
+   ],
+   "oxidation_states_other": [],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 7,
+     "mass": 7.01600343426,
+     "abundance": 95.15
+    },
+    {
+     "mass_number": 6,
+     "mass": 6.01512288742,
+     "abundance": 4.85
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 4,
+   "symbol": "Be",
+   "name": "Beryllium",
+   "aliases": [],
+   "atomic_weight": 9.0121831,
+   "atomic_weight_uncertainty": 5e-07,
+   "standard_weight": true,
+   "group": 2,
+   "period": 2,
+   "block": "s",
+   "config": "[He] 2s2",
+   "config_full": "1s2 2s2",
+   "en_pauling": 1.57,
+   "covalent_radius_pm": 102.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    0,
+    1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 9,
+     "mass": 9.012183062,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 5,
+   "symbol": "B",
+   "name": "Boron",
+   "aliases": [],
+   "atomic_weight": 10.81,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 13,
+   "period": 2,
+   "block": "p",
+   "config": "[He] 2s2 2p1",
+   "config_full": "1s2 2s2 2p1",
+   "en_pauling": 2.04,
+   "covalent_radius_pm": 85.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    -5,
+    -1,
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 11,
+     "mass": 11.009305166,
+     "abundance": 80.35
+    },
+    {
+     "mass_number": 10,
+     "mass": 10.012936862,
+     "abundance": 19.65
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 6,
+   "symbol": "C",
+   "name": "Carbon",
+   "aliases": [],
+   "atomic_weight": 12.011,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 14,
+   "period": 2,
+   "block": "p",
+   "config": "[He] 2s2 2p2",
+   "config_full": "1s2 2s2 2p2",
+   "en_pauling": 2.55,
+   "covalent_radius_pm": 75.0,
+   "oxidation_states_main": [
+    -4,
+    4
+   ],
+   "oxidation_states_other": [
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 12,
+     "mass": 12.0,
+     "abundance": 98.94
+    },
+    {
+     "mass_number": 13,
+     "mass": 13.00335483534,
+     "abundance": 1.06
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 7,
+   "symbol": "N",
+   "name": "Nitrogen",
+   "aliases": [],
+   "atomic_weight": 14.007,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 15,
+   "period": 2,
+   "block": "p",
+   "config": "[He] 2s2 2p3",
+   "config_full": "1s2 2s2 2p3",
+   "en_pauling": 3.04,
+   "covalent_radius_pm": 71.0,
+   "oxidation_states_main": [
+    -3,
+    3,
+    5
+   ],
+   "oxidation_states_other": [
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 14,
+     "mass": 14.00307400425,
+     "abundance": 99.6205
+    },
+    {
+     "mass_number": 15,
+     "mass": 15.00010889827,
+     "abundance": 0.3795
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 8,
+   "symbol": "O",
+   "name": "Oxygen",
+   "aliases": [],
+   "atomic_weight": 15.999,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 16,
+   "period": 2,
+   "block": "p",
+   "config": "[He] 2s2 2p4",
+   "config_full": "1s2 2s2 2p4",
+   "en_pauling": 3.44,
+   "covalent_radius_pm": 63.0,
+   "oxidation_states_main": [
+    -2
+   ],
+   "oxidation_states_other": [
+    -1,
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 16,
+     "mass": 15.99491461926,
+     "abundance": 99.757
+    },
+    {
+     "mass_number": 18,
+     "mass": 17.99915961214,
+     "abundance": 0.2045
+    },
+    {
+     "mass_number": 17,
+     "mass": 16.99913175595,
+     "abundance": 0.03835
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 9,
+   "symbol": "F",
+   "name": "Fluorine",
+   "aliases": [],
+   "atomic_weight": 18.998403163,
+   "atomic_weight_uncertainty": 6.000000000000001e-09,
+   "standard_weight": true,
+   "group": 17,
+   "period": 2,
+   "block": "p",
+   "config": "[He] 2s2 2p5",
+   "config_full": "1s2 2s2 2p5",
+   "en_pauling": 3.98,
+   "covalent_radius_pm": 64.0,
+   "oxidation_states_main": [
+    -1
+   ],
+   "oxidation_states_other": [],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 19,
+     "mass": 18.99840316207,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 10,
+   "symbol": "Ne",
+   "name": "Neon",
+   "aliases": [],
+   "atomic_weight": 20.1797,
+   "atomic_weight_uncertainty": 0.0006000000000000001,
+   "standard_weight": true,
+   "group": 18,
+   "period": 2,
+   "block": "p",
+   "config": "[He] 2s2 2p6",
+   "config_full": "1s2 2s2 2p6",
+   "en_pauling": null,
+   "covalent_radius_pm": 67.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 20,
+     "mass": 19.99244017525,
+     "abundance": 90.48
+    },
+    {
+     "mass_number": 22,
+     "mass": 21.991385113,
+     "abundance": 9.25
+    },
+    {
+     "mass_number": 21,
+     "mass": 20.993846685,
+     "abundance": 0.27
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 11,
+   "symbol": "Na",
+   "name": "Sodium",
+   "aliases": [],
+   "atomic_weight": 22.98976928,
+   "atomic_weight_uncertainty": 2e-08,
+   "standard_weight": true,
+   "group": 1,
+   "period": 3,
+   "block": "s",
+   "config": "[Ne] 3s1",
+   "config_full": "1s2 2s2 2p6 3s1",
+   "en_pauling": 0.93,
+   "covalent_radius_pm": 155.0,
+   "oxidation_states_main": [
+    1
+   ],
+   "oxidation_states_other": [
+    -1,
+    0
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 23,
+     "mass": 22.98976928195,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 12,
+   "symbol": "Mg",
+   "name": "Magnesium",
+   "aliases": [],
+   "atomic_weight": 24.305,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 2,
+   "period": 3,
+   "block": "s",
+   "config": "[Ne] 3s2",
+   "config_full": "1s2 2s2 2p6 3s2",
+   "en_pauling": 1.31,
+   "covalent_radius_pm": 139.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    0,
+    1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 24,
+     "mass": 23.985041689,
+     "abundance": 78.965
+    },
+    {
+     "mass_number": 26,
+     "mass": 25.982592972,
+     "abundance": 11.025
+    },
+    {
+     "mass_number": 25,
+     "mass": 24.985836966,
+     "abundance": 10.011
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 13,
+   "symbol": "Al",
+   "name": "Aluminum",
+   "aliases": [
+    "aluminium",
+    "aluminum"
+   ],
+   "atomic_weight": 26.9815385,
+   "atomic_weight_uncertainty": 7e-07,
+   "standard_weight": true,
+   "group": 13,
+   "period": 3,
+   "block": "p",
+   "config": "[Ne] 3s2 3p1",
+   "config_full": "1s2 2s2 2p6 3s2 3p1",
+   "en_pauling": 1.61,
+   "covalent_radius_pm": 126.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    -2,
+    -1,
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 27,
+     "mass": 26.981538408,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 14,
+   "symbol": "Si",
+   "name": "Silicon",
+   "aliases": [],
+   "atomic_weight": 28.085,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 14,
+   "period": 3,
+   "block": "p",
+   "config": "[Ne] 3s2 3p2",
+   "config_full": "1s2 2s2 2p6 3s2 3p2",
+   "en_pauling": 1.9,
+   "covalent_radius_pm": 116.0,
+   "oxidation_states_main": [
+    -4,
+    4
+   ],
+   "oxidation_states_other": [
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 28,
+     "mass": 27.97692653442,
+     "abundance": 92.2545
+    },
+    {
+     "mass_number": 29,
+     "mass": 28.97649466434,
+     "abundance": 4.672
+    },
+    {
+     "mass_number": 30,
+     "mass": 29.973770137,
+     "abundance": 3.0735
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 15,
+   "symbol": "P",
+   "name": "Phosphorus",
+   "aliases": [],
+   "atomic_weight": 30.973761998,
+   "atomic_weight_uncertainty": 5e-09,
+   "standard_weight": true,
+   "group": 15,
+   "period": 3,
+   "block": "p",
+   "config": "[Ne] 3s2 3p3",
+   "config_full": "1s2 2s2 2p6 3s2 3p3",
+   "en_pauling": 2.19,
+   "covalent_radius_pm": 111.0,
+   "oxidation_states_main": [
+    -3,
+    3,
+    5
+   ],
+   "oxidation_states_other": [
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 31,
+     "mass": 30.97376199768,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 16,
+   "symbol": "S",
+   "name": "Sulfur",
+   "aliases": [
+    "sulfur",
+    "sulphur"
+   ],
+   "atomic_weight": 32.06,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 16,
+   "period": 3,
+   "block": "p",
+   "config": "[Ne] 3s2 3p4",
+   "config_full": "1s2 2s2 2p6 3s2 3p4",
+   "en_pauling": 2.58,
+   "covalent_radius_pm": 103.0,
+   "oxidation_states_main": [
+    -2,
+    2,
+    4,
+    6
+   ],
+   "oxidation_states_other": [
+    -1,
+    0,
+    1,
+    3,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 32,
+     "mass": 31.97207117354,
+     "abundance": 94.85
+    },
+    {
+     "mass_number": 34,
+     "mass": 33.967867011,
+     "abundance": 4.365
+    },
+    {
+     "mass_number": 33,
+     "mass": 32.97145890862,
+     "abundance": 0.763
+    },
+    {
+     "mass_number": 36,
+     "mass": 35.967080692,
+     "abundance": 0.0158
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 17,
+   "symbol": "Cl",
+   "name": "Chlorine",
+   "aliases": [],
+   "atomic_weight": 35.45,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 17,
+   "period": 3,
+   "block": "p",
+   "config": "[Ne] 3s2 3p5",
+   "config_full": "1s2 2s2 2p6 3s2 3p5",
+   "en_pauling": 3.16,
+   "covalent_radius_pm": 99.0,
+   "oxidation_states_main": [
+    -1,
+    1,
+    3,
+    5,
+    7
+   ],
+   "oxidation_states_other": [
+    2,
+    4,
+    6
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 35,
+     "mass": 34.968852694,
+     "abundance": 75.8
+    },
+    {
+     "mass_number": 37,
+     "mass": 36.965902573,
+     "abundance": 24.2
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 18,
+   "symbol": "Ar",
+   "name": "Argon",
+   "aliases": [],
+   "atomic_weight": 39.948,
+   "atomic_weight_uncertainty": 0.001,
+   "standard_weight": true,
+   "group": 18,
+   "period": 3,
+   "block": "p",
+   "config": "[Ne] 3s2 3p6",
+   "config_full": "1s2 2s2 2p6 3s2 3p6",
+   "en_pauling": null,
+   "covalent_radius_pm": 96.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 40,
+     "mass": 39.96238312204,
+     "abundance": 99.6035
+    },
+    {
+     "mass_number": 36,
+     "mass": 35.967545106,
+     "abundance": 0.3336
+    },
+    {
+     "mass_number": 38,
+     "mass": 37.962732102,
+     "abundance": 0.0629
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 19,
+   "symbol": "K",
+   "name": "Potassium",
+   "aliases": [],
+   "atomic_weight": 39.0983,
+   "atomic_weight_uncertainty": 0.0001,
+   "standard_weight": true,
+   "group": 1,
+   "period": 4,
+   "block": "s",
+   "config": "[Ar] 4s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 4s1",
+   "en_pauling": 0.82,
+   "covalent_radius_pm": 196.0,
+   "oxidation_states_main": [
+    1
+   ],
+   "oxidation_states_other": [
+    -1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 39,
+     "mass": 38.96370648482,
+     "abundance": 93.2581
+    },
+    {
+     "mass_number": 41,
+     "mass": 40.96182525611,
+     "abundance": 6.7302
+    },
+    {
+     "mass_number": 40,
+     "mass": 39.963998165,
+     "abundance": 0.0117
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 20,
+   "symbol": "Ca",
+   "name": "Calcium",
+   "aliases": [],
+   "atomic_weight": 40.078,
+   "atomic_weight_uncertainty": 0.004,
+   "standard_weight": true,
+   "group": 2,
+   "period": 4,
+   "block": "s",
+   "config": "[Ar] 4s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 4s2",
+   "en_pauling": 1.0,
+   "covalent_radius_pm": 171.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 40,
+     "mass": 39.96259085,
+     "abundance": 96.941
+    },
+    {
+     "mass_number": 44,
+     "mass": 43.955481489,
+     "abundance": 2.086
+    },
+    {
+     "mass_number": 42,
+     "mass": 41.95861778,
+     "abundance": 0.647
+    },
+    {
+     "mass_number": 48,
+     "mass": 47.952522654,
+     "abundance": 0.187
+    },
+    {
+     "mass_number": 43,
+     "mass": 42.958766381,
+     "abundance": 0.135
+    },
+    {
+     "mass_number": 46,
+     "mass": 45.953687726,
+     "abundance": 0.004
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 21,
+   "symbol": "Sc",
+   "name": "Scandium",
+   "aliases": [],
+   "atomic_weight": 44.955908,
+   "atomic_weight_uncertainty": 4.9999999999999996e-06,
+   "standard_weight": true,
+   "group": 3,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d1 4s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d1 4s2",
+   "en_pauling": 1.36,
+   "covalent_radius_pm": 148.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 45,
+     "mass": 44.955907051,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 22,
+   "symbol": "Ti",
+   "name": "Titanium",
+   "aliases": [],
+   "atomic_weight": 47.867,
+   "atomic_weight_uncertainty": 0.001,
+   "standard_weight": true,
+   "group": 4,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d2 4s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d2 4s2",
+   "en_pauling": 1.54,
+   "covalent_radius_pm": 136.0,
+   "oxidation_states_main": [
+    4
+   ],
+   "oxidation_states_other": [
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 48,
+     "mass": 47.947940677,
+     "abundance": 73.72
+    },
+    {
+     "mass_number": 46,
+     "mass": 45.952626356,
+     "abundance": 8.25
+    },
+    {
+     "mass_number": 47,
+     "mass": 46.951757491,
+     "abundance": 7.44
+    },
+    {
+     "mass_number": 49,
+     "mass": 48.947864391,
+     "abundance": 5.41
+    },
+    {
+     "mass_number": 50,
+     "mass": 49.944785622,
+     "abundance": 5.18
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 23,
+   "symbol": "V",
+   "name": "Vanadium",
+   "aliases": [],
+   "atomic_weight": 50.9415,
+   "atomic_weight_uncertainty": 0.0001,
+   "standard_weight": true,
+   "group": 5,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d3 4s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d3 4s2",
+   "en_pauling": 1.63,
+   "covalent_radius_pm": 134.0,
+   "oxidation_states_main": [
+    5
+   ],
+   "oxidation_states_other": [
+    -3,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 51,
+     "mass": 50.943957664,
+     "abundance": 99.75
+    },
+    {
+     "mass_number": 50,
+     "mass": 49.947156681,
+     "abundance": 0.25
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 24,
+   "symbol": "Cr",
+   "name": "Chromium",
+   "aliases": [],
+   "atomic_weight": 51.9961,
+   "atomic_weight_uncertainty": 0.0006000000000000001,
+   "standard_weight": true,
+   "group": 6,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d5 4s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d5 4s1",
+   "en_pauling": 1.66,
+   "covalent_radius_pm": 122.0,
+   "oxidation_states_main": [
+    3,
+    6
+   ],
+   "oxidation_states_other": [
+    -4,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    4,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 52,
+     "mass": 51.940504714,
+     "abundance": 83.789
+    },
+    {
+     "mass_number": 53,
+     "mass": 52.940646304,
+     "abundance": 9.501
+    },
+    {
+     "mass_number": 50,
+     "mass": 49.946042209,
+     "abundance": 4.345
+    },
+    {
+     "mass_number": 54,
+     "mass": 53.938877359,
+     "abundance": 2.365
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 25,
+   "symbol": "Mn",
+   "name": "Manganese",
+   "aliases": [],
+   "atomic_weight": 54.938044,
+   "atomic_weight_uncertainty": 3e-06,
+   "standard_weight": true,
+   "group": 7,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d5 4s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d5 4s2",
+   "en_pauling": 1.55,
+   "covalent_radius_pm": 119.0,
+   "oxidation_states_main": [
+    2,
+    4,
+    7
+   ],
+   "oxidation_states_other": [
+    -3,
+    -1,
+    0,
+    1,
+    3,
+    5,
+    6
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 55,
+     "mass": 54.93804304,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 26,
+   "symbol": "Fe",
+   "name": "Iron",
+   "aliases": [],
+   "atomic_weight": 55.845,
+   "atomic_weight_uncertainty": 0.002,
+   "standard_weight": true,
+   "group": 8,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d6 4s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d6 4s2",
+   "en_pauling": 1.83,
+   "covalent_radius_pm": 116.0,
+   "oxidation_states_main": [
+    2,
+    3
+   ],
+   "oxidation_states_other": [
+    -4,
+    -2,
+    -1,
+    0,
+    1,
+    4,
+    5,
+    6,
+    7
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 56,
+     "mass": 55.934935537,
+     "abundance": 91.754
+    },
+    {
+     "mass_number": 54,
+     "mass": 53.939608189,
+     "abundance": 5.845
+    },
+    {
+     "mass_number": 57,
+     "mass": 56.93539195,
+     "abundance": 2.119
+    },
+    {
+     "mass_number": 58,
+     "mass": 57.933273575,
+     "abundance": 0.282
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 27,
+   "symbol": "Co",
+   "name": "Cobalt",
+   "aliases": [],
+   "atomic_weight": 58.933194,
+   "atomic_weight_uncertainty": 4e-06,
+   "standard_weight": true,
+   "group": 9,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d7 4s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d7 4s2",
+   "en_pauling": 1.88,
+   "covalent_radius_pm": 111.0,
+   "oxidation_states_main": [
+    2,
+    3
+   ],
+   "oxidation_states_other": [
+    -3,
+    -1,
+    0,
+    1,
+    4,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 59,
+     "mass": 58.933193524,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 28,
+   "symbol": "Ni",
+   "name": "Nickel",
+   "aliases": [],
+   "atomic_weight": 58.6934,
+   "atomic_weight_uncertainty": 0.0004,
+   "standard_weight": true,
+   "group": 10,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d8 4s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d8 4s2",
+   "en_pauling": 1.91,
+   "covalent_radius_pm": 110.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    -2,
+    -1,
+    0,
+    1,
+    3,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 58,
+     "mass": 57.93534165,
+     "abundance": 68.0769
+    },
+    {
+     "mass_number": 60,
+     "mass": 59.930785129,
+     "abundance": 26.2231
+    },
+    {
+     "mass_number": 62,
+     "mass": 61.928344753,
+     "abundance": 3.6345
+    },
+    {
+     "mass_number": 61,
+     "mass": 60.931054819,
+     "abundance": 1.1399
+    },
+    {
+     "mass_number": 64,
+     "mass": 63.927966228,
+     "abundance": 0.9256
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 29,
+   "symbol": "Cu",
+   "name": "Copper",
+   "aliases": [],
+   "atomic_weight": 63.546,
+   "atomic_weight_uncertainty": 0.003,
+   "standard_weight": true,
+   "group": 11,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d10 4s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s1",
+   "en_pauling": 1.9,
+   "covalent_radius_pm": 112.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    -2,
+    0,
+    1,
+    3,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 63,
+     "mass": 62.929597119,
+     "abundance": 69.15
+    },
+    {
+     "mass_number": 65,
+     "mass": 64.927789476,
+     "abundance": 30.85
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 30,
+   "symbol": "Zn",
+   "name": "Zinc",
+   "aliases": [],
+   "atomic_weight": 65.38,
+   "atomic_weight_uncertainty": 0.02,
+   "standard_weight": true,
+   "group": 12,
+   "period": 4,
+   "block": "d",
+   "config": "[Ar] 3d10 4s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2",
+   "en_pauling": 1.65,
+   "covalent_radius_pm": 118.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    -2,
+    0,
+    1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 64,
+     "mass": 63.929141776,
+     "abundance": 49.17
+    },
+    {
+     "mass_number": 66,
+     "mass": 65.926033639,
+     "abundance": 27.73
+    },
+    {
+     "mass_number": 68,
+     "mass": 67.924844232,
+     "abundance": 18.45
+    },
+    {
+     "mass_number": 67,
+     "mass": 66.927127422,
+     "abundance": 4.04
+    },
+    {
+     "mass_number": 70,
+     "mass": 69.925319175,
+     "abundance": 0.61
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 31,
+   "symbol": "Ga",
+   "name": "Gallium",
+   "aliases": [],
+   "atomic_weight": 69.723,
+   "atomic_weight_uncertainty": 0.001,
+   "standard_weight": true,
+   "group": 13,
+   "period": 4,
+   "block": "p",
+   "config": "[Ar] 3d10 4s2 4p1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p1",
+   "en_pauling": 1.81,
+   "covalent_radius_pm": 124.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    -5,
+    -4,
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 69,
+     "mass": 68.925573528,
+     "abundance": 60.108
+    },
+    {
+     "mass_number": 71,
+     "mass": 70.924702554,
+     "abundance": 39.892
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 32,
+   "symbol": "Ge",
+   "name": "Germanium",
+   "aliases": [],
+   "atomic_weight": 72.63,
+   "atomic_weight_uncertainty": 0.008,
+   "standard_weight": true,
+   "group": 14,
+   "period": 4,
+   "block": "p",
+   "config": "[Ar] 3d10 4s2 4p2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p2",
+   "en_pauling": 2.01,
+   "covalent_radius_pm": 121.0,
+   "oxidation_states_main": [
+    -4,
+    2,
+    4
+   ],
+   "oxidation_states_other": [
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    3
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 74,
+     "mass": 73.92117776,
+     "abundance": 36.52
+    },
+    {
+     "mass_number": 72,
+     "mass": 71.922075824,
+     "abundance": 27.45
+    },
+    {
+     "mass_number": 70,
+     "mass": 69.924248542,
+     "abundance": 20.52
+    },
+    {
+     "mass_number": 73,
+     "mass": 72.923458954,
+     "abundance": 7.76
+    },
+    {
+     "mass_number": 76,
+     "mass": 75.921402725,
+     "abundance": 7.75
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 33,
+   "symbol": "As",
+   "name": "Arsenic",
+   "aliases": [],
+   "atomic_weight": 74.921595,
+   "atomic_weight_uncertainty": 6e-06,
+   "standard_weight": true,
+   "group": 15,
+   "period": 4,
+   "block": "p",
+   "config": "[Ar] 3d10 4s2 4p3",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p3",
+   "en_pauling": 2.18,
+   "covalent_radius_pm": 121.0,
+   "oxidation_states_main": [
+    -3,
+    3,
+    5
+   ],
+   "oxidation_states_other": [
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 75,
+     "mass": 74.921594562,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 34,
+   "symbol": "Se",
+   "name": "Selenium",
+   "aliases": [],
+   "atomic_weight": 78.971,
+   "atomic_weight_uncertainty": 0.008,
+   "standard_weight": true,
+   "group": 16,
+   "period": 4,
+   "block": "p",
+   "config": "[Ar] 3d10 4s2 4p4",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p4",
+   "en_pauling": 2.55,
+   "covalent_radius_pm": 116.0,
+   "oxidation_states_main": [
+    -2,
+    2,
+    4,
+    6
+   ],
+   "oxidation_states_other": [
+    -1,
+    0,
+    1,
+    3,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 80,
+     "mass": 79.916521761,
+     "abundance": 49.8
+    },
+    {
+     "mass_number": 78,
+     "mass": 77.917309244,
+     "abundance": 23.69
+    },
+    {
+     "mass_number": 76,
+     "mass": 75.919213702,
+     "abundance": 9.23
+    },
+    {
+     "mass_number": 82,
+     "mass": 81.916699531,
+     "abundance": 8.82
+    },
+    {
+     "mass_number": 77,
+     "mass": 76.91991415,
+     "abundance": 7.6
+    },
+    {
+     "mass_number": 74,
+     "mass": 73.922475933,
+     "abundance": 0.86
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 35,
+   "symbol": "Br",
+   "name": "Bromine",
+   "aliases": [],
+   "atomic_weight": 79.904,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 17,
+   "period": 4,
+   "block": "p",
+   "config": "[Ar] 3d10 4s2 4p5",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p5",
+   "en_pauling": 2.96,
+   "covalent_radius_pm": 114.0,
+   "oxidation_states_main": [
+    -1,
+    1,
+    3,
+    5
+   ],
+   "oxidation_states_other": [
+    2,
+    4,
+    7
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 79,
+     "mass": 78.918337574,
+     "abundance": 50.65
+    },
+    {
+     "mass_number": 81,
+     "mass": 80.916288197,
+     "abundance": 49.35
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 36,
+   "symbol": "Kr",
+   "name": "Krypton",
+   "aliases": [],
+   "atomic_weight": 83.798,
+   "atomic_weight_uncertainty": 0.002,
+   "standard_weight": true,
+   "group": 18,
+   "period": 4,
+   "block": "p",
+   "config": "[Ar] 3d10 4s2 4p6",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6",
+   "en_pauling": null,
+   "covalent_radius_pm": 117.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 84,
+     "mass": 83.91149772708,
+     "abundance": 56.987
+    },
+    {
+     "mass_number": 86,
+     "mass": 85.91061062468,
+     "abundance": 17.279
+    },
+    {
+     "mass_number": 82,
+     "mass": 81.91348115368,
+     "abundance": 11.593
+    },
+    {
+     "mass_number": 83,
+     "mass": 82.914126516,
+     "abundance": 11.5
+    },
+    {
+     "mass_number": 80,
+     "mass": 79.91637794,
+     "abundance": 2.286
+    },
+    {
+     "mass_number": 78,
+     "mass": 77.920366341,
+     "abundance": 0.355
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 37,
+   "symbol": "Rb",
+   "name": "Rubidium",
+   "aliases": [],
+   "atomic_weight": 85.4678,
+   "atomic_weight_uncertainty": 0.00030000000000000003,
+   "standard_weight": true,
+   "group": 1,
+   "period": 5,
+   "block": "s",
+   "config": "[Kr] 5s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 5s1",
+   "en_pauling": 0.82,
+   "covalent_radius_pm": 210.0,
+   "oxidation_states_main": [
+    1
+   ],
+   "oxidation_states_other": [
+    -1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 85,
+     "mass": 84.91178973604,
+     "abundance": 72.17
+    },
+    {
+     "mass_number": 87,
+     "mass": 86.909180529,
+     "abundance": 27.83
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 38,
+   "symbol": "Sr",
+   "name": "Strontium",
+   "aliases": [],
+   "atomic_weight": 87.62,
+   "atomic_weight_uncertainty": 0.01,
+   "standard_weight": true,
+   "group": 2,
+   "period": 5,
+   "block": "s",
+   "config": "[Kr] 5s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 5s2",
+   "en_pauling": 0.95,
+   "covalent_radius_pm": 185.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 88,
+     "mass": 87.905612253,
+     "abundance": 82.58
+    },
+    {
+     "mass_number": 86,
+     "mass": 85.90926072473,
+     "abundance": 9.86
+    },
+    {
+     "mass_number": 87,
+     "mass": 86.90887749454,
+     "abundance": 7.0
+    },
+    {
+     "mass_number": 84,
+     "mass": 83.913419118,
+     "abundance": 0.56
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 39,
+   "symbol": "Y",
+   "name": "Yttrium",
+   "aliases": [],
+   "atomic_weight": 88.90584,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": true,
+   "group": 3,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d1 5s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d1 5s2",
+   "en_pauling": 1.22,
+   "covalent_radius_pm": 163.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 89,
+     "mass": 88.905838156,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 40,
+   "symbol": "Zr",
+   "name": "Zirconium",
+   "aliases": [],
+   "atomic_weight": 91.224,
+   "atomic_weight_uncertainty": 0.002,
+   "standard_weight": true,
+   "group": 4,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d2 5s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d2 5s2",
+   "en_pauling": 1.33,
+   "covalent_radius_pm": 154.0,
+   "oxidation_states_main": [
+    4
+   ],
+   "oxidation_states_other": [
+    1,
+    2,
+    3
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 90,
+     "mass": 89.904698755,
+     "abundance": 51.45
+    },
+    {
+     "mass_number": 94,
+     "mass": 93.906312523,
+     "abundance": 17.38
+    },
+    {
+     "mass_number": 92,
+     "mass": 91.905035336,
+     "abundance": 17.15
+    },
+    {
+     "mass_number": 91,
+     "mass": 90.905640205,
+     "abundance": 11.22
+    },
+    {
+     "mass_number": 96,
+     "mass": 95.908277615,
+     "abundance": 2.8
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 41,
+   "symbol": "Nb",
+   "name": "Niobium",
+   "aliases": [],
+   "atomic_weight": 92.90637,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": true,
+   "group": 5,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d4 5s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d4 5s1",
+   "en_pauling": 1.6,
+   "covalent_radius_pm": 147.0,
+   "oxidation_states_main": [
+    5
+   ],
+   "oxidation_states_other": [
+    -3,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 93,
+     "mass": 92.90637317,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 42,
+   "symbol": "Mo",
+   "name": "Molybdenum",
+   "aliases": [],
+   "atomic_weight": 95.95,
+   "atomic_weight_uncertainty": 0.01,
+   "standard_weight": true,
+   "group": 6,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d5 5s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d5 5s1",
+   "en_pauling": 2.16,
+   "covalent_radius_pm": 138.0,
+   "oxidation_states_main": [
+    4,
+    6
+   ],
+   "oxidation_states_other": [
+    -4,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 98,
+     "mass": 97.905403609,
+     "abundance": 24.292
+    },
+    {
+     "mass_number": 96,
+     "mass": 95.90467477,
+     "abundance": 16.673
+    },
+    {
+     "mass_number": 95,
+     "mass": 94.905837436,
+     "abundance": 15.873
+    },
+    {
+     "mass_number": 92,
+     "mass": 91.906807153,
+     "abundance": 14.649
+    },
+    {
+     "mass_number": 100,
+     "mass": 99.907467982,
+     "abundance": 9.744
+    },
+    {
+     "mass_number": 97,
+     "mass": 96.906016903,
+     "abundance": 9.582
+    },
+    {
+     "mass_number": 94,
+     "mass": 93.905083586,
+     "abundance": 9.187
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 43,
+   "symbol": "Tc",
+   "name": "Technetium",
+   "aliases": [],
+   "atomic_weight": 97.90721,
+   "atomic_weight_uncertainty": 3e-05,
+   "standard_weight": false,
+   "group": 7,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d5 5s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d5 5s2",
+   "en_pauling": 2.1,
+   "covalent_radius_pm": 128.0,
+   "oxidation_states_main": [
+    4,
+    7
+   ],
+   "oxidation_states_other": [
+    -3,
+    -1,
+    1,
+    2,
+    3,
+    5,
+    6
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 97,
+    "half_life": 4.21,
+    "half_life_unit": "Myear"
+   }
+  },
+  {
+   "z": 44,
+   "symbol": "Ru",
+   "name": "Ruthenium",
+   "aliases": [],
+   "atomic_weight": 101.07,
+   "atomic_weight_uncertainty": 0.02,
+   "standard_weight": true,
+   "group": 8,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d7 5s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d7 5s1",
+   "en_pauling": 2.2,
+   "covalent_radius_pm": 125.0,
+   "oxidation_states_main": [
+    3,
+    4
+   ],
+   "oxidation_states_other": [
+    -4,
+    -2,
+    1,
+    2,
+    5,
+    6,
+    7,
+    8
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 102,
+     "mass": 101.904340312,
+     "abundance": 31.55
+    },
+    {
+     "mass_number": 104,
+     "mass": 103.905425312,
+     "abundance": 18.62
+    },
+    {
+     "mass_number": 101,
+     "mass": 100.905573086,
+     "abundance": 17.06
+    },
+    {
+     "mass_number": 99,
+     "mass": 98.905930284,
+     "abundance": 12.76
+    },
+    {
+     "mass_number": 100,
+     "mass": 99.90421046,
+     "abundance": 12.6
+    },
+    {
+     "mass_number": 96,
+     "mass": 95.90758891,
+     "abundance": 5.54
+    },
+    {
+     "mass_number": 98,
+     "mass": 97.905286709,
+     "abundance": 1.87
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 45,
+   "symbol": "Rh",
+   "name": "Rhodium",
+   "aliases": [],
+   "atomic_weight": 102.9055,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": true,
+   "group": 9,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d8 5s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d8 5s1",
+   "en_pauling": 2.28,
+   "covalent_radius_pm": 125.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    -3,
+    -1,
+    1,
+    2,
+    4,
+    5,
+    6,
+    7
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 103,
+     "mass": 102.905494081,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 46,
+   "symbol": "Pd",
+   "name": "Palladium",
+   "aliases": [],
+   "atomic_weight": 106.42,
+   "atomic_weight_uncertainty": 0.01,
+   "standard_weight": true,
+   "group": 10,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d10",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10",
+   "en_pauling": 2.2,
+   "covalent_radius_pm": 120.0,
+   "oxidation_states_main": [
+    2,
+    4
+   ],
+   "oxidation_states_other": [
+    1,
+    3,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 106,
+     "mass": 105.903480287,
+     "abundance": 27.33
+    },
+    {
+     "mass_number": 108,
+     "mass": 107.903891806,
+     "abundance": 26.46
+    },
+    {
+     "mass_number": 105,
+     "mass": 104.905079479,
+     "abundance": 22.33
+    },
+    {
+     "mass_number": 110,
+     "mass": 109.905172878,
+     "abundance": 11.72
+    },
+    {
+     "mass_number": 104,
+     "mass": 103.904030393,
+     "abundance": 11.14
+    },
+    {
+     "mass_number": 102,
+     "mass": 101.905632292,
+     "abundance": 1.02
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 47,
+   "symbol": "Ag",
+   "name": "Silver",
+   "aliases": [],
+   "atomic_weight": 107.8682,
+   "atomic_weight_uncertainty": 0.0002,
+   "standard_weight": true,
+   "group": 11,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d10 5s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s1",
+   "en_pauling": 1.93,
+   "covalent_radius_pm": 128.0,
+   "oxidation_states_main": [
+    1
+   ],
+   "oxidation_states_other": [
+    -2,
+    -1,
+    0,
+    2,
+    3
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 107,
+     "mass": 106.905091509,
+     "abundance": 51.839
+    },
+    {
+     "mass_number": 109,
+     "mass": 108.904755778,
+     "abundance": 48.161
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 48,
+   "symbol": "Cd",
+   "name": "Cadmium",
+   "aliases": [],
+   "atomic_weight": 112.414,
+   "atomic_weight_uncertainty": 0.004,
+   "standard_weight": true,
+   "group": 12,
+   "period": 5,
+   "block": "d",
+   "config": "[Kr] 4d10 5s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2",
+   "en_pauling": 1.69,
+   "covalent_radius_pm": 136.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    -2,
+    1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 114,
+     "mass": 113.903364998,
+     "abundance": 28.754
+    },
+    {
+     "mass_number": 112,
+     "mass": 111.902763896,
+     "abundance": 24.109
+    },
+    {
+     "mass_number": 111,
+     "mass": 110.904183776,
+     "abundance": 12.795
+    },
+    {
+     "mass_number": 110,
+     "mass": 109.90300747,
+     "abundance": 12.47
+    },
+    {
+     "mass_number": 113,
+     "mass": 112.904408105,
+     "abundance": 12.227
+    },
+    {
+     "mass_number": 116,
+     "mass": 115.90476323,
+     "abundance": 7.512
+    },
+    {
+     "mass_number": 106,
+     "mass": 105.906459791,
+     "abundance": 1.245
+    },
+    {
+     "mass_number": 108,
+     "mass": 107.904183588,
+     "abundance": 0.888
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 49,
+   "symbol": "In",
+   "name": "Indium",
+   "aliases": [],
+   "atomic_weight": 114.818,
+   "atomic_weight_uncertainty": 0.001,
+   "standard_weight": true,
+   "group": 13,
+   "period": 5,
+   "block": "p",
+   "config": "[Kr] 4d10 5s2 5p1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p1",
+   "en_pauling": 1.78,
+   "covalent_radius_pm": 142.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    -5,
+    -2,
+    -1,
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 115,
+     "mass": 114.903878772,
+     "abundance": 95.719
+    },
+    {
+     "mass_number": 113,
+     "mass": 112.904060451,
+     "abundance": 4.281
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 50,
+   "symbol": "Sn",
+   "name": "Tin",
+   "aliases": [],
+   "atomic_weight": 118.71,
+   "atomic_weight_uncertainty": 0.007,
+   "standard_weight": true,
+   "group": 14,
+   "period": 5,
+   "block": "p",
+   "config": "[Kr] 4d10 5s2 5p2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p2",
+   "en_pauling": 1.96,
+   "covalent_radius_pm": 140.0,
+   "oxidation_states_main": [
+    -4,
+    2,
+    4
+   ],
+   "oxidation_states_other": [
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    3
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 120,
+     "mass": 119.902202557,
+     "abundance": 32.58
+    },
+    {
+     "mass_number": 118,
+     "mass": 117.90160663,
+     "abundance": 24.22
+    },
+    {
+     "mass_number": 116,
+     "mass": 115.901742825,
+     "abundance": 14.54
+    },
+    {
+     "mass_number": 119,
+     "mass": 118.903311266,
+     "abundance": 8.59
+    },
+    {
+     "mass_number": 117,
+     "mass": 116.902954036,
+     "abundance": 7.68
+    },
+    {
+     "mass_number": 124,
+     "mass": 123.905279619,
+     "abundance": 5.79
+    },
+    {
+     "mass_number": 122,
+     "mass": 121.903445494,
+     "abundance": 4.63
+    },
+    {
+     "mass_number": 112,
+     "mass": 111.904824894,
+     "abundance": 0.97
+    },
+    {
+     "mass_number": 114,
+     "mass": 113.90278013,
+     "abundance": 0.66
+    },
+    {
+     "mass_number": 115,
+     "mass": 114.903344695,
+     "abundance": 0.34
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 51,
+   "symbol": "Sb",
+   "name": "Antimony",
+   "aliases": [],
+   "atomic_weight": 121.76,
+   "atomic_weight_uncertainty": 0.001,
+   "standard_weight": true,
+   "group": 15,
+   "period": 5,
+   "block": "p",
+   "config": "[Kr] 4d10 5s2 5p3",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p3",
+   "en_pauling": 2.05,
+   "covalent_radius_pm": 140.0,
+   "oxidation_states_main": [
+    -3,
+    3,
+    5
+   ],
+   "oxidation_states_other": [
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 121,
+     "mass": 120.903811353,
+     "abundance": 57.21
+    },
+    {
+     "mass_number": 123,
+     "mass": 122.904215292,
+     "abundance": 42.79
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 52,
+   "symbol": "Te",
+   "name": "Tellurium",
+   "aliases": [],
+   "atomic_weight": 127.6,
+   "atomic_weight_uncertainty": 0.03,
+   "standard_weight": true,
+   "group": 16,
+   "period": 5,
+   "block": "p",
+   "config": "[Kr] 4d10 5s2 5p4",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p4",
+   "en_pauling": 2.1,
+   "covalent_radius_pm": 136.0,
+   "oxidation_states_main": [
+    -2,
+    2,
+    4,
+    6
+   ],
+   "oxidation_states_other": [
+    -1,
+    0,
+    1,
+    3,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 130,
+     "mass": 129.906222745,
+     "abundance": 34.08
+    },
+    {
+     "mass_number": 128,
+     "mass": 127.904461237,
+     "abundance": 31.74
+    },
+    {
+     "mass_number": 126,
+     "mass": 125.903312144,
+     "abundance": 18.84
+    },
+    {
+     "mass_number": 125,
+     "mass": 124.904431178,
+     "abundance": 7.07
+    },
+    {
+     "mass_number": 124,
+     "mass": 123.902818341,
+     "abundance": 4.74
+    },
+    {
+     "mass_number": 122,
+     "mass": 121.903044708,
+     "abundance": 2.55
+    },
+    {
+     "mass_number": 123,
+     "mass": 122.904271022,
+     "abundance": 0.89
+    },
+    {
+     "mass_number": 120,
+     "mass": 119.904065779,
+     "abundance": 0.09
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 53,
+   "symbol": "I",
+   "name": "Iodine",
+   "aliases": [],
+   "atomic_weight": 126.90447,
+   "atomic_weight_uncertainty": 3.0000000000000004e-05,
+   "standard_weight": true,
+   "group": 17,
+   "period": 5,
+   "block": "p",
+   "config": "[Kr] 4d10 5s2 5p5",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p5",
+   "en_pauling": 2.66,
+   "covalent_radius_pm": 133.0,
+   "oxidation_states_main": [
+    -1,
+    1,
+    3,
+    5,
+    7
+   ],
+   "oxidation_states_other": [
+    2,
+    4,
+    6
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 127,
+     "mass": 126.904472592,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 54,
+   "symbol": "Xe",
+   "name": "Xenon",
+   "aliases": [],
+   "atomic_weight": 131.293,
+   "atomic_weight_uncertainty": 0.006,
+   "standard_weight": true,
+   "group": 18,
+   "period": 5,
+   "block": "p",
+   "config": "[Kr] 4d10 5s2 5p6",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p6",
+   "en_pauling": 2.6,
+   "covalent_radius_pm": 131.0,
+   "oxidation_states_main": [
+    2,
+    4,
+    6
+   ],
+   "oxidation_states_other": [
+    8
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 132,
+     "mass": 131.90415508346,
+     "abundance": 26.909
+    },
+    {
+     "mass_number": 129,
+     "mass": 128.90478085742,
+     "abundance": 26.401
+    },
+    {
+     "mass_number": 131,
+     "mass": 130.90508412808,
+     "abundance": 21.232
+    },
+    {
+     "mass_number": 134,
+     "mass": 133.90539303,
+     "abundance": 10.436
+    },
+    {
+     "mass_number": 136,
+     "mass": 135.907214474,
+     "abundance": 8.857
+    },
+    {
+     "mass_number": 130,
+     "mass": 129.903509346,
+     "abundance": 4.071
+    },
+    {
+     "mass_number": 128,
+     "mass": 127.90353075341,
+     "abundance": 1.91
+    },
+    {
+     "mass_number": 124,
+     "mass": 123.905885174,
+     "abundance": 0.095
+    },
+    {
+     "mass_number": 126,
+     "mass": 125.904297422,
+     "abundance": 0.089
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 55,
+   "symbol": "Cs",
+   "name": "Cesium",
+   "aliases": [
+    "caesium",
+    "cesium"
+   ],
+   "atomic_weight": 132.90545196,
+   "atomic_weight_uncertainty": 6.000000000000001e-08,
+   "standard_weight": true,
+   "group": 1,
+   "period": 6,
+   "block": "s",
+   "config": "[Xe] 6s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p6 6s1",
+   "en_pauling": 0.79,
+   "covalent_radius_pm": 232.0,
+   "oxidation_states_main": [
+    1
+   ],
+   "oxidation_states_other": [
+    -1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 133,
+     "mass": 132.905451958,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 56,
+   "symbol": "Ba",
+   "name": "Barium",
+   "aliases": [],
+   "atomic_weight": 137.327,
+   "atomic_weight_uncertainty": 0.007,
+   "standard_weight": true,
+   "group": 2,
+   "period": 6,
+   "block": "s",
+   "config": "[Xe] 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p6 6s2",
+   "en_pauling": 0.89,
+   "covalent_radius_pm": 196.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [
+    1
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 138,
+     "mass": 137.905247059,
+     "abundance": 71.7
+    },
+    {
+     "mass_number": 137,
+     "mass": 136.905827207,
+     "abundance": 11.23
+    },
+    {
+     "mass_number": 136,
+     "mass": 135.9045758,
+     "abundance": 7.85
+    },
+    {
+     "mass_number": 135,
+     "mass": 134.905688447,
+     "abundance": 6.59
+    },
+    {
+     "mass_number": 134,
+     "mass": 133.904508249,
+     "abundance": 2.42
+    },
+    {
+     "mass_number": 130,
+     "mass": 129.906326002,
+     "abundance": 0.11
+    },
+    {
+     "mass_number": 132,
+     "mass": 131.905061231,
+     "abundance": 0.1
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 57,
+   "symbol": "La",
+   "name": "Lanthanum",
+   "aliases": [],
+   "atomic_weight": 138.90547,
+   "atomic_weight_uncertainty": 7.000000000000001e-05,
+   "standard_weight": true,
+   "group": 3,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 5d1 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p6 5d1 6s2",
+   "en_pauling": 1.1,
+   "covalent_radius_pm": 180.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 139,
+     "mass": 138.906362927,
+     "abundance": 99.91119
+    },
+    {
+     "mass_number": 138,
+     "mass": 137.907124041,
+     "abundance": 0.08881
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 58,
+   "symbol": "Ce",
+   "name": "Cerium",
+   "aliases": [],
+   "atomic_weight": 140.116,
+   "atomic_weight_uncertainty": 0.001,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f1 5d1 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f1 5s2 5p6 5d1 6s2",
+   "en_pauling": 1.12,
+   "covalent_radius_pm": 163.0,
+   "oxidation_states_main": [
+    3,
+    4
+   ],
+   "oxidation_states_other": [
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 140,
+     "mass": 139.905448433,
+     "abundance": 88.449
+    },
+    {
+     "mass_number": 142,
+     "mass": 141.909250208,
+     "abundance": 11.114
+    },
+    {
+     "mass_number": 138,
+     "mass": 137.90599418,
+     "abundance": 0.251
+    },
+    {
+     "mass_number": 136,
+     "mass": 135.907129256,
+     "abundance": 0.186
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 59,
+   "symbol": "Pr",
+   "name": "Praseodymium",
+   "aliases": [],
+   "atomic_weight": 140.90766,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f3 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f3 5s2 5p6 6s2",
+   "en_pauling": 1.13,
+   "covalent_radius_pm": 176.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2,
+    4,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 141,
+     "mass": 140.907659604,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 60,
+   "symbol": "Nd",
+   "name": "Neodymium",
+   "aliases": [],
+   "atomic_weight": 144.242,
+   "atomic_weight_uncertainty": 0.003,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f4 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f4 5s2 5p6 6s2",
+   "en_pauling": 1.14,
+   "covalent_radius_pm": 174.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    2,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 142,
+     "mass": 141.907728824,
+     "abundance": 27.153
+    },
+    {
+     "mass_number": 144,
+     "mass": 143.910092798,
+     "abundance": 23.798
+    },
+    {
+     "mass_number": 146,
+     "mass": 145.913122459,
+     "abundance": 17.189
+    },
+    {
+     "mass_number": 143,
+     "mass": 142.909819815,
+     "abundance": 12.173
+    },
+    {
+     "mass_number": 145,
+     "mass": 144.912579151,
+     "abundance": 8.293
+    },
+    {
+     "mass_number": 148,
+     "mass": 147.916899027,
+     "abundance": 5.756
+    },
+    {
+     "mass_number": 150,
+     "mass": 149.920901322,
+     "abundance": 5.638
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 61,
+   "symbol": "Pm",
+   "name": "Promethium",
+   "aliases": [],
+   "atomic_weight": 144.91276,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": false,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f5 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f5 5s2 5p6 6s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 173.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    2
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 145,
+    "half_life": 17.7,
+    "half_life_unit": "year"
+   }
+  },
+  {
+   "z": 62,
+   "symbol": "Sm",
+   "name": "Samarium",
+   "aliases": [],
+   "atomic_weight": 150.36,
+   "atomic_weight_uncertainty": 0.02,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f6 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f6 5s2 5p6 6s2",
+   "en_pauling": 1.17,
+   "covalent_radius_pm": 172.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 152,
+     "mass": 151.919738646,
+     "abundance": 26.74
+    },
+    {
+     "mass_number": 154,
+     "mass": 153.922215756,
+     "abundance": 22.74
+    },
+    {
+     "mass_number": 147,
+     "mass": 146.914904401,
+     "abundance": 15.0
+    },
+    {
+     "mass_number": 149,
+     "mass": 148.917191211,
+     "abundance": 13.82
+    },
+    {
+     "mass_number": 148,
+     "mass": 147.914829233,
+     "abundance": 11.25
+    },
+    {
+     "mass_number": 150,
+     "mass": 149.917281993,
+     "abundance": 7.37
+    },
+    {
+     "mass_number": 144,
+     "mass": 143.912006285,
+     "abundance": 3.08
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 63,
+   "symbol": "Eu",
+   "name": "Europium",
+   "aliases": [],
+   "atomic_weight": 151.964,
+   "atomic_weight_uncertainty": 0.001,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f7 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f7 5s2 5p6 6s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 168.0,
+   "oxidation_states_main": [
+    2,
+    3
+   ],
+   "oxidation_states_other": [
+    0
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 153,
+     "mass": 152.921236789,
+     "abundance": 52.19
+    },
+    {
+     "mass_number": 151,
+     "mass": 150.919856606,
+     "abundance": 47.81
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 64,
+   "symbol": "Gd",
+   "name": "Gadolinium",
+   "aliases": [],
+   "atomic_weight": 157.25,
+   "atomic_weight_uncertainty": 0.03,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f7 5d1 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f7 5s2 5p6 5d1 6s2",
+   "en_pauling": 1.2,
+   "covalent_radius_pm": 169.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 158,
+     "mass": 157.9241112,
+     "abundance": 24.84
+    },
+    {
+     "mass_number": 160,
+     "mass": 159.927061202,
+     "abundance": 21.86
+    },
+    {
+     "mass_number": 156,
+     "mass": 155.92213012,
+     "abundance": 20.47
+    },
+    {
+     "mass_number": 157,
+     "mass": 156.923967424,
+     "abundance": 15.65
+    },
+    {
+     "mass_number": 155,
+     "mass": 154.922629356,
+     "abundance": 14.8
+    },
+    {
+     "mass_number": 154,
+     "mass": 153.920872974,
+     "abundance": 2.18
+    },
+    {
+     "mass_number": 152,
+     "mass": 151.919798414,
+     "abundance": 0.2
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 65,
+   "symbol": "Tb",
+   "name": "Terbium",
+   "aliases": [],
+   "atomic_weight": 158.92535,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f9 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f9 5s2 5p6 6s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 168.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 159,
+     "mass": 158.925353707,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 66,
+   "symbol": "Dy",
+   "name": "Dysprosium",
+   "aliases": [],
+   "atomic_weight": 162.5,
+   "atomic_weight_uncertainty": 0.001,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f10 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f10 5s2 5p6 6s2",
+   "en_pauling": 1.22,
+   "covalent_radius_pm": 167.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 164,
+     "mass": 163.929180819,
+     "abundance": 28.26
+    },
+    {
+     "mass_number": 162,
+     "mass": 161.926804507,
+     "abundance": 25.475
+    },
+    {
+     "mass_number": 163,
+     "mass": 162.928737221,
+     "abundance": 24.896
+    },
+    {
+     "mass_number": 161,
+     "mass": 160.926939425,
+     "abundance": 18.889
+    },
+    {
+     "mass_number": 160,
+     "mass": 159.925203578,
+     "abundance": 2.329
+    },
+    {
+     "mass_number": 158,
+     "mass": 157.924414817,
+     "abundance": 0.095
+    },
+    {
+     "mass_number": 156,
+     "mass": 155.924283593,
+     "abundance": 0.056
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 67,
+   "symbol": "Ho",
+   "name": "Holmium",
+   "aliases": [],
+   "atomic_weight": 164.93033,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f11 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f11 5s2 5p6 6s2",
+   "en_pauling": 1.23,
+   "covalent_radius_pm": 166.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 165,
+     "mass": 164.930329116,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 68,
+   "symbol": "Er",
+   "name": "Erbium",
+   "aliases": [],
+   "atomic_weight": 167.259,
+   "atomic_weight_uncertainty": 0.003,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f12 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f12 5s2 5p6 6s2",
+   "en_pauling": 1.24,
+   "covalent_radius_pm": 165.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 166,
+     "mass": 165.930301067,
+     "abundance": 33.503
+    },
+    {
+     "mass_number": 168,
+     "mass": 167.932378282,
+     "abundance": 26.978
+    },
+    {
+     "mass_number": 167,
+     "mass": 166.932056192,
+     "abundance": 22.869
+    },
+    {
+     "mass_number": 170,
+     "mass": 169.935471933,
+     "abundance": 14.91
+    },
+    {
+     "mass_number": 164,
+     "mass": 163.929207739,
+     "abundance": 1.601
+    },
+    {
+     "mass_number": 162,
+     "mass": 161.928787299,
+     "abundance": 0.139
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 69,
+   "symbol": "Tm",
+   "name": "Thulium",
+   "aliases": [],
+   "atomic_weight": 168.93422,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f13 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f13 5s2 5p6 6s2",
+   "en_pauling": 1.25,
+   "covalent_radius_pm": 164.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 169,
+     "mass": 168.934218956,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 70,
+   "symbol": "Yb",
+   "name": "Ytterbium",
+   "aliases": [],
+   "atomic_weight": 173.045,
+   "atomic_weight_uncertainty": 0.01,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f14 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 6s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 170.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 174,
+     "mass": 173.938867545,
+     "abundance": 32.025
+    },
+    {
+     "mass_number": 172,
+     "mass": 171.936386654,
+     "abundance": 21.686
+    },
+    {
+     "mass_number": 173,
+     "mass": 172.938216211,
+     "abundance": 16.103
+    },
+    {
+     "mass_number": 171,
+     "mass": 170.936331515,
+     "abundance": 14.086
+    },
+    {
+     "mass_number": 176,
+     "mass": 175.942574706,
+     "abundance": 12.995
+    },
+    {
+     "mass_number": 170,
+     "mass": 169.934767242,
+     "abundance": 2.982
+    },
+    {
+     "mass_number": 168,
+     "mass": 167.933891297,
+     "abundance": 0.123
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 71,
+   "symbol": "Lu",
+   "name": "Lutetium",
+   "aliases": [],
+   "atomic_weight": 174.9668,
+   "atomic_weight_uncertainty": 0.0001,
+   "standard_weight": true,
+   "group": null,
+   "period": 6,
+   "block": "f",
+   "config": "[Xe] 4f14 5d1 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d1 6s2",
+   "en_pauling": 1.0,
+   "covalent_radius_pm": 162.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    0,
+    1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 175,
+     "mass": 174.940777211,
+     "abundance": 97.401
+    },
+    {
+     "mass_number": 176,
+     "mass": 175.942691711,
+     "abundance": 2.599
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 72,
+   "symbol": "Hf",
+   "name": "Hafnium",
+   "aliases": [],
+   "atomic_weight": 178.49,
+   "atomic_weight_uncertainty": 0.02,
+   "standard_weight": true,
+   "group": 4,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 4f14 5d2 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d2 6s2",
+   "en_pauling": 1.3,
+   "covalent_radius_pm": 152.0,
+   "oxidation_states_main": [
+    4
+   ],
+   "oxidation_states_other": [
+    -2,
+    0,
+    1,
+    2,
+    3
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 180,
+     "mass": 179.946559537,
+     "abundance": 35.08
+    },
+    {
+     "mass_number": 178,
+     "mass": 177.943708322,
+     "abundance": 27.28
+    },
+    {
+     "mass_number": 177,
+     "mass": 176.943230187,
+     "abundance": 18.6
+    },
+    {
+     "mass_number": 179,
+     "mass": 178.945825705,
+     "abundance": 13.62
+    },
+    {
+     "mass_number": 176,
+     "mass": 175.941409797,
+     "abundance": 5.26
+    },
+    {
+     "mass_number": 174,
+     "mass": 173.940048377,
+     "abundance": 0.16
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 73,
+   "symbol": "Ta",
+   "name": "Tantalum",
+   "aliases": [],
+   "atomic_weight": 180.94788,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": true,
+   "group": 5,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 4f14 5d3 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d3 6s2",
+   "en_pauling": 1.5,
+   "covalent_radius_pm": 146.0,
+   "oxidation_states_main": [
+    5
+   ],
+   "oxidation_states_other": [
+    -3,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 181,
+     "mass": 180.947998528,
+     "abundance": 99.98799
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 74,
+   "symbol": "W",
+   "name": "Tungsten",
+   "aliases": [],
+   "atomic_weight": 183.84,
+   "atomic_weight_uncertainty": 0.01,
+   "standard_weight": true,
+   "group": 6,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 4f14 5d4 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d4 6s2",
+   "en_pauling": 1.7,
+   "covalent_radius_pm": 137.0,
+   "oxidation_states_main": [
+    4,
+    6
+   ],
+   "oxidation_states_other": [
+    -4,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 184,
+     "mass": 183.95093318,
+     "abundance": 30.64
+    },
+    {
+     "mass_number": 186,
+     "mass": 185.95436514,
+     "abundance": 28.43
+    },
+    {
+     "mass_number": 182,
+     "mass": 181.948205636,
+     "abundance": 26.5
+    },
+    {
+     "mass_number": 183,
+     "mass": 182.950224416,
+     "abundance": 14.31
+    },
+    {
+     "mass_number": 180,
+     "mass": 179.946713304,
+     "abundance": 0.12
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 75,
+   "symbol": "Re",
+   "name": "Rhenium",
+   "aliases": [],
+   "atomic_weight": 186.207,
+   "atomic_weight_uncertainty": 0.001,
+   "standard_weight": true,
+   "group": 7,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 4f14 5d5 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d5 6s2",
+   "en_pauling": 1.9,
+   "covalent_radius_pm": 131.0,
+   "oxidation_states_main": [
+    4
+   ],
+   "oxidation_states_other": [
+    -3,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 187,
+     "mass": 186.955752217,
+     "abundance": 62.6
+    },
+    {
+     "mass_number": 185,
+     "mass": 184.95295832,
+     "abundance": 37.4
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 76,
+   "symbol": "Os",
+   "name": "Osmium",
+   "aliases": [],
+   "atomic_weight": 190.23,
+   "atomic_weight_uncertainty": 0.03,
+   "standard_weight": true,
+   "group": 8,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 4f14 5d6 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d6 6s2",
+   "en_pauling": 2.2,
+   "covalent_radius_pm": 129.0,
+   "oxidation_states_main": [
+    4
+   ],
+   "oxidation_states_other": [
+    -4,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 192,
+     "mass": 191.961478765,
+     "abundance": 40.78
+    },
+    {
+     "mass_number": 190,
+     "mass": 189.958445442,
+     "abundance": 26.26
+    },
+    {
+     "mass_number": 189,
+     "mass": 188.958145949,
+     "abundance": 16.15
+    },
+    {
+     "mass_number": 188,
+     "mass": 187.955837292,
+     "abundance": 13.24
+    },
+    {
+     "mass_number": 187,
+     "mass": 186.955749569,
+     "abundance": 1.96
+    },
+    {
+     "mass_number": 186,
+     "mass": 185.953837569,
+     "abundance": 1.59
+    },
+    {
+     "mass_number": 184,
+     "mass": 183.952492919,
+     "abundance": 0.02
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 77,
+   "symbol": "Ir",
+   "name": "Iridium",
+   "aliases": [],
+   "atomic_weight": 192.217,
+   "atomic_weight_uncertainty": 0.003,
+   "standard_weight": true,
+   "group": 9,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 4f14 5d7 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d7 6s2",
+   "en_pauling": 2.2,
+   "covalent_radius_pm": 122.0,
+   "oxidation_states_main": [
+    3,
+    4
+   ],
+   "oxidation_states_other": [
+    -3,
+    -2,
+    -1,
+    1,
+    2,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 193,
+     "mass": 192.962923753,
+     "abundance": 62.7
+    },
+    {
+     "mass_number": 191,
+     "mass": 190.960591455,
+     "abundance": 37.3
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 78,
+   "symbol": "Pt",
+   "name": "Platinum",
+   "aliases": [],
+   "atomic_weight": 195.084,
+   "atomic_weight_uncertainty": 0.009000000000000001,
+   "standard_weight": true,
+   "group": 10,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 4f14 5d9 6s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d9 6s1",
+   "en_pauling": 2.2,
+   "covalent_radius_pm": 123.0,
+   "oxidation_states_main": [
+    2,
+    4
+   ],
+   "oxidation_states_other": [
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    3,
+    5,
+    6
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 195,
+     "mass": 194.964794325,
+     "abundance": 33.775
+    },
+    {
+     "mass_number": 194,
+     "mass": 193.962683498,
+     "abundance": 32.864
+    },
+    {
+     "mass_number": 196,
+     "mass": 195.964954648,
+     "abundance": 25.211
+    },
+    {
+     "mass_number": 198,
+     "mass": 197.967896718,
+     "abundance": 7.356
+    },
+    {
+     "mass_number": 192,
+     "mass": 191.961042667,
+     "abundance": 0.782
+    },
+    {
+     "mass_number": 190,
+     "mass": 189.959949823,
+     "abundance": 0.012
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 79,
+   "symbol": "Au",
+   "name": "Gold",
+   "aliases": [],
+   "atomic_weight": 196.966569,
+   "atomic_weight_uncertainty": 4.9999999999999996e-06,
+   "standard_weight": true,
+   "group": 11,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 4f14 5d10 6s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s1",
+   "en_pauling": 2.4,
+   "covalent_radius_pm": 124.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 197,
+     "mass": 196.966570103,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 80,
+   "symbol": "Hg",
+   "name": "Mercury",
+   "aliases": [],
+   "atomic_weight": 200.592,
+   "atomic_weight_uncertainty": 0.003,
+   "standard_weight": true,
+   "group": 12,
+   "period": 6,
+   "block": "d",
+   "config": "[Xe] 4f14 5d10 6s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2",
+   "en_pauling": 1.9,
+   "covalent_radius_pm": 133.0,
+   "oxidation_states_main": [
+    1,
+    2
+   ],
+   "oxidation_states_other": [
+    -2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 202,
+     "mass": 201.970643604,
+     "abundance": 29.74
+    },
+    {
+     "mass_number": 200,
+     "mass": 199.968326941,
+     "abundance": 23.14
+    },
+    {
+     "mass_number": 199,
+     "mass": 198.968280994,
+     "abundance": 16.94
+    },
+    {
+     "mass_number": 201,
+     "mass": 200.970303054,
+     "abundance": 13.17
+    },
+    {
+     "mass_number": 198,
+     "mass": 197.966769177,
+     "abundance": 10.04
+    },
+    {
+     "mass_number": 204,
+     "mass": 203.973494037,
+     "abundance": 6.82
+    },
+    {
+     "mass_number": 196,
+     "mass": 195.965833445,
+     "abundance": 0.15
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 81,
+   "symbol": "Tl",
+   "name": "Thallium",
+   "aliases": [],
+   "atomic_weight": 204.38,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": true,
+   "group": 13,
+   "period": 6,
+   "block": "p",
+   "config": "[Xe] 4f14 5d10 6s2 6p1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p1",
+   "en_pauling": 1.8,
+   "covalent_radius_pm": 144.0,
+   "oxidation_states_main": [
+    1,
+    3
+   ],
+   "oxidation_states_other": [
+    -5,
+    -2,
+    -1,
+    2
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 205,
+     "mass": 204.974427318,
+     "abundance": 70.485
+    },
+    {
+     "mass_number": 203,
+     "mass": 202.972344098,
+     "abundance": 29.515
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 82,
+   "symbol": "Pb",
+   "name": "Lead",
+   "aliases": [],
+   "atomic_weight": 207.2,
+   "atomic_weight_uncertainty": 0.1,
+   "standard_weight": true,
+   "group": 14,
+   "period": 6,
+   "block": "p",
+   "config": "[Xe] 4f14 5d10 6s2 6p2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p2",
+   "en_pauling": 1.8,
+   "covalent_radius_pm": 144.0,
+   "oxidation_states_main": [
+    2,
+    4
+   ],
+   "oxidation_states_other": [
+    -4,
+    -2,
+    -1,
+    0,
+    1,
+    3
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 208,
+     "mass": 207.976652005,
+     "abundance": 52.4
+    },
+    {
+     "mass_number": 206,
+     "mass": 205.97446521,
+     "abundance": 24.1
+    },
+    {
+     "mass_number": 207,
+     "mass": 206.975896821,
+     "abundance": 22.1
+    },
+    {
+     "mass_number": 204,
+     "mass": 203.973043506,
+     "abundance": 1.4
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 83,
+   "symbol": "Bi",
+   "name": "Bismuth",
+   "aliases": [],
+   "atomic_weight": 208.9804,
+   "atomic_weight_uncertainty": 1e-05,
+   "standard_weight": true,
+   "group": 15,
+   "period": 6,
+   "block": "p",
+   "config": "[Xe] 4f14 5d10 6s2 6p3",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p3",
+   "en_pauling": 1.9,
+   "covalent_radius_pm": 151.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    4,
+    5
+   ],
+   "radioactive": false,
+   "isotopes": [
+    {
+     "mass_number": 209,
+     "mass": 208.980398599,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 84,
+   "symbol": "Po",
+   "name": "Polonium",
+   "aliases": [],
+   "atomic_weight": 209.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 16,
+   "period": 6,
+   "block": "p",
+   "config": "[Xe] 4f14 5d10 6s2 6p4",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p4",
+   "en_pauling": 2.0,
+   "covalent_radius_pm": 145.0,
+   "oxidation_states_main": [
+    -2,
+    2,
+    4
+   ],
+   "oxidation_states_other": [
+    5,
+    6
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 209,
+    "half_life": 124.0,
+    "half_life_unit": "year"
+   }
+  },
+  {
+   "z": 85,
+   "symbol": "At",
+   "name": "Astatine",
+   "aliases": [],
+   "atomic_weight": 210.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 17,
+   "period": 6,
+   "block": "p",
+   "config": "[Xe] 4f14 5d10 6s2 6p5",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p5",
+   "en_pauling": 2.2,
+   "covalent_radius_pm": 147.0,
+   "oxidation_states_main": [
+    -1,
+    1
+   ],
+   "oxidation_states_other": [
+    3,
+    5,
+    7
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 210,
+    "half_life": 8.1,
+    "half_life_unit": "hour"
+   }
+  },
+  {
+   "z": 86,
+   "symbol": "Rn",
+   "name": "Radon",
+   "aliases": [],
+   "atomic_weight": 222.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 18,
+   "period": 6,
+   "block": "p",
+   "config": "[Xe] 4f14 5d10 6s2 6p6",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p6",
+   "en_pauling": null,
+   "covalent_radius_pm": 142.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    2,
+    6
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 222,
+    "half_life": 3.8215,
+    "half_life_unit": "day"
+   }
+  },
+  {
+   "z": 87,
+   "symbol": "Fr",
+   "name": "Francium",
+   "aliases": [],
+   "atomic_weight": 223.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 1,
+   "period": 7,
+   "block": "s",
+   "config": "[Rn] 7s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p6 7s1",
+   "en_pauling": 0.7,
+   "covalent_radius_pm": 223.0,
+   "oxidation_states_main": [
+    1
+   ],
+   "oxidation_states_other": [],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 223,
+    "half_life": 22.0,
+    "half_life_unit": "minute"
+   }
+  },
+  {
+   "z": 88,
+   "symbol": "Ra",
+   "name": "Radium",
+   "aliases": [],
+   "atomic_weight": 226.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 2,
+   "period": 7,
+   "block": "s",
+   "config": "[Rn] 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p6 7s2",
+   "en_pauling": 0.9,
+   "covalent_radius_pm": 201.0,
+   "oxidation_states_main": [
+    2
+   ],
+   "oxidation_states_other": [],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 226,
+    "half_life": 1.6,
+    "half_life_unit": "kyear"
+   }
+  },
+  {
+   "z": 89,
+   "symbol": "Ac",
+   "name": "Actinium",
+   "aliases": [],
+   "atomic_weight": 227.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 3,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 6d1 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p6 6d1 7s2",
+   "en_pauling": 1.1,
+   "covalent_radius_pm": 186.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 227,
+    "half_life": 21.772,
+    "half_life_unit": "year"
+   }
+  },
+  {
+   "z": 90,
+   "symbol": "Th",
+   "name": "Thorium",
+   "aliases": [],
+   "atomic_weight": 232.0377,
+   "atomic_weight_uncertainty": 0.0004,
+   "standard_weight": true,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 6d2 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 6s2 6p6 6d2 7s2",
+   "en_pauling": 1.3,
+   "covalent_radius_pm": 175.0,
+   "oxidation_states_main": [
+    4
+   ],
+   "oxidation_states_other": [
+    -1,
+    1,
+    2,
+    3
+   ],
+   "radioactive": true,
+   "isotopes": [
+    {
+     "mass_number": 232,
+     "mass": 232.038053606,
+     "abundance": 99.98
+    },
+    {
+     "mass_number": 230,
+     "mass": 230.033132267,
+     "abundance": 0.02
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 91,
+   "symbol": "Pa",
+   "name": "Protactinium",
+   "aliases": [],
+   "atomic_weight": 231.03588,
+   "atomic_weight_uncertainty": 2e-05,
+   "standard_weight": true,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f2 6d1 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f2 6s2 6p6 6d1 7s2",
+   "en_pauling": 1.5,
+   "covalent_radius_pm": 169.0,
+   "oxidation_states_main": [
+    5
+   ],
+   "oxidation_states_other": [
+    2,
+    3,
+    4
+   ],
+   "radioactive": true,
+   "isotopes": [
+    {
+     "mass_number": 231,
+     "mass": 231.0358825,
+     "abundance": 100.0
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 92,
+   "symbol": "U",
+   "name": "Uranium",
+   "aliases": [],
+   "atomic_weight": 238.02891,
+   "atomic_weight_uncertainty": 3.0000000000000004e-05,
+   "standard_weight": true,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f3 6d1 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f3 6s2 6p6 6d1 7s2",
+   "en_pauling": 1.7,
+   "covalent_radius_pm": 170.0,
+   "oxidation_states_main": [
+    6
+   ],
+   "oxidation_states_other": [
+    -1,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "radioactive": true,
+   "isotopes": [
+    {
+     "mass_number": 238,
+     "mass": 238.050786936,
+     "abundance": 99.2742
+    },
+    {
+     "mass_number": 235,
+     "mass": 235.043928117,
+     "abundance": 0.7204
+    },
+    {
+     "mass_number": 234,
+     "mass": 234.040950296,
+     "abundance": 0.0054
+    }
+   ],
+   "most_stable_isotope": null
+  },
+  {
+   "z": 93,
+   "symbol": "Np",
+   "name": "Neptunium",
+   "aliases": [],
+   "atomic_weight": 237.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f4 6d1 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f4 6s2 6p6 6d1 7s2",
+   "en_pauling": 1.3,
+   "covalent_radius_pm": 171.0,
+   "oxidation_states_main": [
+    5
+   ],
+   "oxidation_states_other": [
+    2,
+    3,
+    4,
+    6,
+    7
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 237,
+    "half_life": 2.144,
+    "half_life_unit": "Myear"
+   }
+  },
+  {
+   "z": 94,
+   "symbol": "Pu",
+   "name": "Plutonium",
+   "aliases": [],
+   "atomic_weight": 244.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f6 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f6 6s2 6p6 7s2",
+   "en_pauling": 1.3,
+   "covalent_radius_pm": 172.0,
+   "oxidation_states_main": [
+    4
+   ],
+   "oxidation_states_other": [
+    2,
+    3,
+    5,
+    6,
+    7,
+    8
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 244,
+    "half_life": 81.3,
+    "half_life_unit": "Myear"
+   }
+  },
+  {
+   "z": 95,
+   "symbol": "Am",
+   "name": "Americium",
+   "aliases": [],
+   "atomic_weight": 243.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f7 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f7 6s2 6p6 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 166.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    2,
+    4,
+    5,
+    6,
+    7
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 243,
+    "half_life": 7.35,
+    "half_life_unit": "kyear"
+   }
+  },
+  {
+   "z": 96,
+   "symbol": "Cm",
+   "name": "Curium",
+   "aliases": [],
+   "atomic_weight": 247.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f7 6d1 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f7 6s2 6p6 6d1 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 166.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    4,
+    5,
+    6
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 247,
+    "half_life": 15.6,
+    "half_life_unit": "Myear"
+   }
+  },
+  {
+   "z": 97,
+   "symbol": "Bk",
+   "name": "Berkelium",
+   "aliases": [],
+   "atomic_weight": 247.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f9 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f9 6s2 6p6 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 168.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    2,
+    4,
+    5
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 247,
+    "half_life": 1.38,
+    "half_life_unit": "kyear"
+   }
+  },
+  {
+   "z": 98,
+   "symbol": "Cf",
+   "name": "Californium",
+   "aliases": [],
+   "atomic_weight": 251.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f10 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f10 6s2 6p6 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 168.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    2,
+    4,
+    5
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 251,
+    "half_life": 898.0,
+    "half_life_unit": "year"
+   }
+  },
+  {
+   "z": 99,
+   "symbol": "Es",
+   "name": "Einsteinium",
+   "aliases": [],
+   "atomic_weight": 252.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f11 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f11 6s2 6p6 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 165.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    2,
+    4
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 252,
+    "half_life": 471.7,
+    "half_life_unit": "day"
+   }
+  },
+  {
+   "z": 100,
+   "symbol": "Fm",
+   "name": "Fermium",
+   "aliases": [],
+   "atomic_weight": 257.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f12 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f12 6s2 6p6 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 167.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    2
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 257,
+    "half_life": 100.5,
+    "half_life_unit": "day"
+   }
+  },
+  {
+   "z": 101,
+   "symbol": "Md",
+   "name": "Mendelevium",
+   "aliases": [],
+   "atomic_weight": 258.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f13 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f13 6s2 6p6 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 173.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    2
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 258,
+    "half_life": 51.59,
+    "half_life_unit": "day"
+   }
+  },
+  {
+   "z": 102,
+   "symbol": "No",
+   "name": "Nobelium",
+   "aliases": [],
+   "atomic_weight": 259.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f14 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 176.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [
+    2
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 259,
+    "half_life": 58.0,
+    "half_life_unit": "minute"
+   }
+  },
+  {
+   "z": 103,
+   "symbol": "Lr",
+   "name": "Lawrencium",
+   "aliases": [],
+   "atomic_weight": 262.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": null,
+   "period": 7,
+   "block": "f",
+   "config": "[Rn] 5f14 7s2 7p1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 7s2 7p1",
+   "en_pauling": null,
+   "covalent_radius_pm": 161.0,
+   "oxidation_states_main": [
+    3
+   ],
+   "oxidation_states_other": [],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 266,
+    "half_life": 22.0,
+    "half_life_unit": "hour"
+   }
+  },
+  {
+   "z": 104,
+   "symbol": "Rf",
+   "name": "Rutherfordium",
+   "aliases": [],
+   "atomic_weight": 267.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 4,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 5f14 6d2 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d2 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 157.0,
+   "oxidation_states_main": [
+    4
+   ],
+   "oxidation_states_other": [
+    3
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 267,
+    "half_life": 2.5,
+    "half_life_unit": "hour"
+   }
+  },
+  {
+   "z": 105,
+   "symbol": "Db",
+   "name": "Dubnium",
+   "aliases": [],
+   "atomic_weight": 268.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 5,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 5f14 6d3 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d3 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 149.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    3,
+    4,
+    5
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 268,
+    "half_life": 29.0,
+    "half_life_unit": "hour"
+   }
+  },
+  {
+   "z": 106,
+   "symbol": "Sg",
+   "name": "Seaborgium",
+   "aliases": [],
+   "atomic_weight": 271.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 6,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 5f14 6d4 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d4 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 143.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 269,
+    "half_life": 5.0,
+    "half_life_unit": "minute"
+   }
+  },
+  {
+   "z": 107,
+   "symbol": "Bh",
+   "name": "Bohrium",
+   "aliases": [],
+   "atomic_weight": 274.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 7,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 5f14 6d5 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d5 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 141.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    3,
+    4,
+    5,
+    7
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 270,
+    "half_life": 3.8,
+    "half_life_unit": "minute"
+   }
+  },
+  {
+   "z": 108,
+   "symbol": "Hs",
+   "name": "Hassium",
+   "aliases": [],
+   "atomic_weight": 269.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 8,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 5f14 6d6 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d6 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 134.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    3,
+    4,
+    6,
+    8
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 269,
+    "half_life": 15.0,
+    "half_life_unit": "sec"
+   }
+  },
+  {
+   "z": 109,
+   "symbol": "Mt",
+   "name": "Meitnerium",
+   "aliases": [],
+   "atomic_weight": 276.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 9,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 5f14 6d7 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d7 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 129.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    1,
+    3,
+    6
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 277,
+    "half_life": 9.0,
+    "half_life_unit": "sec"
+   }
+  },
+  {
+   "z": 110,
+   "symbol": "Ds",
+   "name": "Darmstadtium",
+   "aliases": [],
+   "atomic_weight": 281.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 10,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 5f14 6d9 7s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d9 7s1",
+   "en_pauling": null,
+   "covalent_radius_pm": 128.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    2,
+    4,
+    6
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 282,
+    "half_life": 4.2,
+    "half_life_unit": "minute"
+   }
+  },
+  {
+   "z": 111,
+   "symbol": "Rg",
+   "name": "Roentgenium",
+   "aliases": [],
+   "atomic_weight": 281.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 11,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 5f14 6d10 7s1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d10 7s1",
+   "en_pauling": null,
+   "covalent_radius_pm": 121.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    -1,
+    3,
+    5
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 282,
+    "half_life": 130.0,
+    "half_life_unit": "sec"
+   }
+  },
+  {
+   "z": 112,
+   "symbol": "Cn",
+   "name": "Copernicium",
+   "aliases": [],
+   "atomic_weight": 285.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 12,
+   "period": 7,
+   "block": "d",
+   "config": "[Rn] 5f14 6d10 7s2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d10 7s2",
+   "en_pauling": null,
+   "covalent_radius_pm": 122.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    2,
+    4
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 285,
+    "half_life": 30.0,
+    "half_life_unit": "sec"
+   }
+  },
+  {
+   "z": 113,
+   "symbol": "Nh",
+   "name": "Nihonium",
+   "aliases": [],
+   "atomic_weight": 286.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 13,
+   "period": 7,
+   "block": "p",
+   "config": "[Rn] 5f14 6d10 7s2 7p1",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d10 7s2 7p1",
+   "en_pauling": null,
+   "covalent_radius_pm": 136.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 286,
+    "half_life": 12.0,
+    "half_life_unit": "sec"
+   }
+  },
+  {
+   "z": 114,
+   "symbol": "Fl",
+   "name": "Flerovium",
+   "aliases": [],
+   "atomic_weight": 289.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 14,
+   "period": 7,
+   "block": "p",
+   "config": "[Rn] 5f14 6d10 7s2 7p2",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d10 7s2 7p2",
+   "en_pauling": null,
+   "covalent_radius_pm": 143.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 290,
+    "half_life": 80.0,
+    "half_life_unit": "sec"
+   }
+  },
+  {
+   "z": 115,
+   "symbol": "Mc",
+   "name": "Moscovium",
+   "aliases": [],
+   "atomic_weight": 288.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 15,
+   "period": 7,
+   "block": "p",
+   "config": "[Rn] 5f14 6d10 7s2 7p3",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d10 7s2 7p3",
+   "en_pauling": null,
+   "covalent_radius_pm": 162.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 290,
+    "half_life": 840.0,
+    "half_life_unit": "msec"
+   }
+  },
+  {
+   "z": 116,
+   "symbol": "Lv",
+   "name": "Livermorium",
+   "aliases": [],
+   "atomic_weight": 293.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 16,
+   "period": 7,
+   "block": "p",
+   "config": "[Rn] 5f14 6d10 7s2 7p4",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d10 7s2 7p4",
+   "en_pauling": null,
+   "covalent_radius_pm": 175.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    -2,
+    4
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 293,
+    "half_life": 70.0,
+    "half_life_unit": "msec"
+   }
+  },
+  {
+   "z": 117,
+   "symbol": "Ts",
+   "name": "Tennessine",
+   "aliases": [],
+   "atomic_weight": 294.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 17,
+   "period": 7,
+   "block": "p",
+   "config": "[Rn] 5f14 6d10 7s2 7p5",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d10 7s2 7p5",
+   "en_pauling": null,
+   "covalent_radius_pm": 165.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    -1,
+    5
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 294,
+    "half_life": 70.0,
+    "half_life_unit": "msec"
+   }
+  },
+  {
+   "z": 118,
+   "symbol": "Og",
+   "name": "Oganesson",
+   "aliases": [],
+   "atomic_weight": 294.0,
+   "atomic_weight_uncertainty": null,
+   "standard_weight": false,
+   "group": 18,
+   "period": 7,
+   "block": "p",
+   "config": "[Rn] 5f14 6d10 7s2 7p6",
+   "config_full": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 4f14 5s2 5p6 5d10 5f14 6s2 6p6 6d10 7s2 7p6",
+   "en_pauling": null,
+   "covalent_radius_pm": 157.0,
+   "oxidation_states_main": [],
+   "oxidation_states_other": [
+    -1,
+    1,
+    2,
+    4,
+    6
+   ],
+   "radioactive": true,
+   "isotopes": [],
+   "most_stable_isotope": {
+    "mass_number": 295,
+    "half_life": 680.0,
+    "half_life_unit": "msec"
+   }
+  }
+ ]
+}
