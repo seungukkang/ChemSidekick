@@ -141,33 +141,28 @@ class _Refs:
 
 
 def _check(f: dict[str, Any], refs: _Refs) -> str:
-    """Check column text, e.g. '✓ [1,2,3]', 'definition [4]', 'unverified [5]'."""
+    """Short check mark with reference numbers: '✓ 2,3,4', '≈ 2,4', 'def 1', '? 5'."""
     if f["status"] == "verified":
-        return f"✓ [{refs.cite(f['refs'])}]"
+        return f"✓ {refs.cite(f['refs'])}"
     if f["status"] == "definition":
-        return f"definition [{refs.cite(f['refs'])}]"
+        return f"def {refs.cite(f['refs'])}"
     if f["status"] == "partial":
-        old = f["older"]
         agree = refs.cite(f["refs"])
-        return (
-            f"✓ 2 refs [{agree}]; [{refs.cite([old['source']])}] = [{refs.cite([old['edition']])}]"
-        )
+        refs.cite([f["older"]["source"], f["older"]["edition"]])  # listed in References
+        return f"≈ {agree}"
     cited = refs.cite(f["refs"] + f.get("agree", []))
-    return f"unverified [{cited}]" if cited else "unverified (mendeleev)"
+    return f"? {cited}" if cited else "?"
 
 
 # ---------------------------------------------------------------------------
 # Results
 # ---------------------------------------------------------------------------
 
-PARTIAL_NOTE = (
-    "'✓ 2 refs [a]; [b] = [c]': two references agree; reference b reproduces the "
-    "older edition c, so it is not counted."
-)
-
-UNVERIFIED_WARNING = (
-    "Values marked 'unverified' could not be confirmed by three references "
-    "(one primary source and two compilations); they are shown from mendeleev."
+CHECK_LEGEND = (
+    "Check: ✓ confirmed by 3 references (1 primary + 2 compilations) · "
+    "≈ 2 references agree, the third reproduces an older edition · "
+    "def a definition · ? not confirmed by 3 references, value from mendeleev. "
+    "Numbers refer to References."
 )
 
 
@@ -182,14 +177,14 @@ def _element_card(el: Element) -> ToolResult:
     conf = el["config"]
     ox = el["oxidation_states"]
     rows: list[list[Any]] = [
-        ["Atomic number", el["z"], f"definition [{iupac}]"],
-        ["Symbol", el["symbol"], f"✓ [{identity}]"],
-        ["Name (IUPAC)", el["name"], f"✓ [{identity}]"],
+        ["Atomic number", el["z"], f"def {iupac}"],
+        ["Symbol", el["symbol"], f"✓ {identity}"],
+        ["Name (IUPAC)", el["name"], f"✓ {identity}"],
         ["Standard atomic weight", weight_text, _check(w, refs)],
         [
             "Group / Period / Block",
             f"{group} / {el['period']} / {el['block']}",
-            f"definition [{iupac}]",
+            f"def {iupac}",
         ],
         ["Electron configuration", superscript_config(conf["value"]), _check(conf, refs)],
         ["Full configuration", superscript_config(conf["full"]), _check(conf, refs)],
@@ -206,13 +201,18 @@ def _element_card(el: Element) -> ToolResult:
         ["Oxidation states (main)", _states(ox["value"]["main"]), _check(ox, refs)],
         ["Oxidation states (other known)", _states(ox["value"]["other"]), _check(ox, refs)],
     ]
-    tables = [Table(title="Properties", columns=["Property", "Value", "Check"], rows=rows)]
+    tables = [
+        Table(
+            title="Properties", columns=["Property", "Value", "Check"], rows=rows, minor_columns=[2]
+        )
+    ]
 
     if el["isotopes"]:
         tables.append(
             Table(
                 title="Natural isotopes",
-                columns=["Isotope", "Mass (u)", "Mass check", "Abundance (%)", "Abundance check"],
+                columns=["Isotope", "Mass (u)", "Check", "Abundance (%)", "Check"],
+                minor_columns=[2, 4],
                 rows=[
                     [
                         f"{i['mass_number']}{el['symbol']}",
@@ -232,6 +232,7 @@ def _element_card(el: Element) -> ToolResult:
             Table(
                 title="Longest-lived isotope (no natural abundance)",
                 columns=["Isotope", "Half-life", "Check"],
+                minor_columns=[2],
                 rows=[
                     [
                         f"{v['mass_number']}{el['symbol']}",
@@ -242,21 +243,17 @@ def _element_card(el: Element) -> ToolResult:
             )
         )
 
-    checks = [str(cell) for t in tables for row in t.rows for cell in row[2::2] if cell]
-    has_unverified = any("unverified" in c for c in checks)
-    has_partial = any("2 refs" in c for c in checks)
     meta = _dataset()["meta"]
     return ToolResult(
         answer=f"{el['symbol']} · {el['name']} · Z = {el['z']}",
         tables=tables,
-        assumptions=["Ground state of the neutral, isolated atom."]
-        + ([PARTIAL_NOTE] if has_partial else []),
+        assumptions=["Ground state of the neutral, isolated atom."],
+        notes=[CHECK_LEGEND],
         sources=[
             *refs.lines(),
             f"Data built {meta['built']} from sources retrieved {min(meta['retrieved'].values())}; "
             f"unverified values from mendeleev {meta['mendeleev']}.",
         ],
-        warnings=[UNVERIFIED_WARNING] if has_unverified else [],
         data={"element": el},
     )
 

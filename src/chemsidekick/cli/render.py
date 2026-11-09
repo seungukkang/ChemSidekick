@@ -1,6 +1,6 @@
 """Print any ToolResult to the terminal, in the shared order:
-answer -> evidence (formulas, constants, assumptions) -> details.
-Sources are printed last, dimmed, as footnotes.
+answer -> formulas -> details (tables, files) -> warnings, then footnotes
+(notes, assumptions, references) dimmed at the bottom.
 """
 
 from rich import box
@@ -34,8 +34,9 @@ def _table(t: Table) -> RichTable:
         collapse_padding=wide,
         pad_edge=not wide,
     )
-    for col in t.columns:
-        out.add_column(col, no_wrap=wide)
+    for i, col in enumerate(t.columns):
+        minor = i in t.minor_columns
+        out.add_column(col, no_wrap=wide or minor, style="dim" if minor else None)
     for row in t.rows:
         out.add_row(*(_cell(v) for v in row))
     return out
@@ -59,8 +60,6 @@ def render_result(result: ToolResult, console: Console) -> None:
                 )
             )
         )
-    for a in result.assumptions:
-        console.print(Text(f"  Assumes: {a}", style="italic"))
 
     for t in result.tables:
         console.print(_table(t))
@@ -73,6 +72,8 @@ def render_result(result: ToolResult, console: Console) -> None:
             console.print(Text(f"  {a.kind:5} {a.path}"))
     for w in result.warnings:
         console.print(Text(f"Warning: {w}", style="yellow"))
+    for line in [*result.notes, *(f"Assumes: {a}" for a in result.assumptions)]:
+        console.print(Text(line, style="dim"))
     if result.sources:
         console.print(Text("References", style="dim bold"))
         for s in result.sources:

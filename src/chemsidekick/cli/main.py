@@ -266,6 +266,7 @@ def build_app(registry: Registry) -> typer.Typer:
             "--server.address", "localhost",
             "--browser.gatherUsageStats", "false",
             "--server.showEmailPrompt", "false",  # no first-run email question
+            "--client.toolbarMode", "minimal",  # hide Streamlit's developer menu ("Deploy")
         ]  # fmt: skip
         raise typer.Exit(subprocess.call(cmd))
 

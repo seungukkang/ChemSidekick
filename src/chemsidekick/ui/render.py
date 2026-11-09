@@ -42,36 +42,42 @@ _MIME = {
 }
 
 
+def _column_width(frame: pd.DataFrame, column: str) -> int:
+    """Pixel width that fits the longest text in a column (about 8 px per character)."""
+    longest = max([len(str(column)), *(len(v) for v in frame[column])])
+    return min(640, 8 * longest + 28)
+
+
+def _table(t: Table) -> None:
+    frame = _frame(t)
+    # Every column is as wide as its content, so short reference columns ("Check")
+    # stay narrow and long values are not cut off. Minor columns are labelled small.
+    config = {
+        col: st.column_config.TextColumn(width=_column_width(frame, col)) for col in frame.columns
+    }
+    st.dataframe(
+        frame,
+        hide_index=True,
+        column_config=config,
+        width="content",
+        height=35 * (len(frame) + 1) + 3,  # header + rows: no inner scroll bar
+    )
+
+
 def render_result(result: ToolResult, key: str = "result") -> None:
     st.markdown(f"### {escape_markdown(result.answer)}")
 
+    # Warnings are about this input or result, so they stay prominent.
     for w in result.warnings:
         st.warning(w)
 
-    # Evidence
     for f in result.formulas:
         st.latex(f.latex)
-    if result.constants or result.assumptions:
-        with st.expander("Constants and assumptions", expanded=False):
-            if result.constants:
-                st.dataframe(
-                    pd.DataFrame(
-                        [
-                            [c.name, c.symbol, f"{c.value:g}", c.unit, c.source]
-                            for c in result.constants
-                        ],
-                        columns=["Name", "Symbol", "Value", "Unit", "Source"],
-                    ),  # fmt: skip
-                    hide_index=True,
-                )
-            for a in result.assumptions:
-                st.markdown(f"- {escape_markdown(a)}")
 
-    # Details
     for t in result.tables:
         if t.title:
             st.markdown(f"**{escape_markdown(t.title)}**")
-        st.dataframe(_frame(t), hide_index=True)
+        _table(t)
     for s in result.structures:
         st.caption(f"3D structure: {s.frames[0].n_atoms} atoms, {len(s.frames)} frame(s)")
     for i, a in enumerate(result.artifacts):
@@ -87,6 +93,21 @@ def render_result(result: ToolResult, key: str = "result") -> None:
                 key=f"{key}-download-{i}",
             )
 
+    # Footnotes: small, at the bottom.
+    for line in [*result.notes, *(f"Assumes: {a}" for a in result.assumptions)]:
+        st.caption(escape_markdown(line))
+    if result.constants:
+        with st.expander("Constants", expanded=False):
+            st.dataframe(
+                pd.DataFrame(
+                    [
+                        [c.name, c.symbol, f"{c.value:g}", c.unit, c.source]
+                        for c in result.constants
+                    ],
+                    columns=["Name", "Symbol", "Value", "Unit", "Source"],
+                ),
+                hide_index=True,
+            )
     if result.sources:
         with st.expander("References", expanded=False):
             for s in result.sources:

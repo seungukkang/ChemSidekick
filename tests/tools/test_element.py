@@ -209,11 +209,23 @@ def test_configurations_are_unverified_with_two_agreeing_sources():
 def test_card_shows_check_column_and_numbered_references():
     result = element(ElementInput(query="Fe"))
     checks = {row[0]: row[2] for row in result.tables[0].rows}
-    assert checks["Standard atomic weight"].startswith("✓ [")
-    assert checks["Electron configuration"].startswith("unverified")
+    assert checks["Standard atomic weight"] == "✓ 2,3,4"
+    assert checks["Atomic number"] == "def 1"
+    assert checks["Electron configuration"].startswith("? ")
+    assert result.tables[0].minor_columns == [2]
     assert result.sources[0].startswith("[1] ")
     assert any("Prohaska" in s for s in result.sources)
-    assert result.warnings  # some values are unverified
+    # The legend is a footnote, not a warning.
+    assert result.warnings == []
+    assert result.notes and result.notes[0].startswith("Check:")
+
+
+def test_partial_value_check_mark():
+    result = element(ElementInput(query="Sc"))
+    checks = {row[0]: row[2] for row in result.tables[0].rows}
+    assert checks["Standard atomic weight"] == "≈ 2,4"
+    # The older edition is still listed among the references.
+    assert any("2013 edition" in s for s in result.sources)
 
 
 def test_mendeleev_is_never_cited_as_a_reference():

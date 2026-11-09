@@ -93,6 +93,9 @@ class Table(_Model):
     title: str = ""
     columns: list[str]
     rows: list[list[Cell]]
+    # Indexes of columns that are for reference only (e.g. a "Check" column);
+    # interfaces draw them narrow and dimmed.
+    minor_columns: list[int] = []
 
     @model_validator(mode="after")
     def _check(self) -> "Table":
@@ -125,6 +128,9 @@ class ToolResult(_Model):
     constants: list[Constant] = []
     assumptions: list[str] = []
     sources: list[str] = []
+    # Standing explanations (legends, data caveats) shown small at the bottom.
+    # Use `warnings` only for problems with this particular input or result.
+    notes: list[str] = []
     # Details
     tables: list[Table] = []
     structures: list[Structure3D] = []
