@@ -1,13 +1,15 @@
 """Entry point for the `csk` command.
 
-Built-in commands (list, search) are defined here. Every tool in the
+Built-in commands (list, search, recent, save, doctor) are defined here. Every tool in the
 registry becomes a `csk <tool>` command automatically: its options are
 generated from the tool's Pydantic input model.
 """
 
 import inspect
+import sys
 import types
 import typing
+from pathlib import Path
 from typing import Any, Literal, Union
 
 import typer
@@ -16,8 +18,17 @@ from pydantic.fields import FieldInfo
 from rich.console import Console
 
 from chemsidekick import __version__
-from chemsidekick.cli.render import render_result, render_tool_list
+from chemsidekick.cli.render import (
+    render_doctor,
+    render_recent,
+    render_result,
+    render_tool_list,
+)
+from chemsidekick.core.config import ConfigError, load_config
+from chemsidekick.core.external import doctor
 from chemsidekick.core.registry import Registry, ToolSpec, discover
+from chemsidekick.core.results import RecentStore
+from chemsidekick.core.runner import ConfirmationRequired, RunError, run_tool
 from chemsidekick.core.schemas import ToolError
 
 console = Console()
@@ -67,12 +78,29 @@ def _parameter(name: str, field: FieldInfo) -> inspect.Parameter:
     )
 
 
-_JSON_PARAM = inspect.Parameter(
-    "json_output",
-    inspect.Parameter.KEYWORD_ONLY,
-    default=typer.Option(False, "--json", help="Print the full result as JSON."),
-    annotation=bool,
-)
+def _common(name: str, annotation: Any, option: Any) -> inspect.Parameter:
+    return inspect.Parameter(
+        name, inspect.Parameter.KEYWORD_ONLY, default=option, annotation=annotation
+    )
+
+
+# Options shared by every tool command. Their names start with "csk_" so they
+# can never clash with a field of a tool's input model.
+_COMMON_PARAMS = [
+    _common("csk_json", bool, typer.Option(False, "--json", help="Print the result as JSON.")),
+    _common("csk_save", bool, typer.Option(False, "--save", help="Save the result.")),
+    _common(
+        "csk_save_to",
+        Path | None,
+        typer.Option(None, "--save-to", help="Save the result into this folder."),
+    ),
+    _common(
+        "csk_timeout",
+        float | None,
+        typer.Option(None, "--timeout", help="Time limit in seconds (overrides the default)."),
+    ),
+    _common("csk_yes", bool, typer.Option(False, "--yes", "-y", help="Skip confirmation.")),
+]
 
 
 def _fail(message: str) -> typing.NoReturn:
@@ -88,24 +116,73 @@ def _input_error_message(e: ValidationError) -> str:
     return "; ".join(parts)
 
 
+def _load_config():
+    try:
+        return load_config()
+    except ConfigError as e:
+        _fail(str(e))
+
+
 def _tool_command(spec: ToolSpec):
     """Build a Typer command function for one tool."""
     model: type[BaseModel] = spec.input_model
-    params = [_parameter(n, f) for n, f in model.model_fields.items()] + [_JSON_PARAM]
+    params = [_parameter(n, f) for n, f in model.model_fields.items()] + _COMMON_PARAMS
 
     def command(**kwargs: Any) -> None:
-        as_json = kwargs.pop("json_output")
+        common = {k: kwargs.pop(k) for k in list(kwargs) if k.startswith("csk_")}
+        config = _load_config()
         try:
             inp = model(**kwargs)
-            result = spec.run(inp)
         except ValidationError as e:
             _fail(_input_error_message(e))
-        except ToolError as e:
+
+        confirmed = common["csk_yes"]
+        if spec.resources == "heavy" and not confirmed:
+            if not sys.stdin.isatty():
+                _fail(f"{spec.title} is a heavy tool. Add --yes to run it.")
+            confirmed = typer.confirm(f"{spec.title} is a heavy tool. Run it?")
+            if not confirmed:
+                raise typer.Exit(code=1)
+
+        store = RecentStore(limit=config.recent_limit)
+        number, folder = store.new_folder(spec.name)
+        try:
+            outcome = run_tool(
+                spec,
+                inp,
+                workdir=folder,
+                config=config,
+                timeout_s=common["csk_timeout"],
+                confirmed=confirmed,
+            )
+        except (ToolError, ConfirmationRequired, RunError) as e:
+            store.discard(folder)
             _fail(str(e))
-        if as_json:
+        result = outcome.result
+        store.record(
+            number,
+            folder,
+            spec,
+            inp,
+            result,
+            elapsed_s=outcome.elapsed_s,
+            peak_memory_mb=outcome.peak_memory_mb,
+        )
+
+        saved = None
+        if common["csk_save"] or common["csk_save_to"]:
+            saved = store.save(number, common["csk_save_to"] or config.save_dir)
+
+        if common["csk_json"]:
             typer.echo(result.model_dump_json(indent=2))
+            return
+        render_result(result, console)
+        if saved:
+            console.print(f"Saved to {saved}", highlight=False)
         else:
-            render_result(result, console)
+            console.print(
+                f"[dim]Result #{number} · `csk save {number}` to keep it[/dim]", highlight=False
+            )
 
     command.__signature__ = inspect.Signature(params)  # type: ignore[attr-defined]
     command.__name__ = spec.name
@@ -148,8 +225,41 @@ def build_app(registry: Registry) -> typer.Typer:
             groups.setdefault(spec.category, []).append(spec)
         render_tool_list(groups, console)
 
+    @app.command("recent")
+    def recent(
+        count: int = typer.Option(10, "--count", "-n", min=1, help="How many to show."),
+    ) -> None:
+        """Show the most recent results."""
+        config = _load_config()
+        entries = RecentStore(limit=config.recent_limit).entries()[:count]
+        if not entries:
+            console.print("No recent results yet.")
+            return
+        render_recent(entries, console)
+
+    @app.command("save")
+    def save(
+        number: int | None = typer.Argument(
+            None, help="Result number from `csk recent` (default: the latest)."
+        ),
+        to: Path | None = typer.Option(None, "--to", help="Save into this folder."),
+    ) -> None:
+        """Save a recent result so it is not deleted."""
+        config = _load_config()
+        store = RecentStore(limit=config.recent_limit)
+        try:
+            dest = store.save(number, to or config.save_dir)
+        except LookupError as e:
+            _fail(str(e))
+        console.print(f"Saved to {dest}", highlight=False)
+
+    @app.command("doctor")
+    def doctor_cmd() -> None:
+        """Check which external programs are installed."""
+        render_doctor(doctor(_load_config()), console)
+
     for spec in registry.all():
-        app.command(name=spec.name, help=spec.summary)(_tool_command(spec))
+        app.command(name=spec.name, help=f"[{spec.id}] {spec.summary}")(_tool_command(spec))
 
     return app
 

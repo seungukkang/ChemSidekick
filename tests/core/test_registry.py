@@ -15,6 +15,7 @@ def make_registry() -> Registry:
 
     @reg.tool(
         name="echo",
+        number=1,
         title="Echo",
         summary="Repeat the input text",
         category="reference",
@@ -25,6 +26,7 @@ def make_registry() -> Registry:
 
     @reg.tool(
         name="shape",
+        number=1,
         title="Shape Viewer",
         summary="Show a molecule in 3D",
         category="structure",
@@ -35,6 +37,15 @@ def make_registry() -> Registry:
         return ToolResult(answer="shape")
 
     return reg
+
+
+def test_ids():
+    reg = make_registry()
+    assert reg.get("echo").id == "REF-01"
+    assert reg.get("shape").id == "STR-01"
+    assert reg.by_id("ref-01").name == "echo"
+    assert [s.id for s in reg.all()] == ["STR-01", "REF-01"]
+    assert reg.search("str-01")[0].name == "shape"
 
 
 def test_register_and_run():
@@ -71,11 +82,11 @@ def test_search(query, expected_first):
 def test_search_no_match_and_empty_query():
     reg = make_registry()
     assert reg.search("zzz") == []
-    assert [s.name for s in reg.search("  ")] == ["echo", "shape"]
+    assert [s.name for s in reg.search("  ")] == ["shape", "echo"]
 
 
 def _declare(reg: Registry, **overrides):
-    kwargs = dict(name="t", title="T", summary="s", category="reference")
+    kwargs = dict(name="t", number=2, title="T", summary="s", category="reference")
     kwargs.update(overrides)
 
     @reg.tool(**kwargs)
@@ -91,6 +102,8 @@ def _declare(reg: Registry, **overrides):
         ({"name": "Bad_Name"}, "lowercase"),
         ({"category": "cooking"}, "unknown category"),
         ({"resources": "huge"}, "resources must be"),
+        ({"number": 1}, "ID REF-01 is already used by 'echo'"),
+        ({"number": 0}, "between 1 and 99"),
     ],
 )
 def test_invalid_declarations_fail_immediately(overrides, message):
@@ -102,13 +115,13 @@ def test_function_signature_is_checked():
     reg = Registry()
     with pytest.raises(RegistryError, match="Pydantic model"):
 
-        @reg.tool(name="a", title="A", summary="", category="reference")
+        @reg.tool(name="a", number=1, title="A", summary="", category="reference")
         def a(inp: str) -> ToolResult:
             return ToolResult(answer="")
 
     with pytest.raises(RegistryError, match="-> ToolResult"):
 
-        @reg.tool(name="b", title="B", summary="", category="reference")
+        @reg.tool(name="b", number=2, title="B", summary="", category="reference")
         def b(inp: EchoInput) -> str:
             return ""
 

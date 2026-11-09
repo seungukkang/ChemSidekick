@@ -8,7 +8,9 @@ from rich.console import Console
 from rich.table import Table as RichTable
 from rich.text import Text
 
+from chemsidekick.core.external import ExternalProgram, Located, env_var_name
 from chemsidekick.core.registry import CATEGORIES, ToolSpec
+from chemsidekick.core.results import RecentEntry
 from chemsidekick.core.schemas import Table, ToolResult
 
 
@@ -77,11 +79,55 @@ def render_result(result: ToolResult, console: Console) -> None:
 
 def render_tool_list(groups: dict[str, list[ToolSpec]], console: Console) -> None:
     for cat, specs in groups.items():
-        out = RichTable(title=CATEGORIES[cat], title_justify="left", title_style="bold",
+        out = RichTable(title=CATEGORIES[cat].title, title_justify="left", title_style="bold",
                         box=box.SIMPLE_HEAD, padding=(0, 1))  # fmt: skip
+        out.add_column("ID")
         out.add_column("Command")
         out.add_column("Description")
         out.add_column("Resources")
         for s in specs:
-            out.add_row(Text(f"csk {s.name}"), Text(s.summary), Text(s.resources))
+            out.add_row(Text(s.id), Text(f"csk {s.name}"), Text(s.summary), Text(s.resources))
         console.print(out)
+
+
+def render_recent(entries: list[RecentEntry], console: Console) -> None:
+    out = RichTable(box=box.SIMPLE_HEAD, padding=(0, 1))
+    for col in ["#", "ID", "Tool", "When", "Answer"]:
+        out.add_column(col)
+    for e in entries:
+        out.add_row(
+            Text(str(e.number)),
+            Text(e.tool_id),
+            Text(e.tool),
+            Text(e.created.strftime("%Y-%m-%d %H:%M")),
+            Text(e.answer),
+        )
+    console.print(out)
+    console.print(Text("`csk save <#>` keeps a result.", style="dim"))
+
+
+def render_doctor(rows: list[tuple[ExternalProgram, Located | None]], console: Console) -> None:
+    if not rows:
+        console.print("No external programs registered.")
+        return
+    out = RichTable(box=box.SIMPLE_HEAD, padding=(0, 1))
+    for col in ["Program", "Status", "Found by", "Command", "Version"]:
+        out.add_column(col)
+    for program, located in rows:
+        if located is None:
+            out.add_row(
+                Text(program.name),
+                Text("missing", style="red"),
+                Text("—"),
+                Text(program.install_hint or f"set {env_var_name(program)}"),
+                Text("—"),
+            )
+        else:
+            out.add_row(
+                Text(program.name),
+                Text("ok", style="green"),
+                Text(located.found_by),
+                Text(" ".join(located.command)),
+                Text(located.version or "?"),
+            )
+    console.print(out)

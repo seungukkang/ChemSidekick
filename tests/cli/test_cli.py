@@ -16,6 +16,7 @@ def test_list_shows_tools_by_category():
     assert result.exit_code == 0
     assert "Reference" in result.stdout
     assert "csk element" in result.stdout
+    assert "REF-01" in result.stdout
 
 
 def test_search():
@@ -64,7 +65,7 @@ class FakeInput(BaseModel):
 def fake_app():
     reg = Registry()
 
-    @reg.tool(name="fake", title="Fake", summary="A fake tool", category="structure")
+    @reg.tool(name="fake", number=1, title="Fake", summary="A fake tool", category="structure")
     def fake(inp: FakeInput) -> ToolResult:
         if inp.smiles == "bad":
             raise ToolError("bad molecule")
@@ -90,3 +91,36 @@ def test_generated_options_are_validated():
     assert bad_count.exit_code == 1
     assert "count" in bad_count.stderr
     assert "bad molecule" in runner.invoke(app_, ["fake", "bad"]).stderr
+
+
+# --- Recent results, save, doctor ------------------------------------------
+
+
+def test_each_run_is_kept_and_can_be_saved(isolated_user_dirs):
+    out = runner.invoke(app, ["element", "Fe"])
+    assert "Result #1" in out.stdout
+    runner.invoke(app, ["element", "Cu"])
+
+    recent = runner.invoke(app, ["recent"])
+    assert "Cu · Copper" in recent.stdout and "Fe · Iron" in recent.stdout
+
+    saved = runner.invoke(app, ["save", "1"])
+    assert saved.exit_code == 0
+    assert list((isolated_user_dirs / "saved" / "element").iterdir())
+
+
+def test_save_flag_and_missing_result(isolated_user_dirs):
+    out = runner.invoke(app, ["element", "H", "--save-to", str(isolated_user_dirs / "here")])
+    assert "Saved to" in out.stdout
+    assert (isolated_user_dirs / "here" / "element").exists()
+    assert runner.invoke(app, ["save", "42"]).exit_code == 1
+
+
+def test_failed_run_is_not_kept():
+    runner.invoke(app, ["element", "Iorn"])
+    assert "No recent results" in runner.invoke(app, ["recent"]).stdout
+
+
+def test_doctor_runs():
+    result = runner.invoke(app, ["doctor"])
+    assert result.exit_code == 0

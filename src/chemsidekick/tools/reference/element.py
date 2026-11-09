@@ -25,6 +25,7 @@ class ElementInput(BaseModel):
 
 @tool(
     name="element",
+    number=1,
     title="Element",
     summary="Element properties, electron configuration, isotopes; or the periodic table",
     category="reference",
@@ -123,6 +124,14 @@ def _or_dash(value: Any, unit: str = "") -> str:
     return f"{value:g}{unit}" if isinstance(value, float) else f"{value}{unit}"
 
 
+# Until the cross-check against three references is done (see the project's
+# data verification policy), every result says so.
+UNVERIFIED_WARNING = (
+    "Provisional data: single source (mendeleev), not yet cross-checked against "
+    "three independent references."
+)
+
+
 def _sources() -> list[str]:
     meta = _dataset()["meta"]
     return [
@@ -188,6 +197,7 @@ def _element_card(el: Element) -> ToolResult:
         answer=f"{el['symbol']} · {el['name']} · Z = {el['z']}",
         tables=tables,
         sources=_sources(),
+        warnings=[UNVERIFIED_WARNING],
         data={"element": el},
     )
 
@@ -218,5 +228,6 @@ def _periodic_table() -> ToolResult:
         answer=f"Periodic table · {len(elements)} elements",
         tables=[Table(title="", columns=columns, rows=rows)],
         sources=_sources()[:1],
+        warnings=[UNVERIFIED_WARNING],
         data={"symbols": [el["symbol"] for el in elements]},
     )

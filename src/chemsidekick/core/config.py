@@ -10,6 +10,7 @@ The file is optional: every setting has a default. Example:
     # or: conda_env = "csk-ext"
 """
 
+import os
 import tomllib
 from pathlib import Path
 
@@ -49,9 +50,15 @@ class Config(BaseModel):
         return v.expanduser()
 
 
+def config_path() -> Path:
+    """The config file location; CSK_CONFIG overrides it (used by tests)."""
+    env = os.environ.get("CSK_CONFIG")
+    return Path(env).expanduser() if env else CONFIG_PATH
+
+
 def load_config(path: Path | None = None) -> Config:
     """Read the config file, or return defaults if it does not exist."""
-    path = path or CONFIG_PATH
+    path = path or config_path()
     if not path.exists():
         return Config()
     try:

@@ -1,9 +1,12 @@
 """Tool registry: the @tool decorator, tool discovery, and search.
 
 A tool is a plain function that takes one Pydantic input model and returns a
-ToolResult. The decorator attaches a label (name, category, resources, ...)
+ToolResult. The decorator attaches a label (name, ID, category, resources, ...)
 and stores the function in a registry. Interfaces (CLI, UI) only read the
 registry, so adding a tool never requires changing interface code.
+
+Every tool has a permanent ID: <category code>-<number>, e.g. REF-01.
+Numbers are never reused, even if a tool is removed.
 """
 
 import importlib
@@ -17,10 +20,17 @@ from pydantic import BaseModel
 
 from chemsidekick.core.schemas import ToolResult
 
-# Category id -> display name (UI tab). Add one line here for a new category.
-CATEGORIES: dict[str, str] = {
-    "structure": "Structure",
-    "reference": "Reference",
+
+@dataclass(frozen=True)
+class Category:
+    code: str  # three capital letters, used in tool IDs
+    title: str  # display name (UI tab)
+
+
+# Add one line here for a new category. Codes must never change.
+CATEGORIES: dict[str, Category] = {
+    "structure": Category("STR", "Structure"),
+    "reference": Category("REF", "Reference"),
 }
 
 Resources = Literal["light", "medium", "heavy"]
@@ -43,6 +53,7 @@ class ToolSpec:
     """Everything an interface needs to know about one tool."""
 
     name: str
+    number: int
     title: str
     summary: str
     category: str
@@ -51,8 +62,15 @@ class ToolSpec:
     requires: tuple[str, ...]
     input_model: type[BaseModel]
     func: ToolFunc
+    # Optional: time limit (s) computed from the input, e.g. more isomers -> more time.
+    timeout: Callable[[BaseModel], float] | None = None
+
+    @property
+    def id(self) -> str:
+        return f"{CATEGORIES[self.category].code}-{self.number:02d}"
 
     def run(self, inp: BaseModel) -> ToolResult:
+        """Call the tool directly, without resource limits (see core/runner.py)."""
         return self.func(inp)
 
 
@@ -66,18 +84,21 @@ class Registry:
         self,
         *,
         name: str,
+        number: int,
         title: str,
         summary: str,
         category: str,
         keywords: list[str] | tuple[str, ...] = (),
         resources: Resources = "light",
         requires: list[str] | tuple[str, ...] = (),
+        timeout: Callable[[BaseModel], float] | None = None,
     ) -> Callable[[ToolFunc], ToolFunc]:
         """Decorator that registers a tool function."""
 
         def decorator(func: ToolFunc) -> ToolFunc:
             spec = ToolSpec(
                 name=name,
+                number=number,
                 title=title,
                 summary=summary,
                 category=category,
@@ -86,6 +107,7 @@ class Registry:
                 requires=tuple(requires),
                 input_model=_input_model_of(func),
                 func=func,
+                timeout=timeout,
             )
             self.register(spec)
             return func
@@ -110,6 +132,13 @@ class Registry:
             raise RegistryError(
                 f"tool {spec.name!r}: resources must be one of {', '.join(RESOURCE_LEVELS)}"
             )
+        if not 1 <= spec.number <= 99:
+            raise RegistryError(f"tool {spec.name!r}: number must be between 1 and 99")
+        for other in self._tools.values():
+            if other.id == spec.id:
+                raise RegistryError(
+                    f"tool {spec.name!r}: ID {spec.id} is already used by {other.name!r}"
+                )
         self._tools[spec.name] = spec
 
     # -- lookup -------------------------------------------------------------
@@ -121,7 +150,15 @@ class Registry:
             raise KeyError(f"no tool named {name!r}") from None
 
     def all(self) -> list[ToolSpec]:
-        return sorted(self._tools.values(), key=lambda s: s.name)
+        """All tools, ordered by ID (category order, then number)."""
+        order = list(CATEGORIES)
+        return sorted(self._tools.values(), key=lambda s: (order.index(s.category), s.number))
+
+    def by_id(self, tool_id: str) -> ToolSpec:
+        for spec in self._tools.values():
+            if spec.id == tool_id.upper():
+                return spec
+        raise KeyError(f"no tool with ID {tool_id!r}")
 
     def by_category(self) -> dict[str, list[ToolSpec]]:
         """Tools grouped by category, in CATEGORIES order. Empty categories are omitted."""
@@ -138,7 +175,7 @@ class Registry:
         if not q:
             return self.all()
         scored = [(score, spec) for spec in self._tools.values() if (score := _score(spec, q))]
-        scored.sort(key=lambda pair: (-pair[0], pair[1].name))
+        scored.sort(key=lambda pair: (-pair[0], pair[1].id))
         return [spec for _, spec in scored]
 
     def __contains__(self, name: str) -> bool:
@@ -151,7 +188,7 @@ class Registry:
 def _score(spec: ToolSpec, q: str) -> int:
     """Search relevance: name > keyword > title > summary. 0 means no match."""
     keywords = [k.lower() for k in spec.keywords]
-    if spec.name == q:
+    if spec.name == q or spec.id.lower() == q:
         return 100
     if spec.name.startswith(q):
         return 80
