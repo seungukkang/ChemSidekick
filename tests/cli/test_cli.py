@@ -42,7 +42,7 @@ def test_element_json_output():
     assert result.exit_code == 0
     data = json.loads(result.stdout)
     assert data["answer"] == "Fe · Iron · Z = 26"
-    assert data["data"]["element"]["config"] == "[Ar] 3d6 4s2"
+    assert data["data"]["element"]["config"]["value"] == "[Ar] 3d6 4s2"
 
 
 def test_element_unknown_is_a_clean_error():

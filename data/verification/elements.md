@@ -1,0 +1,248 @@
+# Element data verification report
+
+Built 2026-11-10 by `scripts/build_elements.py`. Do not edit by hand.
+
+| Property | verified | definition | unverified |
+|---|---|---|---|
+| Standard atomic weight | 73 | 34 | 11 |
+| Isotope abundance | 217 | 0 | 72 |
+| Isotope mass | 145 | 0 | 144 |
+| Electron configuration | 0 | 0 | 118 |
+| Electronegativity (Pauling) | 0 | 0 | 118 |
+| Covalent radius | 0 | 0 | 118 |
+| Oxidation states | 0 | 0 | 118 |
+
+Electron configurations where both NIST ASD and PubChem agree with the shown value: 107 of 118.
+
+## Disagreements and gaps
+
+- He-3: abundance CIAAW 0.000002(2), NIST 0.00000134(3), LiveChart 0.0002 %
+- He-4: abundance CIAAW 0.999998(2), NIST 0.99999866(3), LiveChart 99.9998 %
+- F: atomic weight CIAAW 18.998403162(5), NIST 18.998403163(6), PubChem 18.99840316
+- Al: atomic weight CIAAW 26.9815384(3), NIST 26.9815385(7), PubChem 26.981538
+- Ar: atomic weight interval agreed only by ['ciaaw-weights', 'pubchem']
+- Ca-46: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sc: atomic weight CIAAW 44.955907(4), NIST 44.955908(5), PubChem 44.95591
+- Sc-45: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ti-46: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ti-47: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ti-48: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ti-49: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ti-50: mass agreed only by ['ame2020', 'iaea-livechart']
+- V-50: mass agreed only by ['ame2020', 'iaea-livechart']
+- V-51: mass agreed only by ['ame2020', 'iaea-livechart']
+- Cr-52: mass agreed only by ['ame2020', 'iaea-livechart']
+- Cr-53: mass agreed only by ['ame2020', 'iaea-livechart']
+- Cr-54: mass agreed only by ['ame2020', 'iaea-livechart']
+- Mn: atomic weight CIAAW 54.938043(2), NIST 54.938044(3), PubChem 54.93804
+- Mn-55: mass agreed only by ['ame2020', 'iaea-livechart']
+- Fe-54: mass agreed only by ['ame2020', 'iaea-livechart']
+- Fe-57: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ni-60: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ni-61: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ni-62: abundance CIAAW 0.036345(40), NIST 0.036346(40), LiveChart 3.6345 %
+- Ni-64: abundance CIAAW 0.009256(19), NIST 0.009255(19), LiveChart 0.9256 %
+- Ni-64: mass agreed only by ['ame2020', 'iaea-livechart']
+- Cu-63: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ge-70: abundance CIAAW 0.2052(19), NIST 0.2057(27), LiveChart 20.52 %
+- Ge-73: abundance CIAAW 0.0776(8), NIST 0.0775(12), LiveChart 7.76 %
+- Ge-74: abundance CIAAW 0.3652(12), NIST 0.3650(20), LiveChart 36.52 %
+- Ge-76: abundance CIAAW 0.0775(12), NIST 0.0773(12), LiveChart 7.75 %
+- Se-74: abundance CIAAW 0.0086(3), NIST 0.0089(4), LiveChart 0.86 %
+- Se-76: abundance CIAAW 0.0923(7), NIST 0.0937(29), LiveChart 9.23 %
+- Se-77: abundance CIAAW 0.0760(7), NIST 0.0763(16), LiveChart 7.60 %
+- Se-78: abundance CIAAW 0.2369(22), NIST 0.2377(28), LiveChart 23.69 %
+- Se-80: abundance CIAAW 0.4980(36), NIST 0.4961(41), LiveChart 49.80 %
+- Se-82: abundance CIAAW 0.0882(15), NIST 0.0873(22), LiveChart 8.82 %
+- Br-81: mass agreed only by ['ame2020', 'iaea-livechart']
+- Kr-78: mass agreed only by ['ame2020', 'iaea-livechart']
+- Kr-82: mass agreed only by ['ame2020', 'iaea-livechart']
+- Y-89: mass agreed only by ['ame2020', 'iaea-livechart']
+- Zr: atomic weight CIAAW 91.222(3), NIST 91.224(2), PubChem 91.22
+- Zr-90: abundance CIAAW 0.5147(6), NIST 0.5145(40), LiveChart 51.45 %
+- Zr-90: mass agreed only by ['ame2020', 'iaea-livechart']
+- Zr-91: abundance CIAAW 0.1123(6), NIST 0.1122(5), LiveChart 11.22 %
+- Zr-92: abundance CIAAW 0.1716(4), NIST 0.1715(8), LiveChart 17.15 %
+- Zr-94: abundance CIAAW 0.1736(7), NIST 0.1738(28), LiveChart 17.38 %
+- Zr-94: mass agreed only by ['ame2020', 'iaea-livechart']
+- Zr-96: abundance CIAAW 0.0278(4), NIST 0.0280(9), LiveChart 2.80 %
+- Zr-96: mass agreed only by ['ame2020', 'iaea-livechart']
+- Mo-92: abundance CIAAW 0.14649(106), NIST 0.1453(30), LiveChart 14.649 %
+- Mo-92: mass agreed only by ['ame2020', 'iaea-livechart']
+- Mo-94: abundance CIAAW 0.09187(33), NIST 0.0915(9), LiveChart 9.187 %
+- Mo-94: mass agreed only by ['ame2020', 'iaea-livechart']
+- Mo-95: abundance CIAAW 0.15873(30), NIST 0.1584(11), LiveChart 15.873 %
+- Mo-95: mass agreed only by ['ame2020', 'iaea-livechart']
+- Mo-96: mass agreed only by ['ame2020', 'iaea-livechart']
+- Mo-97: abundance CIAAW 0.09582(15), NIST 0.0960(14), LiveChart 9.582 %
+- Mo-97: mass agreed only by ['ame2020', 'iaea-livechart']
+- Mo-98: abundance CIAAW 0.24292(80), NIST 0.2439(37), LiveChart 24.292 %
+- Mo-98: mass agreed only by ['ame2020', 'iaea-livechart']
+- Mo-100: abundance CIAAW 0.09744(65), NIST 0.0982(31), LiveChart 9.744 %
+- Mo-100: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ru-96: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ru-99: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ru-100: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ru-101: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ru-102: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ru-104: mass agreed only by ['ame2020', 'iaea-livechart']
+- Rh: atomic weight CIAAW 102.90549(2), NIST 102.90550(2), PubChem 102.9055
+- Rh-103: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pd-102: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pd-110: mass agreed only by ['ame2020', 'iaea-livechart']
+- Cd-110: abundance CIAAW 0.12470(61), NIST 0.1249(18), LiveChart 12.470 %
+- Cd-111: mass agreed only by ['ame2020', 'iaea-livechart']
+- Cd-112: abundance CIAAW 0.24109(7), NIST 0.2413(21), LiveChart 24.109 %
+- Cd-112: mass agreed only by ['ame2020', 'iaea-livechart']
+- Cd-113: abundance CIAAW 0.12227(7), NIST 0.1222(12), LiveChart 12.227 %
+- Cd-114: abundance CIAAW 0.28754(81), NIST 0.2873(42), LiveChart 28.754 %
+- Cd-116: abundance CIAAW 0.07512(54), NIST 0.0749(18), LiveChart 7.512 %
+- In-113: abundance CIAAW 0.04281(52), NIST 0.0429(5), LiveChart 4.281 %
+- In-113: mass agreed only by ['ame2020', 'iaea-livechart']
+- In-115: abundance CIAAW 0.95719(52), NIST 0.9571(5), LiveChart 95.719 %
+- Sn-112: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sn-114: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sn-120: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sn-122: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sn-124: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sb-121: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sb-123: mass agreed only by ['ame2020', 'iaea-livechart']
+- Te-120: mass agreed only by ['ame2020', 'iaea-livechart']
+- Te-122: mass agreed only by ['ame2020', 'iaea-livechart']
+- Te-123: mass agreed only by ['ame2020', 'iaea-livechart']
+- Te-124: mass agreed only by ['ame2020', 'iaea-livechart']
+- Te-125: mass agreed only by ['ame2020', 'iaea-livechart']
+- Te-126: mass agreed only by ['ame2020', 'iaea-livechart']
+- I-127: mass agreed only by ['ame2020', 'iaea-livechart']
+- Xe-124: mass agreed only by ['ame2020', 'iaea-livechart']
+- Xe-126: mass agreed only by ['ame2020', 'iaea-livechart']
+- Xe-134: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ba-130: mass agreed only by ['ame2020', 'iaea-livechart']
+- La-138: mass agreed only by ['ame2020', 'iaea-livechart']
+- La-139: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ce-136: abundance CIAAW 0.00185(2), NIST 0.00185(2), LiveChart 0.186 %
+- Ce-138: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ce-140: abundance CIAAW 0.88450(51), NIST 0.88450(51), LiveChart 88.449 %
+- Ce-140: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pr-141: mass agreed only by ['ame2020', 'iaea-livechart']
+- Nd-142: abundance CIAAW 0.27152(40), NIST 0.27152(40), LiveChart 27.153 %
+- Nd-143: abundance CIAAW 0.12174(26), NIST 0.12174(26), LiveChart 12.173 %
+- Nd-150: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sm-144: abundance CIAAW 0.0308(4), NIST 0.0307(7), LiveChart 3.08 %
+- Sm-147: abundance CIAAW 0.1500(14), NIST 0.1499(18), LiveChart 15.00 %
+- Sm-148: abundance CIAAW 0.1125(9), NIST 0.1124(10), LiveChart 11.25 %
+- Sm-149: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sm-150: abundance CIAAW 0.0737(9), NIST 0.0738(1), LiveChart 7.37 %
+- Sm-150: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sm-152: abundance CIAAW 0.2674(9), NIST 0.2675(16), LiveChart 26.74 %
+- Sm-152: mass agreed only by ['ame2020', 'iaea-livechart']
+- Sm-154: abundance CIAAW 0.2274(14), NIST 0.2275(29), LiveChart 22.74 %
+- Sm-154: mass agreed only by ['ame2020', 'iaea-livechart']
+- Eu-151: mass agreed only by ['ame2020', 'iaea-livechart']
+- Eu-153: mass agreed only by ['ame2020', 'iaea-livechart']
+- Gd-152: mass agreed only by ['ame2020', 'iaea-livechart']
+- Gd-154: abundance CIAAW 0.02187(9), NIST 0.0218(3), LiveChart 2.18 %
+- Gd-154: mass agreed only by ['ame2020', 'iaea-livechart']
+- Gd-155: abundance CIAAW 0.14828(60), NIST 0.1480(12), LiveChart 14.80 %
+- Gd-155: mass agreed only by ['ame2020', 'iaea-livechart']
+- Gd-156: abundance CIAAW 0.20493(22), NIST 0.2047(9), LiveChart 20.47 %
+- Gd-156: mass agreed only by ['ame2020', 'iaea-livechart']
+- Gd-157: abundance CIAAW 0.15657(17), NIST 0.1565(2), LiveChart 15.65 %
+- Gd-157: mass agreed only by ['ame2020', 'iaea-livechart']
+- Gd-158: abundance CIAAW 0.24820(20), NIST 0.2484(7), LiveChart 24.84 %
+- Gd-158: mass agreed only by ['ame2020', 'iaea-livechart']
+- Gd-160: abundance CIAAW 0.21811(28), NIST 0.2186(19), LiveChart 21.86 %
+- Gd-160: mass agreed only by ['ame2020', 'iaea-livechart']
+- Tb-159: mass agreed only by ['ame2020', 'iaea-livechart']
+- Dy-156: mass agreed only by ['ame2020', 'iaea-livechart']
+- Dy-158: mass agreed only by ['ame2020', 'iaea-livechart']
+- Dy-160: mass agreed only by ['ame2020', 'iaea-livechart']
+- Dy-161: mass agreed only by ['ame2020', 'iaea-livechart']
+- Dy-162: mass agreed only by ['ame2020', 'iaea-livechart']
+- Dy-163: mass agreed only by ['ame2020', 'iaea-livechart']
+- Dy-164: mass agreed only by ['ame2020', 'iaea-livechart']
+- Er-162: mass agreed only by ['ame2020', 'iaea-livechart']
+- Er-164: mass agreed only by ['ame2020', 'iaea-livechart']
+- Er-166: mass agreed only by ['ame2020', 'iaea-livechart']
+- Er-167: mass agreed only by ['ame2020', 'iaea-livechart']
+- Er-168: mass agreed only by ['ame2020', 'iaea-livechart']
+- Er-170: mass agreed only by ['ame2020', 'iaea-livechart']
+- Tm-169: mass agreed only by ['ame2020', 'iaea-livechart']
+- Yb: atomic weight CIAAW 173.045(10), NIST 173.054(5), PubChem 173.05
+- Yb-168: abundance CIAAW 0.00126(1), NIST 0.00123(3), LiveChart 0.123 %
+- Yb-168: mass agreed only by ['ame2020', 'iaea-livechart']
+- Yb-170: abundance CIAAW 0.03023(2), NIST 0.02982(39), LiveChart 2.982 %
+- Yb-170: mass agreed only by ['ame2020', 'iaea-livechart']
+- Yb-171: abundance CIAAW 0.14216(7), NIST 0.1409(14), LiveChart 14.086 %
+- Yb-171: mass agreed only by ['ame2020', 'iaea-livechart']
+- Yb-172: abundance CIAAW 0.21754(10), NIST 0.2168(13), LiveChart 21.686 %
+- Yb-172: mass agreed only by ['ame2020', 'iaea-livechart']
+- Yb-173: abundance CIAAW 0.16098(9), NIST 0.16103(63), LiveChart 16.103 %
+- Yb-173: mass agreed only by ['ame2020', 'iaea-livechart']
+- Yb-174: abundance CIAAW 0.31896(26), NIST 0.32026(80), LiveChart 32.025 %
+- Yb-174: mass agreed only by ['ame2020', 'iaea-livechart']
+- Yb-176: abundance CIAAW 0.12887(30), NIST 0.12996(83), LiveChart 12.995 %
+- Yb-176: mass agreed only by ['ame2020', 'iaea-livechart']
+- Lu: atomic weight CIAAW 174.96669(5), NIST 174.9668(1), PubChem 174.9667
+- Lu-175: abundance CIAAW 0.97414(5), NIST 0.97401(13), LiveChart 97.401 %
+- Lu-175: mass agreed only by ['ame2020', 'iaea-livechart']
+- Lu-176: abundance CIAAW 0.02586(5), NIST 0.02599(13), LiveChart 2.599 %
+- Lu-176: mass agreed only by ['ame2020', 'iaea-livechart']
+- Hf-174: mass agreed only by ['ame2020', 'iaea-livechart']
+- Hf-176: abundance CIAAW 0.0524(14), NIST 0.0526(7), LiveChart 5.26 %
+- Hf-176: mass agreed only by ['ame2020', 'iaea-livechart']
+- Hf-177: abundance CIAAW 0.1858(9), NIST 0.1860(9), LiveChart 18.60 %
+- Hf-177: mass agreed only by ['ame2020', 'iaea-livechart']
+- Hf-178: mass agreed only by ['ame2020', 'iaea-livechart']
+- Hf-179: abundance CIAAW 0.1363(3), NIST 0.1362(2), LiveChart 13.62 %
+- Hf-179: mass agreed only by ['ame2020', 'iaea-livechart']
+- Hf-180: abundance CIAAW 0.3512(16), NIST 0.3508(16), LiveChart 35.08 %
+- Hf-180: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ta-180: abundance CIAAW 0.0001176(23), NIST 0.0001201(32), LiveChart  %
+- Ta-180: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ta-181: abundance CIAAW 0.9998824(23), NIST 0.9998799(32), LiveChart 99.98799 %
+- Ta-181: mass agreed only by ['ame2020', 'iaea-livechart']
+- W-180: mass agreed only by ['ame2020', 'iaea-livechart']
+- W-182: mass agreed only by ['ame2020', 'iaea-livechart']
+- W-183: mass agreed only by ['ame2020', 'iaea-livechart']
+- W-184: mass agreed only by ['ame2020', 'iaea-livechart']
+- W-186: mass agreed only by ['ame2020', 'iaea-livechart']
+- Re-185: mass agreed only by ['ame2020', 'iaea-livechart']
+- Re-187: mass agreed only by ['ame2020', 'iaea-livechart']
+- Os-184: mass agreed only by ['ame2020', 'iaea-livechart']
+- Os-186: mass agreed only by ['ame2020', 'iaea-livechart']
+- Os-187: mass agreed only by ['ame2020', 'iaea-livechart']
+- Os-188: mass agreed only by ['ame2020', 'iaea-livechart']
+- Os-189: mass agreed only by ['ame2020', 'iaea-livechart']
+- Os-190: mass agreed only by ['ame2020', 'iaea-livechart']
+- Os-192: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ir-191: abundance CIAAW 0.3723(9), NIST 0.373(2), LiveChart 37.3 %
+- Ir-191: mass agreed only by ['ame2020', 'iaea-livechart']
+- Ir-193: abundance CIAAW 0.6277(9), NIST 0.627(2), LiveChart 62.7 %
+- Ir-193: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pt-190: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pt-192: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pt-194: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pt-195: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pt-196: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pt-198: mass agreed only by ['ame2020', 'iaea-livechart']
+- Au: atomic weight CIAAW 196.966570(4), NIST 196.966569(5), PubChem 196.96657
+- Au-197: mass agreed only by ['ame2020', 'iaea-livechart']
+- Hg-198: abundance CIAAW 0.1004(3), NIST 0.0997(20), LiveChart 10.04 %
+- Hg-199: abundance CIAAW 0.1694(12), NIST 0.1687(22), LiveChart 16.94 %
+- Hg-200: abundance CIAAW 0.2314(9), NIST 0.2310(19), LiveChart 23.14 %
+- Hg-201: abundance CIAAW 0.1317(9), NIST 0.1318(9), LiveChart 13.17 %
+- Hg-202: abundance CIAAW 0.2974(13), NIST 0.2986(26), LiveChart 29.74 %
+- Hg-204: abundance CIAAW 0.0682(4), NIST 0.0687(15), LiveChart 6.82 %
+- Tl-203: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pb: atomic weight interval agreed only by ['ciaaw-weights', 'pubchem']
+- Th-230: abundance CIAAW 0.0002(2), NIST , LiveChart 0.02 %
+- Th-230: mass agreed only by ['ame2020', 'iaea-livechart']
+- Th-232: mass agreed only by ['ame2020', 'iaea-livechart']
+- Pa-231: mass agreed only by ['ame2020', 'iaea-livechart']
+- U-234: mass agreed only by ['ame2020', 'iaea-livechart']
+- U-235: mass agreed only by ['ame2020', 'iaea-livechart']
+- U-238: mass agreed only by ['ame2020', 'iaea-livechart']
+- Lr: configuration PubChem [Rn]7s2 5f14 6d1 vs mendeleev [Rn] 5f14 7s2 7p1
+- Ds: configuration PubChem [Rn]7s2 5f14 6d8 (predicted) vs mendeleev [Rn] 5f14 6d9 7s1
+- Rg: configuration PubChem [Rn]7s2 5f14 6d9 (predicted) vs mendeleev [Rn] 5f14 6d10 7s1

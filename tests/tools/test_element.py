@@ -51,17 +51,17 @@ def test_alternative_spellings(query, symbol):
     ],
 )
 def test_noble_gas_core_configuration(symbol, config):
-    assert find(symbol)["config"] == config
+    assert find(symbol)["config"]["value"] == config
 
 
 def test_full_configuration_is_sorted_by_n_then_l():
-    assert find("Pd")["config_full"] == "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10"
-    assert find("Fe")["config_full"] == "1s2 2s2 2p6 3s2 3p6 3d6 4s2"
+    assert find("Pd")["config"]["full"] == "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10"
+    assert find("Fe")["config"]["full"] == "1s2 2s2 2p6 3s2 3p6 3d6 4s2"
 
 
 def test_full_configuration_electron_count_equals_z():
     for el in _dataset()["elements"]:
-        electrons = sum(int(tok[2:]) for tok in el["config_full"].split())
+        electrons = sum(int(tok[2:]) for tok in el["config"]["full"].split())
         assert electrons == el["z"], el["symbol"]
 
 
@@ -71,17 +71,17 @@ def test_superscript_display():
 
 @pytest.mark.parametrize(
     ("symbol", "weight", "en"),
-    [("H", 1.008, 2.2), ("C", 12.011, 2.55), ("Fe", 55.845, 1.83), ("Og", 294.0, None)],
+    [("He", 4.002602, None), ("C", None, 2.55), ("Fe", 55.845, 1.83)],
 )
 def test_known_values(symbol, weight, en):
     el = find(symbol)
-    assert el["atomic_weight"] == pytest.approx(weight, abs=1e-3)
-    assert el["en_pauling"] == en
+    assert el["atomic_weight"]["value"] == (pytest.approx(weight) if weight else None)
+    assert el["en_pauling"]["value"] == en
 
 
 def test_card_contents():
     fe = props("Fe")
-    assert fe["Standard atomic weight"] == "55.845 ± 0.002"
+    assert fe["Standard atomic weight"] == "55.845(2)"
     assert fe["Electron configuration"] == "[Ar] 3d⁶ 4s²"
     assert fe["Group / Period / Block"] == "8 / 4 / d"
     assert fe["Oxidation states (main)"] == "+2, +3"
@@ -95,7 +95,7 @@ def test_isotopes_sorted_by_abundance():
 
 def test_no_standard_weight_uses_longest_lived_isotope():
     tc = props("Tc")
-    assert tc["Standard atomic weight"] == "[97] (no standard atomic weight)"
+    assert tc["Standard atomic weight"] == "— (no standard atomic weight)"
     result = element(ElementInput(query="Tc"))
     assert result.tables[1].title.startswith("Longest-lived isotope")
 
@@ -121,8 +121,76 @@ def test_periodic_table_layout():
     assert lanthanides[0] == "Ln" and lanthanides[4] == "Ce" and lanthanides[17] == "Lu"
 
 
-def test_sources_are_reported():
-    assert any("mendeleev" in s for s in element(ElementInput(query="H")).sources)
+# --- Verification -------------------------------------------------------------
+
+STATUSES = {"verified", "definition", "unverified"}
+
+
+def all_fields(el):
+    yield el["atomic_weight"]
+    yield el["config"]
+    yield el["en_pauling"]
+    yield el["covalent_radius_pm"]
+    yield el["oxidation_states"]
+    for i in el["isotopes"]:
+        yield i["mass"]
+        yield i["abundance"]
+    if el["longest_lived_isotope"]:
+        yield el["longest_lived_isotope"]
+
+
+def test_every_value_has_a_status_and_known_references():
+    known = set(_dataset()["meta"]["references"])
+    for el in _dataset()["elements"]:
+        for f in all_fields(el):
+            assert f["status"] in STATUSES
+            for key in f["refs"] + f.get("agree", []):
+                assert key == "mendeleev" or key in known, key
+
+
+def test_verified_means_primary_plus_two_compilations():
+    refs = _dataset()["meta"]["references"]
+    for el in _dataset()["elements"]:
+        for f in all_fields(el):
+            if f["status"] == "verified":
+                assert len(f["refs"]) >= 3
+                assert "mendeleev" not in f["refs"]
+                assert any(k in refs for k in f["refs"])
+
+
+def test_iron_weight_is_verified_by_ciaaw_nist_pubchem():
+    w = find("Fe")["atomic_weight"]
+    assert w["status"] == "verified"
+    assert w["refs"] == ["ciaaw-weights", "nist-srd144", "pubchem"]
+
+
+def test_interval_weight_for_hydrogen():
+    w = find("H")["atomic_weight"]
+    assert w["text"] == "[1.00784, 1.00811]"
+    assert w["status"] == "verified"
+
+
+def test_configurations_are_unverified_with_two_agreeing_sources():
+    conf = find("Fe")["config"]
+    assert conf["status"] == "unverified"
+    assert conf["agree"] == ["nist-asd", "pubchem"]
+
+
+def test_card_shows_check_column_and_numbered_references():
+    result = element(ElementInput(query="Fe"))
+    checks = {row[0]: row[2] for row in result.tables[0].rows}
+    assert checks["Standard atomic weight"].startswith("✓ [")
+    assert checks["Electron configuration"].startswith("unverified")
+    assert result.sources[0].startswith("[1] ")
+    assert any("Prohaska" in s for s in result.sources)
+    assert result.warnings  # some values are unverified
+
+
+def test_mendeleev_is_never_cited_as_a_reference():
+    result = element(ElementInput(query="Fe"))
+    assert not any(
+        s.startswith("[") and "mendeleev" in s.split("]")[1][:20] for s in result.sources
+    )
 
 
 def test_lookup_is_fast():

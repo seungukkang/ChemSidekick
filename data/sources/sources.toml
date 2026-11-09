@@ -1,0 +1,97 @@
+# References for chemical data used by ChemSidekick.
+#
+# Policy: a value is shown as "verified" only when one primary source and at
+# least two authoritative secondary compilations give the same value.
+# Otherwise the value from mendeleev is shown and marked "unverified",
+# together with the original reference that mendeleev cites.
+#
+# kind = "primary"    the evaluation that defines or measures the value
+# kind = "secondary"  an authoritative compilation that reproduces it
+# kind = "fallback"   used only when the value cannot be verified
+
+[ciaaw-weights]
+kind = "primary"
+short = "CIAAW 2024"
+citation = "CIAAW, Standard Atomic Weights 2024, www.ciaaw.org; T. Prohaska et al., Standard atomic weights of the elements 2021 (IUPAC Technical Report), Pure Appl. Chem. 2022, 94, 573–600."
+url = "https://www.ciaaw.org/atomic-weights.htm"
+file = "ciaaw_weights.csv"
+
+[ciaaw-abundances]
+kind = "primary"
+short = "CIAAW 2024"
+citation = "CIAAW, Isotopic Compositions of the Elements 2024, www.ciaaw.org; J. Meija et al., Isotopic compositions of the elements 2013 (IUPAC Technical Report), Pure Appl. Chem. 2016, 88, 293–306."
+url = "https://www.ciaaw.org/isotopic-abundances.htm"
+file = "ciaaw_abundances.csv"
+
+[ame2020]
+kind = "primary"
+short = "AME2020"
+citation = "M. Wang, W. J. Huang, F. G. Kondev, G. Audi, S. Naimi, The AME 2020 atomic mass evaluation (II). Tables, graphs and references, Chin. Phys. C 2021, 45, 030003."
+url = "https://www-nds.iaea.org/amdc/ame2020/mass_1.mas20.txt"
+file = "ame2020_masses.csv"
+
+[nubase2020]
+kind = "primary"
+short = "NUBASE2020"
+citation = "F. G. Kondev, M. Wang, W. J. Huang, S. Naimi, G. Audi, The NUBASE2020 evaluation of nuclear physics properties, Chin. Phys. C 2021, 45, 030001."
+url = "https://www-nds.iaea.org/amdc/ame2020/nubase_4.mas20.txt"
+file = "nubase2020.csv"
+
+[nist-asd]
+kind = "primary"
+short = "NIST ASD 5.12"
+citation = "A. Kramida, Yu. Ralchenko, J. Reader, NIST ASD Team, NIST Atomic Spectra Database (ver. 5.12), NIST Standard Reference Database 78, National Institute of Standards and Technology, Gaithersburg, MD, 2024. DOI: 10.18434/T4W30F."
+url = "https://physics.nist.gov/PhysRefData/ASD/ionEnergy.html"
+file = "nist_asd_ground.csv"
+
+[nist-srd144]
+kind = "secondary"
+short = "NIST SRD 144"
+citation = "J. S. Coursey, D. J. Schwab, J. J. Tsai, R. A. Dragoset, Atomic Weights and Isotopic Compositions with Relative Atomic Masses, NIST Standard Reference Database 144, National Institute of Standards and Technology, Gaithersburg, MD."
+url = "https://www.nist.gov/pml/atomic-weights-and-isotopic-compositions-relative-atomic-masses"
+file = "nist_srd144.csv"
+
+[iaea-livechart]
+kind = "secondary"
+short = "IAEA LiveChart"
+citation = "IAEA Nuclear Data Section, Live Chart of Nuclides (ground states), International Atomic Energy Agency, Vienna."
+url = "https://www-nds.iaea.org/livechart/"
+file = "iaea_livechart.csv"
+
+[pubchem]
+kind = "secondary"
+short = "PubChem"
+citation = "S. Kim et al., PubChem 2023 update, Nucleic Acids Res. 2023, 51, D1373–D1380; PubChem Periodic Table, National Center for Biotechnology Information."
+url = "https://pubchem.ncbi.nlm.nih.gov/periodic-table/"
+file = "pubchem.csv"
+
+# ---------------------------------------------------------------------------
+# Fallback: mendeleev, with the original references it cites for each property
+# ---------------------------------------------------------------------------
+
+[mendeleev]
+kind = "fallback"
+short = "mendeleev 1.3.0"
+citation = "Ł. Mentel, mendeleev – A Python package with properties of chemical elements, ions, isotopes and methods to manipulate and visualize periodic table, version 1.3.0, https://github.com/lmmentel/mendeleev."
+url = "https://github.com/lmmentel/mendeleev"
+
+[pyykko2009]
+kind = "fallback"
+short = "Pyykkö 2009"
+citation = "P. Pyykkö, M. Atsumi, Molecular single-bond covalent radii for elements 1–118, Chem. Eur. J. 2009, 15, 186–197 (via mendeleev)."
+
+[crc2014]
+kind = "fallback"
+short = "CRC 95th ed."
+citation = "W. M. Haynes (ed.), CRC Handbook of Chemistry and Physics, 95th ed., CRC Press, 2014 (via mendeleev)."
+
+[wikipedia-oxidation]
+kind = "fallback"
+short = "Wikipedia"
+citation = "Wikipedia, List of oxidation states of the elements, revision 1102394064 (via mendeleev). Not a peer-reviewed source."
+
+[iupac-definition]
+kind = "primary"
+short = "IUPAC"
+citation = "IUPAC Periodic Table of the Elements (version 4 May 2022), International Union of Pure and Applied Chemistry. Used for atomic number, group, period, and block, which are definitions rather than measured values."
+url = "https://iupac.org/what-we-do/periodic-table-of-elements/"

@@ -73,8 +73,10 @@ def render_result(result: ToolResult, console: Console) -> None:
             console.print(Text(f"  {a.kind:5} {a.path}"))
     for w in result.warnings:
         console.print(Text(f"Warning: {w}", style="yellow"))
-    for s in result.sources:
-        console.print(Text(f"Source: {s}", style="dim"))
+    if result.sources:
+        console.print(Text("References", style="dim bold"))
+        for s in result.sources:
+            console.print(Text(f"  {s}", style="dim"))
 
 
 def render_tool_list(groups: dict[str, list[ToolSpec]], console: Console) -> None:
