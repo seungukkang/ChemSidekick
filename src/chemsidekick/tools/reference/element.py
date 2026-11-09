@@ -4,6 +4,8 @@ Data comes from data/elements.json, built by scripts/build_elements.py by
 cross-checking reference sources. Every shown value carries a status:
 
     verified    one primary source and two secondary compilations agree
+    partial     the primary source and one compilation agree; the other
+                compilation reproduces an older edition (shown with evidence)
     definition  a definition (IUPAC periodic table, CIAAW), not a measurement
     unverified  could not be confirmed by three sources; shown from mendeleev
 """
@@ -143,6 +145,12 @@ def _check(f: dict[str, Any], refs: _Refs) -> str:
         return f"✓ [{refs.cite(f['refs'])}]"
     if f["status"] == "definition":
         return f"definition [{refs.cite(f['refs'])}]"
+    if f["status"] == "partial":
+        old = f["older"]
+        agree = refs.cite(f["refs"])
+        return (
+            f"✓ 2 refs [{agree}]; [{refs.cite([old['source']])}] = [{refs.cite([old['edition']])}]"
+        )
     cited = refs.cite(f["refs"] + f.get("agree", []))
     return f"unverified [{cited}]" if cited else "unverified (mendeleev)"
 
@@ -150,6 +158,11 @@ def _check(f: dict[str, Any], refs: _Refs) -> str:
 # ---------------------------------------------------------------------------
 # Results
 # ---------------------------------------------------------------------------
+
+PARTIAL_NOTE = (
+    "'✓ 2 refs [a]; [b] = [c]': two references agree; reference b reproduces the "
+    "older edition c, so it is not counted."
+)
 
 UNVERIFIED_WARNING = (
     "Values marked 'unverified' could not be confirmed by three references "
@@ -228,12 +241,15 @@ def _element_card(el: Element) -> ToolResult:
             )
         )
 
-    has_unverified = any("unverified" in str(row[-1]) for t in tables for row in t.rows)
+    checks = [str(cell) for t in tables for row in t.rows for cell in row[2::2] if cell]
+    has_unverified = any("unverified" in c for c in checks)
+    has_partial = any("2 refs" in c for c in checks)
     meta = _dataset()["meta"]
     return ToolResult(
         answer=f"{el['symbol']} · {el['name']} · Z = {el['z']}",
         tables=tables,
-        assumptions=["Ground state of the neutral, isolated atom."],
+        assumptions=["Ground state of the neutral, isolated atom."]
+        + ([PARTIAL_NOTE] if has_partial else []),
         sources=[
             *refs.lines(),
             f"Data built {meta['built']} from sources retrieved {min(meta['retrieved'].values())}; "

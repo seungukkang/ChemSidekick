@@ -16,6 +16,8 @@ import html
 import json
 import re
 import ssl
+import time
+import urllib.error
 import urllib.request
 from datetime import date
 from pathlib import Path
@@ -29,7 +31,15 @@ USER_AGENT = "ChemSidekick-data-fetch/0.1 (personal research tool)"
 URLS = {
     "ciaaw_weights": "https://www.ciaaw.org/atomic-weights.htm",
     "ciaaw_abundances": "https://www.ciaaw.org/isotopic-abundances.htm",
+    # Earlier CIAAW tables (Internet Archive snapshots), the editions NIST SRD 144 v4.1
+    # is based on. Used only as evidence that a compilation shows an older edition.
+    "ciaaw_weights_2013": "https://web.archive.org/web/2014id_/http://www.ciaaw.org/atomic-weights.htm",
+    "ciaaw_abundances_2009": (
+        "https://web.archive.org/web/2014id_/http://www.ciaaw.org/isotopic-abundances.htm"
+    ),
     "ame2020": "https://www-nds.iaea.org/amdc/ame2020/mass_1.mas20.txt",
+    # AME2012 is the edition NIST SRD 144 v4.1 is based on (see its version history).
+    "ame2012": "https://amdc.impcas.ac.cn/masstables/Ame2012/mass.mas12",
     "nubase2020": "https://www-nds.iaea.org/amdc/ame2020/nubase_4.mas20.txt",
     "nist_asd": (
         "https://physics.nist.gov/cgi-bin/ASD/ie.pl?spectra=H-Og+I&units=1&format=2"
@@ -83,15 +93,15 @@ def write_csv(name: str, header: list[str], rows: list[list[object]]) -> None:
 # ---------------------------------------------------------------------------
 
 
-def ciaaw_weights(page: str) -> None:
+def ciaaw_weights(page: str, name: str = "ciaaw_weights") -> None:
     rows = []
     for cells in html_rows(page):
         if len(cells) >= 4 and cells[0].isdigit():
             rows.append([int(cells[0]), cells[1], cells[2], cells[3]])
-    write_csv("ciaaw_weights", ["z", "symbol", "name", "standard_atomic_weight"], rows)
+    write_csv(name, ["z", "symbol", "name", "standard_atomic_weight"], rows)
 
 
-def ciaaw_abundances(page: str) -> None:
+def ciaaw_abundances(page: str, name: str = "ciaaw_abundances") -> None:
     rows = []
     z = symbol = None
     for cells in html_rows(page):
@@ -104,7 +114,7 @@ def ciaaw_abundances(page: str) -> None:
         # Radioactive elements are listed as "[97]" with composition "-": no natural abundance.
         if comp and comp != "-" and a.isdigit():
             rows.append([z, symbol, int(a), comp])
-    write_csv("ciaaw_abundances", ["z", "symbol", "mass_number", "isotopic_composition"], rows)
+    write_csv(name, ["z", "symbol", "mass_number", "isotopic_composition"], rows)
 
 
 def ame2020(text: str) -> None:
@@ -134,6 +144,48 @@ def ame2020(text: str) -> None:
         ["z", "symbol", "mass_number", "atomic_mass_u", "uncertainty_micro_u", "estimated"],
         rows,
     )
+
+
+def ame2012(text: str) -> None:
+    """An earlier AME edition, used only as evidence that a compilation is outdated.
+
+    The pre-2020 format has one digit less than AME2020 in the mass columns.
+    """
+    rows = []
+    for line in text.splitlines():
+        if len(line) < 112 or not line[15:19].strip().isdigit():
+            continue
+        try:
+            z, a = int(line[9:14]), int(line[14:19])
+        except ValueError:
+            continue
+        whole, frac = line[96:99].strip(), line[100:112].strip()
+        if not whole.isdigit() or "#" in frac:
+            continue
+        int_part, _, dec_part = frac.partition(".")
+        rows.append([z, line[20:23].strip(), a, f"{int(whole)}.{int_part.zfill(6)}{dec_part}"])
+    write_csv("ame2012_masses", ["z", "symbol", "mass_number", "atomic_mass_u"], rows)
+
+
+def ciaaw_history(names: list[tuple[int, str, str]]) -> None:
+    """Text of each element's CIAAW page, which describes past standard atomic weights.
+
+    Used only as evidence that a compilation shows a former CIAAW value.
+    """
+    rows = []
+    for z, symbol, name in names:
+        try:
+            page = get(f"https://www.ciaaw.org/{name}.htm")
+        except urllib.error.HTTPError as e:
+            if e.code != 404:
+                raise
+            page = ""  # CIAAW has no page for this element
+        page = re.sub(r"<script.*?</script>|<style.*?</style>", "", page, flags=re.S)
+        text = html.unescape(re.sub(r"<[^>]+>", " ", page))
+        text = re.sub(r"\s+", " ", text.replace("\xa0", "")).strip()
+        rows.append([z, symbol, text])
+        time.sleep(0.5)  # be polite to the CIAAW server
+    write_csv("ciaaw_history", ["z", "symbol", "page_text"], rows)
 
 
 def nubase2020(text: str) -> None:
@@ -302,7 +354,10 @@ def pubchem(text: str) -> None:
 PARSERS = {
     "ciaaw_weights": ciaaw_weights,
     "ciaaw_abundances": ciaaw_abundances,
+    "ciaaw_weights_2013": lambda page: ciaaw_weights(page, "ciaaw_weights_2013"),
+    "ciaaw_abundances_2009": lambda page: ciaaw_abundances(page, "ciaaw_abundances_2009"),
     "ame2020": ame2020,
+    "ame2012": ame2012,
     "nubase2020": nubase2020,
     "nist_asd": nist_asd,
     "nist_srd144": nist_srd144,
@@ -318,4 +373,10 @@ if __name__ == "__main__":
         print(f"{name}: {url}")
         PARSERS[name](get(url))
         retrieved[name] = date.today().isoformat()
+    # Per-element CIAAW pages (needs the element list from ciaaw_weights.csv).
+    with (OUT / "ciaaw_weights.csv").open(encoding="utf-8") as f:
+        names = [(int(r["z"]), r["symbol"], r["name"]) for r in csv.DictReader(f)]
+    print(f"ciaaw_history: {len(names)} element pages")
+    ciaaw_history(names)
+    retrieved["ciaaw_history"] = date.today().isoformat()
     (OUT / "retrieved.json").write_text(json.dumps(retrieved, indent=1) + "\n")

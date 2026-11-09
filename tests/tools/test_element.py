@@ -123,7 +123,7 @@ def test_periodic_table_layout():
 
 # --- Verification -------------------------------------------------------------
 
-STATUSES = {"verified", "definition", "unverified"}
+STATUSES = {"verified", "partial", "definition", "unverified"}
 
 
 def all_fields(el):
@@ -156,6 +156,36 @@ def test_verified_means_primary_plus_two_compilations():
                 assert len(f["refs"]) >= 3
                 assert "mendeleev" not in f["refs"]
                 assert any(k in refs for k in f["refs"])
+
+
+def test_partial_needs_two_agreeing_refs_and_older_edition_evidence():
+    known = set(_dataset()["meta"]["references"])
+    seen = 0
+    for el in _dataset()["elements"]:
+        for f in all_fields(el):
+            if f["status"] == "partial":
+                seen += 1
+                assert len(f["refs"]) == 2 and "mendeleev" not in f["refs"]
+                assert f["older"]["source"] in known
+                assert f["older"]["edition"] in known
+                assert f["older"]["evidence"]
+    assert seen > 0
+
+
+def test_scandium_weight_shows_current_iupac_value():
+    # NIST SRD 144 shows the CIAAW 2013 value 44.955908(5); CIAAW 2024 is 44.955907(4).
+    w = find("Sc")["atomic_weight"]
+    assert w["status"] == "partial"
+    assert w["text"] == "44.955907(4)"
+    assert w["refs"] == ["ciaaw-weights", "pubchem"]
+    assert w["older"]["edition"] == "ciaaw-weights-2013"
+
+
+def test_titanium_48_mass_is_ame2020_with_nist_on_ame2012():
+    ti48 = next(i for i in find("Ti")["isotopes"] if i["mass_number"] == 48)
+    assert ti48["mass"]["text"] == "47.947941"  # AME2020 47.947940677 -> 6 decimals
+    assert ti48["mass"]["status"] == "partial"
+    assert ti48["mass"]["older"]["edition"] == "ame2012"
 
 
 def test_iron_weight_is_verified_by_ciaaw_nist_pubchem():

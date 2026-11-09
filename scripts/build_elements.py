@@ -8,11 +8,16 @@ Output:
     data/verification/elements.md                        what was verified, and what not
 
 Verification rule (project policy):
-    A value is "verified" when one primary source and at least two authoritative
-    secondary compilations give the same value (see data/sources/sources.toml).
-    Otherwise the mendeleev value is used and marked "unverified", with the
-    original reference that mendeleev cites. Atomic number, group, period, and
-    block are definitions (IUPAC periodic table), marked "definition".
+    verified    one primary source and at least two authoritative secondary
+                compilations give the same value (see data/sources/sources.toml)
+    partial     the primary source and one compilation agree, and the other
+                compilation is shown, with data, to reproduce an older edition
+                (e.g. NIST SRD 144 v4.1 = AME2012 / CIAAW 2013 / CIAAW 2009).
+                The primary value is shown.
+    unverified  anything else: the mendeleev value is shown, with the original
+                reference that mendeleev cites
+    definition  atomic number, group, period, block (IUPAC periodic table), and
+                "no standard atomic weight" (CIAAW)
 
 "Same value":
     numbers   the difference is at most half a unit in the last digit of the
@@ -46,6 +51,8 @@ ALIASES = {"Al": ["aluminum"], "Cs": ["cesium"], "S": ["sulphur"]}
 L_ORDER = "spdfg"
 
 VERIFIED, DEFINITION, UNVERIFIED = "verified", "definition", "unverified"
+# Two references agree and the third shows an older edition (with evidence).
+PARTIAL = "partial"
 
 
 # ---------------------------------------------------------------------------
@@ -229,12 +236,35 @@ def longest_lived(m):
             "unit": best.half_life_unit}  # fmt: skip
 
 
+def _flat(s: str) -> str:
+    return s.replace(" ", "").replace("\xa0", "")
+
+
+def decide(value, text, agree, older, fallback, problems, label):
+    """Apply the verification rule to one value."""
+    if len(agree) >= 3:
+        return field(value, VERIFIED, agree, text=text)
+    if len(agree) == 2 and older:
+        out = field(value, PARTIAL, agree, text=text)
+        out["older"] = older
+        return out
+    fb_value, fb_text = fallback()
+    problems.append(f"{label}: agreed only by {agree}")
+    return field(fb_value, UNVERIFIED, ["mendeleev"], text=fb_text, agree=agree)
+
+
 def _mendeleev_isotope(m, a):
     return next((i for i in m.isotopes if i.mass_number == a), None)
 
 
 def build():
     ciaaw_w = by_z(read("ciaaw_weights"))
+    # Older editions, used only as evidence that NIST SRD 144 reproduces them.
+    ciaaw_w13 = by_z(read("ciaaw_weights_2013"))
+    ciaaw_a09 = by_za(read("ciaaw_abundances_2009"))
+    ame12 = by_za(read("ame2012_masses"))
+    history = {int(r["z"]): _flat(r["page_text"]) for r in read("ciaaw_history")}
+    nubase = by_za(read("nubase2020"))
     ciaaw_a = defaultdict(list)
     for r in read("ciaaw_abundances"):
         ciaaw_a[int(r["z"])].append(r)
@@ -292,105 +322,128 @@ def build():
                 text="none",
                 note="no stable isotopes; CIAAW gives no standard atomic weight",
             )
-        elif iv := interval(w_c):
-            low, high, _ = iv
-            agree = ["ciaaw-weights"]
-            if interval(w_n) == iv:
-                agree.append("nist-srd144")
-            if (p := number(w_p)) and in_interval(p, low, high):
-                agree.append("pubchem")
-            status = VERIFIED if len(agree) >= 3 else UNVERIFIED
-            weight = field(
-                None,
-                status,
-                agree,
-                text=f"[{low}, {high}]",
-                note="interval: the value depends on the source of the material",
-            )
-            if status != VERIFIED:
-                problems.append(f"{symbol}: atomic weight interval agreed only by {agree}")
         else:
-            c = number(w_c)
-            agree = ["ciaaw-weights"]
-            if (n := number(w_n)) and consistent(c, n):
-                agree.append("nist-srd144")
-            if (p := number(w_p)) and consistent(c, p):
-                agree.append("pubchem")
-            if len(agree) >= 3:
-                weight = field(float(c[0]), VERIFIED, agree, text=w_c)
+            if iv := interval(w_c):
+                low, high, _ = iv
+                text, value = f"[{low}, {high}]", None
+                nist_ok = interval(w_n) == iv
+                pub_ok = bool((p := number(w_p)) and in_interval(p, low, high))
             else:
-                weight = field(
-                    m.atomic_weight,
-                    UNVERIFIED,
-                    ["mendeleev"],
-                    text=f"{m.atomic_weight}",
-                    agree=agree,
-                )
-                problems.append(f"{symbol}: atomic weight CIAAW {w_c}, NIST {w_n}, PubChem {w_p}")
+                c = number(w_c)
+                text, value = w_c, float(c[0])
+                nist_ok = bool((n := number(w_n)) and consistent(c, n))
+                pub_ok = bool((p := number(w_p)) and consistent(c, p))
+            agree = ["ciaaw-weights"] + ["nist-srd144"] * nist_ok + ["pubchem"] * pub_ok
+            older = None
+            if not nist_ok and _flat(w_n) == _flat(ciaaw_w13[z]["standard_atomic_weight"]):
+                older = {
+                    "source": "nist-srd144",
+                    "edition": "ciaaw-weights-2013",
+                    "evidence": f"NIST SRD 144 shows {w_n}, identical to the CIAAW 2013 table",
+                }
+            elif not nist_ok and w_n and _flat(w_n) in history[z]:
+                older = {
+                    "source": "nist-srd144",
+                    "edition": "ciaaw-history",
+                    "evidence": f"NIST SRD 144 shows {w_n}, "
+                    f"a former value on CIAAW's page for {name}",
+                }
+            weight = decide(
+                value,
+                text,
+                agree,
+                older,
+                lambda m=m: (m.atomic_weight, f"{m.atomic_weight}"),
+                problems,
+                f"{symbol} atomic weight (CIAAW {w_c}, NIST {w_n}, PubChem {w_p})",
+            )
+            if iv:
+                weight["note"] = "interval: the value depends on the source of the material"
 
         # -- natural isotopes -------------------------------------------------
         isotopes = []
         for row in ciaaw_a.get(z, []):
             a = int(row["mass_number"])
             comp = row["isotopic_composition"]
-            s_row, l_row = srd.get((z, a)), live.get((z, a))
+            s_row, l_row, n_row = srd.get((z, a)), live.get((z, a)), nubase.get((z, a))
+            mi = _mendeleev_isotope(m, a)
 
-            # abundance in percent
-            agree = ["ciaaw-abundances"]
-            s_val = number(s_row["isotopic_composition"]) if s_row else None
+            # abundance in percent; compilations: NIST SRD 144, IAEA LiveChart, NUBASE2020
+            s_raw = s_row["isotopic_composition"] if s_row else ""
+            s_val = scaled(number(s_raw), 2) if number(s_raw) else None
             l_val = number(l_row["abundance_percent"]) if l_row else None
+            n_val = number(n_row["abundance_percent"]) if n_row else None
             if iv := interval(comp):
                 low, high = iv[0] * 100, iv[1] * 100
                 text = f"[{low.normalize():f}, {high.normalize():f}]"
                 value = None
-                if s_val and in_interval(scaled(s_val, 2), low, high):
-                    agree.append("nist-srd144")
-                if l_val and in_interval(l_val, low, high):
-                    agree.append("iaea-livechart")
+
+                def ok(v, low=low, high=high):
+                    return bool(v and in_interval(v, low, high))
             else:
                 c = scaled(number(comp), 2)
-                text = f"{c[0]:.{c[1]}f}"
-                value = float(c[0])
-                if s_val and consistent(c, scaled(s_val, 2)):
-                    agree.append("nist-srd144")
-                if l_val and consistent(c, l_val):
-                    agree.append("iaea-livechart")
-            if len(agree) >= 3:
-                abundance = field(value, VERIFIED, agree, text=text)
-            else:
-                mi = _mendeleev_isotope(m, a)
-                ma = mi.abundance if mi else None
-                abundance = field(
-                    ma, UNVERIFIED, ["mendeleev"], text=f"{ma:g}" if ma else "—", agree=agree
-                )
-                problems.append(
-                    f"{symbol}-{a}: abundance CIAAW {comp}, "
-                    f"NIST {s_row['isotopic_composition'] if s_row else '—'}, "
-                    f"LiveChart {l_row['abundance_percent'] if l_row else '—'} %"
-                )
+                text, value = f"{c[0]:.{c[1]}f}", float(c[0])
 
-            # mass, compared at the displayed precision (6 decimals, in u)
-            agree = []
+                def ok(v, c=c):
+                    return bool(v and consistent(c, v))
+
+            nist_ok = ok(s_val)
+            agree = (
+                ["ciaaw-abundances"]
+                + ["nist-srd144"] * nist_ok
+                + ["iaea-livechart"] * ok(l_val)
+                + ["nubase2020"] * ok(n_val)
+            )
+            older = None
+            old = ciaaw_a09.get((z, a))
+            if not nist_ok and old and s_raw and _flat(s_raw) == _flat(old["isotopic_composition"]):
+                older = {
+                    "source": "nist-srd144",
+                    "edition": "ciaaw-abundances-2009",
+                    "evidence": f"NIST SRD 144 shows {s_raw}, identical to the CIAAW 2009 table",
+                }
+            abundance = decide(
+                value,
+                text,
+                agree,
+                older,
+                lambda mi=mi: (
+                    mi.abundance if mi else None,
+                    f"{mi.abundance:g}" if mi and mi.abundance else "—",
+                ),
+                problems,
+                f"{symbol}-{a} abundance (CIAAW {comp}, NIST {s_raw or '—'})",
+            )
+
+            # mass in u, compared at the displayed precision (6 decimals)
             ref = Decimal(ame[(z, a)]["atomic_mass_u"]) if (z, a) in ame else None
+            agree, older = [], None
             if ref is not None:
-                agree.append("ame2020")
-                if s_row and (n := number(s_row["relative_atomic_mass"])) and same_at(6, n[0], ref):
-                    agree.append("nist-srd144")
-                if l_row and l_row["atomic_mass_micro_u"]:
-                    if same_at(6, Decimal(l_row["atomic_mass_micro_u"]).scaleb(-6), ref):
-                        agree.append("iaea-livechart")
-            if len(agree) >= 3:
-                mass = field(float(ref), VERIFIED, agree, text=f"{ref:.6f}")
-            else:
-                mi = _mendeleev_isotope(m, a)
-                mass = field(
-                    mi.mass if mi else None,
-                    UNVERIFIED,
-                    ["mendeleev"],
-                    text=f"{mi.mass:.6f}" if mi else "—",
-                    agree=agree,
+                n = number(s_row["relative_atomic_mass"]) if s_row else None
+                nist_ok = bool(n and same_at(6, n[0], ref))
+                live_ok = bool(
+                    l_row
+                    and l_row["atomic_mass_micro_u"]
+                    and same_at(6, Decimal(l_row["atomic_mass_micro_u"]).scaleb(-6), ref)
                 )
-                problems.append(f"{symbol}-{a}: mass agreed only by {agree}")
+                agree = ["ame2020"] + ["nist-srd144"] * nist_ok + ["iaea-livechart"] * live_ok
+                old = ame12.get((z, a))
+                if not nist_ok and n and old and consistent(n, number(old["atomic_mass_u"])):
+                    older = {
+                        "source": "nist-srd144",
+                        "edition": "ame2012",
+                        "evidence": f"NIST SRD 144 shows {s_row['relative_atomic_mass']}, "
+                        f"equal to AME2012 ({old['atomic_mass_u']})",
+                    }
+            mass = decide(
+                float(ref) if ref is not None else None,
+                f"{ref:.6f}" if ref is not None else "—",
+                agree,
+                older,
+                lambda mi=mi: (mi.mass if mi else None, f"{mi.mass:.6f}" if mi else "—"),
+                problems,
+                f"{symbol}-{a} mass",
+            )
             isotopes.append({"mass_number": a, "abundance": abundance, "mass": mass})
         isotopes.sort(key=lambda i: -(i["abundance"]["value"] or 0))
 
@@ -502,19 +555,31 @@ def report(data, problems) -> str:
         "",
         f"Built {data['meta']['built']} by `scripts/build_elements.py`. Do not edit by hand.",
         "",
-        "| Property | verified | definition | unverified |",
-        "|---|---|---|---|",
+        "| Property | verified | partial | definition | unverified |",
+        "|---|---|---|---|---|",
     ]
     for name, c in rows:
-        lines.append(f"| {name} | {c[VERIFIED]} | {c[DEFINITION]} | {c[UNVERIFIED]} |")
+        lines.append(
+            f"| {name} | {c[VERIFIED]} | {c[PARTIAL]} | {c[DEFINITION]} | {c[UNVERIFIED]} |"
+        )
     lines += [
         "",
         f"Electron configurations where both NIST ASD and PubChem agree with the shown value: "
         f"{both} of {len(els)}.",
         "",
-        "## Disagreements and gaps",
+        "## Partial: the third reference shows an older edition",
         "",
     ]
+    for e in els:
+        fields = [("atomic weight", e["atomic_weight"])] + [
+            (f"{e['symbol']}-{i['mass_number']} {kind}", i[kind])
+            for i in e["isotopes"]
+            for kind in ("mass", "abundance")
+        ]
+        for label, f in fields:
+            if f["status"] == PARTIAL:
+                lines.append(f"- {e['symbol']} {label}: {f['older']['evidence']}")
+    lines += ["", "## Unverified (shown from mendeleev) and other gaps", ""]
     lines += [f"- {p}" for p in problems] or ["- none"]
     return "\n".join(lines) + "\n"
 

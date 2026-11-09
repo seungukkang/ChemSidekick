@@ -4,12 +4,16 @@
   "retrieved": {
    "ciaaw_weights": "2026-11-10",
    "ciaaw_abundances": "2026-11-10",
+   "ciaaw_weights_2013": "2026-11-10",
+   "ciaaw_abundances_2009": "2026-11-10",
    "ame2020": "2026-11-10",
+   "ame2012": "2026-11-10",
    "nubase2020": "2026-11-10",
    "nist_asd": "2026-11-10",
    "nist_srd144": "2026-11-10",
    "iaea_livechart": "2026-11-10",
-   "pubchem": "2026-11-10"
+   "pubchem": "2026-11-10",
+   "ciaaw_history": "2026-11-10"
   },
   "mendeleev": "1.3.0",
   "references": {
@@ -35,7 +39,7 @@
    },
    "nist-srd144": {
     "short": "NIST SRD 144",
-    "citation": "J. S. Coursey, D. J. Schwab, J. J. Tsai, R. A. Dragoset, Atomic Weights and Isotopic Compositions with Relative Atomic Masses, NIST Standard Reference Database 144, National Institute of Standards and Technology, Gaithersburg, MD."
+    "citation": "J. S. Coursey, D. J. Schwab, J. J. Tsai, R. A. Dragoset, Atomic Weights and Isotopic Compositions with Relative Atomic Masses (version 4.1, July 2015), NIST Standard Reference Database 144, National Institute of Standards and Technology, Gaithersburg, MD."
    },
    "iaea-livechart": {
     "short": "IAEA LiveChart",
@@ -64,6 +68,22 @@
    "iupac-definition": {
     "short": "IUPAC",
     "citation": "IUPAC Periodic Table of the Elements (version 4 May 2022), International Union of Pure and Applied Chemistry. Used for atomic number, group, period, and block, which are definitions rather than measured values."
+   },
+   "ciaaw-weights-2013": {
+    "short": "CIAAW 2013",
+    "citation": "CIAAW, Standard Atomic Weights (2013 edition), www.ciaaw.org, as archived by the Internet Archive on 2015-02-08; J. Meija et al., Atomic weights of the elements 2013 (IUPAC Technical Report), Pure Appl. Chem. 2016, 88, 265–291."
+   },
+   "ciaaw-abundances-2009": {
+    "short": "CIAAW 2009",
+    "citation": "CIAAW, Isotopic Compositions of the Elements (2009 edition), www.ciaaw.org, as archived by the Internet Archive in 2014; M. Berglund, M. E. Wieser, Isotopic compositions of the elements 2009 (IUPAC Technical Report), Pure Appl. Chem. 2011, 83, 397–410."
+   },
+   "ame2012": {
+    "short": "AME2012",
+    "citation": "M. Wang, G. Audi, A. H. Wapstra, F. G. Kondev, M. MacCormick, X. Xu, B. Pfeiffer, The Ame2012 atomic mass evaluation (II), Chin. Phys. C 2012, 36, 1603–2014."
+   },
+   "ciaaw-history": {
+    "short": "CIAAW element pages",
+    "citation": "CIAAW, per-element pages describing past standard atomic weights, www.ciaaw.org."
    }
   }
  },
@@ -101,7 +121,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[99.972, 99.999]"
      },
@@ -124,7 +145,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0.001, 0.028]"
      },
@@ -213,15 +235,13 @@
      "mass_number": 4,
      "abundance": {
       "value": 99.9998,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "99.9998",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "99.9998"
      },
      "mass": {
       "value": 4.00260325413,
@@ -238,15 +258,13 @@
      "mass_number": 3,
      "abundance": {
       "value": 0.0002,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "0.0002",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "0.0002"
      },
      "mass": {
       "value": 3.01602932197,
@@ -332,7 +350,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[1.9, 7.8]"
      },
@@ -355,7 +374,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[92.2, 98.1]"
      },
@@ -447,7 +467,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -543,7 +564,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[18.9, 20.4]"
      },
@@ -566,7 +588,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[79.6, 81.1]"
      },
@@ -665,7 +688,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[98.84, 99.04]"
      },
@@ -688,7 +712,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0.96, 1.16]"
      },
@@ -790,7 +815,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[99.578, 99.663]"
      },
@@ -813,7 +839,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0.337, 0.422]"
      },
@@ -915,7 +942,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[99.738, 99.776]"
      },
@@ -938,7 +966,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0.0367, 0.04]"
      },
@@ -961,7 +990,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0.187, 0.222]"
      },
@@ -1040,16 +1070,18 @@
     "pubchem"
    ],
    "atomic_weight": {
-    "value": 18.998403163,
-    "status": "unverified",
+    "value": 18.998403162,
+    "status": "partial",
     "refs": [
-     "mendeleev"
-    ],
-    "text": "18.998403163",
-    "agree": [
      "ciaaw-weights",
      "pubchem"
-    ]
+    ],
+    "text": "18.998403162(5)",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 18.998403163(6), identical to the CIAAW 2013 table"
+    }
    },
    "isotopes": [
     {
@@ -1060,7 +1092,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -1152,7 +1185,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "90.48"
      },
@@ -1175,7 +1209,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "9.25"
      },
@@ -1198,7 +1233,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.27"
      },
@@ -1285,7 +1321,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -1381,7 +1418,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[78.88, 79.05]"
      },
@@ -1404,7 +1442,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[9.988, 10.034]"
      },
@@ -1427,7 +1466,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[10.96, 11.09]"
      },
@@ -1506,16 +1546,18 @@
     "pubchem"
    ],
    "atomic_weight": {
-    "value": 26.9815385,
-    "status": "unverified",
+    "value": 26.9815384,
+    "status": "partial",
     "refs": [
-     "mendeleev"
-    ],
-    "text": "26.9815385",
-    "agree": [
      "ciaaw-weights",
      "pubchem"
-    ]
+    ],
+    "text": "26.9815384(3)",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 26.9815385(7), identical to the CIAAW 2013 table"
+    }
    },
    "isotopes": [
     {
@@ -1526,7 +1568,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -1625,7 +1668,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[92.191, 92.318]"
      },
@@ -1648,7 +1692,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[4.645, 4.699]"
      },
@@ -1671,7 +1716,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[3.037, 3.11]"
      },
@@ -1772,7 +1818,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -1876,7 +1923,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[94.41, 95.29]"
      },
@@ -1899,7 +1947,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0.729, 0.797]"
      },
@@ -1922,7 +1971,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[3.96, 4.77]"
      },
@@ -1945,7 +1995,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0.0129, 0.0187]"
      },
@@ -2047,7 +2098,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[75.5, 76.1]"
      },
@@ -2070,7 +2122,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[23.9, 24.5]"
      },
@@ -2153,12 +2206,17 @@
    ],
    "atomic_weight": {
     "value": null,
-    "status": "unverified",
+    "status": "partial",
     "refs": [
      "ciaaw-weights",
      "pubchem"
     ],
     "text": "[39.792, 39.963]",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 39.948(1), identical to the CIAAW 2013 table"
+    },
     "note": "interval: the value depends on the source of the material"
    },
    "isotopes": [
@@ -2170,7 +2228,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0, 2.07]"
      },
@@ -2193,7 +2252,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0, 4.3]"
      },
@@ -2216,7 +2276,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[93.6, 100]"
      },
@@ -2303,7 +2364,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "93.2581"
      },
@@ -2326,7 +2388,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "6.7302"
      },
@@ -2349,7 +2412,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.0117"
      },
@@ -2443,7 +2507,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "96.941"
      },
@@ -2466,7 +2531,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "2.086"
      },
@@ -2489,7 +2555,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.647"
      },
@@ -2512,7 +2579,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.187"
      },
@@ -2535,7 +2603,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.135"
      },
@@ -2558,21 +2627,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.004"
      },
      "mass": {
       "value": 45.953687726,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "45.953688",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "45.953688",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 45.9536890(24), equal to AME2012 (45.953689023)"
+      }
      }
     }
    ],
@@ -2636,16 +2708,18 @@
     "pubchem"
    ],
    "atomic_weight": {
-    "value": 44.955908,
-    "status": "unverified",
+    "value": 44.955907,
+    "status": "partial",
     "refs": [
-     "mendeleev"
-    ],
-    "text": "44.955908",
-    "agree": [
      "ciaaw-weights",
      "pubchem"
-    ]
+    ],
+    "text": "44.955907(4)",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 44.955908(5), identical to the CIAAW 2013 table"
+    }
    },
    "isotopes": [
     {
@@ -2656,21 +2730,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 44.955907051,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "44.955907",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "44.955907",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 44.95590828(77), equal to AME2012 (44.955908275)"
+      }
      }
     }
    ],
@@ -2754,21 +2831,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "73.72"
      },
      "mass": {
       "value": 47.947940677,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "47.947941",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "47.947941",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 47.94794198(38), equal to AME2012 (47.947941979)"
+      }
      }
     },
     {
@@ -2779,21 +2859,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "8.25"
      },
      "mass": {
       "value": 45.952626356,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "45.952626",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "45.952626",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 45.95262772(35), equal to AME2012 (45.952627718)"
+      }
      }
     },
     {
@@ -2804,21 +2887,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "7.44"
      },
      "mass": {
       "value": 46.951757491,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "46.951757",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "46.951757",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 46.95175879(38), equal to AME2012 (46.951758787)"
+      }
      }
     },
     {
@@ -2829,21 +2915,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "5.41"
      },
      "mass": {
       "value": 48.947864391,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "48.947864",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "48.947864",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 48.94786568(39), equal to AME2012 (48.947865676)"
+      }
      }
     },
     {
@@ -2854,21 +2943,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "5.18"
      },
      "mass": {
       "value": 49.944785622,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "49.944786",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "49.944786",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 49.94478689(39), equal to AME2012 (49.944786889)"
+      }
      }
     }
    ],
@@ -2955,21 +3047,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "99.750"
      },
      "mass": {
       "value": 50.943957664,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "50.943958",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "50.943958",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 50.94395704(94), equal to AME2012 (50.943957036)"
+      }
      }
     },
     {
@@ -2980,21 +3075,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.250"
      },
      "mass": {
       "value": 49.947156681,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "49.947157",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "49.947157",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 49.94715601(95), equal to AME2012 (49.947156014)"
+      }
      }
     }
    ],
@@ -3082,21 +3180,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "83.789"
      },
      "mass": {
       "value": 51.940504714,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "51.940505",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "51.940505",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 51.94050623(63), equal to AME2012 (51.940506231)"
+      }
      }
     },
     {
@@ -3107,21 +3208,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "9.501"
      },
      "mass": {
       "value": 52.940646304,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "52.940646",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "52.940646",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 52.94064815(62), equal to AME2012 (52.940648147)"
+      }
      }
     },
     {
@@ -3132,7 +3236,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "4.345"
      },
@@ -3155,21 +3260,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "2.365"
      },
      "mass": {
       "value": 53.938877359,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "53.938877",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "53.938877",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 53.93887916(61), equal to AME2012 (53.938879158)"
+      }
      }
     }
    ],
@@ -3241,16 +3349,18 @@
     "pubchem"
    ],
    "atomic_weight": {
-    "value": 54.938044,
-    "status": "unverified",
+    "value": 54.938043,
+    "status": "partial",
     "refs": [
-     "mendeleev"
-    ],
-    "text": "54.938044",
-    "agree": [
      "ciaaw-weights",
      "pubchem"
-    ]
+    ],
+    "text": "54.938043(2)",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 54.938044(3), identical to the CIAAW 2013 table"
+    }
    },
    "isotopes": [
     {
@@ -3261,21 +3371,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 54.93804304,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "54.938043",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "54.938043",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 54.93804391(48), equal to AME2012 (54.938043910)"
+      }
      }
     }
    ],
@@ -3365,7 +3478,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "91.754"
      },
@@ -3388,21 +3502,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "5.845"
      },
      "mass": {
       "value": 53.939608189,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "53.939608",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "53.939608",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 53.93960899(53), equal to AME2012 (53.939608986)"
+      }
      }
     },
     {
@@ -3413,21 +3530,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "2.119"
      },
      "mass": {
       "value": 56.93539195,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "56.935392",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "56.935392",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 56.93539284(49), equal to AME2012 (56.935392841)"
+      }
      }
     },
     {
@@ -3438,7 +3558,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.282"
      },
@@ -3541,7 +3662,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -3641,7 +3763,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "68.0769"
      },
@@ -3664,36 +3787,37 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "26.2231"
      },
      "mass": {
       "value": 59.930785129,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "59.930785",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "59.930785",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 59.93078588(52), equal to AME2012 (59.930785885)"
+      }
      }
     },
     {
      "mass_number": 62,
      "abundance": {
       "value": 3.6345,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "3.6345",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "3.6345"
      },
      "mass": {
       "value": 61.928344753,
@@ -3714,48 +3838,51 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "1.1399"
      },
      "mass": {
       "value": 60.931054819,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "60.931055",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "60.931055",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 60.93105557(52), equal to AME2012 (60.931055570)"
+      }
      }
     },
     {
      "mass_number": 64,
      "abundance": {
       "value": 0.9256,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "0.9256",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "0.9256"
      },
      "mass": {
       "value": 63.927966228,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "63.927966",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "63.927966",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 63.92796682(58), equal to AME2012 (63.927966816)"
+      }
      }
     }
    ],
@@ -3842,21 +3969,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "69.15"
      },
      "mass": {
       "value": 62.929597119,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "62.929597",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "62.929597",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 62.92959772(56), equal to AME2012 (62.929597723)"
+      }
      }
     },
     {
@@ -3867,7 +3997,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "30.85"
      },
@@ -3965,7 +4096,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "49.17"
      },
@@ -3988,7 +4120,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "27.73"
      },
@@ -4011,7 +4144,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "18.45"
      },
@@ -4034,7 +4168,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "4.04"
      },
@@ -4057,7 +4192,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.61"
      },
@@ -4153,7 +4289,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "60.108"
      },
@@ -4176,7 +4313,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "39.892"
      },
@@ -4273,15 +4411,13 @@
      "mass_number": 74,
      "abundance": {
       "value": 36.52,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "36.52",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "36.52"
      },
      "mass": {
       "value": 73.92117776,
@@ -4302,7 +4438,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "27.45"
      },
@@ -4321,15 +4458,13 @@
      "mass_number": 70,
      "abundance": {
       "value": 20.52,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "20.52",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "20.52"
      },
      "mass": {
       "value": 69.924248542,
@@ -4346,15 +4481,13 @@
      "mass_number": 73,
      "abundance": {
       "value": 7.76,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "7.76",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "7.76"
      },
      "mass": {
       "value": 72.923458954,
@@ -4371,15 +4504,13 @@
      "mass_number": 76,
      "abundance": {
       "value": 7.75,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "7.75",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "7.75"
      },
      "mass": {
       "value": 75.921402725,
@@ -4478,7 +4609,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -4575,15 +4707,13 @@
      "mass_number": 80,
      "abundance": {
       "value": 49.8,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "49.8",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "49.80"
      },
      "mass": {
       "value": 79.916521761,
@@ -4600,15 +4730,13 @@
      "mass_number": 78,
      "abundance": {
       "value": 23.69,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "23.69",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "23.69"
      },
      "mass": {
       "value": 77.917309244,
@@ -4625,15 +4753,13 @@
      "mass_number": 76,
      "abundance": {
       "value": 9.23,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "9.23",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "9.23"
      },
      "mass": {
       "value": 75.919213702,
@@ -4650,15 +4776,13 @@
      "mass_number": 82,
      "abundance": {
       "value": 8.82,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "8.82",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "8.82"
      },
      "mass": {
       "value": 81.916699531,
@@ -4675,15 +4799,13 @@
      "mass_number": 77,
      "abundance": {
       "value": 7.6,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "7.6",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "7.60"
      },
      "mass": {
       "value": 76.91991415,
@@ -4700,15 +4822,13 @@
      "mass_number": 74,
      "abundance": {
       "value": 0.86,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "0.86",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "0.86"
      },
      "mass": {
       "value": 73.922475933,
@@ -4808,7 +4928,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[50.5, 50.8]"
      },
@@ -4831,21 +4952,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[49.2, 49.5]"
      },
      "mass": {
       "value": 80.916288197,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "80.916288",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "80.916288",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 80.9162897(14), equal to AME2012 (80.916289690)"
+      }
      }
     }
    ],
@@ -4932,7 +5056,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "56.987"
      },
@@ -4955,7 +5080,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "17.279"
      },
@@ -4978,21 +5104,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "11.593"
      },
      "mass": {
       "value": 81.91348115368,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "81.913481",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "81.913481",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 81.91348273(94), equal to AME2012 (81.913482730)"
+      }
      }
     },
     {
@@ -5003,7 +5132,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "11.500"
      },
@@ -5026,7 +5156,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "2.286"
      },
@@ -5049,21 +5180,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.355"
      },
      "mass": {
       "value": 77.920366341,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "77.920366",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "77.920366",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 77.92036494(76), equal to AME2012 (77.920364944)"
+      }
      }
     }
    ],
@@ -5142,7 +5276,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "72.17"
      },
@@ -5165,7 +5300,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "27.83"
      },
@@ -5259,7 +5395,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "82.58"
      },
@@ -5282,7 +5419,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "9.86"
      },
@@ -5305,7 +5443,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "7.00"
      },
@@ -5328,7 +5467,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.56"
      },
@@ -5422,21 +5562,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 88.905838156,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "88.905838",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "88.905838",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 88.9058403(24), equal to AME2012 (88.905840348)"
+      }
      }
     }
    ],
@@ -5502,16 +5645,18 @@
     "pubchem"
    ],
    "atomic_weight": {
-    "value": 91.224,
-    "status": "unverified",
+    "value": 91.222,
+    "status": "partial",
     "refs": [
-     "mendeleev"
-    ],
-    "text": "91.224",
-    "agree": [
      "ciaaw-weights",
      "pubchem"
-    ]
+    ],
+    "text": "91.222(3)",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 91.224(2), identical to the CIAAW 2013 table"
+    }
    },
    "isotopes": [
     {
@@ -5529,15 +5674,17 @@
      },
      "mass": {
       "value": 89.904698755,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "89.904699",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "89.904699",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 89.9046977(20), equal to AME2012 (89.904697659)"
+      }
      }
     },
     {
@@ -5555,15 +5702,17 @@
      },
      "mass": {
       "value": 93.906312523,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "93.906313",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "93.906313",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 93.9063108(20), equal to AME2012 (93.906310828)"
+      }
      }
     },
     {
@@ -5629,15 +5778,17 @@
      },
      "mass": {
       "value": 95.908277615,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "95.908278",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "95.908278",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 95.9082714(21), equal to AME2012 (95.908271433)"
+      }
      }
     }
    ],
@@ -5721,7 +5872,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -5817,27 +5969,27 @@
      "mass_number": 98,
      "abundance": {
       "value": 24.292,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "24.292",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "24.292"
      },
      "mass": {
       "value": 97.905403609,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "97.905404",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "97.905404",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 97.90540482(49), equal to AME2012 (97.905404820)"
+      }
      }
     },
     {
@@ -5848,156 +6000,159 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "16.673"
      },
      "mass": {
       "value": 95.90467477,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "95.904675",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "95.904675",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 95.90467612(47), equal to AME2012 (95.904676115)"
+      }
      }
     },
     {
      "mass_number": 95,
      "abundance": {
       "value": 15.873,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "15.873",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "15.873"
      },
      "mass": {
       "value": 94.905837436,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "94.905837",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "94.905837",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 94.90583877(47), equal to AME2012 (94.905838766)"
+      }
      }
     },
     {
      "mass_number": 92,
      "abundance": {
       "value": 14.649,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "14.649",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "14.649"
      },
      "mass": {
       "value": 91.906807153,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "91.906807",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "91.906807",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 91.90680796(84), equal to AME2012 (91.906807959)"
+      }
      }
     },
     {
      "mass_number": 100,
      "abundance": {
       "value": 9.744,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "9.744",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "9.744"
      },
      "mass": {
       "value": 99.907467982,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "99.907468",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "99.907468",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 99.9074718(11), equal to AME2012 (99.907471782)"
+      }
      }
     },
     {
      "mass_number": 97,
      "abundance": {
       "value": 9.582,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "9.582",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "9.582"
      },
      "mass": {
       "value": 96.906016903,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "96.906017",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "96.906017",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 96.90601812(49), equal to AME2012 (96.906018118)"
+      }
      }
     },
     {
      "mass_number": 94,
      "abundance": {
       "value": 9.187,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "9.187",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "9.187"
      },
      "mass": {
       "value": 93.905083586,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "93.905084",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "93.905084",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 93.90508490(48), equal to AME2012 (93.905084903)"
+      }
      }
     }
    ],
@@ -6171,21 +6326,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "31.55"
      },
      "mass": {
       "value": 101.904340312,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "101.904340",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "101.904340",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 101.9043441(12), equal to AME2012 (101.904344096)"
+      }
      }
     },
     {
@@ -6196,21 +6354,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "18.62"
      },
      "mass": {
       "value": 103.905425312,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "103.905425",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "103.905425",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 103.9054275(28), equal to AME2012 (103.905427481)"
+      }
      }
     },
     {
@@ -6221,21 +6382,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "17.06"
      },
      "mass": {
       "value": 100.905573086,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "100.905573",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "100.905573",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 100.9055769(12), equal to AME2012 (100.905576872)"
+      }
      }
     },
     {
@@ -6246,21 +6410,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "12.76"
      },
      "mass": {
       "value": 98.905930284,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "98.905930",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "98.905930",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 98.9059341(11), equal to AME2012 (98.905934082)"
+      }
      }
     },
     {
@@ -6271,21 +6438,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "12.60"
      },
      "mass": {
       "value": 99.90421046,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "99.904210",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "99.904210",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 99.9042143(11), equal to AME2012 (99.904214256)"
+      }
      }
     },
     {
@@ -6296,21 +6466,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "5.54"
      },
      "mass": {
       "value": 95.90758891,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "95.907589",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "95.907589",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 95.90759025(49), equal to AME2012 (95.907590255)"
+      }
      }
     },
     {
@@ -6321,7 +6494,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "1.87"
      },
@@ -6405,16 +6579,18 @@
     "pubchem"
    ],
    "atomic_weight": {
-    "value": 102.9055,
-    "status": "unverified",
+    "value": 102.90549,
+    "status": "partial",
     "refs": [
-     "mendeleev"
-    ],
-    "text": "102.9055",
-    "agree": [
      "ciaaw-weights",
      "pubchem"
-    ]
+    ],
+    "text": "102.90549(2)",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 102.90550(2), identical to the CIAAW 2013 table"
+    }
    },
    "isotopes": [
     {
@@ -6425,21 +6601,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 102.905494081,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "102.905494",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "102.905494",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 102.9054980(26), equal to AME2012 (102.905497993)"
+      }
      }
     }
    ],
@@ -6528,7 +6707,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "27.33"
      },
@@ -6551,7 +6731,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "26.46"
      },
@@ -6574,7 +6755,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "22.33"
      },
@@ -6597,21 +6779,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "11.72"
      },
      "mass": {
       "value": 109.905172878,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "109.905173",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "109.905173",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 109.90517220(75), equal to AME2012 (109.905172199)"
+      }
      }
     },
     {
@@ -6622,7 +6807,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "11.14"
      },
@@ -6645,21 +6831,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "1.02"
      },
      "mass": {
       "value": 101.905632292,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "101.905632",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "101.905632",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 101.9056022(28), equal to AME2012 (101.905602187)"
+      }
      }
     }
    ],
@@ -6744,7 +6933,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "51.839"
      },
@@ -6767,7 +6957,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "48.161"
      },
@@ -6861,15 +7052,13 @@
      "mass_number": 114,
      "abundance": {
       "value": 28.754,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "28.754",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "28.754"
      },
      "mass": {
       "value": 113.903364998,
@@ -6886,27 +7075,27 @@
      "mass_number": 112,
      "abundance": {
       "value": 24.109,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "24.109",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "24.109"
      },
      "mass": {
       "value": 111.902763896,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "111.902764",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "111.902764",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 111.90276287(60), equal to AME2012 (111.902762868)"
+      }
      }
     },
     {
@@ -6917,36 +7106,37 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "12.795"
      },
      "mass": {
       "value": 110.904183776,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "110.904184",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "110.904184",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 110.90418287(61), equal to AME2012 (110.904182872)"
+      }
      }
     },
     {
      "mass_number": 110,
      "abundance": {
       "value": 12.47,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "12.47",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "12.470"
      },
      "mass": {
       "value": 109.90300747,
@@ -6963,15 +7153,13 @@
      "mass_number": 113,
      "abundance": {
       "value": 12.227,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "12.227",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "12.227"
      },
      "mass": {
       "value": 112.904408105,
@@ -6988,15 +7176,13 @@
      "mass_number": 116,
      "abundance": {
       "value": 7.512,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "7.512",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "7.512"
      },
      "mass": {
       "value": 115.90476323,
@@ -7017,7 +7203,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "1.245"
      },
@@ -7040,7 +7227,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.888"
      },
@@ -7131,15 +7319,13 @@
      "mass_number": 115,
      "abundance": {
       "value": 95.719,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "95.719",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "95.719"
      },
      "mass": {
       "value": 114.903878772,
@@ -7156,27 +7342,27 @@
      "mass_number": 113,
      "abundance": {
       "value": 4.281,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "4.281",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "4.281"
      },
      "mass": {
       "value": 112.904060451,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "112.904060",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "112.904060",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 112.90406184(91), equal to AME2012 (112.904061839)"
+      }
      }
     }
    ],
@@ -7263,21 +7449,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "32.58"
      },
      "mass": {
       "value": 119.902202557,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "119.902203",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "119.902203",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 119.90220163(97), equal to AME2012 (119.902201634)"
+      }
      }
     },
     {
@@ -7288,7 +7477,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "24.22"
      },
@@ -7311,7 +7501,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "14.54"
      },
@@ -7334,7 +7525,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "8.59"
      },
@@ -7357,7 +7549,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "7.68"
      },
@@ -7380,21 +7573,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "5.79"
      },
      "mass": {
       "value": 123.905279619,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "123.905280",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "123.905280",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 123.9052766(11), equal to AME2012 (123.905276645)"
+      }
      }
     },
     {
@@ -7405,21 +7601,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "4.63"
      },
      "mass": {
       "value": 121.903445494,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "121.903445",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "121.903445",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 121.9034438(26), equal to AME2012 (121.903443774)"
+      }
      }
     },
     {
@@ -7430,21 +7629,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.97"
      },
      "mass": {
       "value": 111.904824894,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "111.904825",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "111.904825",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 111.90482387(61), equal to AME2012 (111.904823874)"
+      }
      }
     },
     {
@@ -7455,21 +7657,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.66"
      },
      "mass": {
       "value": 113.90278013,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "113.902780",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "113.902780",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 113.9027827(10), equal to AME2012 (113.902782695)"
+      }
      }
     },
     {
@@ -7480,7 +7685,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.34"
      },
@@ -7581,21 +7787,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "57.21"
      },
      "mass": {
       "value": 120.903811353,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "120.903811",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "120.903811",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 120.9038120(30), equal to AME2012 (120.903811967)"
+      }
      }
     },
     {
@@ -7606,21 +7815,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "42.79"
      },
      "mass": {
       "value": 122.904215292,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "122.904215",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "122.904215",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 122.9042132(23), equal to AME2012 (122.904213204)"
+      }
      }
     }
    ],
@@ -7709,7 +7921,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "34.08"
      },
@@ -7732,7 +7945,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "31.74"
      },
@@ -7755,21 +7969,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "18.84"
      },
      "mass": {
       "value": 125.903312144,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "125.903312",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "125.903312",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 125.9033109(16), equal to AME2012 (125.903310886)"
+      }
      }
     },
     {
@@ -7780,21 +7997,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "7.07"
      },
      "mass": {
       "value": 124.904431178,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "124.904431",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "124.904431",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 124.9044299(16), equal to AME2012 (124.904429920)"
+      }
      }
     },
     {
@@ -7805,21 +8025,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "4.74"
      },
      "mass": {
       "value": 123.902818341,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "123.902818",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "123.902818",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 123.9028171(16), equal to AME2012 (123.902817085)"
+      }
      }
     },
     {
@@ -7830,21 +8053,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "2.55"
      },
      "mass": {
       "value": 121.903044708,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "121.903045",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "121.903045",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 121.9030435(16), equal to AME2012 (121.903043455)"
+      }
      }
     },
     {
@@ -7855,21 +8081,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.89"
      },
      "mass": {
       "value": 122.904271022,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "122.904271",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "122.904271",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 122.9042698(16), equal to AME2012 (122.904269769)"
+      }
      }
     },
     {
@@ -7880,21 +8109,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.09"
      },
      "mass": {
       "value": 119.904065779,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "119.904066",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "119.904066",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 119.9040593(33), equal to AME2012 (119.904059300)"
+      }
      }
     }
    ],
@@ -7983,21 +8215,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 126.904472592,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "126.904473",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "126.904473",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 126.9044719(39), equal to AME2012 (126.904471853)"
+      }
      }
     }
    ],
@@ -8085,7 +8320,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "26.909"
      },
@@ -8108,7 +8344,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "26.401"
      },
@@ -8131,7 +8368,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "21.232"
      },
@@ -8154,21 +8392,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "10.436"
      },
      "mass": {
       "value": 133.90539303,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "133.905393",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "133.905393",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 133.90539466(90), equal to AME2012 (133.905394664)"
+      }
      }
     },
     {
@@ -8179,7 +8420,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "8.857"
      },
@@ -8202,7 +8444,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "4.071"
      },
@@ -8225,7 +8468,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "1.910"
      },
@@ -8248,21 +8492,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.095"
      },
      "mass": {
       "value": 123.905885174,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "123.905885",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "123.905885",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 123.9058920(19), equal to AME2012 (123.905891984)"
+      }
      }
     },
     {
@@ -8273,21 +8520,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.089"
      },
      "mass": {
       "value": 125.904297422,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "125.904297",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "125.904297",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 125.9042983(38), equal to AME2012 (125.904298292)"
+      }
      }
     }
    ],
@@ -8373,7 +8623,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -8467,7 +8718,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "71.70"
      },
@@ -8490,7 +8742,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "11.23"
      },
@@ -8513,7 +8766,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "7.85"
      },
@@ -8536,7 +8790,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "6.59"
      },
@@ -8559,7 +8814,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "2.42"
      },
@@ -8582,21 +8838,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.11"
      },
      "mass": {
       "value": 129.906326002,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "129.906326",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "129.906326",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 129.9063207(28), equal to AME2012 (129.906320669)"
+      }
      }
     },
     {
@@ -8607,7 +8866,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.10"
      },
@@ -8701,21 +8961,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "99.91119"
      },
      "mass": {
       "value": 138.906362927,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "138.906363",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "138.906363",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 138.9063563(24), equal to AME2012 (138.906356256)"
+      }
      }
     },
     {
@@ -8726,21 +8989,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.08881"
      },
      "mass": {
       "value": 137.907124041,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "137.907124",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "137.907124",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 137.9071149(37), equal to AME2012 (137.907114919)"
+      }
      }
     }
    ],
@@ -8832,15 +9098,17 @@
      },
      "mass": {
       "value": 139.905448433,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "139.905448",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "139.905448",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 139.9054431(23), equal to AME2012 (139.905443107)"
+      }
      }
     },
     {
@@ -8851,7 +9119,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "11.114"
      },
@@ -8874,21 +9143,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.251"
      },
      "mass": {
       "value": 137.90599418,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "137.905994",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "137.905994",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 137.905991(11), equal to AME2012 (137.905991089)"
+      }
      }
     },
     {
@@ -8997,21 +9269,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 140.907659604,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "140.907660",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "140.907660",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 140.9076576(23), equal to AME2012 (140.907657568)"
+      }
      }
     }
    ],
@@ -9122,7 +9397,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "23.798"
      },
@@ -9145,7 +9421,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "17.189"
      },
@@ -9193,7 +9470,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "8.293"
      },
@@ -9216,7 +9494,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "5.756"
      },
@@ -9239,21 +9518,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "5.638"
      },
      "mass": {
       "value": 149.920901322,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "149.920901",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "149.920901",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 149.9209022(18), equal to AME2012 (149.920902249)"
+      }
      }
     }
    ],
@@ -9410,69 +9692,67 @@
      "mass_number": 152,
      "abundance": {
       "value": 26.74,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "26.74",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "26.74"
      },
      "mass": {
       "value": 151.919738646,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "151.919739",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "151.919739",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 151.9197397(18), equal to AME2012 (151.919739721)"
+      }
      }
     },
     {
      "mass_number": 154,
      "abundance": {
       "value": 22.74,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "22.74",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "22.74"
      },
      "mass": {
       "value": 153.922215756,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "153.922216",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "153.922216",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 153.9222169(20), equal to AME2012 (153.922216861)"
+      }
      }
     },
     {
      "mass_number": 147,
      "abundance": {
       "value": 15.0,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "15",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "15.00"
      },
      "mass": {
       "value": 146.914904401,
@@ -9493,36 +9773,37 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "13.82"
      },
      "mass": {
       "value": 148.917191211,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "148.917191",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "148.917191",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 148.9171921(18), equal to AME2012 (148.917192062)"
+      }
      }
     },
     {
      "mass_number": 148,
      "abundance": {
       "value": 11.25,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "11.25",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "11.25"
      },
      "mass": {
       "value": 147.914829233,
@@ -9539,42 +9820,40 @@
      "mass_number": 150,
      "abundance": {
       "value": 7.37,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "7.37",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "7.37"
      },
      "mass": {
       "value": 149.917281993,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "149.917282",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "149.917282",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 149.9172829(18), equal to AME2012 (149.917282919)"
+      }
      }
     },
     {
      "mass_number": 144,
      "abundance": {
       "value": 3.08,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "3.08",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "3.08"
      },
      "mass": {
       "value": 143.912006285,
@@ -9668,21 +9947,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "52.19"
      },
      "mass": {
       "value": 152.921236789,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "152.921237",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "152.921237",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 152.9212380(18), equal to AME2012 (152.921238003)"
+      }
      }
     },
     {
@@ -9693,21 +9975,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "47.81"
      },
      "mass": {
       "value": 150.919856606,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "150.919857",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "150.919857",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 150.9198578(18), equal to AME2012 (150.919857803)"
+      }
      }
     }
    ],
@@ -9794,15 +10079,17 @@
      },
      "mass": {
       "value": 157.9241112,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "157.924111",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "157.924111",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 157.9241123(17), equal to AME2012 (157.924112348)"
+      }
      }
     },
     {
@@ -9820,15 +10107,17 @@
      },
      "mass": {
       "value": 159.927061202,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "159.927061",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "159.927061",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 159.9270624(18), equal to AME2012 (159.927062411)"
+      }
      }
     },
     {
@@ -9846,15 +10135,17 @@
      },
      "mass": {
       "value": 155.92213012,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "155.922130",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "155.922130",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 155.9221312(17), equal to AME2012 (155.922131241)"
+      }
      }
     },
     {
@@ -9872,15 +10163,17 @@
      },
      "mass": {
       "value": 156.923967424,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "156.923967",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "156.923967",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 156.9239686(17), equal to AME2012 (156.923968569)"
+      }
      }
     },
     {
@@ -9898,15 +10191,17 @@
      },
      "mass": {
       "value": 154.922629356,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "154.922629",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "154.922629",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 154.9226305(17), equal to AME2012 (154.922630473)"
+      }
      }
     },
     {
@@ -9924,15 +10219,17 @@
      },
      "mass": {
       "value": 153.920872974,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "153.920873",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "153.920873",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 153.9208741(17), equal to AME2012 (153.920874060)"
+      }
      }
     },
     {
@@ -9943,21 +10240,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.204"
      },
      "mass": {
       "value": 151.919798414,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "151.919798",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "151.919798",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 151.9197995(18), equal to AME2012 (151.919799494)"
+      }
      }
     }
    ],
@@ -10041,21 +10341,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 158.925353707,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "158.925354",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "158.925354",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 158.9253547(19), equal to AME2012 (158.925354710)"
+      }
      }
     }
    ],
@@ -10137,21 +10440,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "28.260"
      },
      "mass": {
       "value": 163.929180819,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "163.929181",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "163.929181",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 163.9291819(20), equal to AME2012 (163.929181874)"
+      }
      }
     },
     {
@@ -10162,21 +10468,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "25.475"
      },
      "mass": {
       "value": 161.926804507,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "161.926805",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "161.926805",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 161.9268056(20), equal to AME2012 (161.926805573)"
+      }
      }
     },
     {
@@ -10187,21 +10496,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "24.896"
      },
      "mass": {
       "value": 162.928737221,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "162.928737",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "162.928737",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 162.9287383(20), equal to AME2012 (162.928738284)"
+      }
      }
     },
     {
@@ -10212,21 +10524,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "18.889"
      },
      "mass": {
       "value": 160.926939425,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "160.926939",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "160.926939",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 160.9269405(20), equal to AME2012 (160.926940492)"
+      }
      }
     },
     {
@@ -10237,21 +10552,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "2.329"
      },
      "mass": {
       "value": 159.925203578,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "159.925204",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "159.925204",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 159.9252046(20), equal to AME2012 (159.925204646)"
+      }
      }
     },
     {
@@ -10262,21 +10580,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.095"
      },
      "mass": {
       "value": 157.924414817,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "157.924415",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "157.924415",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 157.9244159(31), equal to AME2012 (157.924415875)"
+      }
      }
     },
     {
@@ -10287,21 +10608,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.056"
      },
      "mass": {
       "value": 155.924283593,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "155.924284",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "155.924284",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 155.9242847(17), equal to AME2012 (155.924284713)"
+      }
      }
     }
    ],
@@ -10386,7 +10710,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -10482,21 +10807,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "33.503"
      },
      "mass": {
       "value": 165.930301067,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "165.930301",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "165.930301",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 165.9302995(22), equal to AME2012 (165.930299530)"
+      }
      }
     },
     {
@@ -10507,21 +10835,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "26.978"
      },
      "mass": {
       "value": 167.932378282,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "167.932378",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "167.932378",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 167.9323767(22), equal to AME2012 (167.932376688)"
+      }
      }
     },
     {
@@ -10532,21 +10863,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "22.869"
      },
      "mass": {
       "value": 166.932056192,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "166.932056",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "166.932056",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 166.9320546(22), equal to AME2012 (166.932054617)"
+      }
      }
     },
     {
@@ -10557,21 +10891,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "14.910"
      },
      "mass": {
       "value": 169.935471933,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "169.935472",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "169.935472",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 169.9354702(26), equal to AME2012 (169.935470230)"
+      }
      }
     },
     {
@@ -10582,21 +10919,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "1.601"
      },
      "mass": {
       "value": 163.929207739,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "163.929208",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "163.929208",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 163.9292088(20), equal to AME2012 (163.929208791)"
+      }
      }
     },
     {
@@ -10607,21 +10947,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.139"
      },
      "mass": {
       "value": 161.928787299,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "161.928787",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "161.928787",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 161.9287884(20), equal to AME2012 (161.928788364)"
+      }
      }
     }
    ],
@@ -10705,21 +11048,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 168.934218956,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "168.934219",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "168.934219",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 168.9342179(22), equal to AME2012 (168.934217889)"
+      }
      }
     }
    ],
@@ -10786,15 +11132,17 @@
    ],
    "atomic_weight": {
     "value": 173.045,
-    "status": "unverified",
+    "status": "partial",
     "refs": [
-     "mendeleev"
-    ],
-    "text": "173.045",
-    "agree": [
      "ciaaw-weights",
      "pubchem"
-    ]
+    ],
+    "text": "173.045(10)",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 173.054(5), identical to the CIAAW 2013 table"
+    }
    },
    "isotopes": [
     {
@@ -10812,15 +11160,17 @@
      },
      "mass": {
       "value": 173.938867545,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "173.938868",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "173.938868",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 173.9388664(22), equal to AME2012 (173.938866437)"
+      }
      }
     },
     {
@@ -10838,15 +11188,17 @@
      },
      "mass": {
       "value": 171.936386654,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "171.936387",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "171.936387",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 171.9363859(22), equal to AME2012 (171.936385872)"
+      }
      }
     },
     {
@@ -10864,15 +11216,17 @@
      },
      "mass": {
       "value": 172.938216211,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "172.938216",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "172.938216",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 172.9382151(22), equal to AME2012 (172.938215136)"
+      }
      }
     },
     {
@@ -10890,15 +11244,17 @@
      },
      "mass": {
       "value": 170.936331515,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "170.936332",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "170.936332",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 170.9363302(22), equal to AME2012 (170.936330208)"
+      }
      }
     },
     {
@@ -10916,15 +11272,17 @@
      },
      "mass": {
       "value": 175.942574706,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "175.942575",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "175.942575",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 175.9425764(24), equal to AME2012 (175.942576447)"
+      }
      }
     },
     {
@@ -10942,15 +11300,17 @@
      },
      "mass": {
       "value": 169.934767242,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "169.934767",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "169.934767",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 169.9347664(22), equal to AME2012 (169.934766376)"
+      }
      }
     },
     {
@@ -10968,15 +11328,17 @@
      },
      "mass": {
       "value": 167.933891297,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "167.933891",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "167.933891",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 167.9338896(22), equal to AME2012 (167.933889602)"
+      }
      }
     }
    ],
@@ -11039,16 +11401,18 @@
     "pubchem"
    ],
    "atomic_weight": {
-    "value": 174.9668,
-    "status": "unverified",
+    "value": 174.96669,
+    "status": "partial",
     "refs": [
-     "mendeleev"
-    ],
-    "text": "174.9668",
-    "agree": [
      "ciaaw-weights",
      "pubchem"
-    ]
+    ],
+    "text": "174.96669(5)",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 174.9668(1), identical to the CIAAW 2013 table"
+    }
    },
    "isotopes": [
     {
@@ -11066,15 +11430,17 @@
      },
      "mass": {
       "value": 174.940777211,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "174.940777",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "174.940777",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 174.9407752(20), equal to AME2012 (174.940775191)"
+      }
      }
     },
     {
@@ -11092,15 +11458,17 @@
      },
      "mass": {
       "value": 175.942691711,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "175.942692",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "175.942692",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 175.9426897(20), equal to AME2012 (175.942689680)"
+      }
      }
     }
    ],
@@ -11188,15 +11556,17 @@
      },
      "mass": {
       "value": 179.946559537,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "179.946560",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "179.946560",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 179.9465570(20), equal to AME2012 (179.946557042)"
+      }
      }
     },
     {
@@ -11207,21 +11577,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "27.28"
      },
      "mass": {
       "value": 177.943708322,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "177.943708",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "177.943708",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 177.9437058(20), equal to AME2012 (177.943705833)"
+      }
      }
     },
     {
@@ -11239,15 +11612,17 @@
      },
      "mass": {
       "value": 176.943230187,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "176.943230",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "176.943230",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 176.9432277(20), equal to AME2012 (176.943227717)"
+      }
      }
     },
     {
@@ -11265,15 +11640,17 @@
      },
      "mass": {
       "value": 178.945825705,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "178.945826",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "178.945826",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 178.9458232(20), equal to AME2012 (178.945823212)"
+      }
      }
     },
     {
@@ -11291,15 +11668,17 @@
      },
      "mass": {
       "value": 175.941409797,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "175.941410",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "175.941410",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 175.9414076(22), equal to AME2012 (175.941407628)"
+      }
      }
     },
     {
@@ -11310,21 +11689,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.161"
      },
      "mass": {
       "value": 173.940048377,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "173.940048",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "173.940048",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 173.9400461(28), equal to AME2012 (173.940046141)"
+      }
      }
     }
    ],
@@ -11417,15 +11799,17 @@
      },
      "mass": {
       "value": 180.947998528,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "180.947999",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "180.947999",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 180.9479958(20), equal to AME2012 (180.947995769)"
+      }
      }
     },
     {
@@ -11443,15 +11827,17 @@
      },
      "mass": {
       "value": 179.947467589,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "179.947468",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "179.947468",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 179.9474648(24), equal to AME2012 (179.947464832)"
+      }
      }
     }
    ],
@@ -11539,21 +11925,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "30.64"
      },
      "mass": {
       "value": 183.95093318,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "183.950933",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "183.950933",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 183.95093092(94), equal to AME2012 (183.950930916)"
+      }
      }
     },
     {
@@ -11564,21 +11953,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "28.43"
      },
      "mass": {
       "value": 185.95436514,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "185.954365",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "185.954365",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 185.9543628(17), equal to AME2012 (185.954362771)"
+      }
      }
     },
     {
@@ -11589,21 +11981,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "26.50"
      },
      "mass": {
       "value": 181.948205636,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "181.948206",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "181.948206",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 181.94820394(91), equal to AME2012 (181.948203945)"
+      }
      }
     },
     {
@@ -11614,21 +12009,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "14.31"
      },
      "mass": {
       "value": 182.950224416,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "182.950224",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "182.950224",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 182.95022275(90), equal to AME2012 (182.950222748)"
+      }
      }
     },
     {
@@ -11639,21 +12037,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.12"
      },
      "mass": {
       "value": 179.946713304,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "179.946713",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "179.946713",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 179.9467108(20), equal to AME2012 (179.946710805)"
+      }
      }
     }
    ],
@@ -11740,21 +12141,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "62.60"
      },
      "mass": {
       "value": 186.955752217,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "186.955752",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "186.955752",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 186.9557501(16), equal to AME2012 (186.955750071)"
+      }
      }
     },
     {
@@ -11765,21 +12169,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "37.40"
      },
      "mass": {
       "value": 184.95295832,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "184.952958",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "184.952958",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 184.9529545(13), equal to AME2012 (184.952954486)"
+      }
      }
     }
    ],
@@ -11869,21 +12276,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "40.78"
      },
      "mass": {
       "value": 191.961478765,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "191.961479",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "191.961479",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 191.9614770(29), equal to AME2012 (191.961476998)"
+      }
      }
     },
     {
@@ -11894,21 +12304,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "26.26"
      },
      "mass": {
       "value": 189.958445442,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "189.958445",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "189.958445",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 189.9584437(17), equal to AME2012 (189.958443702)"
+      }
      }
     },
     {
@@ -11919,21 +12332,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "16.15"
      },
      "mass": {
       "value": 188.958145949,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "188.958146",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "188.958146",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 188.9581442(17), equal to AME2012 (188.958144162)"
+      }
      }
     },
     {
@@ -11944,21 +12360,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "13.24"
      },
      "mass": {
       "value": 187.955837292,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "187.955837",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "187.955837",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 187.9558352(16), equal to AME2012 (187.955835174)"
+      }
      }
     },
     {
@@ -11969,21 +12388,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "1.96"
      },
      "mass": {
       "value": 186.955749569,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "186.955750",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "186.955750",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 186.9557474(16), equal to AME2012 (186.955747422)"
+      }
      }
     },
     {
@@ -11994,21 +12416,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "1.59"
      },
      "mass": {
       "value": 185.953837569,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "185.953838",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "185.953838",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 185.9538350(16), equal to AME2012 (185.953835044)"
+      }
      }
     },
     {
@@ -12019,21 +12444,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.02"
      },
      "mass": {
       "value": 183.952492919,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "183.952493",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "183.952493",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 183.9524885(14), equal to AME2012 (183.952488536)"
+      }
      }
     }
    ],
@@ -12132,15 +12560,17 @@
      },
      "mass": {
       "value": 192.962923753,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "192.962924",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "192.962924",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 192.9629216(21), equal to AME2012 (192.962921587)"
+      }
      }
     },
     {
@@ -12158,15 +12588,17 @@
      },
      "mass": {
       "value": 190.960591455,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "190.960591",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "190.960591",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 190.9605893(21), equal to AME2012 (190.960589293)"
+      }
      }
     }
    ],
@@ -12258,21 +12690,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "33.775"
      },
      "mass": {
       "value": 194.964794325,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "194.964794",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "194.964794",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 194.9647917(10), equal to AME2012 (194.964791719)"
+      }
      }
     },
     {
@@ -12283,21 +12718,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "32.864"
      },
      "mass": {
       "value": 193.962683498,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "193.962683",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "193.962683",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 193.9626809(10), equal to AME2012 (193.962680850)"
+      }
      }
     },
     {
@@ -12308,21 +12746,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "25.211"
      },
      "mass": {
       "value": 195.964954648,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "195.964955",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "195.964955",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 195.96495209(99), equal to AME2012 (195.964952091)"
+      }
      }
     },
     {
@@ -12333,21 +12774,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "7.356"
      },
      "mass": {
       "value": 197.967896718,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "197.967897",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "197.967897",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 197.9678949(23), equal to AME2012 (197.967894920)"
+      }
      }
     },
     {
@@ -12358,21 +12802,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.782"
      },
      "mass": {
       "value": 191.961042667,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "191.961043",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "191.961043",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 191.9610387(32), equal to AME2012 (191.961038746)"
+      }
      }
     },
     {
@@ -12383,21 +12830,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.012"
      },
      "mass": {
       "value": 189.959949823,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "189.959950",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "189.959950",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 189.9599297(63), equal to AME2012 (189.959929707)"
+      }
      }
     }
    ],
@@ -12466,16 +12916,18 @@
     "pubchem"
    ],
    "atomic_weight": {
-    "value": 196.966569,
-    "status": "unverified",
+    "value": 196.96657,
+    "status": "partial",
     "refs": [
-     "mendeleev"
-    ],
-    "text": "196.966569",
-    "agree": [
      "ciaaw-weights",
      "pubchem"
-    ]
+    ],
+    "text": "196.966570(4)",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 196.966569(5), identical to the CIAAW 2013 table"
+    }
    },
    "isotopes": [
     {
@@ -12486,21 +12938,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 196.966570103,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "196.966570",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "196.966570",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 196.96656879(71), equal to AME2012 (196.966568786)"
+      }
      }
     }
    ],
@@ -12581,15 +13036,13 @@
      "mass_number": 202,
      "abundance": {
       "value": 29.74,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "29.74",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "29.74"
      },
      "mass": {
       "value": 201.970643604,
@@ -12606,15 +13059,13 @@
      "mass_number": 200,
      "abundance": {
       "value": 23.14,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "23.14",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "23.14"
      },
      "mass": {
       "value": 199.968326941,
@@ -12631,15 +13082,13 @@
      "mass_number": 199,
      "abundance": {
       "value": 16.94,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "16.94",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "16.94"
      },
      "mass": {
       "value": 198.968280994,
@@ -12656,15 +13105,13 @@
      "mass_number": 201,
      "abundance": {
       "value": 13.17,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "13.17",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "13.17"
      },
      "mass": {
       "value": 200.970303054,
@@ -12681,15 +13128,13 @@
      "mass_number": 198,
      "abundance": {
       "value": 10.04,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "10.04",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "10.04"
      },
      "mass": {
       "value": 197.966769177,
@@ -12706,15 +13151,13 @@
      "mass_number": 204,
      "abundance": {
       "value": 6.82,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "6.82",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "6.82"
      },
      "mass": {
       "value": 203.973494037,
@@ -12735,7 +13178,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.15"
      },
@@ -12831,21 +13275,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[29.44, 29.59]"
      },
      "mass": {
       "value": 202.972344098,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "202.972344",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "202.972344",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 202.9723446(14), equal to AME2012 (202.972344593)"
+      }
      }
     },
     {
@@ -12856,7 +13303,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[70.41, 70.56]"
      },
@@ -12934,12 +13382,17 @@
    ],
    "atomic_weight": {
     "value": null,
-    "status": "unverified",
+    "status": "partial",
     "refs": [
      "ciaaw-weights",
      "pubchem"
     ],
     "text": "[206.14, 207.94]",
+    "older": {
+     "source": "nist-srd144",
+     "edition": "ciaaw-weights-2013",
+     "evidence": "NIST SRD 144 shows 207.2(1), identical to the CIAAW 2013 table"
+    },
     "note": "interval: the value depends on the source of the material"
    },
    "isotopes": [
@@ -12951,7 +13404,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0, 1.58]"
      },
@@ -12974,7 +13428,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[1.9, 86.73]"
      },
@@ -12997,7 +13452,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[0.35, 23.51]"
      },
@@ -13020,7 +13476,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "[3.38, 97.75]"
      },
@@ -13117,7 +13574,8 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
@@ -13691,48 +14149,51 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "99.98"
      },
      "mass": {
       "value": 232.038053606,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "232.038054",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "232.038054",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 232.0380558(21), equal to AME2012 (232.038055760)"
+      }
      }
     },
     {
      "mass_number": 230,
      "abundance": {
       "value": 0.02,
-      "status": "unverified",
+      "status": "verified",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "0.02",
-      "agree": [
        "ciaaw-abundances",
-       "iaea-livechart"
-      ]
+       "iaea-livechart",
+       "nubase2020"
+      ],
+      "text": "0.02"
      },
      "mass": {
       "value": 230.033132267,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "230.033132",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "230.033132",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 230.0331341(19), equal to AME2012 (230.033134130)"
+      }
      }
     }
    ],
@@ -13817,21 +14278,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "100"
      },
      "mass": {
       "value": 231.0358825,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "231.035883",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "231.035882",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 231.0358842(24), equal to AME2012 (231.035884243)"
+      }
      }
     }
    ],
@@ -13915,21 +14379,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "99.2742"
      },
      "mass": {
       "value": 238.050786936,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "238.050787",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "238.050787",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 238.0507884(20), equal to AME2012 (238.050788423)"
+      }
      }
     },
     {
@@ -13940,21 +14407,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.7204"
      },
      "mass": {
       "value": 235.043928117,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "235.043928",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "235.043928",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 235.0439301(19), equal to AME2012 (235.043930131)"
+      }
      }
     },
     {
@@ -13965,21 +14435,24 @@
       "refs": [
        "ciaaw-abundances",
        "nist-srd144",
-       "iaea-livechart"
+       "iaea-livechart",
+       "nubase2020"
       ],
       "text": "0.0054"
      },
      "mass": {
       "value": 234.040950296,
-      "status": "unverified",
+      "status": "partial",
       "refs": [
-       "mendeleev"
-      ],
-      "text": "234.040950",
-      "agree": [
        "ame2020",
        "iaea-livechart"
-      ]
+      ],
+      "text": "234.040950",
+      "older": {
+       "source": "nist-srd144",
+       "edition": "ame2012",
+       "evidence": "NIST SRD 144 shows 234.0409523(19), equal to AME2012 (234.040952306)"
+      }
      }
     }
    ],

@@ -37,6 +37,9 @@ citation = "F. G. Kondev, M. Wang, W. J. Huang, S. Naimi, G. Audi, The NUBASE202
 url = "https://www-nds.iaea.org/amdc/ame2020/nubase_4.mas20.txt"
 file = "nubase2020.csv"
 
+# NUBASE2020 also tabulates isotopic abundances (taken from IUPAC); for abundances
+# it serves as a secondary compilation.
+
 [nist-asd]
 kind = "primary"
 short = "NIST ASD 5.12"
@@ -47,7 +50,9 @@ file = "nist_asd_ground.csv"
 [nist-srd144]
 kind = "secondary"
 short = "NIST SRD 144"
-citation = "J. S. Coursey, D. J. Schwab, J. J. Tsai, R. A. Dragoset, Atomic Weights and Isotopic Compositions with Relative Atomic Masses, NIST Standard Reference Database 144, National Institute of Standards and Technology, Gaithersburg, MD."
+citation = "J. S. Coursey, D. J. Schwab, J. J. Tsai, R. A. Dragoset, Atomic Weights and Isotopic Compositions with Relative Atomic Masses (version 4.1, July 2015), NIST Standard Reference Database 144, National Institute of Standards and Technology, Gaithersburg, MD."
+# Per its version history, v4.1 uses AME2012 masses, CIAAW 2013 atomic weights,
+# and CIAAW 2009 isotopic compositions.
 url = "https://www.nist.gov/pml/atomic-weights-and-isotopic-compositions-relative-atomic-masses"
 file = "nist_srd144.csv"
 
@@ -95,3 +100,34 @@ kind = "primary"
 short = "IUPAC"
 citation = "IUPAC Periodic Table of the Elements (version 4 May 2022), International Union of Pure and Applied Chemistry. Used for atomic number, group, period, and block, which are definitions rather than measured values."
 url = "https://iupac.org/what-we-do/periodic-table-of-elements/"
+
+# ---------------------------------------------------------------------------
+# Older editions: evidence that a compilation reproduces an earlier evaluation
+# ---------------------------------------------------------------------------
+
+[ciaaw-weights-2013]
+kind = "evidence"
+short = "CIAAW 2013"
+citation = "CIAAW, Standard Atomic Weights (2013 edition), www.ciaaw.org, as archived by the Internet Archive on 2015-02-08; J. Meija et al., Atomic weights of the elements 2013 (IUPAC Technical Report), Pure Appl. Chem. 2016, 88, 265–291."
+url = "https://web.archive.org/web/2015/http://www.ciaaw.org/atomic-weights.htm"
+file = "ciaaw_weights_2013.csv"
+
+[ciaaw-abundances-2009]
+kind = "evidence"
+short = "CIAAW 2009"
+citation = "CIAAW, Isotopic Compositions of the Elements (2009 edition), www.ciaaw.org, as archived by the Internet Archive in 2014; M. Berglund, M. E. Wieser, Isotopic compositions of the elements 2009 (IUPAC Technical Report), Pure Appl. Chem. 2011, 83, 397–410."
+url = "https://web.archive.org/web/2014/http://www.ciaaw.org/isotopic-abundances.htm"
+file = "ciaaw_abundances_2009.csv"
+
+[ame2012]
+kind = "evidence"
+short = "AME2012"
+citation = "M. Wang, G. Audi, A. H. Wapstra, F. G. Kondev, M. MacCormick, X. Xu, B. Pfeiffer, The Ame2012 atomic mass evaluation (II), Chin. Phys. C 2012, 36, 1603–2014."
+url = "https://amdc.impcas.ac.cn/masstables/Ame2012/mass.mas12"
+file = "ame2012_masses.csv"
+
+[ciaaw-history]
+kind = "evidence"
+short = "CIAAW element pages"
+citation = "CIAAW, per-element pages describing past standard atomic weights, www.ciaaw.org."
+file = "ciaaw_history.csv"
