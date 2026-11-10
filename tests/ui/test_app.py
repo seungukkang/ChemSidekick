@@ -59,6 +59,16 @@ def test_xyz_shows_3d_viewer(app):
     assert "3Dmol" in viewers[0].proto.srcdoc
 
 
+def test_stereo_shows_drawing_and_3d(app):
+    app.button(key="tool-stereo").click().run()
+    app.text_input(key="in-stereo-smiles").input("CCC(Br)C")
+    app.button(key="FormSubmitter:form-stereo-Run").click().run()
+    assert not app.exception
+    assert any("2 stereoisomers" in m.value for m in app.markdown)
+    assert len(app.get("image")) == 1  # the 2D grid
+    assert len(app.get("iframe")) == 1  # the 3D viewer
+
+
 def test_search_hides_non_matching_tools(app):
     app.text_input[0].input("zzzz").run()
     assert not any(b.key and "tool-element" in b.key for b in app.button)

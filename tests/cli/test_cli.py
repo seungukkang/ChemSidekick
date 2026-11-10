@@ -162,3 +162,20 @@ def test_xyz_opens_browser_unless_no_open(monkeypatch):
     runner.invoke(app, ["xyz"], input=WATER)
     runner.invoke(app, ["xyz", "--no-open"], input=WATER)
     assert len(opened) == 1 and opened[0].endswith("viewer.html")
+
+
+def test_stereo_runs_in_a_subprocess_and_writes_files():
+    result = runner.invoke(app, ["stereo", "CC(Br)C(Br)C", "--no-open", "--json"])
+    assert result.exit_code == 0, result.output
+    data = json.loads(result.stdout)
+    assert data["answer"] == "3 stereoisomers (1 pair of enantiomers, 1 meso)"
+    assert {a["kind"] for a in data["artifacts"]} == {"svg", "sdf", "html"}
+
+
+def test_stereo_max_flag_and_bad_smiles():
+    ok = runner.invoke(app, ["stereo", "CC(O)C(O)C(O)C", "--max", "2", "--no-3d", "--no-open"])
+    assert ok.exit_code == 0, ok.output
+    assert "first 2 of up to" in ok.stdout
+    bad = runner.invoke(app, ["stereo", "C1CC", "--no-open"])
+    assert bad.exit_code == 1
+    assert "ring is opened but never closed" in bad.stderr

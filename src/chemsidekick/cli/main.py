@@ -81,7 +81,8 @@ def _parameter(name: str, field: FieldInfo) -> inspect.Parameter:
     if extra.get("positional"):
         info = typer.Argument(default, show_default=False, **common)
     else:
-        flags = [f"--{name.replace('_', '-')}"]
+        # json_schema_extra={"flag": "--max"} replaces the name derived from the field.
+        flags = [str(extra.get("flag") or f"--{name.replace('_', '-')}")]
         if extra.get("short"):
             flags.append(str(extra["short"]))
         info = typer.Option(default, *flags, **common)
