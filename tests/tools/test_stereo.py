@@ -151,7 +151,7 @@ def _drawn(smiles: str):
 
     from chemsidekick.tools.structure.stereo import _with_shared_layout, enumerate_isomers
 
-    isomers, _ = enumerate_isomers(Chem.MolFromSmiles(smiles), 8, False)
+    isomers, _, _ = enumerate_isomers(Chem.MolFromSmiles(smiles), 8, False)
     return isomers, _with_shared_layout(isomers)
 
 
@@ -206,3 +206,90 @@ def test_3d_frames_carry_locants_and_stereo_marks():
     assert frame.comment == "#3 · meso · (2R,3r,4S)"
     for m in frame.marks:
         assert frame.symbols[m.atoms[0]] == "C"
+
+
+# --- meso, achiral and chiral: checked against the known sets ------------------
+
+GIVEN = "chiral (enantiomer not shown)"
+
+
+def kinds(result) -> dict[str, int]:
+    """Relation counts; enantiomer pairs counted once as 'pair'."""
+    out: dict[str, int] = {}
+    for i in result.data["isomers"]:
+        key = "pair" if i["relation"].startswith("enantiomer of") else i["relation"]
+        out[key] = out.get(key, 0) + 1
+    if "pair" in out:
+        out["pair"] //= 2
+    return out
+
+
+@pytest.mark.parametrize(
+    ("smiles", "expected"),
+    [
+        # Fully specified: meso is decided by the whole set, not by the one isomer shown.
+        ("C[C@H](Br)[C@@H](C)Br", {"meso": 1}),  # meso-2,3-dibromobutane
+        ("C[C@@H](Br)[C@@H](C)Br", {GIVEN: 1}),  # (2R,3R)
+        ("O=C(O)[C@@H](O)[C@@H](O)C(=O)O", {"meso": 1}),  # meso-tartaric acid
+        ("O=C(O)[C@@H](O)[C@H](O)C(=O)O", {GIVEN: 1}),  # (R,R)- or (S,S)-tartaric acid
+        ("C[C@H](O)C[C@@H](C)O", {"meso": 1}),  # (2R,4S)-pentane-2,4-diol
+        ("C[C@H](O)[C@@H](O)[C@@H](C)O", {"meso": 1}),  # (2R,3r,4S)-pentane-2,3,4-triol
+        ("O[C@@H]1CCCC[C@@H]1O", {"meso": 1}),  # cis-cyclohexane-1,2-diol
+        ("O[C@H]1CCCC[C@@H]1O", {GIVEN: 1}),  # trans-cyclohexane-1,2-diol
+        ("C[C@@H]1CCC[C@H](C)C1", {"meso": 1}),  # cis-1,3-dimethylcyclohexane
+        ("C[C@H]1CCC[C@H](C)C1", {GIVEN: 1}),  # trans-1,3-dimethylcyclohexane
+        # Achiral, and no chiral member in the set: not meso.
+        ("C[C@H]1CC[C@@H](C)CC1", {"achiral": 1}),  # cis-1,4-dimethylcyclohexane
+        ("CC1CC(C)C1", {"achiral": 2}),  # cis/trans-1,3-dimethylcyclobutane
+        ("C1CCC2CCCCC2C1", {"achiral": 2}),  # cis/trans-decalin
+        ("OC1CC(O)CC(O)C1", {"achiral": 2}),  # cyclohexane-1,3,5-triols
+        ("CC=CC=CC", {"achiral": 3}),  # (2E,4E), (2E,4Z), (2Z,4Z)-hexa-2,4-diene
+        # Full sets.
+        ("CC1CC1C", {"meso": 1, "pair": 1}),  # 1,2-dimethylcyclopropane
+        ("CC1CCC(C)N1", {"meso": 1, "pair": 1}),  # 2,5-dimethylpyrrolidine
+        ("OCC(O)C(O)C(O)CO", {"meso": 2, "pair": 1}),  # pentitols
+        ("CC(O)C=CC(O)C", {"meso": 2, "pair": 2}),  # hex-3-ene-2,5-diol
+        ("CC=CC(O)C=CC", {"achiral": 2, "pair": 1}),  # EE, ZZ (C4 not stereogenic); EZ pair
+    ],
+)
+def test_relations_match_the_known_sets(smiles, expected):
+    assert kinds(run(smiles, skip_3d=True)) == expected
+
+
+def test_hexitols_and_inositols():
+    # Hexitols: allitol and galactitol are meso, plus 4 pairs (10 in all).
+    assert kinds(run("OCC(O)C(O)C(O)C(O)CO", max_isomers=32, skip_3d=True)) == {
+        "meso": 2,
+        "pair": 4,
+    }
+    # Inositols: 9 stereoisomers, 7 meso (myo, scyllo, ...) and the chiro pair.
+    assert kinds(run("OC1C(O)C(O)C(O)C(O)C1O", max_isomers=64, skip_3d=True)) == {
+        "meso": 7,
+        "pair": 1,
+    }
+
+
+def test_complete_lists_show_the_exact_count():
+    r = run("CC(O)C(O)C(O)C", skip_3d=True)  # RDKit's upper bound is 8; there are 4
+    assert r.data["complete"] and r.data["possible"] == 8
+    labels = [h.label for h in r.highlights]
+    assert "Stereoisomers" in labels and "Upper bound" not in labels
+    assert next(h.value for h in r.highlights if h.label == "Stereoisomers") == "4"
+
+
+def test_a_list_cut_at_the_maximum_says_so():
+    r = run("CC(O)C(O)C(O)C", max_isomers=2, skip_3d=True)
+    assert not r.data["complete"]
+    assert r.answer.startswith("2 stereoisomers shown (more exist)")
+    assert {h.label: h.value for h in r.highlights}["Upper bound"] == "8"
+    # Exactly the maximum, and nothing more: complete, no warning.
+    r = run("CC(O)C(O)C(O)C", max_isomers=4, skip_3d=True)
+    assert r.data["complete"] and not any("first" in w for w in r.warnings)
+
+
+def test_centers_without_a_cip_label_are_reported():
+    # cis,cis,trans-cyclohexane-1,3,5-triol: RDKit labels one of its three centers.
+    r = run("OC1CC(O)CC(O)C1", skip_3d=True)
+    warnings = [w for w in r.warnings if "CIP labeler gave no" in w]
+    assert len(warnings) == 1 and "incomplete" in warnings[0]
+    assert not [w for w in run("CC(O)C(O)C(O)C", skip_3d=True).warnings if "CIP" in w]

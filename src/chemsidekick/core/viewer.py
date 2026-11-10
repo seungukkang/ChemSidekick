@@ -119,14 +119,10 @@ if (typeof $3Dmol === "undefined") {
   const viewer = $3Dmol.createViewer($("view"), {backgroundColor: "white"});
   let current = DATA.start_frame, timer = null;
 
-  function numberOf(f, i) { return f.numbers.length ? f.numbers[i] : String(i + 1); }
-
-  // Atom numbers, except on atoms that carry a stereo mark while marks are shown:
-  // there the number goes into the mark itself ("2R"), drawn on the atom.
-  function drawNumbers(f, skip) {
+  function drawNumbers(f) {
     f.coords.forEach((c, i) => {
-      const text = numberOf(f, i);
-      if (!text || skip.has(i)) return;
+      const text = f.numbers.length ? f.numbers[i] : String(i + 1);
+      if (!text) return;
       viewer.addLabel(text, {
         position: pt(c), alignment: "center", font: FONT, fontSize: 13,
         fontColor: "#111827", backgroundColor: "#ffffff", backgroundOpacity: 0.95,
@@ -136,25 +132,20 @@ if (typeof $3Dmol === "undefined") {
   }
 
   // Stereo marks exactly on the stereocenter (or the middle of the double bond).
-  function drawMarks(f, withNumbers) {
+  function drawMarks(f) {
     f.marks.forEach((m) => {
       const color = markColor(m.label);
       const a = f.coords[m.atoms[0]];
-      let at = a, number = withNumbers ? numberOf(f, m.atoms[0]) : "";
+      let at = a;
       if (m.atoms.length === 2) {
         const b = f.coords[m.atoms[1]];
         at = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2];
         viewer.addCylinder({start: pt(a), end: pt(b), radius: 0.32, color: color,
                             opacity: 0.35, fromCap: 1, toCap: 1});
-        if (withNumbers) {
-          // A double bond takes the lower of its two numbers, as in (3E).
-          const ns = m.atoms.map((i) => numberOf(f, i)).filter((t) => t !== "");
-          number = ns.length ? ns.reduce((x, y) => (Number(y) < Number(x) ? y : x)) : "";
-        }
       } else {
         viewer.addSphere({center: pt(a), radius: 0.7, color: color, opacity: 0.3});
       }
-      viewer.addLabel(number + m.label, {
+      viewer.addLabel(m.label, {
         position: pt(at), alignment: "center", font: FONT, fontSize: 15,
         bold: true, fontColor: "#ffffff", backgroundColor: color, backgroundOpacity: 0.95,
         padding: 3, inFront: true,
@@ -170,12 +161,10 @@ if (typeof $3Dmol === "undefined") {
     viewer.removeAllLabels();
     viewer.addModel(xyzText(f), "xyz");
     viewer.setStyle({}, STYLES[$("style").value]);
-    const showNumbers = pressed($("numbers"));
+    // Numbers and stereo marks are shown one at a time, never on top of each other.
     const showMarks = hasMarks && pressed($("marks"));
-    const marked = new Set(showMarks ? f.marks.filter((m) => m.atoms.length === 1)
-                                           .map((m) => m.atoms[0]) : []);
-    if (showNumbers) drawNumbers(f, marked);
-    if (showMarks) drawMarks(f, showNumbers);
+    if (pressed($("numbers"))) drawNumbers(f);
+    if (showMarks) drawMarks(f);
     $("legend").style.display = showMarks ? "inline-flex" : "none";
     if (view) viewer.setView(view); else { viewer.zoomTo(); viewer.zoom(1.4); }
     viewer.render();
@@ -204,10 +193,19 @@ if (typeof $3Dmol === "undefined") {
   $("style").value = DATA.style;
   $("numbers").textContent = DATA.numbers_name;
   setPressed($("numbers"), DATA.labels);
-  if (hasMarks) { $("marks").style.display = ""; setPressed($("marks"), DATA.marks_shown); }
+  if (hasMarks) {
+    $("marks").style.display = "";
+    setPressed($("marks"), DATA.marks_shown && !DATA.labels);
+  }
   $("style").onchange = () => draw(true);
-  [$("numbers"), $("marks")].forEach((b) => {
-    b.onclick = () => { setPressed(b, !pressed(b)); draw(true); };
+  // One at a time: turning one on turns the other off.
+  [[$("numbers"), $("marks")], [$("marks"), $("numbers")]].forEach(([b, other]) => {
+    b.onclick = () => {
+      const on = !pressed(b);
+      setPressed(b, on);
+      if (on) setPressed(other, false);
+      draw(true);
+    };
   });
   $("reset").onclick = () => { viewer.zoomTo(); viewer.zoom(1.4); viewer.render(); };
 

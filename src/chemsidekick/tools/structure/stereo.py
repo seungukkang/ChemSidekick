@@ -99,19 +99,21 @@ def _timeout(inp: StereoInput) -> float:
 )
 def stereo(inp: StereoInput) -> ToolResult:
     mol, reading = read_structure(inp.smiles)
-    isomers, possible = enumerate_isomers(mol, inp.max_isomers, inp.enumerate_all)
+    isomers, possible, complete = enumerate_isomers(mol, inp.max_isomers, inp.enumerate_all)
     numbering = number_isomers(isomers)
+    chiral_in_set = set_has_chiral_member(mol, isomers)
     for iso in isomers:
-        iso.relation = relation_of(iso, isomers)
+        iso.relation = relation_of(iso, isomers, chiral_in_set)
     warnings = [reading] if reading else []
-    if possible > len(isomers) and len(isomers) == inp.max_isomers:
+    if not complete:
         warnings.append(
             f"Showing the first {len(isomers)} of up to {possible} stereoisomers. "
             "Raise the maximum (--max) to see more; this takes longer."
         )
+    warnings += unlabeled_center_warnings(isomers)
     if not inp.skip_3d:
         warnings += embed_all(isomers)
-    return _result(inp, mol, isomers, possible, warnings, numbering)
+    return _result(inp, mol, isomers, possible, complete, warnings, numbering)
 
 
 # ---------------------------------------------------------------------------
@@ -203,7 +205,7 @@ class Isomer:
     mol: object  # rdkit Mol (no hydrogens)
     smiles: str
     stereo: list  # CIP stereo elements: ((atom,), "R") or ((atom1, atom2), "E")
-    has_tetrahedral: bool
+    has_tetrahedral: bool  # has tetrahedral stereocenters (even if CIP gave no label)
     mirror_smiles: str
     labels: str = "—"  # stereodescriptors, e.g. "(2R,3s,4S)"
     locants: dict[int, int] | None = None  # atom index -> IUPAC locant (None: atom numbers)
@@ -265,7 +267,31 @@ def mirror_image(mol):
     return m
 
 
-def enumerate_isomers(mol, max_isomers: int, enumerate_all: bool) -> tuple[list[Isomer], int]:
+def _tetrahedral_centers(m) -> list[int]:
+    from rdkit import Chem
+
+    tetrahedral = (Chem.ChiralType.CHI_TETRAHEDRAL_CW, Chem.ChiralType.CHI_TETRAHEDRAL_CCW)
+    return [a.GetIdx() for a in m.GetAtoms() if a.GetChiralTag() in tetrahedral]
+
+
+def _isomer(k: int, m) -> Isomer:
+    from rdkit import Chem
+
+    Chem.AssignStereochemistry(m, cleanIt=True, force=True)
+    return Isomer(
+        number=k,
+        mol=m,
+        smiles=Chem.MolToSmiles(m),
+        stereo=stereo_elements(m),
+        has_tetrahedral=bool(_tetrahedral_centers(m)),
+        mirror_smiles=Chem.MolToSmiles(mirror_image(m)),
+    )
+
+
+def enumerate_isomers(mol, max_isomers: int, enumerate_all: bool) -> tuple[list[Isomer], int, bool]:
+    """Stereoisomers (at most max_isomers), RDKit's upper bound on their number,
+    and whether the list is complete (one more than the maximum is asked for, so a
+    full list is known to be full)."""
     from rdkit import Chem
     from rdkit.Chem.EnumerateStereoisomers import (
         EnumerateStereoisomers,
@@ -277,42 +303,89 @@ def enumerate_isomers(mol, max_isomers: int, enumerate_all: bool) -> tuple[list[
         mol = Chem.Mol(mol)
         Chem.RemoveStereochemistry(mol)
     options = StereoEnumerationOptions(
-        onlyUnassigned=True, unique=True, maxIsomers=max_isomers, tryEmbedding=False
+        onlyUnassigned=True, unique=True, maxIsomers=max_isomers + 1, tryEmbedding=False
     )
     possible = GetStereoisomerCount(mol, options=options)
-    isomers = []
-    for k, m in enumerate(EnumerateStereoisomers(mol, options=options), start=1):
+    found = list(EnumerateStereoisomers(mol, options=options))
+    complete = len(found) <= max_isomers
+    isomers = [_isomer(k, m) for k, m in enumerate(found[:max_isomers], start=1)]
+    return isomers, possible, complete
+
+
+# The search for a chiral member of the full set stops at the first one found;
+# this only limits sets in which every member is achiral.
+CHIRAL_SEARCH_LIMIT = 4096
+
+
+def set_has_chiral_member(mol, isomers: list[Isomer]) -> bool:
+    """Does the full set of stereoisomers of this constitution contain a chiral one?
+
+    The isomers shown are not always the full set: centers given in the SMILES are
+    kept, and the list can be cut at the maximum. So "meso" cannot be decided from
+    the list alone; e.g. meso-2,3-dibromobutane entered with both centers given is
+    the only isomer shown, but its set also holds the chiral (2R,3R) and (2S,3S).
+    """
+    from rdkit import Chem
+    from rdkit.Chem.EnumerateStereoisomers import (
+        EnumerateStereoisomers,
+        StereoEnumerationOptions,
+    )
+
+    if any(i.mirror_smiles != i.smiles for i in isomers):
+        return True
+    if not any(i.has_tetrahedral for i in isomers):
+        return False  # without stereocenters there is nothing to call meso
+    bare = Chem.Mol(mol)
+    Chem.RemoveStereochemistry(bare)
+    options = StereoEnumerationOptions(
+        onlyUnassigned=True, unique=True, maxIsomers=CHIRAL_SEARCH_LIMIT, tryEmbedding=False
+    )
+    for m in EnumerateStereoisomers(bare, options=options):
         Chem.AssignStereochemistry(m, cleanIt=True, force=True)
-        has_tet = any(
-            a.GetChiralTag()
-            in (Chem.ChiralType.CHI_TETRAHEDRAL_CW, Chem.ChiralType.CHI_TETRAHEDRAL_CCW)
-            for a in m.GetAtoms()
-        )
-        isomers.append(
-            Isomer(
-                number=k,
-                mol=m,
-                smiles=Chem.MolToSmiles(m),
-                stereo=stereo_elements(m),
-                has_tetrahedral=has_tet,
-                mirror_smiles=Chem.MolToSmiles(mirror_image(m)),
-            )
-        )
-    return isomers, possible
+        if Chem.MolToSmiles(mirror_image(m)) != Chem.MolToSmiles(m):
+            return True
+    return False
 
 
-def relation_of(iso: Isomer, isomers: list[Isomer]) -> str:
-    """How an isomer relates to its own mirror image."""
+def relation_of(iso: Isomer, isomers: list[Isomer], chiral_in_set: bool) -> str:
+    """How an isomer relates to its own mirror image.
+
+    IUPAC (Gold Book): meso = an achiral member of a set of diastereoisomers that
+    also includes chiral members. It has stereocenters but is its own mirror image.
+    """
     if iso.mirror_smiles == iso.smiles:
-        # IUPAC: meso = an achiral member of a set of diastereoisomers that also
-        # includes chiral members (it has stereocenters, but is its own mirror image).
-        has_center = any(len(atoms) == 1 for atoms, _ in iso.stereo)
-        chiral_in_set = any(o.mirror_smiles != o.smiles for o in isomers)
-        return "meso" if has_center and chiral_in_set else "achiral"
+        return "meso" if iso.has_tetrahedral and chiral_in_set else "achiral"
     partner = next((o for o in isomers if o.smiles == iso.mirror_smiles), None)
     if partner:
         return f"enantiomer of #{partner.number}"
     return "chiral (enantiomer not shown)"
+
+
+def unlabeled_center_warnings(isomers: list[Isomer]) -> list[str]:
+    """Stereocenters that RDKit's CIP labeler left without a descriptor.
+
+    Seen for some rings with several pseudoasymmetric centers (e.g. cis,cis,trans-
+    cyclohexane-1,3,5-triol: one of the three centers is labeled, and which one
+    depends on the atom order of the input). The structures are right; only the
+    descriptors are incomplete, so this is said rather than hidden.
+    """
+    out = []
+    for iso in isomers:
+        labeled = {atoms[0] for atoms, _ in iso.stereo if len(atoms) == 1}
+        missing = [i for i in _tetrahedral_centers(iso.mol) if i not in labeled]
+        if not missing:
+            continue
+        where = ", ".join(
+            f"C{iso.locants[i]}" if iso.locants and i in iso.locants else f"atom {i + 1}"
+            for i in missing
+        )
+        out.append(
+            f"Isomer #{iso.number}: RDKit's CIP labeler gave no R/S or r/s descriptor for "
+            f"the stereocenter{'s' if len(missing) > 1 else ''} at {where}. Its "
+            "stereodescriptors are incomplete, and which centers get a label can depend "
+            "on the atom order of the input. The 2D and 3D structures are correct."
+        )
+    return out
 
 
 def pair_relation(a: Isomer, b: Isomer) -> str:
@@ -517,7 +590,7 @@ def _write_files(isomers: list[Isomer]) -> list[Artifact]:
     return artifacts
 
 
-def _summary(isomers: list[Isomer]) -> str:
+def _summary(isomers: list[Isomer], complete: bool) -> str:
     n = len(isomers)
     pairs = sum(1 for i in isomers if i.relation.startswith("enantiomer of")) // 2
     meso = sum(1 for i in isomers if i.relation == "meso")
@@ -530,10 +603,14 @@ def _summary(isomers: list[Isomer]) -> str:
     if achiral and n > 1:
         parts.append(f"{achiral} achiral")
     head = f"{n} stereoisomer{'s' if n > 1 else ''}"
+    if not complete:
+        head += " shown (more exist)"
     return f"{head} ({', '.join(parts)})" if parts else head
 
 
-def _result(inp, mol, isomers, possible, warnings, numbering: NumberingNote) -> ToolResult:
+def _result(
+    inp, mol, isomers, possible, complete, warnings, numbering: NumberingNote
+) -> ToolResult:
     from rdkit import Chem
 
     if not isomers:
@@ -579,7 +656,7 @@ def _result(inp, mol, isomers, possible, warnings, numbering: NumberingNote) -> 
         )
 
     pairs = sum(1 for i in isomers if i.relation.startswith("enantiomer of")) // 2
-    answer = _summary(isomers)
+    answer = _summary(isomers, complete)
     if no_stereo:
         answer = "1 stereoisomer (no stereocenters or stereo double bonds)"
     assumptions = [
@@ -604,8 +681,14 @@ def _result(inp, mol, isomers, possible, warnings, numbering: NumberingNote) -> 
     return ToolResult(
         answer=answer,
         highlights=[
-            Highlight(label="Stereoisomers shown", value=str(len(isomers))),
-            Highlight(label="Possible (upper bound)", value=str(possible)),
+            *(
+                [Highlight(label="Stereoisomers", value=str(len(isomers)))]
+                if complete
+                else [
+                    Highlight(label="Stereoisomers shown", value=str(len(isomers))),
+                    Highlight(label="Upper bound", value=str(possible)),
+                ]
+            ),
             Highlight(label="Pairs of enantiomers", value=str(pairs)),
             Highlight(label="Meso", value=str(sum(1 for i in isomers if i.relation == "meso"))),
         ],
@@ -637,6 +720,7 @@ def _result(inp, mol, isomers, possible, warnings, numbering: NumberingNote) -> 
         ],
         data={
             "possible": possible,
+            "complete": complete,
             "isomers": [
                 {
                     "number": i.number,
