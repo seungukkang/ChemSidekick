@@ -118,3 +118,14 @@ def test_3d_is_reproducible():
     a = run("CC(Br)C(Br)C").structures[0].frames[0].coords
     b = run("CC(Br)C(Br)C").structures[0].frames[0].coords
     assert a == b
+
+
+def test_condensed_formula_input_is_converted_and_reported():
+    r = run("CH3–CH(OH)–CH=CH–CH(OH)–CH3", skip_3d=True)
+    assert r.answer == "6 stereoisomers (2 pairs of enantiomers, 2 meso)"
+    assert any("SMILES CC(O)C=CC(O)C" in w for w in r.warnings)
+
+
+def test_unconvertible_condensed_formula_explains_smiles():
+    with pytest.raises(ToolError, match="SMILES leaves hydrogens out"):
+        run("CH3-CO-CH3")

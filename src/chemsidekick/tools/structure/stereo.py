@@ -20,6 +20,7 @@ from dataclasses import dataclass, field
 
 from pydantic import BaseModel, Field
 
+from chemsidekick.chem.condensed import looks_condensed, to_smiles
 from chemsidekick.core.registry import tool
 from chemsidekick.core.runner import workdir
 from chemsidekick.core.schemas import (
@@ -45,7 +46,8 @@ LIMITATIONS = "Not handled in v0.1: axial chirality (atropisomers), planar chira
 class StereoInput(BaseModel):
     smiles: Smiles = Field(
         description="SMILES of the molecule, e.g. CC(Br)C(Br)C. Stereo marks (@, /, \\) "
-        "already in the SMILES are kept unless --enumerate-all is given.",
+        "already in the SMILES are kept unless --enumerate-all is given. Simple condensed "
+        "formulas such as CH3-CH(OH)-CH3 are also accepted.",
         json_schema_extra={"positional": True, "label": "SMILES"},
     )
     max_isomers: int = Field(
@@ -84,11 +86,11 @@ def _timeout(inp: StereoInput) -> float:
     icon="flip",
 )
 def stereo(inp: StereoInput) -> ToolResult:
-    mol = read_smiles(inp.smiles)
+    mol, reading = read_structure(inp.smiles)
     isomers, possible = enumerate_isomers(mol, inp.max_isomers, inp.enumerate_all)
     for iso in isomers:
         iso.relation = relation_of(iso, isomers)
-    warnings = []
+    warnings = [reading] if reading else []
     if possible > len(isomers) and len(isomers) == inp.max_isomers:
         warnings.append(
             f"Showing the first {len(isomers)} of up to {possible} stereoisomers. "
@@ -149,10 +151,32 @@ def read_smiles(smiles: str):
     finally:
         logger.handlers = saved
     if mol is None:
-        raise ToolError(f"Could not read the SMILES {smiles!r}: {_plain(capture.messages, smiles)}")
+        message = f"Could not read the SMILES {smiles!r}: {_plain(capture.messages, smiles)}"
+        if looks_condensed(smiles):
+            message += (
+                " It looks like a condensed formula, which could not be converted. "
+                "SMILES leaves hydrogens out: CH3–CH(OH)–CH3 is written CC(O)C."
+            )
+        raise ToolError(message)
     if mol.GetNumAtoms() == 0:
         raise ToolError("The SMILES has no atoms.")
     return mol
+
+
+def read_structure(text: str):
+    """SMILES, or a simple condensed formula (e.g. CH3–CH(OH)–CH3).
+
+    Returns the molecule and, if the text was read as a condensed formula, a
+    sentence saying so (shown to the user, since it is an interpretation).
+    """
+    from rdkit import Chem
+
+    if looks_condensed(text) and (smiles := to_smiles(text)):
+        return Chem.MolFromSmiles(smiles), (
+            f"Read as a condensed formula, not SMILES: {text.strip()} → SMILES {smiles} "
+            "(hydrogen count of every atom checked)."
+        )
+    return read_smiles(text), None
 
 
 # ---------------------------------------------------------------------------
