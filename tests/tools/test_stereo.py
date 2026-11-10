@@ -106,12 +106,46 @@ def test_3d_enantiomers_are_mirror_images_with_equal_energy():
 
 def test_files():
     r = run("CC(Br)C(Br)C")
-    kinds = {a.kind: a.path for a in r.artifacts}
-    assert "<svg" in kinds["svg"].read_text()
-    assert kinds["sdf"].read_text().count("$$$$") == 3
-    folder = kinds["svg"].parent / "isomers"
-    assert len(list(folder.glob("*.xyz"))) == 3
-    assert len(list(folder.glob("*.svg"))) == 3
+    drawings = [a for a in r.artifacts if a.kind == "svg"]
+    assert [a.title for a in drawings] == [
+        "#1 · meso",
+        "#2 · enantiomer of #3",
+        "#3 · enantiomer of #2",
+    ]
+    assert drawings[0].note == "C2 S, C4 R"
+    assert all("<svg" in a.path.read_text() for a in drawings)
+    sdf = next(a.path for a in r.artifacts if a.kind == "sdf")
+    assert sdf.read_text().count("$$$$") == 3
+    assert len(list((sdf.parent / "isomers").glob("*.xyz"))) == 3
+
+
+def _drawn(smiles: str):
+    from rdkit import Chem
+
+    from chemsidekick.tools.structure.stereo import _with_shared_layout, enumerate_isomers
+
+    isomers, _ = enumerate_isomers(Chem.MolFromSmiles(smiles), 8, False)
+    return isomers, _with_shared_layout(isomers)
+
+
+@pytest.mark.parametrize("smiles", ["CC(Br)C(Br)C", "CC(O)C=CC(O)C", "CC=CC"])
+def test_each_drawing_shows_its_own_stereochemistry(smiles):
+    from rdkit import Chem
+
+    isomers, drawn = _drawn(smiles)
+    for iso, m in zip(isomers, drawn, strict=True):
+        # Read the drawing back (2D coordinates + wedges) and compare.
+        back = Chem.MolFromMolBlock(Chem.MolToMolBlock(m))
+        assert Chem.MolToSmiles(back) == iso.smiles
+
+
+def test_same_e_z_isomers_share_a_layout():
+    isomers, drawn = _drawn("CC(O)C=CC(O)C")
+    pos = [m.GetConformer().GetPositions().tolist() for m in drawn]
+    e = [p for i, p in zip(isomers, pos, strict=True) if i.labels.endswith("E")]
+    z = [p for i, p in zip(isomers, pos, strict=True) if i.labels.endswith("Z")]
+    assert all(p == e[0] for p in e) and all(p == z[0] for p in z)
+    assert e[0] != z[0]
 
 
 def test_3d_is_reproducible():

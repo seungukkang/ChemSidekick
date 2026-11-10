@@ -65,7 +65,7 @@ def test_stereo_shows_drawing_and_3d(app):
     app.button(key="FormSubmitter:form-stereo-Run").click().run()
     assert not app.exception
     assert any("2 stereoisomers" in m.value for m in app.markdown)
-    assert len(app.get("image")) == 1  # the 2D grid
+    assert len(app.get("image")) == 2  # one drawing per isomer
     assert len(app.get("iframe")) == 1  # the 3D viewer
 
 

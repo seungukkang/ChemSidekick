@@ -148,6 +148,7 @@ class Artifact(_Model):
     kind: ArtifactKind
     path: Path
     title: str = ""
+    note: str = ""  # a short second line under the title, e.g. CIP labels of a drawing
 
 
 class Highlight(_Model):

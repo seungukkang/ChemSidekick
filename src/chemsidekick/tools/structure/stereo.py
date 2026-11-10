@@ -7,7 +7,7 @@ Steps (plan 003 §6.3):
     3. CIP labels (R/S, r/s, E/Z) with RDKit's new CIP labeler
     4. relations: the mirror image of each isomer (all tetrahedral centers
        inverted) is compared with the others by canonical SMILES
-    5. 2D drawings with CIP labels; one grid image for all isomers
+    5. one 2D drawing per isomer with CIP labels, all on the same layout
     6. optional 3D: ETKDGv3 embedding with a fixed seed, then MMFF94 (UFF if
        MMFF94 has no parameters), and a check that the 3D structure has the
        intended stereochemistry
@@ -377,36 +377,62 @@ def _frame(iso: Isomer) -> Frame:
 # ---------------------------------------------------------------------------
 
 
+DRAWING_SIZE = (300, 240)
+
+
 def _draw_options():
     from rdkit.Chem.Draw import rdMolDraw2D
 
     opts = rdMolDraw2D.MolDrawOptions()
     opts.addStereoAnnotation = True  # CIP labels next to the stereo centers
-    opts.legendFontSize = 16
+    opts.annotationFontScale = 0.75  # R/S labels readable at card size
+    opts.clearBackground = False  # transparent: fits light and dark themes
+    opts.padding = 0.08
     return opts
 
 
-def _svg(mol, legend: str, size=(320, 260)) -> str:
+def _double_bond_key(mol) -> tuple:
+    """The E/Z configuration of every stereo double bond (empty if none)."""
+    return tuple(
+        (b.GetIdx(), str(b.GetStereo()))
+        for b in mol.GetBonds()
+        if b.GetStereo() != b.GetStereo().STEREONONE
+    )
+
+
+def _with_shared_layout(isomers: list[Isomer]) -> list:
+    """Copies of the isomers for drawing. Isomers with the same E/Z configuration
+    share one 2D layout, so their drawings differ only in the wedges. (A layout
+    cannot be shared across E/Z: it fixes the double-bond geometry.) All isomers
+    come from the same molecule and keep its atom order."""
+    from rdkit import Chem
+    from rdkit.Chem import rdDepictor
+
+    rdDepictor.SetPreferCoordGen(True)
+    layouts: dict[tuple, object] = {}
+    out = []
+    for iso in isomers:
+        key = _double_bond_key(iso.mol)
+        if key not in layouts:
+            base = Chem.Mol(iso.mol)
+            rdDepictor.Compute2DCoords(base)
+            layouts[key] = base.GetConformer()
+        m = Chem.Mol(iso.mol)
+        m.RemoveAllConformers()
+        m.AddConformer(Chem.Conformer(layouts[key]), assignId=True)
+        Chem.WedgeMolBonds(m, m.GetConformer())
+        out.append(m)
+    return out
+
+
+def _svg(mol) -> str:
     from rdkit.Chem.Draw import rdMolDraw2D
 
-    d = rdMolDraw2D.MolDraw2DSVG(*size)
+    d = rdMolDraw2D.MolDraw2DSVG(*DRAWING_SIZE)
     d.SetDrawOptions(_draw_options())
-    d.DrawMolecule(mol, legend=legend)
+    d.DrawMolecule(mol)
     d.FinishDrawing()
     return d.GetDrawingText()
-
-
-def _grid_svg(isomers: list[Isomer]) -> str:
-    from rdkit.Chem import Draw
-
-    return Draw.MolsToGridImage(
-        [i.mol for i in isomers],
-        molsPerRow=min(4, len(isomers)),
-        subImgSize=(260, 220),
-        legends=[f"#{i.number}  {i.relation}" for i in isomers],
-        useSVG=True,
-        drawOptions=_draw_options(),
-    )
 
 
 def _write_files(isomers: list[Isomer]) -> list[Artifact]:
@@ -415,12 +441,14 @@ def _write_files(isomers: list[Isomer]) -> list[Artifact]:
     wd = workdir()
     each = wd / "isomers"
     each.mkdir(exist_ok=True)
-    grid = wd / "grid.svg"
-    grid.write_text(_grid_svg(isomers), encoding="utf-8")
-    artifacts = [Artifact(kind="svg", path=grid, title="All stereoisomers (2D)")]
-    for iso in isomers:
-        (each / f"isomer-{iso.number:02d}.svg").write_text(
-            _svg(iso.mol, f"#{iso.number}  {iso.labels}"), encoding="utf-8"
+    artifacts = []
+    for iso, drawn in zip(isomers, _with_shared_layout(isomers), strict=True):
+        path = each / f"isomer-{iso.number:02d}.svg"
+        path.write_text(_svg(drawn), encoding="utf-8")
+        artifacts.append(
+            Artifact(
+                kind="svg", path=path, title=f"#{iso.number} · {iso.relation}", note=iso.labels
+            )
         )
         if iso.mol3d is not None:
             (each / f"isomer-{iso.number:02d}.xyz").write_text(
@@ -535,8 +563,9 @@ def _result(inp, mol, isomers, possible, warnings) -> ToolResult:
             "Relations: E = enantiomers, D = diastereomers.",
             "Atom numbers in CIP labels count from 1 in the order of the SMILES; "
             "they match the atom numbers in the 3D view.",
-            f"Each isomer is also saved as SVG{'' if inp.skip_3d else ' and XYZ'} "
-            "in the isomers folder.",
+            f"Each isomer is saved as SVG{'' if inp.skip_3d else ' and XYZ'} in the "
+            "isomers folder. 2D drawings with the same E/Z configuration share one "
+            "layout, so only the wedges differ.",
             LIMITATIONS,
         ],
         sources=[

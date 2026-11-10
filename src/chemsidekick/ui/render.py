@@ -12,7 +12,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-from chemsidekick.core.schemas import Highlight, Table, ToolResult
+from chemsidekick.core.schemas import Artifact, Highlight, Table, ToolResult
 from chemsidekick.core.viewer import viewer_html
 
 VIEWER_HEIGHT = 520
@@ -46,6 +46,8 @@ CSS = """
     padding: 10px 14px; height: 100%; }
 .csk-hl .label { font-size: .75rem; opacity: .6; margin-bottom: 2px; }
 .csk-hl .value { font-size: 1.25rem; font-weight: 600; line-height: 1.4; }
+.csk-card-title { text-align: center; font-weight: 600; font-size: .9rem; }
+.csk-card-note { text-align: center; font-size: .75rem; opacity: .6; min-height: 1.1em; }
 .csk-col-label { text-align: center; font-size: .72rem; opacity: .5; }
 .csk-row-label { text-align: center; font-size: .75rem; opacity: .5; line-height: 52px; }
 .csk-legend { display: flex; gap: 14px; font-size: .8rem; margin: 8px 0 4px; flex-wrap: wrap; }
@@ -210,6 +212,23 @@ def _highlights(items: list[Highlight]) -> None:
     st.write("")
 
 
+GALLERY_COLUMNS = 4
+
+
+def _gallery(drawings: list[Artifact]) -> None:
+    """Drawings as a grid of equal cards: the image, a title, and a small note."""
+    for start in range(0, len(drawings), GALLERY_COLUMNS):
+        cols = st.columns(GALLERY_COLUMNS)
+        for col, a in zip(cols, drawings[start : start + GALLERY_COLUMNS], strict=False):
+            with col, st.container(border=True):
+                st.image(Path(a.path).read_text(encoding="utf-8"), width="stretch")
+                st.markdown(
+                    f"<div class='csk-card-title'>{html.escape(a.title)}</div>"
+                    f"<div class='csk-card-note'>{html.escape(a.note)}</div>",
+                    unsafe_allow_html=True,
+                )
+
+
 _MIME = {
     "svg": "image/svg+xml",
     "png": "image/png",
@@ -238,10 +257,7 @@ def render_result(
 
     # Drawings and 3D structures are the main content of a result, so they come
     # before the tables.
-    for a in result.artifacts:
-        path = Path(a.path)
-        if a.kind == "svg" and path.exists():
-            st.image(path.read_text(encoding="utf-8"), caption=a.title or None)
+    _gallery([a for a in result.artifacts if a.kind == "svg" and Path(a.path).exists()])
     for s in result.structures:
         st.iframe(viewer_html(s), height=VIEWER_HEIGHT)
 
@@ -260,9 +276,11 @@ def render_result(
         else:
             _table(t, key, on_action)
             i += 1
+    # Drawings are shown in the gallery (and kept with the result); other files get a
+    # download button.
     for i, a in enumerate(result.artifacts):
         path = Path(a.path)
-        if path.exists():
+        if a.kind != "svg" and path.exists():
             st.download_button(
                 f"Download {a.title or path.name}",
                 data=path.read_bytes(),
