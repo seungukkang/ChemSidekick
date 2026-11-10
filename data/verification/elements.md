@@ -8,6 +8,7 @@ Built 2026-11-10 by `scripts/build_elements.py`. Do not edit by hand.
 | Abridged atomic weight | 83 | 1 | 34 | 0 |
 | Isotope abundance | 257 | 0 | 0 | 32 |
 | Isotope mass | 145 | 144 | 0 | 0 |
+| Longest-lived isotope | 16 | 0 | 0 | 18 |
 | Electron configuration | 0 | 0 | 0 | 118 |
 | Electronegativity (Pauling) | 0 | 0 | 0 | 118 |
 | Covalent radius | 0 | 0 | 0 | 118 |
@@ -208,6 +209,24 @@ Electron configurations where both NIST ASD and PubChem agree with the shown val
 - Ta-181 abundance (CIAAW 0.9998824(23), NIST 0.9998799(32)): agreed only by ['ciaaw-abundances']
 - Ir-191 abundance (CIAAW 0.3723(9), NIST 0.373(2)): agreed only by ['ciaaw-abundances']
 - Ir-193 abundance (CIAAW 0.6277(9), NIST 0.627(2)): agreed only by ['ciaaw-abundances']
+- At longest-lived isotope (NUBASE2020 210, shown elsewhere {'iaea-livechart': '210', 'nist-periodic-table': ''}): agreed only by ['nubase2020', 'iaea-livechart']
+- No longest-lived isotope (NUBASE2020 261, shown elsewhere {'iaea-livechart': '259', 'nist-periodic-table': '259'}): agreed only by ['nubase2020']
+- Lr longest-lived isotope (NUBASE2020 266, shown elsewhere {'iaea-livechart': '266', 'nist-periodic-table': '262'}): agreed only by ['nubase2020', 'iaea-livechart']
 - Lr: configuration PubChem [Rn]7s2 5f14 6d1 vs mendeleev [Rn] 5f14 7s2 7p1
+- Rf longest-lived isotope (NUBASE2020 266, shown elsewhere {'iaea-livechart': '267', 'nist-periodic-table': '267'}): agreed only by ['nubase2020']
+- Db longest-lived isotope (NUBASE2020 268, shown elsewhere {'iaea-livechart': '268', 'nist-periodic-table': ''}): agreed only by ['nubase2020', 'iaea-livechart']
+- Sg longest-lived isotope (NUBASE2020 269, shown elsewhere {'iaea-livechart': '269', 'nist-periodic-table': ''}): agreed only by ['nubase2020', 'iaea-livechart']
+- Bh longest-lived isotope (NUBASE2020 270, shown elsewhere {'iaea-livechart': '278', 'nist-periodic-table': ''}): agreed only by ['nubase2020']
+- Hs longest-lived isotope (NUBASE2020 269, shown elsewhere {'iaea-livechart': '278', 'nist-periodic-table': ''}): agreed only by ['nubase2020']
+- Mt longest-lived isotope (NUBASE2020 279, shown elsewhere {'iaea-livechart': '282', 'nist-periodic-table': ''}): agreed only by ['nubase2020']
+- Ds longest-lived isotope (NUBASE2020 282, shown elsewhere {'iaea-livechart': '282', 'nist-periodic-table': ''}): agreed only by ['nubase2020', 'iaea-livechart']
 - Ds: configuration PubChem [Rn]7s2 5f14 6d8 (predicted) vs mendeleev [Rn] 5f14 6d9 7s1
+- Rg longest-lived isotope (NUBASE2020 282, shown elsewhere {'iaea-livechart': '286', 'nist-periodic-table': ''}): agreed only by ['nubase2020']
 - Rg: configuration PubChem [Rn]7s2 5f14 6d9 (predicted) vs mendeleev [Rn] 5f14 6d10 7s1
+- Cn longest-lived isotope (NUBASE2020 285, shown elsewhere {'iaea-livechart': '286', 'nist-periodic-table': ''}): agreed only by ['nubase2020']
+- Nh longest-lived isotope (NUBASE2020 289, shown elsewhere {'iaea-livechart': '286', 'nist-periodic-table': ''}): agreed only by ['nubase2020']
+- Fl longest-lived isotope (NUBASE2020 290, shown elsewhere {'iaea-livechart': '290', 'nist-periodic-table': ''}): agreed only by ['nubase2020', 'iaea-livechart']
+- Mc longest-lived isotope (NUBASE2020 292, shown elsewhere {'iaea-livechart': '290', 'nist-periodic-table': ''}): agreed only by ['nubase2020']
+- Lv longest-lived isotope (NUBASE2020 293, shown elsewhere {'iaea-livechart': '293', 'nist-periodic-table': ''}): agreed only by ['nubase2020', 'iaea-livechart']
+- Ts longest-lived isotope (NUBASE2020 294, shown elsewhere {'iaea-livechart': '294', 'nist-periodic-table': ''}): agreed only by ['nubase2020', 'iaea-livechart']
+- Og longest-lived isotope (NUBASE2020 295, shown elsewhere {'iaea-livechart': '294', 'nist-periodic-table': '294'}): agreed only by ['nubase2020']

@@ -306,6 +306,67 @@ def abridged_field(z, symbol, abridged, abridged21, iupac_pt, nist_pt, pc, m, pr
     return out
 
 
+NUBASE_UNITS_S = {
+    "ys": 1e-24, "zs": 1e-21, "as": 1e-18, "fs": 1e-15, "ps": 1e-12, "ns": 1e-9,
+    "us": 1e-6, "ms": 1e-3, "s": 1.0, "m": 60.0, "h": 3600.0, "d": 86400.0,
+    "y": 3.15576e7, "ky": 3.15576e10, "My": 3.15576e13, "Gy": 3.15576e16,
+    "Ty": 3.15576e19, "Py": 3.15576e22, "Ey": 3.15576e25, "Zy": 3.15576e28,
+    "Yy": 3.15576e31,
+}  # fmt: skip
+_HALF_LIFE = re.compile(r"^([\d.]+)#?$")  # "4.21", "13#" (estimated); not "<110ns"
+
+
+def _longest(candidates):
+    """(seconds, mass number, row) -> the mass number with the longest half-life."""
+    timed = [c for c in candidates if c[0] is not None]
+    return max(timed, key=lambda c: c[0]) if timed else None
+
+
+def longest_lived_field(z, symbol, nubase_rows, live_rows, nist_pt, m, problems):
+    """Longest-lived isotope of an element without natural isotopes.
+
+    NUBASE2020 (primary) is compared with IAEA LiveChart (half-lives in seconds) and
+    the NIST periodic table, which prints this isotope's mass number in parentheses.
+    """
+
+    def nubase_seconds(r):
+        hit = _HALF_LIFE.match(r["half_life"])
+        unit = NUBASE_UNITS_S.get(r["unit"])
+        return float(hit.group(1)) * unit if hit and unit else None
+
+    def live_seconds(r):
+        try:
+            return float(r["half_life_sec"])
+        except ValueError:
+            return None
+
+    nb = _longest([(nubase_seconds(r), int(r["mass_number"]), r) for r in nubase_rows])
+    lv = _longest([(live_seconds(r), int(r["mass_number"]), r) for r in live_rows])
+    fallback = longest_lived(m)
+    if nb is None:
+        if fallback is None:
+            return None
+        problems.append(f"{symbol} longest-lived isotope: no NUBASE2020 half-life")
+        return field(fallback, UNVERIFIED, ["mendeleev"], text=str(fallback["mass_number"]))
+    _, a, row = nb
+    shown = {
+        "iaea-livechart": str(lv[1]) if lv else "",
+        "nist-periodic-table": (nist_pt.get(z) or {}).get("mass_number", ""),
+    }
+    agree = ["nubase2020"] + [k for k, v in shown.items() if v == str(a)]
+    value = {"mass_number": a, "half_life": float(row["half_life"].rstrip("#")),
+             "unit": row["unit"]}  # fmt: skip
+    return decide(
+        value,
+        str(a),
+        agree,
+        None,
+        lambda: (fallback, str(fallback["mass_number"]) if fallback else "—"),
+        problems,
+        f"{symbol} longest-lived isotope (NUBASE2020 {a}, shown elsewhere {shown})",
+    )
+
+
 def _mendeleev_isotope(m, a):
     return next((i for i in m.isotopes if i.mass_number == a), None)
 
@@ -334,6 +395,12 @@ def build():
     abridged21 = by_z(read("ciaaw_abridged_2021"))
     iupac_pt = by_z(read("iupac_periodic_table"))
     nist_pt = by_z(read("nist_periodic_table"))
+    nubase_by_z: dict[int, list[dict[str, str]]] = defaultdict(list)
+    for r in read("nubase2020"):
+        nubase_by_z[int(r["z"])].append(r)
+    live_by_z: dict[int, list[dict[str, str]]] = defaultdict(list)
+    for r in read("iaea_livechart"):
+        live_by_z[int(r["z"])].append(r)
 
     mend = {z: mendeleev_element(z) for z in range(1, 119)}
     asd_cores = {r["symbol"]: r["ground_shells"] for r in asd.values()}
@@ -511,12 +578,15 @@ def build():
 
         # -- longest-lived isotope (elements without natural isotopes) ------
         longest = None
-        if not isotopes and (ll := longest_lived(m)):
-            longest = field(
-                ll,
-                UNVERIFIED,
-                ["nubase2020"],
-                note="NUBASE2020 via mendeleev; no second compilation compared",
+        if not isotopes:
+            longest = longest_lived_field(
+                z,
+                symbol,
+                nubase_by_z[z],
+                live_by_z[z],
+                nist_pt,
+                m,
+                problems,
             )
 
         # -- electron configuration -------------------------------------------
@@ -608,6 +678,10 @@ def report(data, problems) -> str:
         ("Abridged atomic weight", count(lambda e: [e["abridged_weight"]])),
         ("Isotope abundance", count(lambda e: [i["abundance"] for i in e["isotopes"]])),
         ("Isotope mass", count(lambda e: [i["mass"] for i in e["isotopes"]])),
+        (
+            "Longest-lived isotope",
+            count(lambda e: [e["longest_lived_isotope"]] if e["longest_lived_isotope"] else []),
+        ),
         ("Electron configuration", count(lambda e: [e["config"]])),
         ("Electronegativity (Pauling)", count(lambda e: [e["en_pauling"]])),
         ("Covalent radius", count(lambda e: [e["covalent_radius_pm"]])),

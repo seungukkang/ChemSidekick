@@ -21,6 +21,7 @@ from dataclasses import dataclass, field
 from pydantic import BaseModel, Field
 
 from chemsidekick.chem.condensed import looks_condensed, to_smiles
+from chemsidekick.core.drawing import with_backdrop
 from chemsidekick.core.registry import tool
 from chemsidekick.core.runner import workdir
 from chemsidekick.core.schemas import (
@@ -386,7 +387,7 @@ def _draw_options():
     opts = rdMolDraw2D.MolDrawOptions()
     opts.addStereoAnnotation = True  # CIP labels next to the stereo centers
     opts.annotationFontScale = 0.75  # R/S labels readable at card size
-    opts.clearBackground = False  # transparent: fits light and dark themes
+    opts.clearBackground = False  # transparent; a white backdrop is added by _svg
     opts.padding = 0.08
     return opts
 
@@ -432,7 +433,8 @@ def _svg(mol) -> str:
     d.SetDrawOptions(_draw_options())
     d.DrawMolecule(mol)
     d.FinishDrawing()
-    return d.GetDrawingText()
+    # Dark lines on a soft white backdrop: readable on light and dark pages.
+    return with_backdrop(d.GetDrawingText())
 
 
 def _write_files(isomers: list[Isomer]) -> list[Artifact]:

@@ -180,6 +180,14 @@ CHECK_LEGEND = (
 )
 
 
+# Half-life units as written by NUBASE2020 and by mendeleev -> shown units.
+HALF_LIFE_UNITS = {
+    "m": "min", "minute": "min", "hour": "h", "day": "d", "sec": "s", "msec": "ms",
+    "usec": "µs", "us": "µs", "nsec": "ns", "year": "y", "kyear": "ky", "Myear": "My",
+    "Gyear": "Gy",
+}  # fmt: skip
+
+
 def _weight_text(el: Element, key: str = "atomic_weight") -> str:
     w = el[key]
     return "none (no stable isotopes)" if w["text"] == "none" else w["text"]
@@ -298,7 +306,7 @@ def _element_card(el: Element) -> ToolResult:
                 rows=[
                     [
                         f"{v['mass_number']}{el['symbol']}",
-                        f"{v['half_life']:g} {v['unit']}",
+                        f"{v['half_life']:g} {HALF_LIFE_UNITS.get(v['unit'], v['unit'])}",
                         check_mark(ll, refs),
                     ]
                 ],
@@ -318,6 +326,25 @@ def _element_card(el: Element) -> ToolResult:
             f"unverified values from mendeleev {meta['mendeleev']}.",
         ],
         data={"element": el},
+    )
+
+
+def _cell(el: Element) -> CellInfo:
+    """Periodic-table tile: number, symbol, name, and the abridged atomic weight, or
+    [mass number] of the longest-lived isotope for elements without stable isotopes."""
+    w = el["abridged_weight"]
+    ll = el["longest_lived_isotope"]
+    if w["value"] is not None:
+        mass, unconfirmed = w["text"].split(" ± ")[0], w["status"] == "unverified"
+    elif ll is not None:
+        mass, unconfirmed = f"[{ll['value']['mass_number']}]", ll["status"] == "unverified"
+    else:
+        mass, unconfirmed = "", False
+    return CellInfo(
+        top=str(el["z"]),
+        tag=el["block"],
+        lines=[el["name"], mass],
+        unconfirmed=unconfirmed,
     )
 
 
@@ -346,15 +373,9 @@ def _periodic_table() -> ToolResult:
     rows.append([""] * len(columns))
     rows.append(f_row("Ln", lanthanides))
     rows.append(f_row("An", actinides))
-    cells = {
-        el["symbol"]: CellInfo(
-            top=str(el["z"]),
-            tag=el["block"],
-            tooltip=f"{el['name']} · Z = {el['z']} · standard atomic weight {_weight_text(el)}",
-        )
-        for el in elements
-    }
+    cells = {el["symbol"]: _cell(el) for el in elements}
     refs = _dataset()["meta"]["references"]
+    cited = ["iupac-definition", "ciaaw-abridged", "nubase2020"]
     return ToolResult(
         answer=f"Periodic table · {len(elements)} elements",
         tables=[
@@ -366,13 +387,19 @@ def _periodic_table() -> ToolResult:
                 action_columns=list(range(1, len(columns))),
                 cells=cells,
                 tags=BLOCKS,
+                column_gaps=[3, 13],  # s | d | p blocks (groups 1-2, 3-12, 13-18)
             )
         ],
         assumptions=[
             "18-column layout with La and Ac in group 3; Ln = lanthanoids Ce–Lu, "
             "An = actinoids Th–Lr."
         ],
-        notes=["Click an element to open its card. Colors show the block (s, p, d, f)."],
-        sources=[f"[1] {refs['iupac-definition']['citation']}"],
+        notes=[
+            "Click an element to open its card. Border colors show the block (s, p, d, f). "
+            "Below each name: the abridged atomic weight (CIAAW 2024); for elements without "
+            "stable isotopes, the mass number of the longest-lived isotope in brackets "
+            "(NUBASE2020). Italic: not confirmed by 3 references."
+        ],
+        sources=[f"[{i}] {refs[k]['citation']}" for i, k in enumerate(cited, start=1)],
         data={"symbols": [el["symbol"] for el in elements]},
     )

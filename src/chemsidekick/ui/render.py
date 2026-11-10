@@ -24,9 +24,17 @@ _NUMBER = re.compile(r"^[−+-]?\d[\d.,]*(\(\d+\))?( ?[a-zA-Zµ%]+)?$")
 # interactive data grid (sorting, search, download).
 HTML_TABLE_MAX_ROWS = 60
 
-# Colors for tagged cells (e.g. periodic-table blocks). Light tints with dark text,
-# readable in both light and dark themes.
-TAG_COLORS = ["#fde2e4", "#fff3c4", "#dbeafe", "#dcfce7", "#ede9fe", "#ffedd5"]
+# Colors for tagged cells (e.g. periodic-table blocks). Tiles share one neutral
+# fill; the tag color is used for the border, so it reads in light and dark themes.
+TAG_COLORS = ["#f43f5e", "#f59e0b", "#3b82f6", "#10b981", "#8b5cf6", "#f97316"]
+
+# Tile grids (clickable tables): every tile is the same size and the gap between
+# rows equals the gap between columns. Section gaps (Table.column_gaps) are a bit
+# wider; widths are in tiles.
+TILE_HEIGHT_PX = 68
+TILE_GAP_PX = 4
+LABEL_WIDTH = 0.55
+SECTION_GAP = 0.22
 
 CSS = """
 <style>
@@ -48,23 +56,40 @@ CSS = """
 .csk-hl .value { font-size: 1.25rem; font-weight: 600; line-height: 1.4; }
 .csk-card-title { text-align: center; font-weight: 600; font-size: .9rem; }
 .csk-card-note { text-align: center; font-size: .75rem; opacity: .6; min-height: 1.1em; }
-.csk-col-label { text-align: center; font-size: .72rem; opacity: .5; }
-.csk-row-label { text-align: center; font-size: .75rem; opacity: .5; line-height: 52px; }
-.csk-legend { display: flex; gap: 14px; font-size: .8rem; margin: 8px 0 4px; flex-wrap: wrap; }
+.csk-col-label { text-align: center; font-size: .7rem; opacity: .5; }
+.csk-row-label { text-align: center; font-size: .75rem; opacity: .5; }
+.csk-legend { display: flex; gap: 16px; font-size: .8rem; margin: 10px 0 4px; flex-wrap: wrap; }
 .csk-legend span { display: inline-flex; align-items: center; gap: 6px; }
 .csk-legend i { width: 14px; height: 14px; border-radius: 4px; display: inline-block;
-    border: 1px solid rgba(0,0,0,.15); }
-div[class*="st-key-act-"] button { height: 52px; min-height: 52px; padding: 2px 0;
-    border-radius: 8px; line-height: 1.05; }
-div[class*="st-key-act-"] button p { margin: 0; }
+    border: 2px solid; }
+div[class*="st-key-tiles-"], div[class*="st-key-tiles-"] div[data-testid="stVerticalBlock"],
+div[class*="st-key-tiles-"] div[data-testid="stHorizontalBlock"] {
+    gap: __GAP__px !important; }
+div[class*="st-key-tiles-"] div[data-testid="stHorizontalBlock"] {
+    flex-wrap: nowrap !important; }
+div[class*="st-key-tiles-"] div[data-testid="stColumn"] { min-width: 0 !important; }
+div[class*="st-key-tiles-"] .csk-row-label { line-height: __TILE_H__px; }
+div[class*="st-key-tiles-"] .csk-section-gap { height: 10px; }
+div[class*="st-key-act-"] button { height: __TILE_H__px; min-height: __TILE_H__px; width: 100%;
+    padding: 3px 2px; border-radius: 7px; line-height: 1.15;
+    background: rgba(128,128,128,.07); border: 1.5px solid rgba(128,128,128,.4);
+    transition: background .12s, transform .12s; }
+div[class*="st-key-act-"] button:hover { transform: translateY(-1px); }
+div[class*="st-key-act-"] button p { margin: 0; max-width: 100%; overflow: hidden;
+    white-space: nowrap; text-overflow: ellipsis; }
 div[class*="st-key-act-"] button div[data-testid="stMarkdownContainer"] {
-    display: flex; flex-direction: column; align-items: center; }
-div[class*="st-key-act-"] button div[data-testid="stMarkdownContainer"] p:first-child {
-    font-size: .62rem; opacity: .7; }
-div[class*="st-key-act-"] button div[data-testid="stMarkdownContainer"] p:last-child {
-    font-size: 1rem; font-weight: 700; }
+    display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; }
+div[class*="st-key-act-"] button div[data-testid="stMarkdownContainer"] p:nth-child(1) {
+    font-size: .58rem; opacity: .6; }
+div[class*="st-key-act-"] button div[data-testid="stMarkdownContainer"] p:nth-child(2) {
+    font-size: 1.05rem; font-weight: 700; line-height: 1.1; }
+div[class*="st-key-act-"] button div[data-testid="stMarkdownContainer"] p:nth-child(3) {
+    font-size: .5rem; opacity: .75; }
+div[class*="st-key-act-"] button div[data-testid="stMarkdownContainer"] p:nth-child(4) {
+    font-size: .52rem; opacity: .65; font-variant-numeric: tabular-nums; }
 </style>
 """
+CSS = CSS.replace("__GAP__", str(TILE_GAP_PX)).replace("__TILE_H__", str(TILE_HEIGHT_PX))
 
 
 def escape_markdown(text: str) -> str:
@@ -129,55 +154,96 @@ def _tag_colors(t: Table) -> dict[str, str]:
     return {tag: TAG_COLORS[i % len(TAG_COLORS)] for i, tag in enumerate(t.tags)}
 
 
+def grid_slots(t: Table, row: list) -> list[int | None]:
+    """Column order for one row of a tile grid: column indexes, with None for a
+    section gap. Every row has the same slots, so all tiles have the same width.
+    A gap between two cells of the same tag (e.g. inside the f-block row) is moved
+    to the end of the row, keeping that row's tiles together."""
+
+    def tag(c: int) -> str | None:
+        text = "" if row[c] is None else str(row[c])
+        info = t.cells.get(text) if text else None
+        return info.tag if info else None
+
+    slots: list[int | None] = []
+    moved = 0
+    for c in range(len(t.columns)):
+        if c in t.column_gaps:
+            if c > 0 and tag(c) is not None and tag(c) == tag(c - 1):
+                moved += 1
+            else:
+                slots.append(None)
+        slots.append(c)
+    return slots + [None] * moved
+
+
+def _tile_label(text: str, info) -> str:
+    """Button label: number, symbol, then small lines (one paragraph each)."""
+    if info is None:
+        return text
+    parts = [escape_markdown(p) for p in [info.top, text, *info.lines] if p is not None]
+    if info.unconfirmed and info.lines and info.lines[-1]:
+        parts[-1] = f"*{parts[-1]}*"
+    return "\n\n".join(p if p else "&nbsp;" for p in parts)
+
+
 def _action_grid(t: Table, key: str, on_action: OnAction) -> None:
     """A table whose cells are tiles (e.g. a periodic table): one click runs the tool."""
     colors = _tag_colors(t)
     css = "".join(
-        f'div[class*="st-key-act-"][class*="-tag-{tag}-"] button '
-        f"{{ background: {color}; color: #1f2937; border-color: rgba(0,0,0,.12); }}"
+        f'div[class*="st-key-act-"][class*="-tag-{tag}-"] button {{ border-color: {color}; }}'
+        f'div[class*="st-key-act-"][class*="-tag-{tag}-"] button:hover '
+        f"{{ background: {color}26; border-color: {color}; }}"
         for tag, color in colors.items()
     )
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
     clickable = set(t.action_columns)
-    n = len(t.columns)
-    # Column labels (e.g. group numbers) above the grid.
-    header = st.columns(n, gap=None)
-    for col, label in zip(header, t.columns, strict=True):
-        with col:
-            st.markdown(
-                f"<div class='csk-col-label'>{html.escape(label)}</div>", unsafe_allow_html=True
-            )
-    for r, row in enumerate(t.rows):
-        if not any(row):
-            st.write("")  # spacer row
-            continue
-        cols = st.columns(n, gap=None)
-        for c, (col, value) in enumerate(zip(cols, row, strict=True)):
-            text = "" if value is None else str(value)
-            if not text:
-                continue
-            with col:
-                if c in clickable:
-                    info = t.cells.get(text)
-                    tag = info.tag if info else ""
-                    label = f"{info.top}\n\n{text}" if info and info.top else text
-                    st.button(
-                        label,
-                        key=f"act-{key}-tag-{tag}-r{r}c{c}",
-                        help=info.tooltip if info and info.tooltip else None,
-                        on_click=on_action,
-                        args=(t.action_field, text),
-                        width="stretch",
-                    )
-                else:
+
+    def width(c: int | None) -> float:
+        if c is None:
+            return SECTION_GAP
+        return 1.0 if c in clickable else LABEL_WIDTH
+
+    with st.container(key=f"tiles-{key}"):
+        # Column labels (e.g. group numbers) above the grid.
+        slots = grid_slots(t, t.columns)
+        for col, c in zip(st.columns([width(c) for c in slots], gap=None), slots, strict=True):
+            if c is not None and t.columns[c]:
+                with col:
                     st.markdown(
-                        f"<div class='csk-row-label'>{html.escape(text)}</div>",
+                        f"<div class='csk-col-label'>{html.escape(t.columns[c])}</div>",
                         unsafe_allow_html=True,
                     )
+        for r, row in enumerate(t.rows):
+            if not any(row):
+                st.markdown("<div class='csk-section-gap'></div>", unsafe_allow_html=True)
+                continue
+            slots = grid_slots(t, row)
+            cols = st.columns([width(c) for c in slots], gap=None)
+            for col, c in zip(cols, slots, strict=True):
+                text = "" if c is None or row[c] is None else str(row[c])
+                if not text:
+                    continue
+                with col:
+                    if c in clickable:
+                        info = t.cells.get(text)
+                        tag = info.tag if info else ""
+                        st.button(
+                            _tile_label(text, info),
+                            key=f"act-{key}-tag-{tag}-r{r}c{c}",
+                            on_click=on_action,
+                            args=(t.action_field, text),
+                            width="stretch",
+                        )
+                    else:
+                        st.markdown(
+                            f"<div class='csk-row-label'>{html.escape(text)}</div>",
+                            unsafe_allow_html=True,
+                        )
     if t.tags:
         chips = "".join(
-            f"<span><i style='background:{colors[tag]}'></i>{html.escape(label)}</span>"
+            f"<span><i style='border-color:{colors[tag]}'></i>{html.escape(label)}</span>"
             for tag, label in t.tags.items()
         )
         st.markdown(f"<div class='csk-legend'>{chips}</div>", unsafe_allow_html=True)

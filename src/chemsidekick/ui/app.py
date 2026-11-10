@@ -33,12 +33,6 @@ div[class*="st-key-tool-"] button, div[class*="st-key-selected-tool-"] button {
 div[class*="st-key-tool-"] button p, div[class*="st-key-selected-tool-"] button p {
     font-size: 1.4rem; font-weight: 600; }
 div[class*="st-key-selected-"] button { border: 2px solid var(--primary-color, #ff4b4b); }
-/* Clickable table cells (e.g. periodic table): compact buttons. */
-div[class*="st-key-act-"] button {
-    min-height: 34px; height: 34px; padding: 0 2px; border-radius: 6px;
-}
-div[class*="st-key-act-"] button p { font-size: .85rem; font-weight: 600; }
-.csk-row-label { opacity: .5; font-size: .8rem; line-height: 34px; text-align: center; }
 </style>
 """
 

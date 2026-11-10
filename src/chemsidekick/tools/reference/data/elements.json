@@ -6771,13 +6771,15 @@
     "value": {
      "mass_number": 97,
      "half_life": 4.21,
-     "unit": "Myear"
+     "unit": "My"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "97"
    },
    "config": {
     "value": "[Kr] 4d5 5s2",
@@ -10360,13 +10362,15 @@
     "value": {
      "mass_number": 145,
      "half_life": 17.7,
-     "unit": "year"
+     "unit": "y"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "145"
    },
    "config": {
     "value": "[Xe] 4f5 6s2",
@@ -14687,13 +14691,15 @@
     "value": {
      "mass_number": 209,
      "half_life": 124.0,
-     "unit": "year"
+     "unit": "y"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "209"
    },
    "config": {
     "value": "[Xe] 4f14 5d10 6s2 6p4",
@@ -14783,9 +14789,13 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "210",
+    "agree": [
+     "nubase2020",
+     "iaea-livechart"
+    ]
    },
    "config": {
     "value": "[Xe] 4f14 5d10 6s2 6p5",
@@ -14871,13 +14881,15 @@
     "value": {
      "mass_number": 222,
      "half_life": 3.8215,
-     "unit": "day"
+     "unit": "d"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "222"
    },
    "config": {
     "value": "[Xe] 4f14 5d10 6s2 6p6",
@@ -14956,13 +14968,15 @@
     "value": {
      "mass_number": 223,
      "half_life": 22.0,
-     "unit": "minute"
+     "unit": "m"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "223"
    },
    "config": {
     "value": "[Rn] 7s1",
@@ -15043,13 +15057,15 @@
     "value": {
      "mass_number": 226,
      "half_life": 1.6,
-     "unit": "kyear"
+     "unit": "ky"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "226"
    },
    "config": {
     "value": "[Rn] 7s2",
@@ -15130,13 +15146,15 @@
     "value": {
      "mass_number": 227,
      "half_life": 21.772,
-     "unit": "year"
+     "unit": "y"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "227"
    },
    "config": {
     "value": "[Rn] 6d1 7s2",
@@ -15640,13 +15658,15 @@
     "value": {
      "mass_number": 237,
      "half_life": 2.144,
-     "unit": "Myear"
+     "unit": "My"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "237"
    },
    "config": {
     "value": "[Rn] 5f4 6d1 7s2",
@@ -15730,13 +15750,15 @@
     "value": {
      "mass_number": 244,
      "half_life": 81.3,
-     "unit": "Myear"
+     "unit": "My"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "244"
    },
    "config": {
     "value": "[Rn] 5f6 7s2",
@@ -15824,13 +15846,15 @@
     "value": {
      "mass_number": 243,
      "half_life": 7.35,
-     "unit": "kyear"
+     "unit": "ky"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "243"
    },
    "config": {
     "value": "[Rn] 5f7 7s2",
@@ -15914,13 +15938,15 @@
     "value": {
      "mass_number": 247,
      "half_life": 15.6,
-     "unit": "Myear"
+     "unit": "My"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "247"
    },
    "config": {
     "value": "[Rn] 5f7 6d1 7s2",
@@ -16002,13 +16028,15 @@
     "value": {
      "mass_number": 247,
      "half_life": 1.38,
-     "unit": "kyear"
+     "unit": "ky"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "247"
    },
    "config": {
     "value": "[Rn] 5f9 7s2",
@@ -16090,13 +16118,15 @@
     "value": {
      "mass_number": 251,
      "half_life": 898.0,
-     "unit": "year"
+     "unit": "y"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "251"
    },
    "config": {
     "value": "[Rn] 5f10 7s2",
@@ -16178,13 +16208,15 @@
     "value": {
      "mass_number": 252,
      "half_life": 471.7,
-     "unit": "day"
+     "unit": "d"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "252"
    },
    "config": {
     "value": "[Rn] 5f11 7s2",
@@ -16265,13 +16297,15 @@
     "value": {
      "mass_number": 257,
      "half_life": 100.5,
-     "unit": "day"
+     "unit": "d"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "257"
    },
    "config": {
     "value": "[Rn] 5f12 7s2",
@@ -16351,13 +16385,15 @@
     "value": {
      "mass_number": 258,
      "half_life": 51.59,
-     "unit": "day"
+     "unit": "d"
     },
-    "status": "unverified",
+    "status": "verified",
     "refs": [
-     "nubase2020"
+     "nubase2020",
+     "iaea-livechart",
+     "nist-periodic-table"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "258"
    },
    "config": {
     "value": "[Rn] 5f13 7s2",
@@ -16441,9 +16477,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "259",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 7s2",
@@ -16527,9 +16566,13 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "266",
+    "agree": [
+     "nubase2020",
+     "iaea-livechart"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 7s2 7p1",
@@ -16610,9 +16653,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "267",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d2 7s2",
@@ -16696,9 +16742,13 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "268",
+    "agree": [
+     "nubase2020",
+     "iaea-livechart"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d3 7s2",
@@ -16782,9 +16832,13 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "269",
+    "agree": [
+     "nubase2020",
+     "iaea-livechart"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d4 7s2",
@@ -16869,9 +16923,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "270",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d5 7s2",
@@ -16956,9 +17013,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "269",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d6 7s2",
@@ -17043,9 +17103,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "277",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d7 7s2",
@@ -17128,9 +17191,13 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "282",
+    "agree": [
+     "nubase2020",
+     "iaea-livechart"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d9 7s1",
@@ -17210,9 +17277,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "282",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d10 7s1",
@@ -17292,9 +17362,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "285",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d10 7s2",
@@ -17376,9 +17449,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "286",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d10 7s2 7p1",
@@ -17457,9 +17533,13 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "290",
+    "agree": [
+     "nubase2020",
+     "iaea-livechart"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d10 7s2 7p2",
@@ -17538,9 +17618,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "290",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d10 7s2 7p3",
@@ -17619,9 +17702,13 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "293",
+    "agree": [
+     "nubase2020",
+     "iaea-livechart"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d10 7s2 7p4",
@@ -17703,9 +17790,13 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "294",
+    "agree": [
+     "nubase2020",
+     "iaea-livechart"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d10 7s2 7p5",
@@ -17787,9 +17878,12 @@
     },
     "status": "unverified",
     "refs": [
-     "nubase2020"
+     "mendeleev"
     ],
-    "note": "NUBASE2020 via mendeleev; no second compilation compared"
+    "text": "295",
+    "agree": [
+     "nubase2020"
+    ]
    },
    "config": {
     "value": "[Rn] 5f14 6d10 7s2 7p6",

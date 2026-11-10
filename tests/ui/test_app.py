@@ -123,7 +123,7 @@ def _cell(app, symbol):
     return next(
         b
         for b in app.button
-        if b.key and b.key.startswith("act-") and b.label.split("\n")[-1] == symbol
+        if b.key and b.key.startswith("act-") and b.label.split("\n\n")[1] == symbol
     )
 
 

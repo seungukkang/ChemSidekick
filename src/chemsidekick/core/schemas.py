@@ -110,7 +110,11 @@ class CellInfo(_Model):
 
     top: str = ""  # small text above the value, e.g. the atomic number
     tag: str = ""  # a group used for coloring, e.g. "d" for d-block; see Table.tags
-    tooltip: str = ""  # shown on hover
+    # Small lines below the value, e.g. the name and atomic weight. Compact views
+    # (little space) may show only `top` and the value.
+    lines: list[str] = []
+    # The last line holds a value not confirmed by 3 references; drawn in italics.
+    unconfirmed: bool = False
 
 
 class Table(_Model):
@@ -128,6 +132,10 @@ class Table(_Model):
     # Display extras for clickable tables: per cell text, and the meaning of each tag.
     cells: dict[str, CellInfo] = {}
     tags: dict[str, str] = {}
+    # Columns that start a new section (e.g. a new periodic-table block): clickable
+    # tables leave a slightly wider gap before them. Where the cells on both sides
+    # share a tag (e.g. the f-block rows), the gap is not drawn there.
+    column_gaps: list[int] = []
 
     @model_validator(mode="after")
     def _check(self) -> "Table":

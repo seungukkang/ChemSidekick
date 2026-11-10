@@ -265,13 +265,34 @@ def test_card_highlights_key_values():
     assert "✓ 2,3,4" in hl["Standard atomic weight"].note
 
 
-def test_periodic_table_cells_have_number_block_and_tooltip():
+def test_periodic_table_cells_show_number_name_and_mass():
     t = element(ElementInput()).tables[0]
     fe = t.cells["Fe"]
-    assert (fe.top, fe.tag) == ("26", "d")
-    assert "Iron" in fe.tooltip and "55.845(2)" in fe.tooltip
+    assert (fe.top, fe.tag, fe.lines, fe.unconfirmed) == ("26", "d", ["Iron", "55.845"], False)
+    assert t.cells["H"].lines == ["Hydrogen", "1.0080"]
     assert set(t.tags) == {"s", "p", "d", "f"}
     assert t.cells["Ce"].tag == "f" and t.cells["Na"].tag == "s"
+    assert t.column_gaps == [3, 13]
+
+
+def test_radioactive_cells_show_longest_lived_mass_number():
+    cells = element(ElementInput()).tables[0].cells
+    # Confirmed by NUBASE2020, IAEA LiveChart and the NIST periodic table.
+    assert (cells["Tc"].lines[1], cells["Tc"].unconfirmed) == ("[97]", False)
+    assert (cells["Pu"].lines[1], cells["Pu"].unconfirmed) == ("[244]", False)
+    # Superheavy elements: the sources disagree, so the value is marked.
+    assert cells["Og"].unconfirmed and cells["Og"].lines[1].startswith("[")
+
+
+def test_longest_lived_isotope_is_cross_checked():
+    els = {e["symbol"]: e for e in _dataset()["elements"]}
+    tc = els["Tc"]["longest_lived_isotope"]
+    assert tc["status"] == "verified"
+    assert tc["refs"] == ["nubase2020", "iaea-livechart", "nist-periodic-table"]
+    assert tc["value"] == {"mass_number": 97, "half_life": 4.21, "unit": "My"}
+    card = element(ElementInput(query="Tc"))
+    row = card.tables[-1].rows[0]
+    assert row[:2] == ["97Tc", "4.21 My"] and row[2].startswith("✓")
 
 
 def test_abridged_atomic_weights():

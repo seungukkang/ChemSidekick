@@ -440,10 +440,16 @@ def nist_periodic_table(pdf: bytes) -> None:
         hit = names.get(m.group(1).lower())
         if hit:
             weight = m.group(2)
-            rows.setdefault(hit[0], [hit[0], hit[1], "—" if weight.startswith("(") else weight])
+            # Elements without stable isotopes show the mass number of a long-lived
+            # isotope in parentheses, e.g. (97), instead of a weight.
+            if weight.startswith("("):
+                row = [hit[0], hit[1], "—", weight.strip("()")]
+            else:
+                row = [hit[0], hit[1], weight, ""]
+            rows.setdefault(hit[0], row)
     write_csv(
         "nist_periodic_table",
-        ["z", "symbol", "abridged_atomic_weight"],
+        ["z", "symbol", "abridged_atomic_weight", "mass_number"],
         [rows[z] for z in sorted(rows)],
     )
 
