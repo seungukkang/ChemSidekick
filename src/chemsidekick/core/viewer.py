@@ -108,23 +108,6 @@ function markColor(label) {
   return "#4b5563";
 }
 function pt(c) { return {x: c[0], y: c[1], z: c[2]}; }
-function add(a, b, k) { return [a[0] + k * b[0], a[1] + k * b[1], a[2] + k * b[2]]; }
-// A point next to the stereo element, pointing away from its bonded neighbors,
-// so that its label does not cover the atom number.
-function outside(f, atoms) {
-  const c = atoms.map((i) => f.coords[i]);
-  const at = c.length === 1 ? c[0] : add(c[0], add(c[1], c[0], -1), 0.5);
-  let d = [0, 0, 0];
-  f.coords.forEach((p, j) => {
-    if (atoms.includes(j)) return;
-    for (const q of c) {
-      const v = add(q, p, -1), r = Math.hypot(...v);
-      if (r > 0.1 && r < 1.75) d = add(d, v, 1 / r);
-    }
-  });
-  const n = Math.hypot(...d);
-  return n > 1e-6 ? add(at, d, 1.0 / n) : add(at, [0, 1, 0], 1.0);
-}
 function setPressed(el, on) { el.setAttribute("aria-pressed", on ? "true" : "false"); }
 function pressed(el) { return el.getAttribute("aria-pressed") === "true"; }
 
@@ -136,10 +119,14 @@ if (typeof $3Dmol === "undefined") {
   const viewer = $3Dmol.createViewer($("view"), {backgroundColor: "white"});
   let current = DATA.start_frame, timer = null;
 
-  function drawNumbers(f) {
+  function numberOf(f, i) { return f.numbers.length ? f.numbers[i] : String(i + 1); }
+
+  // Atom numbers, except on atoms that carry a stereo mark while marks are shown:
+  // there the number goes into the mark itself ("2R"), drawn on the atom.
+  function drawNumbers(f, skip) {
     f.coords.forEach((c, i) => {
-      const text = f.numbers.length ? f.numbers[i] : String(i + 1);
-      if (!text) return;
+      const text = numberOf(f, i);
+      if (!text || skip.has(i)) return;
       viewer.addLabel(text, {
         position: pt(c), alignment: "center", font: FONT, fontSize: 13,
         fontColor: "#111827", backgroundColor: "#ffffff", backgroundOpacity: 0.95,
@@ -148,21 +135,29 @@ if (typeof $3Dmol === "undefined") {
     });
   }
 
-  function drawMarks(f) {
+  // Stereo marks exactly on the stereocenter (or the middle of the double bond).
+  function drawMarks(f, withNumbers) {
     f.marks.forEach((m) => {
       const color = markColor(m.label);
       const a = f.coords[m.atoms[0]];
+      let at = a, number = withNumbers ? numberOf(f, m.atoms[0]) : "";
       if (m.atoms.length === 2) {
         const b = f.coords[m.atoms[1]];
+        at = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2];
         viewer.addCylinder({start: pt(a), end: pt(b), radius: 0.32, color: color,
                             opacity: 0.35, fromCap: 1, toCap: 1});
+        if (withNumbers) {
+          // A double bond takes the lower of its two numbers, as in (3E).
+          const ns = m.atoms.map((i) => numberOf(f, i)).filter((t) => t !== "");
+          number = ns.length ? ns.reduce((x, y) => (Number(y) < Number(x) ? y : x)) : "";
+        }
       } else {
         viewer.addSphere({center: pt(a), radius: 0.7, color: color, opacity: 0.3});
       }
-      viewer.addLabel(m.label, {
-        position: pt(outside(f, m.atoms)), alignment: "center", font: FONT, fontSize: 15,
+      viewer.addLabel(number + m.label, {
+        position: pt(at), alignment: "center", font: FONT, fontSize: 15,
         bold: true, fontColor: "#ffffff", backgroundColor: color, backgroundOpacity: 0.95,
-        padding: 4, inFront: true,
+        padding: 3, inFront: true,
       });
     });
   }
@@ -175,9 +170,12 @@ if (typeof $3Dmol === "undefined") {
     viewer.removeAllLabels();
     viewer.addModel(xyzText(f), "xyz");
     viewer.setStyle({}, STYLES[$("style").value]);
-    if (pressed($("numbers"))) drawNumbers(f);
+    const showNumbers = pressed($("numbers"));
     const showMarks = hasMarks && pressed($("marks"));
-    if (showMarks) drawMarks(f);
+    const marked = new Set(showMarks ? f.marks.filter((m) => m.atoms.length === 1)
+                                           .map((m) => m.atoms[0]) : []);
+    if (showNumbers) drawNumbers(f, marked);
+    if (showMarks) drawMarks(f, showNumbers);
     $("legend").style.display = showMarks ? "inline-flex" : "none";
     if (view) viewer.setView(view); else { viewer.zoomTo(); viewer.zoom(1.4); }
     viewer.render();
