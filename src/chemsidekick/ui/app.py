@@ -5,6 +5,7 @@ icons (name shown on hover), and the selected tool's form and result below.
 Everything is generated from the tool registry.
 """
 
+import html
 import tempfile
 from pathlib import Path
 
@@ -33,6 +34,8 @@ div[class*="st-key-tool-"] button, div[class*="st-key-selected-tool-"] button {
 div[class*="st-key-tool-"] button p, div[class*="st-key-selected-tool-"] button p {
     font-size: 1.4rem; font-weight: 600; }
 div[class*="st-key-selected-"] button { border: 2px solid var(--primary-color, #ff4b4b); }
+.csk-tool-id { font-size: .68rem; letter-spacing: .08em; opacity: .45; margin-bottom: 2px; }
+.csk-tool-title { font-size: 1.5rem; font-weight: 600; line-height: 1.25; }
 </style>
 """
 
@@ -138,7 +141,12 @@ def _back_to_start(spec: ToolSpec) -> None:
 
 
 def _tool_page(spec: ToolSpec) -> None:
-    st.markdown(f"#### {spec.title} · `{spec.id}`")
+    # The ID is for reference (CLI, notes); small and above, so the name stands out.
+    st.markdown(
+        f"<div class='csk-tool-id'>{html.escape(spec.id)}</div>"
+        f"<div class='csk-tool-title'>{html.escape(spec.title)}</div>",
+        unsafe_allow_html=True,
+    )
     st.caption(spec.summary)
 
     pending = st.session_state.pop("pending", None)
