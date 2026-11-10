@@ -63,6 +63,27 @@ citation = "IAEA Nuclear Data Section, Live Chart of Nuclides (ground states), I
 url = "https://www-nds.iaea.org/livechart/"
 file = "iaea_livechart.csv"
 
+[ciaaw-abridged]
+kind = "primary"
+short = "CIAAW 2024 abridged"
+citation = "CIAAW, Abridged Standard Atomic Weights 2024, www.ciaaw.org; T. Prohaska et al., Standard atomic weights of the elements 2021 (IUPAC Technical Report), Pure Appl. Chem. 2022, 94, 573–600."
+url = "https://www.ciaaw.org/abridged-atomic-weights.htm"
+file = "ciaaw_abridged.csv"
+
+[iupac-periodic-table]
+kind = "secondary"
+short = "IUPAC 2022"
+citation = "IUPAC Periodic Table of the Elements (version 4 May 2022), International Union of Pure and Applied Chemistry; abridged atomic weights as printed."
+url = "https://iupac.org/wp-content/uploads/2022/07/IUPAC_Periodic_Table-04May22_CRA.pdf"
+file = "iupac_periodic_table.csv"
+
+[nist-periodic-table]
+kind = "secondary"
+short = "NIST 2024"
+citation = "NIST, Periodic Table: Atomic Properties of the Elements, NIST Special Publication 966 (June 2024); atomic weights as printed."
+url = "https://www.nist.gov/pml/periodic-table-elements"
+file = "nist_periodic_table.csv"
+
 [pubchem]
 kind = "secondary"
 short = "PubChem"
@@ -131,3 +152,10 @@ kind = "evidence"
 short = "CIAAW element pages"
 citation = "CIAAW, per-element pages describing past standard atomic weights, www.ciaaw.org."
 file = "ciaaw_history.csv"
+
+[ciaaw-abridged-2021]
+kind = "evidence"
+short = "CIAAW 2021 abridged"
+citation = "CIAAW, Abridged Standard Atomic Weights 2021, www.ciaaw.org (Internet Archive snapshot, 2023). Earlier edition, shown by the IUPAC 2022 and NIST 2024 periodic tables."
+url = "https://web.archive.org/web/2023id_/https://www.ciaaw.org/abridged-atomic-weights.htm"
+file = "ciaaw_abridged_2021.csv"

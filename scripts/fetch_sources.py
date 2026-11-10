@@ -1,6 +1,7 @@
 """Download reference data and save it as normalized CSV files in data/sources/.
 
-    uv run python scripts/fetch_sources.py
+    uv run python scripts/fetch_sources.py              # all sources
+    uv run python scripts/fetch_sources.py pubchem      # only the named sources
 
 Each source is parsed into a small CSV with plain columns, so that
 scripts/build_elements.py can compare the sources value by value.
@@ -13,9 +14,11 @@ in build_elements.py, not here.
 
 import csv
 import html
+import io
 import json
 import re
 import ssl
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -52,15 +55,36 @@ URLS = {
     ),
     "iaea_livechart": "https://www-nds.iaea.org/relnsd/v1/data?fields=ground_states&nuclides=all",
     "pubchem": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON",
+    # Abridged standard atomic weights (one value per element, used for molecular weights).
+    "ciaaw_abridged": "https://www.ciaaw.org/abridged-atomic-weights.htm",
+    # The 2021 abridged table (Internet Archive), the edition the IUPAC Periodic Table
+    # of 4 May 2022 shows. Used only as evidence that the IUPAC table shows an older edition.
+    "ciaaw_abridged_2021": (
+        "https://web.archive.org/web/2023id_/https://www.ciaaw.org/abridged-atomic-weights.htm"
+    ),
+    "iupac_periodic_table": (
+        "https://iupac.org/wp-content/uploads/2022/07/IUPAC_Periodic_Table-04May22_CRA.pdf"
+    ),
+    # NIST SP 966, Periodic Table: Atomic Properties of the Elements (June 2024).
+    "nist_periodic_table": (
+        "https://www.nist.gov/system/files/documents/2024/06/25/NIST_periodictable_June24_iupac.pdf"
+    ),
 }
 
+# Sources that are binary files (PDF); their parsers receive bytes.
+BINARY = {"iupac_periodic_table", "nist_periodic_table"}
 
-def get(url: str) -> str:
+
+def get_bytes(url: str) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     # certifi: python.org builds of Python on macOS ship without root certificates.
     context = ssl.create_default_context(cafile=certifi.where())
     with urllib.request.urlopen(req, timeout=180, context=context) as resp:
-        return resp.read().decode("utf-8", errors="replace")
+        return resp.read()
+
+
+def get(url: str) -> str:
+    return get_bytes(url).decode("utf-8", errors="replace")
 
 
 def clean(cell: str) -> str:
@@ -351,6 +375,79 @@ def pubchem(text: str) -> None:
     )
 
 
+def ciaaw_abridged(page: str, name: str = "ciaaw_abridged") -> None:
+    """Abridged table: '1.0080 ± 0.0002' -> value 1.0080, uncertainty 0.0002; '—' for none."""
+    rows = []
+    for cells in html_rows(page):
+        if len(cells) >= 4 and cells[0].isdigit():
+            value, _, unc = cells[3].partition("±")
+            rows.append([int(cells[0]), cells[1], value, unc])
+    write_csv(name, ["z", "symbol", "abridged_atomic_weight", "uncertainty"], rows)
+
+
+_PT_ENTRY = re.compile(
+    r"^(\d{1,3})\n([A-Z][a-z]?)\n([a-z]+)\s*(?:([\d.]+)\s*±\s*([\d.]+)|\[(\d+)\])", re.M
+)
+
+
+def pdf_text(pdf: bytes) -> str:
+    import logging
+
+    from pypdf import PdfReader  # dev dependency, needed only here
+
+    logging.getLogger("pypdf").setLevel(logging.ERROR)  # font-encoding notices only
+    return "\n".join(p.extract_text() for p in PdfReader(io.BytesIO(pdf)).pages)
+
+
+def iupac_periodic_table(pdf: bytes) -> None:
+    """IUPAC Periodic Table PDF: each element is printed as Z, symbol, name, value, ± unc.
+
+    Radioactive elements show a mass number in brackets (e.g. [97]) instead of a value.
+    Some elements are printed twice in the PDF text; the first entry is kept.
+    """
+    text = pdf_text(pdf)
+    seen: dict[int, list[object]] = {}
+    for m in _PT_ENTRY.finditer(text):
+        z = int(m.group(1))
+        value, unc = (m.group(4), m.group(5)) if m.group(4) else ("—", "")
+        seen.setdefault(z, [z, m.group(2), value, unc])
+    write_csv(
+        "iupac_periodic_table",
+        ["z", "symbol", "abridged_atomic_weight", "uncertainty"],
+        [seen[z] for z in sorted(seen)],
+    )
+
+
+# NIST prints each element as: symbol, name, atomic weight, first ionization energy (eV).
+_NIST_PT_ENTRY = re.compile(r"\n([A-Z][a-z]+)\n\s*([\d.]+|\(\d+\))\n\s*(\d+\.\d+)\n")
+
+
+def nist_periodic_table(pdf: bytes) -> None:
+    """NIST periodic table PDF, matched by element name.
+
+    The atomic numbers in the PDF text are not reliably next to their element
+    (text order follows the drawing order), so entries are keyed by name. An entry
+    is accepted only if the weight is followed by an ionization energy, which
+    skips the few places where the text order is broken (they are reported missing).
+    """
+    names = {}
+    with (OUT / "ciaaw_weights.csv").open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            names[r["name"].lower()] = (int(r["z"]), r["symbol"])
+    names |= {"aluminum": names["aluminium"], "cesium": names["caesium"]}
+    rows = {}
+    for m in _NIST_PT_ENTRY.finditer(pdf_text(pdf)):
+        hit = names.get(m.group(1).lower())
+        if hit:
+            weight = m.group(2)
+            rows.setdefault(hit[0], [hit[0], hit[1], "—" if weight.startswith("(") else weight])
+    write_csv(
+        "nist_periodic_table",
+        ["z", "symbol", "abridged_atomic_weight"],
+        [rows[z] for z in sorted(rows)],
+    )
+
+
 PARSERS = {
     "ciaaw_weights": ciaaw_weights,
     "ciaaw_abundances": ciaaw_abundances,
@@ -363,20 +460,35 @@ PARSERS = {
     "nist_srd144": nist_srd144,
     "iaea_livechart": iaea_livechart,
     "pubchem": pubchem,
+    "ciaaw_abridged": ciaaw_abridged,
+    "ciaaw_abridged_2021": lambda page: ciaaw_abridged(page, "ciaaw_abridged_2021"),
+    "iupac_periodic_table": iupac_periodic_table,
+    "nist_periodic_table": nist_periodic_table,
 }
 
 
 if __name__ == "__main__":
+    # `fetch_sources.py name ...` refreshes only the named sources; no names = all.
+    only = set(sys.argv[1:])
+    unknown = only - set(URLS) - {"ciaaw_history"}
+    if unknown:
+        sys.exit(f"unknown source(s): {', '.join(sorted(unknown))}")
     OUT.mkdir(parents=True, exist_ok=True)
-    retrieved = {}
+    path = OUT / "retrieved.json"
+    retrieved = json.loads(path.read_text()) if only and path.exists() else {}
     for name, url in URLS.items():
+        if only and name not in only:
+            continue
         print(f"{name}: {url}")
-        PARSERS[name](get(url))
+        PARSERS[name](get_bytes(url) if name in BINARY else get(url))
         retrieved[name] = date.today().isoformat()
+    if only and "ciaaw_history" not in only:
+        path.write_text(json.dumps(retrieved, indent=1) + "\n")
+        sys.exit(0)
     # Per-element CIAAW pages (needs the element list from ciaaw_weights.csv).
     with (OUT / "ciaaw_weights.csv").open(encoding="utf-8") as f:
         names = [(int(r["z"]), r["symbol"], r["name"]) for r in csv.DictReader(f)]
     print(f"ciaaw_history: {len(names)} element pages")
     ciaaw_history(names)
     retrieved["ciaaw_history"] = date.today().isoformat()
-    (OUT / "retrieved.json").write_text(json.dumps(retrieved, indent=1) + "\n")
+    path.write_text(json.dumps(retrieved, indent=1) + "\n")

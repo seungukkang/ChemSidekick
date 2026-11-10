@@ -10,5 +10,9 @@
  "nist_srd144": "2026-11-10",
  "iaea_livechart": "2026-11-10",
  "pubchem": "2026-11-10",
- "ciaaw_history": "2026-11-10"
+ "ciaaw_history": "2026-11-10",
+ "ciaaw_abridged": "2026-11-10",
+ "ciaaw_abridged_2021": "2026-11-10",
+ "iupac_periodic_table": "2026-11-10",
+ "nist_periodic_table": "2026-11-10"
 }

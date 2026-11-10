@@ -124,3 +124,41 @@ def test_failed_run_is_not_kept():
 def test_doctor_runs():
     result = runner.invoke(app, ["doctor"])
     assert result.exit_code == 0
+
+
+# --- xyz: file or standard input, and the HTML 3D viewer --------------------
+
+WATER = "3\nwater\nO 0 0 0.1173\nH 0 0.7572 -0.4692\nH 0 -0.7572 -0.4692\n"
+
+
+def test_xyz_from_standard_input_writes_viewer():
+    result = runner.invoke(app, ["xyz", "--no-open", "--json"], input=WATER)
+    assert result.exit_code == 0, result.output
+    data = json.loads(result.stdout)
+    assert data["answer"] == "H2O · 3 atoms · 1 frame"
+    viewer = next(a for a in data["artifacts"] if a["kind"] == "html")
+    page = open(viewer["path"], encoding="utf-8").read()
+    assert "3Dmol" in page and '"symbols":["O","H","H"]' in page
+
+
+def test_xyz_from_file(tmp_path):
+    path = tmp_path / "water.xyz"
+    path.write_text(WATER)
+    result = runner.invoke(app, ["xyz", str(path), "--no-open"])
+    assert result.exit_code == 0, result.output
+    assert "H2O · 3 atoms · 1 frame" in result.stdout
+    assert "viewer.html" in result.stdout
+
+
+def test_xyz_missing_file_is_a_clean_error():
+    result = runner.invoke(app, ["xyz", "nope.xyz", "--no-open"])
+    assert result.exit_code == 1
+    assert "File not found: nope.xyz" in result.stderr
+
+
+def test_xyz_opens_browser_unless_no_open(monkeypatch):
+    opened = []
+    monkeypatch.setattr("chemsidekick.cli.main.webbrowser.open", opened.append)
+    runner.invoke(app, ["xyz"], input=WATER)
+    runner.invoke(app, ["xyz", "--no-open"], input=WATER)
+    assert len(opened) == 1 and opened[0].endswith("viewer.html")

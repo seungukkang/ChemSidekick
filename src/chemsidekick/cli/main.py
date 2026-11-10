@@ -10,6 +10,7 @@ import subprocess
 import sys
 import types
 import typing
+import webbrowser
 from pathlib import Path
 from typing import Any, Literal, Union
 
@@ -30,7 +31,8 @@ from chemsidekick.core.external import doctor
 from chemsidekick.core.registry import Registry, ToolSpec, discover
 from chemsidekick.core.results import RecentStore
 from chemsidekick.core.runner import ConfirmationRequired, RunError, run_tool
-from chemsidekick.core.schemas import ToolError
+from chemsidekick.core.schemas import Artifact, ToolError, ToolResult
+from chemsidekick.core.viewer import viewer_html
 
 console = Console()
 err_console = Console(stderr=True)
@@ -67,6 +69,15 @@ def _parameter(name: str, field: FieldInfo) -> inspect.Parameter:
     extra = field.json_schema_extra if isinstance(field.json_schema_extra, dict) else {}
     default = ... if field.is_required() else field.default
     common: dict[str, Any] = {"help": field.description}
+    if extra.get("file_input"):
+        # Text that is usually long (e.g. XYZ): a file path, or read from standard input.
+        info = typer.Argument(
+            None, show_default=False, metavar="[FILE]",
+            help=f"{field.description} Use '-' or leave out to read standard input.",
+        )  # fmt: skip
+        return inspect.Parameter(
+            name, inspect.Parameter.KEYWORD_ONLY, default=info, annotation=str | None
+        )
     if extra.get("positional"):
         info = typer.Argument(default, show_default=False, **common)
     else:
@@ -101,7 +112,48 @@ _COMMON_PARAMS = [
         typer.Option(None, "--timeout", help="Time limit in seconds (overrides the default)."),
     ),
     _common("csk_yes", bool, typer.Option(False, "--yes", "-y", help="Skip confirmation.")),
+    _common(
+        "csk_no_open",
+        bool,
+        typer.Option(False, "--no-open", help="Do not open the 3D viewer in the browser."),
+    ),
 ]
+
+
+def _file_fields(model: type[BaseModel]) -> list[str]:
+    return [
+        n
+        for n, f in model.model_fields.items()
+        if isinstance(f.json_schema_extra, dict) and f.json_schema_extra.get("file_input")
+    ]
+
+
+def _read_text_input(value: str | None) -> str:
+    """A file path -> its text; '-' or nothing -> standard input."""
+    if value is None or value == "-":
+        if sys.stdin.isatty():
+            _fail("Give a file, or pipe the text in (e.g. `pbpaste | csk xyz`).")
+        return sys.stdin.read()
+    path = Path(value).expanduser()
+    if path.is_file():
+        return path.read_text(encoding="utf-8", errors="replace")
+    if "\n" in value:
+        return value  # the text itself, e.g. from a script
+    _fail(f"File not found: {value}")
+
+
+def _add_viewer(result: ToolResult, folder: Path) -> Path | None:
+    """Save an HTML 3D viewer next to the result (the terminal cannot draw 3D)."""
+    if not result.structures:
+        return None
+    paths = []
+    for i, s in enumerate(result.structures, start=1):
+        name = "viewer.html" if len(result.structures) == 1 else f"viewer-{i}.html"
+        path = folder / name
+        path.write_text(viewer_html(s), encoding="utf-8")
+        result.artifacts.append(Artifact(kind="html", path=path, title="3D viewer"))
+        paths.append(path)
+    return paths[0]
 
 
 def _fail(message: str) -> typing.NoReturn:
@@ -131,6 +183,8 @@ def _tool_command(spec: ToolSpec):
 
     def command(**kwargs: Any) -> None:
         common = {k: kwargs.pop(k) for k in list(kwargs) if k.startswith("csk_")}
+        for name in _file_fields(model):
+            kwargs[name] = _read_text_input(kwargs[name])
         config = _load_config()
         try:
             inp = model(**kwargs)
@@ -160,6 +214,7 @@ def _tool_command(spec: ToolSpec):
             store.discard(folder)
             _fail(str(e))
         result = outcome.result
+        viewer = _add_viewer(result, folder)
         store.record(
             number,
             folder,
@@ -178,6 +233,9 @@ def _tool_command(spec: ToolSpec):
             typer.echo(result.model_dump_json(indent=2))
             return
         render_result(result, console)
+        if viewer and not common["csk_no_open"]:
+            webbrowser.open(viewer.as_uri())
+            console.print("[dim]Opened the 3D viewer in the browser (--no-open to skip).[/dim]")
         if saved:
             console.print(f"Saved to {saved}", highlight=False)
         else:

@@ -26,11 +26,12 @@ GRID_COLUMNS = 8
 # Square icon buttons. Streamlit puts a "st-key-<key>" class on keyed widgets.
 _CSS = """
 <style>
-div[class*="st-key-tool-"] button {
+div[class*="st-key-tool-"] button, div[class*="st-key-selected-tool-"] button {
     width: 64px; height: 64px; min-height: 64px; padding: 0;
     border-radius: 14px; font-size: 1.4rem;
 }
-div[class*="st-key-tool-"] button p { font-size: 1.4rem; font-weight: 600; }
+div[class*="st-key-tool-"] button p, div[class*="st-key-selected-tool-"] button p {
+    font-size: 1.4rem; font-weight: 600; }
 div[class*="st-key-selected-"] button { border: 2px solid var(--primary-color, #ff4b4b); }
 /* Clickable table cells (e.g. periodic table): compact buttons. */
 div[class*="st-key-act-"] button {
@@ -51,6 +52,13 @@ def visible_tools(registry: Registry, category: str, query: str) -> list[ToolSpe
         return tools
     key = next((k for k, c in CATEGORIES.items() if c.title == category), None)
     return [t for t in tools if t.category == key]
+
+
+def first_tool(registry: Registry) -> ToolSpec:
+    """The tool selected when the app opens: the first one with a start view (it has
+    something to show before any input, e.g. the periodic table), else the first."""
+    tools = registry.all()
+    return next((t for t in tools if t.start_view), tools[0])
 
 
 def _icon_button(spec: ToolSpec, selected: bool) -> bool:
@@ -198,7 +206,7 @@ def main() -> None:
 
     tools = visible_tools(registry, category or ALL, query)
     if "tool" not in st.session_state and registry.all():
-        st.session_state["tool"] = registry.all()[0].name
+        st.session_state["tool"] = first_tool(registry).name
     _grid(tools)
     st.divider()
 

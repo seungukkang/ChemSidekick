@@ -253,6 +253,59 @@ def decide(value, text, agree, older, fallback, problems, label):
     return field(fb_value, UNVERIFIED, ["mendeleev"], text=fb_text, agree=agree)
 
 
+PT_NAMES = {
+    "iupac-periodic-table": "IUPAC periodic table (2022)",
+    "nist-periodic-table": "NIST periodic table (2024)",
+}
+
+
+def abridged_field(z, symbol, abridged, abridged21, iupac_pt, nist_pt, pc, m, problems):
+    """CIAAW abridged value (primary), checked against the IUPAC and NIST periodic
+    tables and PubChem. Both periodic tables were printed before the 2024 revision,
+    so where they differ from CIAAW 2024 they are compared with the 2021 table."""
+    a = abridged[z]
+    if a["abridged_atomic_weight"] in ("—", "-", ""):
+        return field(
+            None,
+            DEFINITION,
+            ["ciaaw-abridged"],
+            text="none",
+            note="no stable isotopes; CIAAW gives no abridged atomic weight",
+        )
+    text = f"{a['abridged_atomic_weight']} ± {a['uncertainty']}"
+    value = number(a["abridged_atomic_weight"])
+    shown = {
+        "iupac-periodic-table": (iupac_pt.get(z) or {}).get("abridged_atomic_weight", ""),
+        "nist-periodic-table": (nist_pt.get(z) or {}).get("abridged_atomic_weight", ""),
+        "pubchem": pc["atomic_mass"],
+    }
+    agree = ["ciaaw-abridged"] + [
+        k for k, v in shown.items() if (n := number(v)) and consistent(value, n)
+    ]
+    older = None
+    old = abridged21[z]["abridged_atomic_weight"]
+    for k in ("iupac-periodic-table", "nist-periodic-table"):
+        if k not in agree and shown[k] and _flat(shown[k]) == _flat(old):
+            older = {
+                "source": k,
+                "edition": "ciaaw-abridged-2021",
+                "evidence": f"{PT_NAMES[k]} shows {shown[k]}, "
+                "identical to the CIAAW 2021 abridged table",
+            }
+    out = decide(
+        float(value[0]),
+        text,
+        agree,
+        older,
+        lambda: (m.atomic_weight, f"{m.atomic_weight}"),
+        problems,
+        f"{symbol} abridged atomic weight (CIAAW {text}, shown elsewhere {shown})",
+    )
+    if out["status"] != UNVERIFIED:
+        out["uncertainty"] = float(a["uncertainty"])
+    return out
+
+
 def _mendeleev_isotope(m, a):
     return next((i for i in m.isotopes if i.mass_number == a), None)
 
@@ -277,6 +330,10 @@ def build():
     live = by_za(read("iaea_livechart"))
     asd = by_z(read("nist_asd_ground"))
     pub = by_z(read("pubchem"))
+    abridged = by_z(read("ciaaw_abridged"))
+    abridged21 = by_z(read("ciaaw_abridged_2021"))
+    iupac_pt = by_z(read("iupac_periodic_table"))
+    nist_pt = by_z(read("nist_periodic_table"))
 
     mend = {z: mendeleev_element(z) for z in range(1, 119)}
     asd_cores = {r["symbol"]: r["ground_shells"] for r in asd.values()}
@@ -359,6 +416,11 @@ def build():
             )
             if iv:
                 weight["note"] = "interval: the value depends on the source of the material"
+
+        # -- abridged standard atomic weight (one value; for molecular weights)
+        abridged_weight = abridged_field(
+            z, symbol, abridged, abridged21, iupac_pt, nist_pt, pc, m, problems
+        )
 
         # -- natural isotopes -------------------------------------------------
         isotopes = []
@@ -509,6 +571,7 @@ def build():
                 "block": block,
                 "identity_refs": ["ciaaw-weights", "nist-srd144", "pubchem"],
                 "atomic_weight": weight,
+                "abridged_weight": abridged_weight,
                 "isotopes": isotopes,
                 "longest_lived_isotope": longest,
                 "config": config,
@@ -542,6 +605,7 @@ def report(data, problems) -> str:
 
     rows = [
         ("Standard atomic weight", count(lambda e: [e["atomic_weight"]])),
+        ("Abridged atomic weight", count(lambda e: [e["abridged_weight"]])),
         ("Isotope abundance", count(lambda e: [i["abundance"] for i in e["isotopes"]])),
         ("Isotope mass", count(lambda e: [i["mass"] for i in e["isotopes"]])),
         ("Electron configuration", count(lambda e: [e["config"]])),
@@ -571,7 +635,10 @@ def report(data, problems) -> str:
         "",
     ]
     for e in els:
-        fields = [("atomic weight", e["atomic_weight"])] + [
+        fields = [
+            ("atomic weight", e["atomic_weight"]),
+            ("abridged atomic weight", e["abridged_weight"]),
+        ] + [
             (f"{e['symbol']}-{i['mass_number']} {kind}", i[kind])
             for i in e["isotopes"]
             for kind in ("mass", "abundance")

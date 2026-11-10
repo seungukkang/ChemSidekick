@@ -13,7 +13,11 @@
    "nist_srd144": "2026-11-10",
    "iaea_livechart": "2026-11-10",
    "pubchem": "2026-11-10",
-   "ciaaw_history": "2026-11-10"
+   "ciaaw_history": "2026-11-10",
+   "ciaaw_abridged": "2026-11-10",
+   "ciaaw_abridged_2021": "2026-11-10",
+   "iupac_periodic_table": "2026-11-10",
+   "nist_periodic_table": "2026-11-10"
   },
   "mendeleev": "1.3.0",
   "references": {
@@ -44,6 +48,18 @@
    "iaea-livechart": {
     "short": "IAEA LiveChart",
     "citation": "IAEA Nuclear Data Section, Live Chart of Nuclides (ground states), International Atomic Energy Agency, Vienna."
+   },
+   "ciaaw-abridged": {
+    "short": "CIAAW 2024 abridged",
+    "citation": "CIAAW, Abridged Standard Atomic Weights 2024, www.ciaaw.org; T. Prohaska et al., Standard atomic weights of the elements 2021 (IUPAC Technical Report), Pure Appl. Chem. 2022, 94, 573–600."
+   },
+   "iupac-periodic-table": {
+    "short": "IUPAC 2022",
+    "citation": "IUPAC Periodic Table of the Elements (version 4 May 2022), International Union of Pure and Applied Chemistry; abridged atomic weights as printed."
+   },
+   "nist-periodic-table": {
+    "short": "NIST 2024",
+    "citation": "NIST, Periodic Table: Atomic Properties of the Elements, NIST Special Publication 966 (June 2024); atomic weights as printed."
    },
    "pubchem": {
     "short": "PubChem",
@@ -84,6 +100,10 @@
    "ciaaw-history": {
     "short": "CIAAW element pages",
     "citation": "CIAAW, per-element pages describing past standard atomic weights, www.ciaaw.org."
+   },
+   "ciaaw-abridged-2021": {
+    "short": "CIAAW 2021 abridged",
+    "citation": "CIAAW, Abridged Standard Atomic Weights 2021, www.ciaaw.org (Internet Archive snapshot, 2023). Earlier edition, shown by the IUPAC 2022 and NIST 2024 periodic tables."
    }
   }
  },
@@ -111,6 +131,18 @@
     ],
     "text": "[1.00784, 1.00811]",
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 1.008,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "1.0080 ± 0.0002",
+    "uncertainty": 0.0002
    },
    "isotopes": [
     {
@@ -230,6 +262,18 @@
     ],
     "text": "4.002602(2)"
    },
+   "abridged_weight": {
+    "value": 4.0026,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "4.0026 ± 0.0001",
+    "uncertainty": 0.0001
+   },
    "isotopes": [
     {
      "mass_number": 4,
@@ -340,6 +384,17 @@
     ],
     "text": "[6.938, 6.997]",
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 6.94,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table"
+    ],
+    "text": "6.94 ± 0.06",
+    "uncertainty": 0.06
    },
    "isotopes": [
     {
@@ -458,6 +513,18 @@
     ],
     "text": "9.0121831(5)"
    },
+   "abridged_weight": {
+    "value": 9.0122,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "9.0122 ± 0.0001",
+    "uncertainty": 0.0001
+   },
    "isotopes": [
     {
      "mass_number": 9,
@@ -554,6 +621,18 @@
     ],
     "text": "[10.806, 10.821]",
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 10.81,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "10.81 ± 0.02",
+    "uncertainty": 0.02
    },
    "isotopes": [
     {
@@ -678,6 +757,18 @@
     ],
     "text": "[12.0096, 12.0116]",
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 12.011,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "12.011 ± 0.002",
+    "uncertainty": 0.002
    },
    "isotopes": [
     {
@@ -806,6 +897,18 @@
     "text": "[14.00643, 14.00728]",
     "note": "interval: the value depends on the source of the material"
    },
+   "abridged_weight": {
+    "value": 14.007,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "14.007 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 14,
@@ -932,6 +1035,18 @@
     ],
     "text": "[15.99903, 15.99977]",
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 15.999,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "15.999 ± 0.001",
+    "uncertainty": 0.001
    },
    "isotopes": [
     {
@@ -1083,6 +1198,18 @@
      "evidence": "NIST SRD 144 shows 18.998403163(6), identical to the CIAAW 2013 table"
     }
    },
+   "abridged_weight": {
+    "value": 18.998,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "18.998 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 19,
@@ -1175,6 +1302,18 @@
      "pubchem"
     ],
     "text": "20.1797(6)"
+   },
+   "abridged_weight": {
+    "value": 20.18,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "20.180 ± 0.001",
+    "uncertainty": 0.001
    },
    "isotopes": [
     {
@@ -1312,6 +1451,18 @@
     ],
     "text": "22.98976928(2)"
    },
+   "abridged_weight": {
+    "value": 22.99,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "22.990 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 23,
@@ -1408,6 +1559,18 @@
     ],
     "text": "[24.304, 24.307]",
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 24.305,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "24.305 ± 0.002",
+    "uncertainty": 0.002
    },
    "isotopes": [
     {
@@ -1559,6 +1722,18 @@
      "evidence": "NIST SRD 144 shows 26.9815385(7), identical to the CIAAW 2013 table"
     }
    },
+   "abridged_weight": {
+    "value": 26.982,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "26.982 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 27,
@@ -1658,6 +1833,18 @@
     ],
     "text": "[28.084, 28.086]",
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 28.085,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "28.085 ± 0.001",
+    "uncertainty": 0.001
    },
    "isotopes": [
     {
@@ -1809,6 +1996,18 @@
     ],
     "text": "30.973761998(5)"
    },
+   "abridged_weight": {
+    "value": 30.974,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "30.974 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 31,
@@ -1913,6 +2112,17 @@
     ],
     "text": "[32.059, 32.076]",
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 32.06,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table"
+    ],
+    "text": "32.06 ± 0.02",
+    "uncertainty": 0.02
    },
    "isotopes": [
     {
@@ -2089,6 +2299,18 @@
     "text": "[35.446, 35.457]",
     "note": "interval: the value depends on the source of the material"
    },
+   "abridged_weight": {
+    "value": 35.45,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "35.45 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 35,
@@ -2218,6 +2440,18 @@
      "evidence": "NIST SRD 144 shows 39.948(1), identical to the CIAAW 2013 table"
     },
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 39.95,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "39.95 ± 0.16",
+    "uncertainty": 0.16
    },
    "isotopes": [
     {
@@ -2354,6 +2588,18 @@
      "pubchem"
     ],
     "text": "39.0983(1)"
+   },
+   "abridged_weight": {
+    "value": 39.098,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "39.098 ± 0.001",
+    "uncertainty": 0.001
    },
    "isotopes": [
     {
@@ -2497,6 +2743,18 @@
      "pubchem"
     ],
     "text": "40.078(4)"
+   },
+   "abridged_weight": {
+    "value": 40.078,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "40.078 ± 0.004",
+    "uncertainty": 0.004
    },
    "isotopes": [
     {
@@ -2721,6 +2979,18 @@
      "evidence": "NIST SRD 144 shows 44.955908(5), identical to the CIAAW 2013 table"
     }
    },
+   "abridged_weight": {
+    "value": 44.956,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "44.956 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 45,
@@ -2821,6 +3091,18 @@
      "pubchem"
     ],
     "text": "47.867(1)"
+   },
+   "abridged_weight": {
+    "value": 47.867,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "47.867 ± 0.001",
+    "uncertainty": 0.001
    },
    "isotopes": [
     {
@@ -3038,6 +3320,18 @@
     ],
     "text": "50.9415(1)"
    },
+   "abridged_weight": {
+    "value": 50.942,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "50.942 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 51,
@@ -3170,6 +3464,18 @@
      "pubchem"
     ],
     "text": "51.9961(6)"
+   },
+   "abridged_weight": {
+    "value": 51.996,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "51.996 ± 0.001",
+    "uncertainty": 0.001
    },
    "isotopes": [
     {
@@ -3362,6 +3668,18 @@
      "evidence": "NIST SRD 144 shows 54.938044(3), identical to the CIAAW 2013 table"
     }
    },
+   "abridged_weight": {
+    "value": 54.938,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "54.938 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 55,
@@ -3468,6 +3786,18 @@
      "pubchem"
     ],
     "text": "55.845(2)"
+   },
+   "abridged_weight": {
+    "value": 55.845,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "55.845 ± 0.002",
+    "uncertainty": 0.002
    },
    "isotopes": [
     {
@@ -3653,6 +3983,18 @@
     ],
     "text": "58.933194(3)"
    },
+   "abridged_weight": {
+    "value": 58.933,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "58.933 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 59,
@@ -3753,6 +4095,18 @@
      "pubchem"
     ],
     "text": "58.6934(4)"
+   },
+   "abridged_weight": {
+    "value": 58.693,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "58.693 ± 0.001",
+    "uncertainty": 0.001
    },
    "isotopes": [
     {
@@ -3960,6 +4314,18 @@
     ],
     "text": "63.546(3)"
    },
+   "abridged_weight": {
+    "value": 63.546,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "63.546 ± 0.003",
+    "uncertainty": 0.003
+   },
    "isotopes": [
     {
      "mass_number": 63,
@@ -4086,6 +4452,18 @@
      "pubchem"
     ],
     "text": "65.38(2)"
+   },
+   "abridged_weight": {
+    "value": 65.38,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "65.38 ± 0.02",
+    "uncertainty": 0.02
    },
    "isotopes": [
     {
@@ -4280,6 +4658,18 @@
     ],
     "text": "69.723(1)"
    },
+   "abridged_weight": {
+    "value": 69.723,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "69.723 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 69,
@@ -4405,6 +4795,18 @@
      "pubchem"
     ],
     "text": "72.630(8)"
+   },
+   "abridged_weight": {
+    "value": 72.63,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "72.630 ± 0.008",
+    "uncertainty": 0.008
    },
    "isotopes": [
     {
@@ -4600,6 +5002,18 @@
     ],
     "text": "74.921595(6)"
    },
+   "abridged_weight": {
+    "value": 74.922,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "74.922 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 75,
@@ -4701,6 +5115,18 @@
      "pubchem"
     ],
     "text": "78.971(8)"
+   },
+   "abridged_weight": {
+    "value": 78.971,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "78.971 ± 0.008",
+    "uncertainty": 0.008
    },
    "isotopes": [
     {
@@ -4919,6 +5345,18 @@
     "text": "[79.901, 79.907]",
     "note": "interval: the value depends on the source of the material"
    },
+   "abridged_weight": {
+    "value": 79.904,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "79.904 ± 0.003",
+    "uncertainty": 0.003
+   },
    "isotopes": [
     {
      "mass_number": 79,
@@ -5046,6 +5484,18 @@
      "pubchem"
     ],
     "text": "83.798(2)"
+   },
+   "abridged_weight": {
+    "value": 83.798,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "83.798 ± 0.002",
+    "uncertainty": 0.002
    },
    "isotopes": [
     {
@@ -5267,6 +5717,18 @@
     ],
     "text": "85.4678(3)"
    },
+   "abridged_weight": {
+    "value": 85.468,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "85.468 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 85,
@@ -5385,6 +5847,18 @@
      "pubchem"
     ],
     "text": "87.62(1)"
+   },
+   "abridged_weight": {
+    "value": 87.62,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "87.62 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -5553,6 +6027,18 @@
     ],
     "text": "88.905838(2)"
    },
+   "abridged_weight": {
+    "value": 88.906,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "88.906 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 89,
@@ -5657,6 +6143,21 @@
      "edition": "ciaaw-weights-2013",
      "evidence": "NIST SRD 144 shows 91.224(2), identical to the CIAAW 2013 table"
     }
+   },
+   "abridged_weight": {
+    "value": 91.222,
+    "status": "partial",
+    "refs": [
+     "ciaaw-abridged",
+     "pubchem"
+    ],
+    "text": "91.222 ± 0.003",
+    "older": {
+     "source": "nist-periodic-table",
+     "edition": "ciaaw-abridged-2021",
+     "evidence": "NIST periodic table (2024) shows 91.224, identical to the CIAAW 2021 abridged table"
+    },
+    "uncertainty": 0.003
    },
    "isotopes": [
     {
@@ -5863,6 +6364,18 @@
     ],
     "text": "92.90637(1)"
    },
+   "abridged_weight": {
+    "value": 92.906,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "92.906 ± 0.001",
+    "uncertainty": 0.001
+   },
    "isotopes": [
     {
      "mass_number": 93,
@@ -5963,6 +6476,18 @@
      "pubchem"
     ],
     "text": "95.95(1)"
+   },
+   "abridged_weight": {
+    "value": 95.95,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "95.95 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -6232,6 +6757,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -6316,6 +6850,18 @@
      "pubchem"
     ],
     "text": "101.07(2)"
+   },
+   "abridged_weight": {
+    "value": 101.07,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "101.07 ± 0.02",
+    "uncertainty": 0.02
    },
    "isotopes": [
     {
@@ -6592,6 +7138,18 @@
      "evidence": "NIST SRD 144 shows 102.90550(2), identical to the CIAAW 2013 table"
     }
    },
+   "abridged_weight": {
+    "value": 102.91,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "102.91 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 103,
@@ -6697,6 +7255,18 @@
      "pubchem"
     ],
     "text": "106.42(1)"
+   },
+   "abridged_weight": {
+    "value": 106.42,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "106.42 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -6924,6 +7494,18 @@
     ],
     "text": "107.8682(2)"
    },
+   "abridged_weight": {
+    "value": 107.87,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "107.87 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 107,
@@ -7046,6 +7628,18 @@
      "pubchem"
     ],
     "text": "112.414(4)"
+   },
+   "abridged_weight": {
+    "value": 112.41,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "112.41 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -7314,6 +7908,18 @@
     ],
     "text": "114.818(1)"
    },
+   "abridged_weight": {
+    "value": 114.82,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "114.82 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 115,
@@ -7439,6 +8045,18 @@
      "pubchem"
     ],
     "text": "118.710(7)"
+   },
+   "abridged_weight": {
+    "value": 118.71,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "118.71 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -7778,6 +8396,18 @@
     ],
     "text": "121.760(1)"
    },
+   "abridged_weight": {
+    "value": 121.76,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "121.76 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 121,
@@ -7911,6 +8541,18 @@
      "pubchem"
     ],
     "text": "127.60(3)"
+   },
+   "abridged_weight": {
+    "value": 127.6,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "127.60 ± 0.03",
+    "uncertainty": 0.03
    },
    "isotopes": [
     {
@@ -8206,6 +8848,18 @@
     ],
     "text": "126.90447(3)"
    },
+   "abridged_weight": {
+    "value": 126.9,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "126.90 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 127,
@@ -8310,6 +8964,18 @@
      "pubchem"
     ],
     "text": "131.293(6)"
+   },
+   "abridged_weight": {
+    "value": 131.29,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "131.29 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -8614,6 +9280,18 @@
     ],
     "text": "132.90545196(6)"
    },
+   "abridged_weight": {
+    "value": 132.91,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "132.91 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 133,
@@ -8708,6 +9386,18 @@
      "pubchem"
     ],
     "text": "137.327(7)"
+   },
+   "abridged_weight": {
+    "value": 137.33,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "137.33 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -8952,6 +9642,18 @@
     ],
     "text": "138.90547(7)"
    },
+   "abridged_weight": {
+    "value": 138.91,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "138.91 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 139,
@@ -9080,6 +9782,18 @@
      "pubchem"
     ],
     "text": "140.116(1)"
+   },
+   "abridged_weight": {
+    "value": 140.12,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "140.12 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -9260,6 +9974,17 @@
     ],
     "text": "140.90766(1)"
    },
+   "abridged_weight": {
+    "value": 140.91,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "pubchem"
+    ],
+    "text": "140.91 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 141,
@@ -9362,6 +10087,18 @@
      "pubchem"
     ],
     "text": "144.242(3)"
+   },
+   "abridged_weight": {
+    "value": 144.24,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "144.24 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -9609,6 +10346,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -9686,6 +10432,18 @@
      "pubchem"
     ],
     "text": "150.36(2)"
+   },
+   "abridged_weight": {
+    "value": 150.36,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "150.36 ± 0.02",
+    "uncertainty": 0.02
    },
    "isotopes": [
     {
@@ -9938,6 +10696,18 @@
     ],
     "text": "151.964(1)"
    },
+   "abridged_weight": {
+    "value": 151.96,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "151.96 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 153,
@@ -10062,6 +10832,18 @@
      "pubchem"
     ],
     "text": "157.249(2)"
+   },
+   "abridged_weight": {
+    "value": 157.25,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "157.25 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -10332,6 +11114,18 @@
     ],
     "text": "158.925354(7)"
    },
+   "abridged_weight": {
+    "value": 158.93,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "158.93 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 159,
@@ -10430,6 +11224,18 @@
      "pubchem"
     ],
     "text": "162.500(1)"
+   },
+   "abridged_weight": {
+    "value": 162.5,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "162.50 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -10701,6 +11507,18 @@
     ],
     "text": "164.930329(5)"
    },
+   "abridged_weight": {
+    "value": 164.93,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "164.93 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 165,
@@ -10797,6 +11615,18 @@
      "pubchem"
     ],
     "text": "167.259(3)"
+   },
+   "abridged_weight": {
+    "value": 167.26,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "167.26 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -11039,6 +11869,18 @@
     ],
     "text": "168.934219(5)"
    },
+   "abridged_weight": {
+    "value": 168.93,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "168.93 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 169,
@@ -11143,6 +11985,18 @@
      "edition": "ciaaw-weights-2013",
      "evidence": "NIST SRD 144 shows 173.054(5), identical to the CIAAW 2013 table"
     }
+   },
+   "abridged_weight": {
+    "value": 173.05,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "173.05 ± 0.02",
+    "uncertainty": 0.02
    },
    "isotopes": [
     {
@@ -11414,6 +12268,18 @@
      "evidence": "NIST SRD 144 shows 174.9668(1), identical to the CIAAW 2013 table"
     }
    },
+   "abridged_weight": {
+    "value": 174.97,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "174.97 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 175,
@@ -11539,6 +12405,18 @@
      "pubchem"
     ],
     "text": "178.486(6)"
+   },
+   "abridged_weight": {
+    "value": 178.49,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "178.49 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -11783,6 +12661,18 @@
     ],
     "text": "180.94788(2)"
    },
+   "abridged_weight": {
+    "value": 180.95,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "180.95 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 181,
@@ -11915,6 +12805,18 @@
      "pubchem"
     ],
     "text": "183.84(1)"
+   },
+   "abridged_weight": {
+    "value": 183.84,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "183.84 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -12132,6 +13034,18 @@
     ],
     "text": "186.207(1)"
    },
+   "abridged_weight": {
+    "value": 186.21,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "186.21 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 187,
@@ -12266,6 +13180,18 @@
      "pubchem"
     ],
     "text": "190.23(3)"
+   },
+   "abridged_weight": {
+    "value": 190.23,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "190.23 ± 0.03",
+    "uncertainty": 0.03
    },
    "isotopes": [
     {
@@ -12544,6 +13470,18 @@
     ],
     "text": "192.217(2)"
    },
+   "abridged_weight": {
+    "value": 192.22,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "192.22 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 193,
@@ -12680,6 +13618,18 @@
      "pubchem"
     ],
     "text": "195.084(9)"
+   },
+   "abridged_weight": {
+    "value": 195.08,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "195.08 ± 0.02",
+    "uncertainty": 0.02
    },
    "isotopes": [
     {
@@ -12929,6 +13879,18 @@
      "evidence": "NIST SRD 144 shows 196.966569(5), identical to the CIAAW 2013 table"
     }
    },
+   "abridged_weight": {
+    "value": 196.97,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "196.97 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 197,
@@ -13030,6 +13992,18 @@
      "pubchem"
     ],
     "text": "200.592(3)"
+   },
+   "abridged_weight": {
+    "value": 200.59,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "200.59 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -13266,6 +14240,18 @@
     "text": "[204.382, 204.385]",
     "note": "interval: the value depends on the source of the material"
    },
+   "abridged_weight": {
+    "value": 204.38,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "204.38 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 203,
@@ -13394,6 +14380,18 @@
      "evidence": "NIST SRD 144 shows 207.2(1), identical to the CIAAW 2013 table"
     },
     "note": "interval: the value depends on the source of the material"
+   },
+   "abridged_weight": {
+    "value": 207.2,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "207.2 ± 1.1",
+    "uncertainty": 1.1
    },
    "isotopes": [
     {
@@ -13565,6 +14563,18 @@
     ],
     "text": "208.98040(1)"
    },
+   "abridged_weight": {
+    "value": 208.98,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "208.98 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 209,
@@ -13663,6 +14673,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -13745,6 +14764,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -13829,6 +14857,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -13904,6 +14941,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -13983,6 +15029,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -14060,6 +15115,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -14139,6 +15203,18 @@
      "pubchem"
     ],
     "text": "232.0377(4)"
+   },
+   "abridged_weight": {
+    "value": 232.04,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "232.04 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -14269,6 +15345,18 @@
     ],
     "text": "231.03588(1)"
    },
+   "abridged_weight": {
+    "value": 231.04,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "231.04 ± 0.01",
+    "uncertainty": 0.01
+   },
    "isotopes": [
     {
      "mass_number": 231,
@@ -14369,6 +15457,18 @@
      "pubchem"
     ],
     "text": "238.02891(3)"
+   },
+   "abridged_weight": {
+    "value": 238.03,
+    "status": "verified",
+    "refs": [
+     "ciaaw-abridged",
+     "iupac-periodic-table",
+     "nist-periodic-table",
+     "pubchem"
+    ],
+    "text": "238.03 ± 0.01",
+    "uncertainty": 0.01
    },
    "isotopes": [
     {
@@ -14526,6 +15626,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -14606,6 +15715,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -14692,6 +15810,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -14773,6 +15900,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -14851,6 +15987,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -14931,6 +16076,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -15010,6 +16164,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -15088,6 +16251,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -15164,6 +16336,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -15242,6 +16423,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -15319,6 +16509,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -15392,6 +16591,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -15470,6 +16678,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -15546,6 +16763,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -15625,6 +16851,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -15702,6 +16937,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -15781,6 +17025,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -15857,6 +17110,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -15930,6 +17192,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -16002,6 +17273,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -16078,6 +17358,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -16149,6 +17438,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -16222,6 +17520,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -16293,6 +17600,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {
@@ -16369,6 +17685,15 @@
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
    },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
+   },
    "isotopes": [],
    "longest_lived_isotope": {
     "value": {
@@ -16443,6 +17768,15 @@
     ],
     "text": "none",
     "note": "no stable isotopes; CIAAW gives no standard atomic weight"
+   },
+   "abridged_weight": {
+    "value": null,
+    "status": "definition",
+    "refs": [
+     "ciaaw-abridged"
+    ],
+    "text": "none",
+    "note": "no stable isotopes; CIAAW gives no abridged atomic weight"
    },
    "isotopes": [],
    "longest_lived_isotope": {

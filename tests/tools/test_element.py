@@ -272,3 +272,13 @@ def test_periodic_table_cells_have_number_block_and_tooltip():
     assert "Iron" in fe.tooltip and "55.845(2)" in fe.tooltip
     assert set(t.tags) == {"s", "p", "d", "f"}
     assert t.cells["Ce"].tag == "f" and t.cells["Na"].tag == "s"
+
+
+def test_abridged_atomic_weights():
+    els = {e["symbol"]: e for e in _dataset()["elements"]}
+    assert els["H"]["abridged_weight"]["text"] == "1.0080 ± 0.0002"
+    assert els["S"]["abridged_weight"]["status"] == "verified"
+    # The IUPAC (2022) and NIST (2024) tables still print the 2021 value 91.224.
+    assert els["Zr"]["abridged_weight"]["status"] == "partial"
+    assert els["Tc"]["abridged_weight"]["value"] is None
+    assert props("Fe")["Abridged atomic weight"] == "55.845 ± 0.002"

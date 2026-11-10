@@ -5,6 +5,7 @@ Built 2026-11-10 by `scripts/build_elements.py`. Do not edit by hand.
 | Property | verified | partial | definition | unverified |
 |---|---|---|---|---|
 | Standard atomic weight | 73 | 11 | 34 | 0 |
+| Abridged atomic weight | 83 | 1 | 34 | 0 |
 | Isotope abundance | 257 | 0 | 0 | 32 |
 | Isotope mass | 145 | 144 | 0 | 0 |
 | Electron configuration | 0 | 0 | 0 | 118 |
@@ -45,6 +46,7 @@ Electron configurations where both NIST ASD and PubChem agree with the shown val
 - Kr Kr-78 mass: NIST SRD 144 shows 77.92036494(76), equal to AME2012 (77.920364944)
 - Y Y-89 mass: NIST SRD 144 shows 88.9058403(24), equal to AME2012 (88.905840348)
 - Zr atomic weight: NIST SRD 144 shows 91.224(2), identical to the CIAAW 2013 table
+- Zr abridged atomic weight: NIST periodic table (2024) shows 91.224, identical to the CIAAW 2021 abridged table
 - Zr Zr-90 mass: NIST SRD 144 shows 89.9046977(20), equal to AME2012 (89.904697659)
 - Zr Zr-94 mass: NIST SRD 144 shows 93.9063108(20), equal to AME2012 (93.906310828)
 - Zr Zr-96 mass: NIST SRD 144 shows 95.9082714(21), equal to AME2012 (95.908271433)

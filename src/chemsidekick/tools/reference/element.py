@@ -77,6 +77,12 @@ def _index() -> dict[str, Element]:
     return index
 
 
+def by_symbol(symbol: str) -> Element | None:
+    """Exact element symbol (e.g. "Cl") -> element data, or None."""
+    el = _index().get(symbol.lower())
+    return el if el is not None and el["symbol"] == symbol else None
+
+
 def find(query: str) -> Element:
     """Find an element by symbol, English name, or atomic number."""
     q = query.strip()
@@ -127,7 +133,7 @@ def _or_dash(value: Any, unit: str = "") -> str:
     return f"{value:g}{unit}" if isinstance(value, float) else f"{value}{unit}"
 
 
-class _Refs:
+class Refs:
     """Numbers references in the order they are first used on one card: [1], [2], ..."""
 
     def __init__(self) -> None:
@@ -148,7 +154,7 @@ class _Refs:
         return [f"[{i}] {refs[k]['citation']}" for i, k in enumerate(self.order, start=1)]
 
 
-def _check(f: dict[str, Any], refs: _Refs) -> str:
+def check_mark(f: dict[str, Any], refs: Refs) -> str:
     """Short check mark with reference numbers: '✓ 2,3,4', '≈ 2,4', 'def 1', '? 5'."""
     if f["status"] == "verified":
         return f"✓ {refs.cite(f['refs'])}"
@@ -174,18 +180,18 @@ CHECK_LEGEND = (
 )
 
 
-def _weight_text(el: Element) -> str:
-    w = el["atomic_weight"]
+def _weight_text(el: Element, key: str = "atomic_weight") -> str:
+    w = el[key]
     return "none (no stable isotopes)" if w["text"] == "none" else w["text"]
 
 
-def _check_note(f: dict[str, Any], refs: _Refs) -> str:
+def _check_note(f: dict[str, Any], refs: Refs) -> str:
     """Hover text for a highlight, e.g. 'Check ✓ 2,3,4 (see References)'."""
-    return f"Check {_check(f, refs)} (see References)"
+    return f"Check {check_mark(f, refs)} (see References)"
 
 
 def _element_card(el: Element) -> ToolResult:
-    refs = _Refs()
+    refs = Refs()
     iupac = refs.cite(["iupac-definition"])
     identity = refs.cite(el["identity_refs"])
     group = el["group"] if el["group"] is not None else "—"
@@ -220,7 +226,12 @@ def _element_card(el: Element) -> ToolResult:
                 ["Atomic number", el["z"], f"def {iupac}"],
                 ["Symbol", el["symbol"], f"✓ {identity}"],
                 ["Name (IUPAC)", el["name"], f"✓ {identity}"],
-                ["Standard atomic weight", _weight_text(el), _check(w, refs)],
+                ["Standard atomic weight", _weight_text(el), check_mark(w, refs)],
+                [
+                    "Abridged atomic weight",
+                    _weight_text(el, "abridged_weight"),
+                    check_mark(el["abridged_weight"], refs),
+                ],
                 ["Group · Period · Block", position, f"def {iupac}"],
             ],
         ),
@@ -229,14 +240,18 @@ def _element_card(el: Element) -> ToolResult:
             columns=columns,
             minor_columns=[2],
             rows=[
-                ["Electronegativity (Pauling)", _or_dash(en["value"]), _check(en, refs)],
+                ["Electronegativity (Pauling)", _or_dash(en["value"]), check_mark(en, refs)],
                 [
                     "Covalent radius (single bond)",
                     _or_dash(radius["value"], " pm"),
-                    _check(radius, refs),
+                    check_mark(radius, refs),
                 ],
-                ["Oxidation states (main)", _states(ox["value"]["main"]), _check(ox, refs)],
-                ["Oxidation states (other known)", _states(ox["value"]["other"]), _check(ox, refs)],
+                ["Oxidation states (main)", _states(ox["value"]["main"]), check_mark(ox, refs)],
+                [
+                    "Oxidation states (other known)",
+                    _states(ox["value"]["other"]),
+                    check_mark(ox, refs),
+                ],
             ],
         ),  # fmt: skip
         Table(
@@ -247,9 +262,9 @@ def _element_card(el: Element) -> ToolResult:
                 [
                     "Ground-state configuration",
                     superscript_config(conf["value"]),
-                    _check(conf, refs),
+                    check_mark(conf, refs),
                 ],
-                ["Full configuration", superscript_config(conf["full"]), _check(conf, refs)],
+                ["Full configuration", superscript_config(conf["full"]), check_mark(conf, refs)],
             ],
         ),
     ]
@@ -264,9 +279,9 @@ def _element_card(el: Element) -> ToolResult:
                     [
                         f"{i['mass_number']}{el['symbol']}",
                         i["mass"]["text"],
-                        _check(i["mass"], refs),
+                        check_mark(i["mass"], refs),
                         i["abundance"]["text"],
-                        _check(i["abundance"], refs),
+                        check_mark(i["abundance"], refs),
                     ]
                     for i in el["isotopes"]
                 ],
@@ -284,7 +299,7 @@ def _element_card(el: Element) -> ToolResult:
                     [
                         f"{v['mass_number']}{el['symbol']}",
                         f"{v['half_life']:g} {v['unit']}",
-                        _check(ll, refs),
+                        check_mark(ll, refs),
                     ]
                 ],
             )

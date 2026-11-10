@@ -57,11 +57,27 @@ class Frame(_Model):
         return len(self.symbols)
 
 
+ViewStyle = Literal["ball-and-stick", "stick", "sphere"]
+
+
 class Structure3D(_Model):
-    """A 3D structure with one or more frames (conformers, trajectory, IRC)."""
+    """A 3D structure with one or more frames (conformers, trajectory, IRC).
+
+    `style`, `labels`, and `start_frame` are how the viewer first shows it;
+    the viewer lets the user change them.
+    """
 
     frames: list[Frame] = Field(min_length=1)
     title: str = ""
+    style: ViewStyle = "ball-and-stick"
+    labels: bool = False  # atom numbers, counted from 1
+    start_frame: int = 0  # index into frames
+
+    @model_validator(mode="after")
+    def _check(self) -> "Structure3D":
+        if not 0 <= self.start_frame < len(self.frames):
+            raise ValueError(f"start_frame {self.start_frame} is outside 0..{len(self.frames) - 1}")
+        return self
 
 
 # ---------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 """Draw any ToolResult in Streamlit, in the shared order:
-answer -> highlights -> warnings -> formulas -> tables and files -> footnotes
+answer -> highlights -> warnings -> formulas -> 3D structures -> tables and files -> footnotes
 (notes, assumptions, constants, references) in small text at the bottom.
 """
 
@@ -10,8 +10,12 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 
 from chemsidekick.core.schemas import Highlight, Table, ToolResult
+from chemsidekick.core.viewer import viewer_html
+
+VIEWER_HEIGHT = 520
 
 _MD_SPECIAL = re.compile(r"([\\`*_{}\[\]()#+\-.!|>~$])")
 _NUMBER = re.compile(r"^[−+-]?\d[\d.,]*(\(\d+\))?( ?[a-zA-Zµ%]+)?$")
@@ -232,6 +236,10 @@ def render_result(
     for f in result.formulas:
         st.latex(f.latex)
 
+    # A 3D structure is the main content of its result, so it comes before the tables.
+    for s in result.structures:
+        components.html(viewer_html(s), height=VIEWER_HEIGHT)
+
     # Short label/value tables are placed two per row; others take the full width.
     tables, i = result.tables, 0
     while i < len(tables):
@@ -247,8 +255,6 @@ def render_result(
         else:
             _table(t, key, on_action)
             i += 1
-    for s in result.structures:
-        st.caption(f"3D structure: {s.frames[0].n_atoms} atoms, {len(s.frames)} frame(s)")
     for i, a in enumerate(result.artifacts):
         path = Path(a.path)
         if a.kind == "svg" and path.exists():

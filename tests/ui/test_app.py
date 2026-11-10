@@ -48,6 +48,17 @@ def test_save_button_copies_result(app, isolated_user_dirs):
     assert (isolated_user_dirs / "saved" / "element").exists()
 
 
+def test_xyz_shows_3d_viewer(app):
+    app.button(key="tool-xyz").click().run()
+    app.text_area(key="in-xyz-text").input("O 0 0 0\nH 0 0.76 0.59\nH 0 -0.76 0.59\n")
+    app.button(key="FormSubmitter:form-xyz-Run").click().run()
+    assert not app.exception
+    assert any("H2O · 3 atoms · 1 frame" in m.value for m in app.markdown)
+    viewers = app.get("iframe")
+    assert len(viewers) == 1
+    assert "3Dmol" in viewers[0].proto.srcdoc
+
+
 def test_search_hides_non_matching_tools(app):
     app.text_input[0].input("zzzz").run()
     assert not any(b.key and "tool-element" in b.key for b in app.button)
