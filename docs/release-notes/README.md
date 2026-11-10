@@ -4,7 +4,7 @@ Changes in each version, newest first.
 
 | Version | Date | Summary |
 |---|---|---|
-| — | — | No releases yet. |
+| [v0.1.0](v0.1.0.md) | 2026-11-10 | First release: `element`, `xyz`, `stereo` tools; CLI and web interface. |
 
 ## How to write
 

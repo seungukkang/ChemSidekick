@@ -179,3 +179,25 @@ def test_stereo_max_flag_and_bad_smiles():
     bad = runner.invoke(app, ["stereo", "C1CC", "--no-open"])
     assert bad.exit_code == 1
     assert "ring is opened but never closed" in bad.stderr
+
+
+def test_formulas_are_shown_as_text_in_the_terminal():
+    """CLI shows the text form of a formula; the LaTeX form is for Streamlit (001 §6)."""
+    import io
+
+    from rich.console import Console
+
+    from chemsidekick.cli.render import render_result
+    from chemsidekick.core.schemas import Formula
+
+    out = io.StringIO()
+    render_result(
+        ToolResult(
+            answer="rate",
+            formulas=[Formula(latex=r"k = \kappa \frac{k_B T}{h}", text="k = κ kB T / h")],
+        ),
+        Console(file=out, width=100),
+    )
+    text = out.getvalue()
+    assert "k = κ kB T / h" in text
+    assert r"\frac" not in text
