@@ -36,12 +36,23 @@ class _Model(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class Mark(_Model):
+    """A label on one atom (e.g. a stereocenter 'R') or on a bond (two atoms, e.g. 'E')."""
+
+    atoms: list[int] = Field(min_length=1, max_length=2)  # atom indexes, from 0
+    label: str
+
+
 class Frame(_Model):
     """One 3D geometry: element symbols and Cartesian coordinates in Å."""
 
     symbols: list[str] = Field(min_length=1)
     coords: list[tuple[float, float, float]]
     comment: str = ""
+    # Number shown on each atom by the viewer's number button ("" = none). Empty
+    # list: atoms are numbered 1, 2, 3, ... in file order.
+    numbers: list[str] = []
+    marks: list[Mark] = []  # shown by the viewer's stereo button
 
     @model_validator(mode="after")
     def _check(self) -> "Frame":
@@ -50,6 +61,13 @@ class Frame(_Model):
         for i, xyz in enumerate(self.coords, start=1):
             if not all(math.isfinite(v) for v in xyz):
                 raise ValueError(f"atom {i} has a non-finite coordinate: {xyz}")
+        if self.numbers and len(self.numbers) != len(self.symbols):
+            raise ValueError(f"{len(self.numbers)} numbers for {len(self.symbols)} atoms")
+        for m in self.marks:
+            if any(not 0 <= a < len(self.symbols) for a in m.atoms):
+                raise ValueError(
+                    f"mark {m.label!r} points to an atom outside 0..{len(self.symbols) - 1}"
+                )
         return self
 
     @property
@@ -58,6 +76,9 @@ class Frame(_Model):
 
 
 ViewStyle = Literal["ball-and-stick", "stick", "sphere"]
+# frames: a sequence in time (trajectory, IRC) -> slider and Play.
+# pages: separate structures (e.g. stereoisomers) -> previous/next and page numbers.
+Navigation = Literal["frames", "pages"]
 
 
 class Structure3D(_Model):
@@ -70,8 +91,12 @@ class Structure3D(_Model):
     frames: list[Frame] = Field(min_length=1)
     title: str = ""
     style: ViewStyle = "ball-and-stick"
-    labels: bool = False  # atom numbers, counted from 1
+    labels: bool = False  # show atom numbers at first
+    marks_shown: bool = True  # show marks (e.g. stereocenters) at first, if there are any
     start_frame: int = 0  # index into frames
+    navigation: Navigation = "frames"
+    page_name: str = "Frame"  # what one frame is called, e.g. "Isomer"
+    numbers_name: str = "Atom numbers"  # text of the number button, e.g. "Locants"
 
     @model_validator(mode="after")
     def _check(self) -> "Structure3D":

@@ -25,7 +25,11 @@ def test_2_3_dibromobutane_has_a_meso_form():
     r = run("CC(Br)C(Br)C")
     assert r.answer == "3 stereoisomers (1 pair of enantiomers, 1 meso)"
     labels = {i["cip"]: i["relation"] for i in r.data["isomers"]}
-    assert labels["C2 S, C4 R"] == "meso"
+    assert labels == {
+        "(2R,3S)": "meso",
+        "(2R,3R)": "enantiomer of #3",
+        "(2S,3S)": "enantiomer of #2",
+    }
 
 
 def test_tartaric_acid():
@@ -36,14 +40,15 @@ def test_tartaric_acid():
 def test_2_butene_e_and_z():
     r = run("CC=CC", skip_3d=True)
     assert len(r.data["isomers"]) == 2
-    assert sorted(i["cip"][-1] for i in r.data["isomers"]) == ["E", "Z"]
+    assert sorted(i["cip"] for i in r.data["isomers"]) == ["(2E)", "(2Z)"]
     assert relations(r) == ["achiral", "achiral"]
+    assert r.answer == "2 stereoisomers (2 achiral)"
 
 
 def test_specified_center_is_kept():
     r = run("C[C@H](Br)C(Br)C", skip_3d=True)
     assert len(r.data["isomers"]) == 2
-    assert all(i["cip"].startswith("C2 S") for i in r.data["isomers"])
+    assert sorted(i["cip"] for i in r.data["isomers"]) == ["(2R,3S)", "(2S,3S)"]
     assert sorted(relations(r)) == ["chiral (enantiomer not shown)", "meso"]
 
 
@@ -54,7 +59,27 @@ def test_enumerate_all_ignores_given_stereo():
 def test_pseudoasymmetric_center():
     r = run("CC(O)C(O)C(O)C", skip_3d=True)
     assert r.answer == "4 stereoisomers (1 pair of enantiomers, 2 meso)"
-    assert any(" r" in i["cip"] for i in r.data["isomers"])
+    assert sorted(i["cip"] for i in r.data["isomers"]) == [
+        "(2R,3r,4S)",
+        "(2R,3s,4S)",
+        "(2R,4R)",
+        "(2S,4S)",
+    ]
+    assert all(i["locants"] == "iupac" for i in r.data["isomers"])
+
+
+def test_achiral_diastereomers_are_not_called_meso():
+    # cis/trans-1,4-dimethylcyclohexane: no chiral member in the set (IUPAC meso).
+    r = run("CC1CCC(C)CC1", skip_3d=True)
+    assert relations(r) == ["achiral", "achiral"]
+    assert sorted(i["cip"] for i in r.data["isomers"]) == ["(1r,4r)", "(1s,4s)"]
+    assert r.answer == "2 stereoisomers (2 achiral)"
+
+
+def test_unsupported_structures_use_atom_numbers_and_say_so():
+    r = run("CCC(C)c1ccccc1", skip_3d=True)
+    assert sorted(i["cip"] for i in r.data["isomers"]) == ["atom 3 R", "atom 3 S"]
+    assert any("not IUPAC locants" in n and "substituent" in n for n in r.notes)
 
 
 def test_cholesterol_is_limited_to_8_with_warning():
@@ -101,6 +126,8 @@ def test_3d_enantiomers_are_mirror_images_with_equal_energy():
     assert a["energy_kcal_mol"] == pytest.approx(b["energy_kcal_mol"])
     frames = r.structures[0].frames
     assert len(frames) == 2
+    s = r.structures[0]
+    assert (s.navigation, s.page_name, s.numbers_name) == ("pages", "Isomer", "Locants")
     assert frames[1].coords[0][0] == pytest.approx(-frames[0].coords[0][0])
 
 
@@ -112,7 +139,7 @@ def test_files():
         "#2 · enantiomer of #3",
         "#3 · enantiomer of #2",
     ]
-    assert drawings[0].note == "C2 S, C4 R"
+    assert drawings[0].note == "(2R,3S)"
     assert all("<svg" in a.path.read_text() for a in drawings)
     sdf = next(a.path for a in r.artifacts if a.kind == "sdf")
     assert sdf.read_text().count("$$$$") == 3
@@ -142,8 +169,12 @@ def test_each_drawing_shows_its_own_stereochemistry(smiles):
 def test_same_e_z_isomers_share_a_layout():
     isomers, drawn = _drawn("CC(O)C=CC(O)C")
     pos = [m.GetConformer().GetPositions().tolist() for m in drawn]
-    e = [p for i, p in zip(isomers, pos, strict=True) if i.labels.endswith("E")]
-    z = [p for i, p in zip(isomers, pos, strict=True) if i.labels.endswith("Z")]
+
+    def has(iso, d):
+        return any(label == d for _, label in iso.stereo)
+
+    e = [p for i, p in zip(isomers, pos, strict=True) if has(i, "E")]
+    z = [p for i, p in zip(isomers, pos, strict=True) if has(i, "Z")]
     assert all(p == e[0] for p in e) and all(p == z[0] for p in z)
     assert e[0] != z[0]
 
@@ -163,3 +194,15 @@ def test_condensed_formula_input_is_converted_and_reported():
 def test_unconvertible_condensed_formula_explains_smiles():
     with pytest.raises(ToolError, match="SMILES leaves hydrogens out"):
         run("CH3-CO-CH3")
+
+
+def test_3d_frames_carry_locants_and_stereo_marks():
+    r = run("CC(O)C(O)C(O)C")
+    frame = next(f for f in r.structures[0].frames if "3r" in f.comment)
+    # C2, C3, C4 of pentane-2,3,4-triol carry locants; O and H atoms none.
+    heavy = [n for n in frame.numbers if n]
+    assert sorted(heavy, key=int) == ["1", "2", "3", "4", "5"]
+    assert sorted(m.label for m in frame.marks) == ["R", "S", "r"]
+    assert frame.comment == "#3 · meso · (2R,3r,4S)"
+    for m in frame.marks:
+        assert frame.symbols[m.atoms[0]] == "C"

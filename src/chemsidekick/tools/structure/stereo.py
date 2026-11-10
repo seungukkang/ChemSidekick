@@ -4,9 +4,13 @@ Steps (plan 003 §6.3):
     1. read the SMILES (RDKit errors are turned into plain sentences)
     2. enumerate stereoisomers (centers already given in the SMILES are kept,
        unless enumerate_all is set), at most `max_isomers`
-    3. CIP labels (R/S, r/s, E/Z) with RDKit's new CIP labeler
+    3. CIP labels (R/S, r/s, E/Z) with RDKit's new CIP labeler, numbered with
+       IUPAC locants (chem.locants), e.g. (2R,3s,4S); atom numbers if the
+       structure is outside what chem.locants handles
     4. relations: the mirror image of each isomer (all tetrahedral centers
-       inverted) is compared with the others by canonical SMILES
+       inverted) is compared with the others by canonical SMILES. "meso" follows
+       the IUPAC definition: an achiral member of a set of stereoisomers that
+       also contains chiral members
     5. one 2D drawing per isomer with CIP labels, all on the same layout
     6. optional 3D: ETKDGv3 embedding with a fixed seed, then MMFF94 (UFF if
        MMFF94 has no parameters), and a check that the 3D structure has the
@@ -21,6 +25,12 @@ from dataclasses import dataclass, field
 from pydantic import BaseModel, Field
 
 from chemsidekick.chem.condensed import looks_condensed, to_smiles
+from chemsidekick.chem.locants import (
+    Unsupported,
+    descriptor_text,
+    iupac_numbering,
+    stereo_elements,
+)
 from chemsidekick.core.drawing import with_backdrop
 from chemsidekick.core.registry import tool
 from chemsidekick.core.runner import workdir
@@ -28,6 +38,7 @@ from chemsidekick.core.schemas import (
     Artifact,
     Frame,
     Highlight,
+    Mark,
     Smiles,
     Structure3D,
     Table,
@@ -89,6 +100,7 @@ def _timeout(inp: StereoInput) -> float:
 def stereo(inp: StereoInput) -> ToolResult:
     mol, reading = read_structure(inp.smiles)
     isomers, possible = enumerate_isomers(mol, inp.max_isomers, inp.enumerate_all)
+    numbering = number_isomers(isomers)
     for iso in isomers:
         iso.relation = relation_of(iso, isomers)
     warnings = [reading] if reading else []
@@ -99,7 +111,7 @@ def stereo(inp: StereoInput) -> ToolResult:
         )
     if not inp.skip_3d:
         warnings += embed_all(isomers)
-    return _result(inp, mol, isomers, possible, warnings)
+    return _result(inp, mol, isomers, possible, warnings, numbering)
 
 
 # ---------------------------------------------------------------------------
@@ -190,9 +202,11 @@ class Isomer:
     number: int
     mol: object  # rdkit Mol (no hydrogens)
     smiles: str
-    labels: str
+    stereo: list  # CIP stereo elements: ((atom,), "R") or ((atom1, atom2), "E")
     has_tetrahedral: bool
     mirror_smiles: str
+    labels: str = "—"  # stereodescriptors, e.g. "(2R,3s,4S)"
+    locants: dict[int, int] | None = None  # atom index -> IUPAC locant (None: atom numbers)
     relation: str = ""
     mol3d: object | None = None
     energy: float | None = None
@@ -201,24 +215,39 @@ class Isomer:
     notes: list[str] = field(default_factory=list)
 
 
-def cip_labels(mol) -> str:
-    """'C2 R, C3 S, C1=C2 E' with atom numbers counted from 1 (as in the 3D view)."""
-    from rdkit.Chem import rdCIPLabeler
+@dataclass
+class NumberingNote:
+    iupac: bool
+    text: str
 
-    rdCIPLabeler.AssignCIPLabels(mol)
-    parts = [
-        f"{a.GetSymbol()}{a.GetIdx() + 1} {a.GetProp('_CIPCode')}"
-        for a in mol.GetAtoms()
-        if a.HasProp("_CIPCode")
-    ]
-    for b in mol.GetBonds():
-        if b.HasProp("_CIPCode"):
-            a1, a2 = b.GetBeginAtom(), b.GetEndAtom()
-            parts.append(
-                f"{a1.GetSymbol()}{a1.GetIdx() + 1}={a2.GetSymbol()}{a2.GetIdx() + 1} "
-                f"{b.GetProp('_CIPCode')}"
-            )
-    return ", ".join(parts) or "—"
+
+def number_isomers(isomers: list["Isomer"]) -> NumberingNote:
+    """Stereodescriptors with IUPAC locants for every isomer, e.g. (2R,3s,4S).
+
+    The numbering can differ between isomers only where the IUPAC rules leave a
+    choice that the stereodescriptors decide (R before S). If the structure is
+    outside what chem.locants handles, every isomer uses atom numbers instead.
+    """
+    try:
+        numberings = [iupac_numbering(iso.mol, iso.stereo) for iso in isomers]
+    except Unsupported as e:
+        for iso in isomers:
+            iso.locants = None
+            iso.labels = descriptor_text(iso.stereo, None) or "—"
+        return NumberingNote(
+            False,
+            "Numbers in the stereodescriptors are atom numbers in the order of the SMILES, "
+            f"not IUPAC locants: {e}.",
+        )
+    for iso, n in zip(isomers, numberings, strict=True):
+        iso.locants = n.locants
+        iso.labels = descriptor_text(iso.stereo, n.locants) or "—"
+    return NumberingNote(
+        True,
+        f"Numbers in the stereodescriptors are IUPAC locants of the parent "
+        f"({numberings[0].parent}), IUPAC 2013 Recommendations P-31.1.4 (where the "
+        "numbering is otherwise symmetric, R gets the lower locant: P-31.1.4.3.4).",
+    )
 
 
 def mirror_image(mol):
@@ -264,7 +293,7 @@ def enumerate_isomers(mol, max_isomers: int, enumerate_all: bool) -> tuple[list[
                 number=k,
                 mol=m,
                 smiles=Chem.MolToSmiles(m),
-                labels=cip_labels(m),
+                stereo=stereo_elements(m),
                 has_tetrahedral=has_tet,
                 mirror_smiles=Chem.MolToSmiles(mirror_image(m)),
             )
@@ -275,7 +304,11 @@ def enumerate_isomers(mol, max_isomers: int, enumerate_all: bool) -> tuple[list[
 def relation_of(iso: Isomer, isomers: list[Isomer]) -> str:
     """How an isomer relates to its own mirror image."""
     if iso.mirror_smiles == iso.smiles:
-        return "meso" if iso.has_tetrahedral else "achiral"
+        # IUPAC: meso = an achiral member of a set of diastereoisomers that also
+        # includes chiral members (it has stereocenters, but is its own mirror image).
+        has_center = any(len(atoms) == 1 for atoms, _ in iso.stereo)
+        chiral_in_set = any(o.mirror_smiles != o.smiles for o in isomers)
+        return "meso" if has_center and chiral_in_set else "achiral"
     partner = next((o for o in isomers if o.smiles == iso.mirror_smiles), None)
     if partner:
         return f"enantiomer of #{partner.number}"
@@ -364,12 +397,22 @@ def embed_all(isomers: list[Isomer]) -> list[str]:
 
 
 def _frame(iso: Isomer) -> Frame:
+    """3D frame: heavy atoms keep their indexes (hydrogens are added after them),
+    so locants and stereo marks carry over from the 2D molecule."""
     m = iso.mol3d
     pos = m.GetConformer().GetPositions()
+    heavy = iso.mol.GetNumAtoms()
+    if iso.locants is not None:
+        numbers = [str(iso.locants.get(i, "")) if i < heavy else "" for i in range(m.GetNumAtoms())]
+    else:
+        numbers = [str(i + 1) if i < heavy else "" for i in range(m.GetNumAtoms())]
+    labels = "" if iso.labels == "—" else f" · {iso.labels}"
     return Frame(
         symbols=[a.GetSymbol() for a in m.GetAtoms()],
         coords=[tuple(float(v) for v in p) for p in pos],
-        comment=f"#{iso.number} · {iso.labels} · {iso.relation}",
+        comment=f"#{iso.number} · {iso.relation}{labels}",
+        numbers=numbers,
+        marks=[Mark(atoms=list(atoms), label=d) for atoms, d in iso.stereo],
     )
 
 
@@ -478,16 +521,19 @@ def _summary(isomers: list[Isomer]) -> str:
     n = len(isomers)
     pairs = sum(1 for i in isomers if i.relation.startswith("enantiomer of")) // 2
     meso = sum(1 for i in isomers if i.relation == "meso")
+    achiral = sum(1 for i in isomers if i.relation == "achiral")
     parts = []
     if pairs:
         parts.append(f"{pairs} pair{'s' if pairs > 1 else ''} of enantiomers")
     if meso:
         parts.append(f"{meso} meso")
+    if achiral and n > 1:
+        parts.append(f"{achiral} achiral")
     head = f"{n} stereoisomer{'s' if n > 1 else ''}"
     return f"{head} ({', '.join(parts)})" if parts else head
 
 
-def _result(inp, mol, isomers, possible, warnings) -> ToolResult:
+def _result(inp, mol, isomers, possible, warnings, numbering: NumberingNote) -> ToolResult:
     from rdkit import Chem
 
     if not isomers:
@@ -497,12 +543,12 @@ def _result(inp, mol, isomers, possible, warnings) -> ToolResult:
 
     rows = []
     for iso in isomers:
-        row = [iso.number, iso.smiles, iso.labels, iso.relation]
+        row = [iso.number, iso.labels, iso.relation, iso.smiles]
         if not inp.skip_3d:
             energy = f"{iso.energy:.2f}" if iso.energy is not None else "—"
             row += [iso.status_3d, f"{energy} ({iso.force_field})" if iso.force_field else energy]
         rows.append(row)
-    columns = ["#", "SMILES", "CIP labels", "Relation"]
+    columns = ["#", "Stereodescriptors", "Relation", "SMILES"]
     if not inp.skip_3d:
         columns += ["3D", "Energy (kcal/mol)"]
     tables = [Table(title="Stereoisomers", columns=columns, rows=rows)]
@@ -526,6 +572,9 @@ def _result(inp, mol, isomers, possible, warnings) -> ToolResult:
             Structure3D(
                 frames=[_frame(i) for i in with_3d],
                 title=f"Stereoisomers of {Chem.MolToSmiles(mol, isomericSmiles=False)}",
+                navigation="pages",
+                page_name="Isomer",
+                numbers_name="Locants" if numbering.iupac else "Atom numbers",
             )
         )
 
@@ -538,6 +587,10 @@ def _result(inp, mol, isomers, possible, warnings) -> ToolResult:
         "bonds (E/Z), as perceived by RDKit.",
         "Relations: an isomer's mirror image has every tetrahedral center inverted; "
         "isomers are compared by canonical SMILES.",
+        "meso: an achiral stereoisomer (it has stereocenters but is identical to its "
+        "mirror image) in a set that also contains chiral stereoisomers (IUPAC Gold "
+        "Book). Achiral isomers in a set without chiral members, such as cis- and "
+        "trans-1,4-dimethylcyclohexane, are called achiral.",
     ]
     if not inp.skip_3d:
         assumptions.append(
@@ -563,8 +616,9 @@ def _result(inp, mol, isomers, possible, warnings) -> ToolResult:
         assumptions=assumptions,
         notes=[
             "Relations: E = enantiomers, D = diastereomers.",
-            "Atom numbers in CIP labels count from 1 in the order of the SMILES; "
-            "they match the atom numbers in the 3D view.",
+            numbering.text,
+            "In the 3D view, the number button shows the same numbers, and the "
+            "stereocenter button marks each stereo element.",
             f"Each isomer is saved as SVG{'' if inp.skip_3d else ' and XYZ'} in the "
             "isomers folder. 2D drawings with the same E/Z configuration share one "
             "layout, so only the wedges differ.",
@@ -574,7 +628,12 @@ def _result(inp, mol, isomers, possible, warnings) -> ToolResult:
             f"RDKit {rdkit_version}: stereoisomer enumeration, new CIP labeler "
             "(R. M. Hanson et al., J. Chem. Inf. Model. 2018, 58, 1755–1765), ETKDGv3 "
             "(S. Wang, J. Witek, G. A. Landrum, S. Riniker, J. Chem. Inf. Model. 2020, "
-            "60, 2044–2058), MMFF94 (T. A. Halgren, J. Comput. Chem. 1996, 17, 490–519)."
+            "60, 2044–2058), MMFF94 (T. A. Halgren, J. Comput. Chem. 1996, 17, 490–519).",
+            "IUPAC numbering: H. A. Favre, W. H. Powell, Nomenclature of Organic Chemistry: "
+            "IUPAC Recommendations and Preferred Names 2013, Royal Society of Chemistry, "
+            "2014 (P-31.1.4, P-44).",
+            "meso: IUPAC Compendium of Chemical Terminology (Gold Book), 'meso-compound', "
+            "https://doi.org/10.1351/goldbook.M03839.",
         ],
         data={
             "possible": possible,
@@ -583,6 +642,7 @@ def _result(inp, mol, isomers, possible, warnings) -> ToolResult:
                     "number": i.number,
                     "smiles": i.smiles,
                     "cip": i.labels,
+                    "locants": "iupac" if numbering.iupac else "atom numbers",
                     "relation": i.relation,
                     "status_3d": i.status_3d,
                     "energy_kcal_mol": i.energy,
