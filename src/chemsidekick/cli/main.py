@@ -32,6 +32,7 @@ from chemsidekick.core.registry import Registry, ToolSpec, discover
 from chemsidekick.core.results import RecentStore
 from chemsidekick.core.runner import ConfirmationRequired, RunError, run_tool
 from chemsidekick.core.schemas import Artifact, ToolError, ToolResult
+from chemsidekick.core.theme import THEME_COLOR
 from chemsidekick.core.viewer import viewer_html
 
 console = Console()
@@ -326,6 +327,7 @@ def build_app(registry: Registry) -> typer.Typer:
             "--browser.gatherUsageStats", "false",
             "--server.showEmailPrompt", "false",  # no first-run email question
             "--client.toolbarMode", "minimal",  # hide Streamlit's developer menu ("Deploy")
+            "--theme.primaryColor", THEME_COLOR,  # core/theme.py
         ]  # fmt: skip
         raise typer.Exit(subprocess.call(cmd))
 
