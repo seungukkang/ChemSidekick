@@ -1,7 +1,7 @@
 from PIL import Image
 
-from chemsidekick.core.schemas import Frame
-from chemsidekick.core.spin import FRAMES, HEIGHT, WIDTH, bonds, spin_gif
+from chemsidekick.core.schemas import Frame, Mark
+from chemsidekick.core.spin import FRAMES, HEIGHT, WIDTH, bonds, mark_color, spin_gif
 
 WATER = Frame(
     symbols=["O", "H", "H"],
@@ -62,3 +62,35 @@ def test_corners_outside_the_rounded_border_are_transparent(tmp_path):
         rgba = im.convert("RGBA")
         assert rgba.getpixel((0, 0))[3] == 0  # corner: see-through on a dark page
         assert rgba.getpixel((WIDTH // 2, HEIGHT // 2))[3] == 255
+
+
+def _count(path, color, tol=40) -> int:
+    """Pixels of the first frame close to `color`."""
+    with Image.open(path) as im:
+        data = im.convert("RGB").tobytes()
+    px = [data[k : k + 3] for k in range(0, len(data), 3)]
+    return sum(
+        1 for r, g, b in px if abs(r - color[0]) + abs(g - color[1]) + abs(b - color[2]) < tol
+    )
+
+
+def test_mark_colors_match_the_viewer():
+    assert mark_color("R") == mark_color("S") == (0x7C, 0x3A, 0xED)
+    assert mark_color("r") == (0x0D, 0x94, 0x88)
+    assert mark_color("E") == mark_color("Z") == (0xEA, 0x58, 0x0C)
+    assert mark_color("?") == (0x4B, 0x55, 0x63)
+
+
+def test_stereo_marks_are_drawn_as_badges(tmp_path):
+    marked = BENZENE.model_copy(update={"marks": [Mark(atoms=[0], label="R")]})
+    purple = (0x7C, 0x3A, 0xED)
+    with_marks = spin_gif(marked, tmp_path / "m.gif")
+    without = spin_gif(marked, tmp_path / "n.gif", marks=False)
+    assert _count(with_marks, purple) > 30  # the badge behind the white "R"
+    assert _count(without, purple) == 0
+    assert _count(spin_gif(BENZENE, tmp_path / "plain.gif"), purple) == 0  # no marks, no badge
+
+
+def test_double_bond_marks_sit_between_two_atoms(tmp_path):
+    marked = BENZENE.model_copy(update={"marks": [Mark(atoms=[0, 1], label="E")]})
+    assert _count(spin_gif(marked, tmp_path / "e.gif"), (0xEA, 0x58, 0x0C)) > 30

@@ -9,16 +9,18 @@ with rounded corners and a border in the theme color, so an interface can swap
 a drawing for its 3D view in place. The structure turns once around the vertical
 axis, seen slightly from above, with perspective (nearer atoms larger), shaded
 spheres, and depth fog (farther atoms paler), so it reads as 3D. Bonds are
-inferred from distances only.
+inferred from distances only. Stereo marks (R/S, r/s, E/Z) are drawn as in the
+HTML viewer: a translucent halo on the stereocenter and a colored label badge.
 """
 
+from functools import cache
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 from chemsidekick.core.drawing import BORDER_COLOR, BORDER_WIDTH, CORNER_RADIUS
-from chemsidekick.core.schemas import Frame
+from chemsidekick.core.schemas import Frame, Mark
 
 # Same size as the RDKit drawings of the stereo tool.
 WIDTH, HEIGHT = 300, 240
@@ -112,6 +114,63 @@ def _stick(d: ImageDraw.ImageDraw, a, b, wa: float, wb: float, ca: RGB, cb: RGB)
         )
 
 
+# Stereo marks, styled like the HTML viewer (core/viewer.py, markColor): a
+# translucent halo on the stereocenter (or along the double bond) and a badge
+# with the label, always in front so it stays readable while the structure turns.
+MARK_COLORS = {"RS": "7C3AED", "rs": "0D9488", "EZ": "EA580C"}
+MARK_DEFAULT = "4B5563"
+HALO_RADIUS_A = 0.7  # Å, as in the viewer
+HALO_ALPHA = 0.3
+BADGE_FONT_PX = 13
+
+
+def mark_color(label: str) -> RGB:
+    for letters, color in MARK_COLORS.items():
+        if len(label) == 1 and label in letters:
+            return _rgb(color)
+    return _rgb(MARK_DEFAULT)
+
+
+@cache
+def _bold_font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    try:
+        return ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", size, index=1)
+    except OSError:  # not macOS
+        return ImageFont.load_default(size)
+
+
+def _draw_marks(img: Image.Image, marks: list[Mark], sx, sy, f, px: float) -> Image.Image:
+    """Halos (translucent) and label badges on top of one frame (SS× size)."""
+    layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    alpha = int(255 * HALO_ALPHA)
+    for m in marks:
+        color = mark_color(m.label)
+        if len(m.atoms) == 2:  # double bond: a translucent band along the bond
+            i, j = m.atoms
+            width = 2 * 0.32 * px * (f[i] + f[j]) / 2
+            d.line([(sx[i], sy[i]), (sx[j], sy[j])], fill=(*color, alpha), width=int(width))
+        else:
+            i = m.atoms[0]
+            r = HALO_RADIUS_A * px * f[i]
+            d.ellipse([sx[i] - r, sy[i] - r, sx[i] + r, sy[i] + r], fill=(*color, alpha))
+    font = _bold_font(BADGE_FONT_PX * SS)
+    for m in marks:
+        x = float(np.mean([sx[a] for a in m.atoms]))
+        y = float(np.mean([sy[a] for a in m.atoms]))
+        left, top, right, bottom = d.textbbox((x, y), m.label, font=font, anchor="mm")
+        pad = 3 * SS
+        d.rounded_rectangle(
+            [left - pad, top - pad, right + pad, bottom + pad],
+            radius=3 * SS,
+            fill=(*mark_color(m.label), 242),
+        )
+        d.text((x, y), m.label, font=font, anchor="mm", fill=(255, 255, 255, 255))
+    out = img.convert("RGBA")
+    out.alpha_composite(layer)
+    return out.convert("RGB")
+
+
 def _background() -> Image.Image:
     """White, with the drawings' rounded border, drawn at SS× size."""
     s, h = SS, BORDER_WIDTH / 2
@@ -126,8 +185,12 @@ def _background() -> Image.Image:
     return img
 
 
-def spin_gif(frame: Frame, path: Path) -> Path:
-    """Write the rotating view of one structure as an animated GIF."""
+def spin_gif(frame: Frame, path: Path, marks: bool = True) -> Path:
+    """Write the rotating view of one structure as an animated GIF.
+
+    With `marks`, the frame's stereo marks (R/S, r/s, E/Z) are drawn as in the viewer.
+    """
+    marks = marks and bool(frame.marks)
     xyz = np.array(frame.coords, dtype=float)
     xyz -= xyz.mean(axis=0)
     symbols = frame.symbols
@@ -171,6 +234,8 @@ def spin_gif(frame: Frame, path: Path) -> Path:
                 _stick(
                     d, (sx[i], sy[i]), (sx[j], sy[j]), 0.16 * px * f[i], 0.16 * px * f[j], ci, cj
                 )
+        if marks:
+            img = _draw_marks(img, frame.marks, sx, sy, f, px)
         frames.append(img.resize((WIDTH, HEIGHT), Image.LANCZOS))
     # One palette for all frames, chosen from several viewing angles: about half the
     # file size of a palette per frame, and no flicker between frames.

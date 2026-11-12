@@ -27,8 +27,8 @@ async function makeGif(target: SpinTarget) {
   changed();
   const toast = await showToast({ style: Toast.Style.Animated, title: "Making the 3D view…" });
   try {
-    const { symbols, coords, comment } = target.frame;
-    const response = await getTransport().gif({ frame: { symbols, coords, comment } });
+    const { symbols, coords, comment, marks } = target.frame;
+    const response = await getTransport().gif({ frame: { symbols, coords, comment, marks } });
     if (!response.ok) throw new Error(response.error.message);
     gifs.set(target.key, response.path);
     await toast.hide();
