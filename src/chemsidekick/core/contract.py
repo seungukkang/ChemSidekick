@@ -19,7 +19,7 @@ and a test fails if they drift.
 import traceback as tb
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from chemsidekick import __version__
 from chemsidekick.core.config import Config, ConfigError
@@ -31,7 +31,7 @@ from chemsidekick.core.runner import (
     RunError,
     ToolCrashed,
 )
-from chemsidekick.core.schemas import ToolError, ToolResult
+from chemsidekick.core.schemas import Frame, ToolError, ToolResult
 
 CONTRACT_VERSION = 1
 
@@ -140,6 +140,24 @@ class SaveResponse(_Envelope):
     ok: Literal[True] = True
     number: int
     saved_to: str  # absolute path of the saved copy
+
+
+# ---------------------------------------------------------------------------
+# Rotating 3D view (`csk gif`): a view of a result's structure, not a tool
+# ---------------------------------------------------------------------------
+
+
+class GifRequest(BaseModel):
+    """Input of `csk gif`, as JSON on standard input."""
+
+    model_config = ConfigDict(extra="forbid")
+    frame: Frame  # one frame of a result's Structure3D (symbols, coords in Å, comment)
+
+
+class GifResponse(_Envelope):
+    ok: Literal[True] = True
+    path: str  # absolute path of the animated GIF (a fresh file every time)
+    frames: int
 
 
 # ---------------------------------------------------------------------------

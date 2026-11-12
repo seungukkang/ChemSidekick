@@ -211,6 +211,8 @@ name = "chemsidekick"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "numpy" },
+    { name = "pillow" },
     { name = "psutil" },
     { name = "pydantic" },
     { name = "rdkit" },
@@ -229,6 +231,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "numpy", specifier = ">=2.5.4" },
+    { name = "pillow", specifier = ">=13.0.0" },
     { name = "psutil", specifier = ">=7.2.2" },
     { name = "pydantic", specifier = ">=2.14.3" },
     { name = "rdkit", specifier = ">=2026.9.1" },

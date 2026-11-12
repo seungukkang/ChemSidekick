@@ -13,6 +13,7 @@ import pytest
 
 from chemsidekick.core.contract import (
     ErrorResponse,
+    GifResponse,
     RunResponse,
     SaveResponse,
     ToolListResponse,
@@ -44,5 +45,7 @@ def test_fixture_matches_the_models(name):
         ToolListResponse.model_validate(data)
     elif "saved_to" in data:
         SaveResponse.model_validate(data)
+    elif "frames" in data and "path" in data:
+        GifResponse.model_validate(data)
     else:
         RunResponse.model_validate(data)

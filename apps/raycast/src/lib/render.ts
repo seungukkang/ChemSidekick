@@ -5,13 +5,14 @@ import type { Artifact, Cell, RunInfo, Table, ToolResult } from "./contract";
 
 export const MAX_TABLE_ROWS = 60;
 export const DRAWINGS_PER_ROW = 2;
-export const DRAWING_WIDTH = 220; // px in the result view; "Browse Drawings" shows them large
+export const DRAWING_WIDTH = 220; // px: two fit side by side in the Detail view
+export const HIGHLIGHTS_PER_ROW = 3;
 
 export interface RenderedResult {
   markdown: string;
   metadata: { label: string; value: string }[]; // shown in the side panel
   viewer?: string; // path of the HTML 3D viewer, opened in the browser
-  drawings: Artifact[]; // SVG/PNG, for "Browse Drawings"
+  drawings: Artifact[]; // SVG/PNG
   files: Artifact[]; // other files (SDF, XYZ, JSON, ...) for "Show in Finder"
 }
 
@@ -61,30 +62,55 @@ export function isGrid(table: Table): boolean {
 
 const IMAGE_KINDS = new Set(["svg", "png"]);
 
-function drawingRows(drawings: Artifact[]): string[] {
+// Rotating 3D views (`csk gif`) shown in place of drawings, or for a result without drawings.
+export interface ViewImages {
+  swaps?: Record<string, string>; // drawing path -> GIF
+  spins?: string[]; // GIFs of the structures of a result without drawings (xyz)
+}
+
+function image(alt: string, path: string, width: number): string {
+  // Paths are unique per run (Raycast caches images by path).
+  return `![${cellText(alt) || "image"}](${encodeURI(path)}?raycast-width=${width})`;
+}
+
+function drawingRows(drawings: Artifact[], swaps: Record<string, string>): string[] {
   const md: string[] = [];
   for (let i = 0; i < drawings.length; i += DRAWINGS_PER_ROW) {
     const row = drawings.slice(i, i + DRAWINGS_PER_ROW);
-    // Images on one line sit side by side. Paths are unique per run (Raycast caches by path).
-    const images = row.map(
-      (a) => `![${cellText(a.title) || "drawing"}](${encodeURI(a.path)}?raycast-width=${DRAWING_WIDTH})`,
-    );
-    const captions = row.map((a) => [a.title && `**${a.title}**`, a.note].filter(Boolean).join(" ")).filter(Boolean);
-    md.push(images.join(" "), "");
-    // One caption per line (a separate paragraph each: a plain line break would be joined).
-    for (const caption of captions) md.push(caption, "");
+    // Images on one line sit side by side.
+    md.push(row.map((a) => image(a.title, swaps[a.path] ?? a.path, DRAWING_WIDTH)).join(" "), "");
+    // Captions one per line (a separate paragraph each: a plain line break would be joined).
+    for (const a of row) {
+      const caption = [a.title && `**${a.title}**`, a.note].filter(Boolean).join(" ");
+      if (caption) md.push(caption, "");
+    }
   }
   return md;
 }
 
-export function renderResult(result: ToolResult, run?: RunInfo): RenderedResult {
+// Key values as a native table, three per row: labels, values in bold, notes.
+export function highlightsMarkdown(highlights: ToolResult["highlights"]): string {
+  const md: string[] = [];
+  for (let i = 0; i < highlights.length; i += HIGHLIGHTS_PER_ROW) {
+    const row = highlights.slice(i, i + HIGHLIGHTS_PER_ROW);
+    md.push(`| ${row.map((h) => cellText(h.label)).join(" | ")} |`, `| ${row.map(() => ":---:").join(" | ")} |`);
+    md.push(`| ${row.map((h) => `**${cellText(h.value)}**`).join(" | ")} |`);
+    if (row.some((h) => h.note)) md.push(`| ${row.map((h) => (h.note ? `_${cellText(h.note)}_` : " ")).join(" | ")} |`);
+    md.push("");
+  }
+  return md.join("\n").trimEnd();
+}
+
+export function renderResult(result: ToolResult, run?: RunInfo, images: ViewImages = {}): RenderedResult {
   const md: string[] = [];
   for (const w of result.warnings) md.push(`> ⚠️ ${w}`, "");
   md.push(`# ${result.answer}`, "");
+  if (result.highlights.length) md.push(highlightsMarkdown(result.highlights), "");
+  for (const spin of images.spins ?? []) md.push(image("rotating 3D view", spin, DRAWING_WIDTH), "");
 
   // The result itself: drawings, then tables
   const drawings = result.artifacts.filter((a) => IMAGE_KINDS.has(a.kind));
-  md.push(...drawingRows(drawings));
+  md.push(...drawingRows(drawings, images.swaps ?? {}));
   for (const t of result.tables) md.push(isGrid(t) ? gridMarkdown(t) : tableMarkdown(t), "");
 
   // Evidence
@@ -104,10 +130,7 @@ export function renderResult(result: ToolResult, run?: RunInfo): RenderedResult 
   if (result.notes.length) md.push("---", "", ...result.notes.map((n) => `_${n}_`), "");
   if (result.sources.length) md.push("### References", "", ...result.sources.map((s) => `- ${s}`), "");
 
-  const metadata = result.highlights.map((h) => ({
-    label: h.label,
-    value: h.note ? `${h.value}  (${h.note})` : h.value,
-  }));
+  const metadata: { label: string; value: string }[] = [];
   if (run) {
     metadata.push({ label: "Tool", value: `${run.tool_id} · ${run.tool}` });
     metadata.push({ label: "Time", value: `${run.elapsed_s.toFixed(2)} s` });

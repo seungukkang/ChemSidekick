@@ -24,6 +24,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from chemsidekick.core.contract import (  # noqa: E402
     CONTRACT_VERSION,
     ErrorResponse,
+    GifRequest,
+    GifResponse,
     RunResponse,
     SaveResponse,
     ToolListResponse,
@@ -37,6 +39,8 @@ MODELS = {
     "error-response": ErrorResponse,
     "tool-list": ToolListResponse,
     "save-response": SaveResponse,
+    "gif-request": GifRequest,
+    "gif-response": GifResponse,
 }
 
 WATER = "3\nwater\nO 0 0 0.1173\nH 0 0.7572 -0.4692\nH 0 -0.7572 -0.4692\n"
@@ -55,6 +59,18 @@ FIXTURES: dict[str, tuple[list[str], str | None]] = {
     "stereo-error": (["run", "stereo", "--no-open", "--json"], '{"smiles": "C1CC"}'),
     "validation-error": (["run", "stereo", "--json"], '{"smiles": "CC", "max_isomers": 0}'),
     "save": (["save", "--json"], None),
+    "gif": (
+        ["gif", "--json"],
+        json.dumps(
+            {
+                "frame": {
+                    "symbols": ["O", "H", "H"],
+                    "coords": [[0, 0, 0.1173], [0, 0.7572, -0.4692], [0, -0.7572, -0.4692]],
+                    "comment": "water",
+                }
+            }
+        ),
+    ),
 }
 
 FIXTURE_ROOT = "/fixture"  # stands in for the temporary folder in every path

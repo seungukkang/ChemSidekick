@@ -1,0 +1,102 @@
+{
+  "$defs": {
+    "Frame": {
+      "additionalProperties": false,
+      "description": "One 3D geometry: element symbols and Cartesian coordinates in Å.",
+      "properties": {
+        "symbols": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Symbols",
+          "type": "array"
+        },
+        "coords": {
+          "items": {
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Coords",
+          "type": "array"
+        },
+        "comment": {
+          "default": "",
+          "title": "Comment",
+          "type": "string"
+        },
+        "numbers": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Numbers",
+          "type": "array"
+        },
+        "marks": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Mark"
+          },
+          "title": "Marks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "symbols",
+        "coords"
+      ],
+      "title": "Frame",
+      "type": "object"
+    },
+    "Mark": {
+      "additionalProperties": false,
+      "description": "A label on one atom (e.g. a stereocenter 'R') or on a bond (two atoms, e.g. 'E').",
+      "properties": {
+        "atoms": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Atoms",
+          "type": "array"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "atoms",
+        "label"
+      ],
+      "title": "Mark",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Input of `csk gif`, as JSON on standard input.",
+  "properties": {
+    "frame": {
+      "$ref": "#/$defs/Frame"
+    }
+  },
+  "required": [
+    "frame"
+  ],
+  "title": "GifRequest",
+  "type": "object"
+}

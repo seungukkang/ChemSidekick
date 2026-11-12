@@ -115,6 +115,23 @@ describe("CliTransport with a fake csk", () => {
     expect(r.ok && "saved_to" in r && r.saved_to).toBe("/Users/me|/usr/bin:/bin:/usr/sbin:/sbin");
   });
 
+  it("asks `csk gif` for a rotating view with the frame on stdin", async () => {
+    const dir = tempDir();
+    const transport = new CliTransport(fakeCsk(dir, `cat "${join(FIXTURES, "gif.json")}"`), { home: dir });
+    const frame = {
+      symbols: ["H", "H"],
+      coords: [
+        [0, 0, 0],
+        [0, 0, 0.74],
+      ] as [number, number, number][],
+      comment: "",
+    };
+    const r = await transport.gif({ frame });
+    expect(r.ok && "path" in r && r.path).toMatch(/spin\.gif$/);
+    expect(readFileSync(join(dir, "args.txt"), "utf-8").trim()).toBe("gif --json");
+    expect(JSON.parse(readFileSync(join(dir, "stdin.txt"), "utf-8"))).toEqual({ frame });
+  });
+
   it("stops a csk that hangs", async () => {
     const dir = tempDir();
     const transport = new CliTransport(fakeCsk(dir, "sleep 5"), { home: dir, safetyTimeoutMs: 300 });

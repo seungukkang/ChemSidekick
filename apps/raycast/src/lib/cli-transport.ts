@@ -2,7 +2,7 @@
 // JSON object it prints (contract v1). Tool input goes to `csk run` on stdin.
 import { execFile } from "node:child_process";
 import { CONTRACT_VERSION } from "./contract";
-import type { ErrorResponse, RunResponse, SaveResponse, ToolListResponse } from "./contract";
+import type { ErrorResponse, GifRequest, GifResponse, RunResponse, SaveResponse, ToolListResponse } from "./contract";
 import { TransportError } from "./errors";
 import { INSTALL_HINT } from "./locate";
 import type { RunOptions, Transport } from "./transport";
@@ -44,6 +44,10 @@ export class CliTransport implements Transport {
 
   async save(number: number): Promise<SaveResponse | ErrorResponse> {
     return parseResponse<SaveResponse>(await this.exec(["save", String(number), "--json"]));
+  }
+
+  async gif(request: GifRequest): Promise<GifResponse | ErrorResponse> {
+    return parseResponse<GifResponse>(await this.exec(["gif", "--json"], JSON.stringify(request)));
   }
 
   private exec(args: string[], stdin = ""): Promise<ExecResult> {

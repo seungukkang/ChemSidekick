@@ -6,16 +6,20 @@ import { fixture } from "./helpers";
 const run = (name: string) => JSON.parse(fixture(name)) as RunResponse;
 
 describe("renderResult", () => {
-  it("element card: answer first, highlights in the side panel, tables and references", () => {
+  it("element card: answer, key values as a table three per row, tables and references", () => {
     const r = run("element-card");
     const view = renderResult(r.result, r.run);
     expect(view.markdown.startsWith("# Fe · Iron · Z = 26")).toBe(true);
+    expect(view.markdown).toContain(
+      "| Standard atomic weight | Electron configuration | Group · Period · Block |\n| :---: | :---: | :---: |\n" +
+        "| **55.845(2)** | **[Ar] 3d⁶ 4s²** |",
+    );
+    expect(view.markdown).toContain("| Electronegativity (Pauling) |\n| :---: |\n| **1.83** |"); // 4th on a new row
+    expect(view.markdown).toContain("_Check ✓ 2,3,4 (see References)_");
+    expect(view.markdown.indexOf("Standard atomic weight")).toBeLessThan(view.markdown.indexOf("### Identity"));
     expect(view.markdown).toContain("### Natural isotopes");
     expect(view.markdown).toContain("### References");
-    expect(view.metadata[0]).toEqual({
-      label: "Standard atomic weight",
-      value: "55.845(2)  (Check ✓ 2,3,4 (see References))",
-    });
+    expect(view.metadata.map((m) => m.label)).toEqual(["Tool", "Time", "Result"]);
     expect(view.metadata.at(-1)).toEqual({ label: "Result", value: `#${r.run.number}` });
     expect(view.viewer).toBeUndefined();
   });
@@ -51,6 +55,23 @@ describe("renderResult", () => {
     // Every cell padded to 2 characters, so columns line up and "Hg" stays on one line.
     expect(grid).toContain("6  Cs Ba La Hf Ta W  Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn");
     expect(grid[0]).toBe("   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18");
+  });
+
+  it("swaps a drawing for its rotating 3D view in place, caption kept", () => {
+    const r = run("stereo-dibromobutane");
+    const [d1] = r.result.artifacts;
+    const view = renderResult(r.result, r.run, { swaps: { [d1.path]: "/gifs/1.gif" } });
+    expect(view.markdown).toContain(
+      `![#1 · meso](/gifs/1.gif?raycast-width=${DRAWING_WIDTH}) ![#2 · enantiomer of #3](`,
+    );
+    expect(view.markdown).toContain("**#1 · meso** (2R,3S)");
+    expect(view.markdown).not.toContain("isomer-01.svg");
+  });
+
+  it("shows rotating views of a structure without drawings near the top", () => {
+    const r = run("xyz-water");
+    const view = renderResult(r.result, r.run, { spins: ["/gifs/spin.gif"] });
+    expect(view.markdown.indexOf("/gifs/spin.gif")).toBeLessThan(view.markdown.indexOf("###"));
   });
 
   it("puts warnings above the answer", () => {
