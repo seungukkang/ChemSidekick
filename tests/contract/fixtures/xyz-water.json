@@ -1,0 +1,192 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": true,
+  "result": {
+    "answer": "H2O · 3 atoms · 1 frame",
+    "highlights": [
+      {
+        "label": "Formula",
+        "value": "H₂O",
+        "note": ""
+      },
+      {
+        "label": "Molecular weight",
+        "value": "18.015 ± 0.001 g/mol",
+        "note": "Sum of CIAAW 2024 abridged atomic weights (see Composition)"
+      },
+      {
+        "label": "Atoms",
+        "value": "3",
+        "note": ""
+      },
+      {
+        "label": "Frames",
+        "value": "1",
+        "note": ""
+      }
+    ],
+    "formulas": [],
+    "constants": [],
+    "assumptions": [
+      "Coordinates are in Å.",
+      "Molecular weight: abridged atomic weights × atom counts; their uncertainties are added linearly (a conservative estimate)."
+    ],
+    "sources": [
+      "[1] CIAAW, Abridged Standard Atomic Weights 2024, www.ciaaw.org; T. Prohaska et al., Standard atomic weights of the elements 2021 (IUPAC Technical Report), Pure Appl. Chem. 2022, 94, 573–600.",
+      "[2] IUPAC Periodic Table of the Elements (version 4 May 2022), International Union of Pure and Applied Chemistry; abridged atomic weights as printed.",
+      "[3] NIST, Periodic Table: Atomic Properties of the Elements, NIST Special Publication 966 (June 2024); atomic weights as printed.",
+      "[4] S. Kim et al., PubChem 2023 update, Nucleic Acids Res. 2023, 51, D1373–D1380; PubChem Periodic Table, National Center for Biotechnology Information."
+    ],
+    "notes": [
+      "Bonds in the 3D view are drawn by 3Dmol.js from interatomic distances only. They are not bond orders or chemical bond assignments; in transition states, forming and breaking bonds may look different from reality.",
+      "Check: ✓ confirmed by 3 references (1 primary + 2 compilations) · ≈ 2 references agree, the third reproduces an older edition · def a definition · ? not confirmed by 3 references, value from mendeleev. Numbers refer to References."
+    ],
+    "tables": [
+      {
+        "title": "Summary",
+        "columns": [
+          "Property",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Formula",
+            "H2O"
+          ],
+          [
+            "Atoms",
+            3
+          ],
+          [
+            "Molecular weight",
+            "18.015 ± 0.001 g/mol"
+          ],
+          [
+            "Frames",
+            1
+          ],
+          [
+            "Closest atoms",
+            "0.958 Å (O1–H2)"
+          ],
+          [
+            "Comment line",
+            "water"
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Composition",
+        "columns": [
+          "Element",
+          "Count",
+          "Abridged atomic weight",
+          "Check"
+        ],
+        "rows": [
+          [
+            "H",
+            2,
+            "1.0080 ± 0.0002",
+            "✓ 1,2,3,4"
+          ],
+          [
+            "O",
+            1,
+            "15.999 ± 0.001",
+            "✓ 1,2,3,4"
+          ]
+        ],
+        "minor_columns": [
+          3
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      }
+    ],
+    "structures": [
+      {
+        "frames": [
+          {
+            "symbols": [
+              "O",
+              "H",
+              "H"
+            ],
+            "coords": [
+              [
+                0.0,
+                0.0,
+                0.1173
+              ],
+              [
+                0.0,
+                0.7572,
+                -0.4692
+              ],
+              [
+                0.0,
+                -0.7572,
+                -0.4692
+              ]
+            ],
+            "comment": "water",
+            "numbers": [],
+            "marks": []
+          }
+        ],
+        "title": "H₂O",
+        "style": "ball-and-stick",
+        "labels": false,
+        "marks_shown": true,
+        "start_frame": 0,
+        "navigation": "frames",
+        "page_name": "Frame",
+        "numbers_name": "Atom numbers"
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "xyz",
+        "path": "/fixture/cache/recent/00002-xyz/structure.xyz",
+        "title": "Standard XYZ",
+        "note": ""
+      },
+      {
+        "kind": "html",
+        "path": "/fixture/cache/recent/00002-xyz/viewer.html",
+        "title": "3D viewer",
+        "note": ""
+      }
+    ],
+    "warnings": [],
+    "data": {
+      "formula": "H2O",
+      "n_atoms": 3,
+      "n_frames": 1,
+      "molecular_weight": 18.015,
+      "closest_atoms_A": [
+        0.9578
+      ]
+    }
+  },
+  "run": {
+    "tool": "xyz",
+    "tool_id": "STR-01",
+    "number": 2,
+    "folder": "/fixture/cache/recent/00002-xyz",
+    "recorded": true,
+    "elapsed_s": 0.1,
+    "peak_memory_mb": null
+  }
+}

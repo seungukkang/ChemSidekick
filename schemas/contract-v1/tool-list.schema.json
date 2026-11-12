@@ -1,0 +1,148 @@
+{
+  "$defs": {
+    "CategoryInfo": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "code",
+        "title"
+      ],
+      "title": "CategoryInfo",
+      "type": "object"
+    },
+    "ToolInfo": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "keywords": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Keywords",
+          "type": "array"
+        },
+        "resources": {
+          "enum": [
+            "light",
+            "medium",
+            "heavy"
+          ],
+          "title": "Resources",
+          "type": "string"
+        },
+        "requires": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Requires",
+          "type": "array"
+        },
+        "available": {
+          "title": "Available",
+          "type": "boolean"
+        },
+        "unavailable_reason": {
+          "default": "",
+          "title": "Unavailable Reason",
+          "type": "string"
+        },
+        "icon": {
+          "default": "",
+          "title": "Icon",
+          "type": "string"
+        },
+        "start_view": {
+          "default": "",
+          "title": "Start View",
+          "type": "string"
+        },
+        "input_schema": {
+          "additionalProperties": true,
+          "title": "Input Schema",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "title",
+        "summary",
+        "category",
+        "keywords",
+        "resources",
+        "requires",
+        "available"
+      ],
+      "title": "ToolInfo",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "contract": {
+      "default": 1,
+      "title": "Contract",
+      "type": "integer"
+    },
+    "csk_version": {
+      "title": "Csk Version",
+      "type": "string"
+    },
+    "ok": {
+      "const": true,
+      "default": true,
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "categories": {
+      "items": {
+        "$ref": "#/$defs/CategoryInfo"
+      },
+      "title": "Categories",
+      "type": "array"
+    },
+    "tools": {
+      "items": {
+        "$ref": "#/$defs/ToolInfo"
+      },
+      "title": "Tools",
+      "type": "array"
+    }
+  },
+  "required": [
+    "categories",
+    "tools"
+  ],
+  "title": "ToolListResponse",
+  "type": "object"
+}

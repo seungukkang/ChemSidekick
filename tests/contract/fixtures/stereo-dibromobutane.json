@@ -1,0 +1,580 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": true,
+  "result": {
+    "answer": "3 stereoisomers (1 pair of enantiomers, 1 meso)",
+    "highlights": [
+      {
+        "label": "Stereoisomers",
+        "value": "3",
+        "note": ""
+      },
+      {
+        "label": "Pairs of enantiomers",
+        "value": "1",
+        "note": ""
+      },
+      {
+        "label": "Meso",
+        "value": "1",
+        "note": ""
+      }
+    ],
+    "formulas": [],
+    "constants": [],
+    "assumptions": [
+      "Stereo elements: tetrahedral centers (R/S, pseudoasymmetric r/s) and double bonds (E/Z), as perceived by RDKit.",
+      "Relations: an isomer's mirror image has every tetrahedral center inverted; isomers are compared by canonical SMILES.",
+      "meso: an achiral stereoisomer (it has stereocenters but is identical to its mirror image) in a set that also contains chiral stereoisomers (IUPAC Gold Book). Achiral isomers in a set without chiral members, such as cis- and trans-1,4-dimethylcyclohexane, are called achiral.",
+      "3D: one conformer per isomer (ETKDGv3, fixed seed), optimized with MMFF94. Energies belong to that conformer, not to the lowest-energy conformer, so they are not reliable for comparing diastereomers. The second isomer of an enantiomer pair is the mirror image of the first (same energy)."
+    ],
+    "sources": [
+      "RDKit 2026.09.1: stereoisomer enumeration, new CIP labeler (R. M. Hanson et al., J. Chem. Inf. Model. 2018, 58, 1755–1765), ETKDGv3 (S. Wang, J. Witek, G. A. Landrum, S. Riniker, J. Chem. Inf. Model. 2020, 60, 2044–2058), MMFF94 (T. A. Halgren, J. Comput. Chem. 1996, 17, 490–519).",
+      "IUPAC numbering: H. A. Favre, W. H. Powell, Nomenclature of Organic Chemistry: IUPAC Recommendations and Preferred Names 2013, Royal Society of Chemistry, 2014 (P-31.1.4, P-44).",
+      "meso: IUPAC Compendium of Chemical Terminology (Gold Book), 'meso-compound', https://doi.org/10.1351/goldbook.M03839."
+    ],
+    "notes": [
+      "Relations: E = enantiomers, D = diastereomers.",
+      "Numbers in the stereodescriptors are IUPAC locants of the parent (4-carbon chain), IUPAC 2013 Recommendations P-31.1.4 (where the numbering is otherwise symmetric, R gets the lower locant: P-31.1.4.3.4).",
+      "In the 3D view, the number button shows the same numbers, and the stereocenter button marks each stereo element.",
+      "Each isomer is saved as SVG and XYZ in the isomers folder. 2D drawings with the same E/Z configuration share one layout, so only the wedges differ.",
+      "Not handled in v0.1: axial chirality (atropisomers), planar chirality, and helicity."
+    ],
+    "tables": [
+      {
+        "title": "Stereoisomers",
+        "columns": [
+          "#",
+          "Stereodescriptors",
+          "Relation",
+          "SMILES",
+          "3D",
+          "Energy (kcal/mol)"
+        ],
+        "rows": [
+          [
+            1,
+            "(2R,3S)",
+            "meso",
+            "C[C@H](Br)[C@@H](C)Br",
+            "ok",
+            "10.54 (MMFF94)"
+          ],
+          [
+            2,
+            "(2R,3R)",
+            "enantiomer of #3",
+            "C[C@@H](Br)[C@@H](C)Br",
+            "ok",
+            "11.06 (MMFF94)"
+          ],
+          [
+            3,
+            "(2S,3S)",
+            "enantiomer of #2",
+            "C[C@H](Br)[C@H](C)Br",
+            "ok (mirror image of #2)",
+            "11.06 (MMFF94)"
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Relations",
+        "columns": [
+          "",
+          "#1",
+          "#2",
+          "#3"
+        ],
+        "rows": [
+          [
+            "#1",
+            "—",
+            "D",
+            "D"
+          ],
+          [
+            "#2",
+            "D",
+            "—",
+            "E"
+          ],
+          [
+            "#3",
+            "D",
+            "E",
+            "—"
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      }
+    ],
+    "structures": [
+      {
+        "frames": [
+          {
+            "symbols": [
+              "C",
+              "C",
+              "Br",
+              "C",
+              "Br",
+              "C",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H"
+            ],
+            "coords": [
+              [
+                1.9494477600045645,
+                -0.20521969185872715,
+                -0.22271366089893704
+              ],
+              [
+                0.5514551777282671,
+                0.397747447753475,
+                -0.35602677861841764
+              ],
+              [
+                0.6673456131371566,
+                2.21202316694768,
+                0.4220787698956288
+              ],
+              [
+                -0.5514551349015583,
+                -0.39774748198675014,
+                0.3560272001863738
+              ],
+              [
+                -0.667344811313005,
+                -2.2120238892984188,
+                -0.4220774141625224
+              ],
+              [
+                -1.9494475916624159,
+                0.20521993545643002,
+                0.22271325030470596
+              ],
+              [
+                2.709373952493986,
+                0.45668777147594103,
+                -0.6541059743548617
+              ],
+              [
+                2.0310664900465483,
+                -1.160842522813129,
+                -0.7484685822667126
+              ],
+              [
+                2.2147664226502997,
+                -0.3724924187763602,
+                0.8273695007491222
+              ],
+              [
+                0.31229766165890926,
+                0.5569536442383728,
+                -1.4132015194167047
+              ],
+              [
+                -0.31229805944312683,
+                -0.5569532489301531,
+                1.4132021025461228
+              ],
+              [
+                -2.214765179277253,
+                0.3724932498290683,
+                -0.8273696768047775
+              ],
+              [
+                -2.0310675773856524,
+                1.1608418640928533,
+                0.7484697025623301
+              ],
+              [
+                -2.709374723736754,
+                -0.4566878261302614,
+                0.6541030802786224
+              ]
+            ],
+            "comment": "#1 · meso · (2R,3S)",
+            "numbers": [
+              "4",
+              "3",
+              "",
+              "2",
+              "",
+              "1",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "marks": [
+              {
+                "atoms": [
+                  1
+                ],
+                "label": "S"
+              },
+              {
+                "atoms": [
+                  3
+                ],
+                "label": "R"
+              }
+            ]
+          },
+          {
+            "symbols": [
+              "C",
+              "C",
+              "Br",
+              "C",
+              "Br",
+              "C",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H"
+            ],
+            "coords": [
+              [
+                1.9434560652894644,
+                -0.21369041265010327,
+                -0.2277066990731258
+              ],
+              [
+                0.5838367980146928,
+                0.47191379914302845,
+                -0.1577426094995105
+              ],
+              [
+                0.27279457785302436,
+                1.4081943070401355,
+                -1.8518819883682138
+              ],
+              [
+                -0.5682293929795588,
+                -0.45810209465105944,
+                0.2360272306065969
+              ],
+              [
+                -0.8495769607911159,
+                -1.9186184820136318,
+                -1.0411621466255736
+              ],
+              [
+                -1.8980090027963508,
+                0.25390875174108063,
+                0.4556616456394139
+              ],
+              [
+                2.7414632250375304,
+                0.5215213877290262,
+                -0.38297476328274105
+              ],
+              [
+                2.0076155229125834,
+                -0.934969629092431,
+                -1.0488252900899668
+              ],
+              [
+                2.160007028295405,
+                -0.7405822688957293,
+                0.7075348359264919
+              ],
+              [
+                0.6496164290386913,
+                1.2804283156437468,
+                0.5800694940992316
+              ],
+              [
+                -0.3012897360539961,
+                -0.9721767096032455,
+                1.167080470086989
+              ],
+              [
+                -2.3105302003616845,
+                0.6669048214660204,
+                -0.4705434333767391
+              ],
+              [
+                -1.7848633066744068,
+                1.0725660353473074,
+                1.1741211187133755
+              ],
+              [
+                -2.6462910467842913,
+                -0.43729782120416966,
+                0.8603421352437769
+              ]
+            ],
+            "comment": "#2 · enantiomer of #3 · (2R,3R)",
+            "numbers": [
+              "4",
+              "3",
+              "",
+              "2",
+              "",
+              "1",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "marks": [
+              {
+                "atoms": [
+                  1
+                ],
+                "label": "R"
+              },
+              {
+                "atoms": [
+                  3
+                ],
+                "label": "R"
+              }
+            ]
+          },
+          {
+            "symbols": [
+              "C",
+              "C",
+              "Br",
+              "C",
+              "Br",
+              "C",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H",
+              "H"
+            ],
+            "coords": [
+              [
+                -1.9434560652894644,
+                -0.21369041265010327,
+                -0.2277066990731258
+              ],
+              [
+                -0.5838367980146928,
+                0.47191379914302845,
+                -0.1577426094995105
+              ],
+              [
+                -0.27279457785302436,
+                1.4081943070401355,
+                -1.8518819883682138
+              ],
+              [
+                0.5682293929795588,
+                -0.45810209465105944,
+                0.2360272306065969
+              ],
+              [
+                0.8495769607911159,
+                -1.9186184820136318,
+                -1.0411621466255736
+              ],
+              [
+                1.8980090027963508,
+                0.25390875174108063,
+                0.4556616456394139
+              ],
+              [
+                -2.7414632250375304,
+                0.5215213877290262,
+                -0.38297476328274105
+              ],
+              [
+                -2.0076155229125834,
+                -0.934969629092431,
+                -1.0488252900899668
+              ],
+              [
+                -2.160007028295405,
+                -0.7405822688957293,
+                0.7075348359264919
+              ],
+              [
+                -0.6496164290386913,
+                1.2804283156437468,
+                0.5800694940992316
+              ],
+              [
+                0.3012897360539961,
+                -0.9721767096032455,
+                1.167080470086989
+              ],
+              [
+                2.3105302003616845,
+                0.6669048214660204,
+                -0.4705434333767391
+              ],
+              [
+                1.7848633066744068,
+                1.0725660353473074,
+                1.1741211187133755
+              ],
+              [
+                2.6462910467842913,
+                -0.43729782120416966,
+                0.8603421352437769
+              ]
+            ],
+            "comment": "#3 · enantiomer of #2 · (2S,3S)",
+            "numbers": [
+              "4",
+              "3",
+              "",
+              "2",
+              "",
+              "1",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "marks": [
+              {
+                "atoms": [
+                  1
+                ],
+                "label": "S"
+              },
+              {
+                "atoms": [
+                  3
+                ],
+                "label": "S"
+              }
+            ]
+          }
+        ],
+        "title": "Stereoisomers of CC(Br)C(C)Br",
+        "style": "ball-and-stick",
+        "labels": false,
+        "marks_shown": true,
+        "start_frame": 0,
+        "navigation": "pages",
+        "page_name": "Isomer",
+        "numbers_name": "Locants"
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "svg",
+        "path": "/fixture/cache/recent/00003-stereo/isomers/isomer-01.svg",
+        "title": "#1 · meso",
+        "note": "(2R,3S)"
+      },
+      {
+        "kind": "svg",
+        "path": "/fixture/cache/recent/00003-stereo/isomers/isomer-02.svg",
+        "title": "#2 · enantiomer of #3",
+        "note": "(2R,3R)"
+      },
+      {
+        "kind": "svg",
+        "path": "/fixture/cache/recent/00003-stereo/isomers/isomer-03.svg",
+        "title": "#3 · enantiomer of #2",
+        "note": "(2S,3S)"
+      },
+      {
+        "kind": "sdf",
+        "path": "/fixture/cache/recent/00003-stereo/isomers.sdf",
+        "title": "3D structures (SDF)",
+        "note": ""
+      },
+      {
+        "kind": "html",
+        "path": "/fixture/cache/recent/00003-stereo/viewer.html",
+        "title": "3D viewer",
+        "note": ""
+      }
+    ],
+    "warnings": [],
+    "data": {
+      "possible": 4,
+      "complete": true,
+      "isomers": [
+        {
+          "number": 1,
+          "smiles": "C[C@H](Br)[C@@H](C)Br",
+          "cip": "(2R,3S)",
+          "locants": "iupac",
+          "relation": "meso",
+          "status_3d": "ok",
+          "energy_kcal_mol": 10.537338488881298,
+          "force_field": "MMFF94"
+        },
+        {
+          "number": 2,
+          "smiles": "C[C@@H](Br)[C@@H](C)Br",
+          "cip": "(2R,3R)",
+          "locants": "iupac",
+          "relation": "enantiomer of #3",
+          "status_3d": "ok",
+          "energy_kcal_mol": 11.061531029894361,
+          "force_field": "MMFF94"
+        },
+        {
+          "number": 3,
+          "smiles": "C[C@H](Br)[C@H](C)Br",
+          "cip": "(2S,3S)",
+          "locants": "iupac",
+          "relation": "enantiomer of #2",
+          "status_3d": "ok (mirror image of #2)",
+          "energy_kcal_mol": 11.061531029894361,
+          "force_field": "MMFF94"
+        }
+      ]
+    }
+  },
+  "run": {
+    "tool": "stereo",
+    "tool_id": "STR-02",
+    "number": 3,
+    "folder": "/fixture/cache/recent/00003-stereo",
+    "recorded": true,
+    "elapsed_s": 0.1,
+    "peak_memory_mb": 50.0
+  }
+}

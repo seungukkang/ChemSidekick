@@ -1,0 +1,11 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": false,
+  "error": {
+    "type": "input",
+    "message": "Could not read the SMILES 'C1CC': A ring is opened but never closed (check the ring-closure digits).",
+    "details": [],
+    "traceback": ""
+  }
+}

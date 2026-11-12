@@ -21,6 +21,15 @@ from pathlib import Path
 from chemsidekick.core.config import Config
 from chemsidekick.core.schemas import ToolError
 
+
+class MissingProgram(ToolError):
+    """A program the tool needs is not installed (or not where the config says).
+
+    A ToolError, so interfaces that only know ToolError still show the message;
+    the JSON contract reports it as error type "missing_program".
+    """
+
+
 VERSION_TIMEOUT_S = 15.0
 
 
@@ -102,13 +111,15 @@ def locate(program: ExternalProgram, config: Config) -> Located | None:
 
 
 def require(names: tuple[str, ...] | list[str], config: Config) -> dict[str, Located]:
-    """Locate every program a tool needs, or raise ToolError with install help."""
+    """Locate every program a tool needs, or raise MissingProgram with install help."""
     found: dict[str, Located] = {}
     missing: list[str] = []
     for name in names:
         program = PROGRAMS.get(name)
         if program is None:
-            raise ToolError(f"This tool needs {name!r}, which ChemSidekick does not know about.")
+            raise MissingProgram(
+                f"This tool needs {name!r}, which ChemSidekick does not know about."
+            )
         located = locate(program, config)
         if located is None:
             hint = f" Install: {program.install_hint}" if program.install_hint else ""
@@ -116,7 +127,7 @@ def require(names: tuple[str, ...] | list[str], config: Config) -> dict[str, Loc
         else:
             found[name] = located
     if missing:
-        raise ToolError(" ".join(missing) + " Run `csk doctor` for details.")
+        raise MissingProgram(" ".join(missing) + " Run `csk doctor` for details.")
     return found
 
 

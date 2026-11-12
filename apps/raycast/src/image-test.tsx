@@ -17,7 +17,8 @@ import { THEME_COLOR } from "./theme";
 async function build(): Promise<string> {
   const run = await runCsk(["stereo", "CC(Br)C(Br)C", "--json", "--no-3d", "--no-open"]);
   if (run.exitCode !== 0) return `# csk failed\n\n\`\`\`\n${run.stderr}\n\`\`\``;
-  const result = JSON.parse(run.stdout) as { artifacts: { kind: string; path: string }[] };
+  // JSON contract v1: the ToolResult is under "result".
+  const { result } = JSON.parse(run.stdout) as { result: { artifacts: { kind: string; path: string }[] } };
   const molecule = result.artifacts.find((a) => a.kind === "svg")?.path;
   if (!molecule) return "# No SVG artifact in the stereo result";
   const svg = readFileSync(molecule, "utf-8");

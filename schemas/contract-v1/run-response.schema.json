@@ -1,0 +1,593 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "A file produced by a tool.",
+      "properties": {
+        "kind": {
+          "enum": [
+            "svg",
+            "png",
+            "sdf",
+            "xyz",
+            "html",
+            "json"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "path": {
+          "format": "path",
+          "title": "Path",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "path"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "CellInfo": {
+      "additionalProperties": false,
+      "description": "Extra display information for one cell of a clickable table (e.g. a periodic table).",
+      "properties": {
+        "top": {
+          "default": "",
+          "title": "Top",
+          "type": "string"
+        },
+        "tag": {
+          "default": "",
+          "title": "Tag",
+          "type": "string"
+        },
+        "lines": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Lines",
+          "type": "array"
+        },
+        "unconfirmed": {
+          "default": false,
+          "title": "Unconfirmed",
+          "type": "boolean"
+        }
+      },
+      "title": "CellInfo",
+      "type": "object"
+    },
+    "Constant": {
+      "additionalProperties": false,
+      "description": "A physical constant used in a calculation, with its source.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "symbol": {
+          "title": "Symbol",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "symbol",
+        "value",
+        "unit",
+        "source"
+      ],
+      "title": "Constant",
+      "type": "object"
+    },
+    "Formula": {
+      "additionalProperties": false,
+      "description": "An equation, stored twice: LaTeX for the UI, plain text for the terminal.",
+      "properties": {
+        "latex": {
+          "title": "Latex",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "latex",
+        "text"
+      ],
+      "title": "Formula",
+      "type": "object"
+    },
+    "Frame": {
+      "additionalProperties": false,
+      "description": "One 3D geometry: element symbols and Cartesian coordinates in Å.",
+      "properties": {
+        "symbols": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Symbols",
+          "type": "array"
+        },
+        "coords": {
+          "items": {
+            "maxItems": 3,
+            "minItems": 3,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Coords",
+          "type": "array"
+        },
+        "comment": {
+          "default": "",
+          "title": "Comment",
+          "type": "string"
+        },
+        "numbers": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Numbers",
+          "type": "array"
+        },
+        "marks": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Mark"
+          },
+          "title": "Marks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "symbols",
+        "coords"
+      ],
+      "title": "Frame",
+      "type": "object"
+    },
+    "Highlight": {
+      "additionalProperties": false,
+      "description": "A key value shown prominently under the answer (e.g. atomic weight).",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "value"
+      ],
+      "title": "Highlight",
+      "type": "object"
+    },
+    "Mark": {
+      "additionalProperties": false,
+      "description": "A label on one atom (e.g. a stereocenter 'R') or on a bond (two atoms, e.g. 'E').",
+      "properties": {
+        "atoms": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Atoms",
+          "type": "array"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "atoms",
+        "label"
+      ],
+      "title": "Mark",
+      "type": "object"
+    },
+    "RunInfo": {
+      "properties": {
+        "tool": {
+          "title": "Tool",
+          "type": "string"
+        },
+        "tool_id": {
+          "title": "Tool Id",
+          "type": "string"
+        },
+        "number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Number"
+        },
+        "folder": {
+          "title": "Folder",
+          "type": "string"
+        },
+        "recorded": {
+          "title": "Recorded",
+          "type": "boolean"
+        },
+        "elapsed_s": {
+          "title": "Elapsed S",
+          "type": "number"
+        },
+        "peak_memory_mb": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Peak Memory Mb"
+        }
+      },
+      "required": [
+        "tool",
+        "tool_id",
+        "number",
+        "folder",
+        "recorded",
+        "elapsed_s",
+        "peak_memory_mb"
+      ],
+      "title": "RunInfo",
+      "type": "object"
+    },
+    "Structure3D": {
+      "additionalProperties": false,
+      "description": "A 3D structure with one or more frames (conformers, trajectory, IRC).\n\n`style`, `labels`, and `start_frame` are how the viewer first shows it;\nthe viewer lets the user change them.",
+      "properties": {
+        "frames": {
+          "items": {
+            "$ref": "#/$defs/Frame"
+          },
+          "minItems": 1,
+          "title": "Frames",
+          "type": "array"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "style": {
+          "default": "ball-and-stick",
+          "enum": [
+            "ball-and-stick",
+            "stick",
+            "sphere"
+          ],
+          "title": "Style",
+          "type": "string"
+        },
+        "labels": {
+          "default": false,
+          "title": "Labels",
+          "type": "boolean"
+        },
+        "marks_shown": {
+          "default": true,
+          "title": "Marks Shown",
+          "type": "boolean"
+        },
+        "start_frame": {
+          "default": 0,
+          "title": "Start Frame",
+          "type": "integer"
+        },
+        "navigation": {
+          "default": "frames",
+          "enum": [
+            "frames",
+            "pages"
+          ],
+          "title": "Navigation",
+          "type": "string"
+        },
+        "page_name": {
+          "default": "Frame",
+          "title": "Page Name",
+          "type": "string"
+        },
+        "numbers_name": {
+          "default": "Atom numbers",
+          "title": "Numbers Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "frames"
+      ],
+      "title": "Structure3D",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "columns": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Columns",
+          "type": "array"
+        },
+        "rows": {
+          "items": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "minor_columns": {
+          "default": [],
+          "items": {
+            "type": "integer"
+          },
+          "title": "Minor Columns",
+          "type": "array"
+        },
+        "action_field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Action Field"
+        },
+        "action_columns": {
+          "default": [],
+          "items": {
+            "type": "integer"
+          },
+          "title": "Action Columns",
+          "type": "array"
+        },
+        "cells": {
+          "additionalProperties": {
+            "$ref": "#/$defs/CellInfo"
+          },
+          "default": {},
+          "title": "Cells",
+          "type": "object"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "title": "Tags",
+          "type": "object"
+        },
+        "column_gaps": {
+          "default": [],
+          "items": {
+            "type": "integer"
+          },
+          "title": "Column Gaps",
+          "type": "array"
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ],
+      "title": "Table",
+      "type": "object"
+    },
+    "ToolResult": {
+      "additionalProperties": false,
+      "description": "What every tool returns.",
+      "properties": {
+        "answer": {
+          "title": "Answer",
+          "type": "string"
+        },
+        "highlights": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Highlight"
+          },
+          "title": "Highlights",
+          "type": "array"
+        },
+        "formulas": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Formula"
+          },
+          "title": "Formulas",
+          "type": "array"
+        },
+        "constants": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Constant"
+          },
+          "title": "Constants",
+          "type": "array"
+        },
+        "assumptions": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "sources": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "notes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        },
+        "tables": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Table"
+          },
+          "title": "Tables",
+          "type": "array"
+        },
+        "structures": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Structure3D"
+          },
+          "title": "Structures",
+          "type": "array"
+        },
+        "artifacts": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Artifact"
+          },
+          "title": "Artifacts",
+          "type": "array"
+        },
+        "warnings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        },
+        "data": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Data",
+          "type": "object"
+        }
+      },
+      "required": [
+        "answer"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "contract": {
+      "default": 1,
+      "title": "Contract",
+      "type": "integer"
+    },
+    "csk_version": {
+      "title": "Csk Version",
+      "type": "string"
+    },
+    "ok": {
+      "const": true,
+      "default": true,
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "result": {
+      "$ref": "#/$defs/ToolResult"
+    },
+    "run": {
+      "$ref": "#/$defs/RunInfo"
+    }
+  },
+  "required": [
+    "result",
+    "run"
+  ],
+  "title": "RunResponse",
+  "type": "object"
+}

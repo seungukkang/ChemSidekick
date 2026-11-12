@@ -1,0 +1,11 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": false,
+  "error": {
+    "type": "input",
+    "message": "Unknown element 'Iorn'. Did you mean: Fe (Iron), Rn (Radon), Ir (Iridium)?",
+    "details": [],
+    "traceback": ""
+  }
+}

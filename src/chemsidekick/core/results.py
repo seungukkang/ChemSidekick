@@ -10,11 +10,19 @@ Only the newest `recent_limit` (default 50) are kept. macOS treats
 ~/Library/Caches as disposable and excludes it from backups.
 
 `save()` copies one result to the save folder (default ~/Documents/ChemSidekick).
+
+Runs that should not be kept (`--no-record`, e.g. a launcher loading the periodic
+table every time it opens) write their files to a fresh folder under
+~/Library/Caches/ChemSidekick/scratch/ instead; those are deleted after an hour.
+Every scratch folder has a new name, because some viewers (Raycast) cache
+images by path.
 """
 
 import json
 import os
 import shutil
+import tempfile
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -28,6 +36,7 @@ from chemsidekick.core.schemas import ToolResult
 
 DEFAULT_ROOT = Path("~/Library/Caches/ChemSidekick/recent").expanduser()
 RUN_FILE = "run.json"
+SCRATCH_MAX_AGE_S = 3600
 
 
 def default_root() -> Path:
@@ -64,6 +73,10 @@ class RecentStore:
     def __init__(self, root: Path | None = None, limit: int = 50) -> None:
         self.root = root or default_root()
         self.limit = limit
+
+    @property
+    def scratch_root(self) -> Path:
+        return self.root.parent / "scratch"
 
     # -- writing ------------------------------------------------------------
 
@@ -107,6 +120,25 @@ class RecentStore:
         )
         self.prune()
         return RecentEntry(number, spec.name, spec.id, created, result.answer, folder)
+
+    def scratch_folder(self, tool_name: str) -> Path:
+        """A new, uniquely named folder for a run that is not recorded."""
+        root = self.scratch_root
+        root.mkdir(parents=True, exist_ok=True)
+        self.prune_scratch()
+        return Path(tempfile.mkdtemp(prefix=f"{tool_name}-", dir=root))
+
+    def prune_scratch(self, max_age_s: float = SCRATCH_MAX_AGE_S) -> None:
+        """Delete scratch folders older than `max_age_s`."""
+        if not self.scratch_root.exists():
+            return
+        cutoff = time.time() - max_age_s
+        for p in self.scratch_root.iterdir():
+            try:
+                if p.is_dir() and p.stat().st_mtime < cutoff:
+                    shutil.rmtree(p, ignore_errors=True)
+            except FileNotFoundError:  # removed by another process
+                pass
 
     def discard(self, folder: Path) -> None:
         """Remove the folder of a run that failed."""

@@ -1,0 +1,432 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": true,
+  "result": {
+    "answer": "Fe · Iron · Z = 26",
+    "highlights": [
+      {
+        "label": "Standard atomic weight",
+        "value": "55.845(2)",
+        "note": "Check ✓ 2,3,4 (see References)"
+      },
+      {
+        "label": "Electron configuration",
+        "value": "[Ar] 3d⁶ 4s²",
+        "note": "Check ? 5,4 (see References)"
+      },
+      {
+        "label": "Group · Period · Block",
+        "value": "8 · 4 · d",
+        "note": "Definition [1]"
+      },
+      {
+        "label": "Electronegativity (Pauling)",
+        "value": "1.83",
+        "note": "Check ? 6,4 (see References)"
+      }
+    ],
+    "formulas": [],
+    "constants": [],
+    "assumptions": [
+      "Ground state of the neutral, isolated atom."
+    ],
+    "sources": [
+      "[1] IUPAC Periodic Table of the Elements (version 4 May 2022), International Union of Pure and Applied Chemistry. Used for atomic number, group, period, and block, which are definitions rather than measured values.",
+      "[2] CIAAW, Standard Atomic Weights 2024, www.ciaaw.org; T. Prohaska et al., Standard atomic weights of the elements 2021 (IUPAC Technical Report), Pure Appl. Chem. 2022, 94, 573–600.",
+      "[3] J. S. Coursey, D. J. Schwab, J. J. Tsai, R. A. Dragoset, Atomic Weights and Isotopic Compositions with Relative Atomic Masses (version 4.1, July 2015), NIST Standard Reference Database 144, National Institute of Standards and Technology, Gaithersburg, MD.",
+      "[4] S. Kim et al., PubChem 2023 update, Nucleic Acids Res. 2023, 51, D1373–D1380; PubChem Periodic Table, National Center for Biotechnology Information.",
+      "[5] A. Kramida, Yu. Ralchenko, J. Reader, NIST ASD Team, NIST Atomic Spectra Database (ver. 5.12), NIST Standard Reference Database 78, National Institute of Standards and Technology, Gaithersburg, MD, 2024. DOI: 10.18434/T4W30F.",
+      "[6] W. M. Haynes (ed.), CRC Handbook of Chemistry and Physics, 95th ed., CRC Press, 2014 (via mendeleev).",
+      "[7] CIAAW, Abridged Standard Atomic Weights 2024, www.ciaaw.org; T. Prohaska et al., Standard atomic weights of the elements 2021 (IUPAC Technical Report), Pure Appl. Chem. 2022, 94, 573–600.",
+      "[8] IUPAC Periodic Table of the Elements (version 4 May 2022), International Union of Pure and Applied Chemistry; abridged atomic weights as printed.",
+      "[9] NIST, Periodic Table: Atomic Properties of the Elements, NIST Special Publication 966 (June 2024); atomic weights as printed.",
+      "[10] P. Pyykkö, M. Atsumi, Molecular single-bond covalent radii for elements 1–118, Chem. Eur. J. 2009, 15, 186–197 (via mendeleev).",
+      "[11] Wikipedia, List of oxidation states of the elements, revision 1102394064 (via mendeleev). Not a peer-reviewed source.",
+      "[12] M. Wang, W. J. Huang, F. G. Kondev, G. Audi, S. Naimi, The AME 2020 atomic mass evaluation (II). Tables, graphs and references, Chin. Phys. C 2021, 45, 030003.",
+      "[13] IAEA Nuclear Data Section, Live Chart of Nuclides (ground states), International Atomic Energy Agency, Vienna.",
+      "[14] CIAAW, Isotopic Compositions of the Elements 2024, www.ciaaw.org; J. Meija et al., Isotopic compositions of the elements 2013 (IUPAC Technical Report), Pure Appl. Chem. 2016, 88, 293–306.",
+      "[15] F. G. Kondev, M. Wang, W. J. Huang, S. Naimi, G. Audi, The NUBASE2020 evaluation of nuclear physics properties, Chin. Phys. C 2021, 45, 030001.",
+      "[16] M. Wang, G. Audi, A. H. Wapstra, F. G. Kondev, M. MacCormick, X. Xu, B. Pfeiffer, The Ame2012 atomic mass evaluation (II), Chin. Phys. C 2012, 36, 1603–2014.",
+      "Data built 2026-11-10 from sources retrieved 2026-11-10; unverified values from mendeleev 1.3.0."
+    ],
+    "notes": [
+      "Check: ✓ confirmed by 3 references (1 primary + 2 compilations) · ≈ 2 references agree, the third reproduces an older edition · def a definition · ? not confirmed by 3 references, value from mendeleev. Numbers refer to References."
+    ],
+    "tables": [
+      {
+        "title": "Identity",
+        "columns": [
+          "Property",
+          "Value",
+          "Check"
+        ],
+        "rows": [
+          [
+            "Atomic number",
+            26,
+            "def 1"
+          ],
+          [
+            "Symbol",
+            "Fe",
+            "✓ 2,3,4"
+          ],
+          [
+            "Name (IUPAC)",
+            "Iron",
+            "✓ 2,3,4"
+          ],
+          [
+            "Standard atomic weight",
+            "55.845(2)",
+            "✓ 2,3,4"
+          ],
+          [
+            "Abridged atomic weight",
+            "55.845 ± 0.002",
+            "✓ 7,8,9,4"
+          ],
+          [
+            "Group · Period · Block",
+            "8 · 4 · d",
+            "def 1"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Chemical properties",
+        "columns": [
+          "Property",
+          "Value",
+          "Check"
+        ],
+        "rows": [
+          [
+            "Electronegativity (Pauling)",
+            "1.83",
+            "? 6,4"
+          ],
+          [
+            "Covalent radius (single bond)",
+            "116 pm",
+            "? 10"
+          ],
+          [
+            "Oxidation states (main)",
+            "+2, +3",
+            "? 11"
+          ],
+          [
+            "Oxidation states (other known)",
+            "−4, −2, −1, 0, +1, +4, +5, +6, +7",
+            "? 11"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Electronic structure",
+        "columns": [
+          "Property",
+          "Value",
+          "Check"
+        ],
+        "rows": [
+          [
+            "Ground-state configuration",
+            "[Ar] 3d⁶ 4s²",
+            "? 5,4"
+          ],
+          [
+            "Full configuration",
+            "1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁶ 4s²",
+            "? 5,4"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Natural isotopes",
+        "columns": [
+          "Isotope",
+          "Mass (u)",
+          "Check",
+          "Abundance (%)",
+          "Check"
+        ],
+        "rows": [
+          [
+            "56Fe",
+            "55.934936",
+            "✓ 12,3,13",
+            "91.754",
+            "✓ 14,3,13,15"
+          ],
+          [
+            "54Fe",
+            "53.939608",
+            "≈ 12,13",
+            "5.845",
+            "✓ 14,3,13,15"
+          ],
+          [
+            "57Fe",
+            "56.935392",
+            "≈ 12,13",
+            "2.119",
+            "✓ 14,3,13,15"
+          ],
+          [
+            "58Fe",
+            "57.933274",
+            "✓ 12,3,13",
+            "0.282",
+            "✓ 14,3,13,15"
+          ]
+        ],
+        "minor_columns": [
+          2,
+          4
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      }
+    ],
+    "structures": [],
+    "artifacts": [],
+    "warnings": [],
+    "data": {
+      "element": {
+        "z": 26,
+        "symbol": "Fe",
+        "name": "Iron",
+        "aliases": [],
+        "group": 8,
+        "period": 4,
+        "block": "d",
+        "identity_refs": [
+          "ciaaw-weights",
+          "nist-srd144",
+          "pubchem"
+        ],
+        "atomic_weight": {
+          "value": 55.845,
+          "status": "verified",
+          "refs": [
+            "ciaaw-weights",
+            "nist-srd144",
+            "pubchem"
+          ],
+          "text": "55.845(2)"
+        },
+        "abridged_weight": {
+          "value": 55.845,
+          "status": "verified",
+          "refs": [
+            "ciaaw-abridged",
+            "iupac-periodic-table",
+            "nist-periodic-table",
+            "pubchem"
+          ],
+          "text": "55.845 ± 0.002",
+          "uncertainty": 0.002
+        },
+        "isotopes": [
+          {
+            "mass_number": 56,
+            "abundance": {
+              "value": 91.754,
+              "status": "verified",
+              "refs": [
+                "ciaaw-abundances",
+                "nist-srd144",
+                "iaea-livechart",
+                "nubase2020"
+              ],
+              "text": "91.754"
+            },
+            "mass": {
+              "value": 55.934935537,
+              "status": "verified",
+              "refs": [
+                "ame2020",
+                "nist-srd144",
+                "iaea-livechart"
+              ],
+              "text": "55.934936"
+            }
+          },
+          {
+            "mass_number": 54,
+            "abundance": {
+              "value": 5.845,
+              "status": "verified",
+              "refs": [
+                "ciaaw-abundances",
+                "nist-srd144",
+                "iaea-livechart",
+                "nubase2020"
+              ],
+              "text": "5.845"
+            },
+            "mass": {
+              "value": 53.939608189,
+              "status": "partial",
+              "refs": [
+                "ame2020",
+                "iaea-livechart"
+              ],
+              "text": "53.939608",
+              "older": {
+                "source": "nist-srd144",
+                "edition": "ame2012",
+                "evidence": "NIST SRD 144 shows 53.93960899(53), equal to AME2012 (53.939608986)"
+              }
+            }
+          },
+          {
+            "mass_number": 57,
+            "abundance": {
+              "value": 2.119,
+              "status": "verified",
+              "refs": [
+                "ciaaw-abundances",
+                "nist-srd144",
+                "iaea-livechart",
+                "nubase2020"
+              ],
+              "text": "2.119"
+            },
+            "mass": {
+              "value": 56.93539195,
+              "status": "partial",
+              "refs": [
+                "ame2020",
+                "iaea-livechart"
+              ],
+              "text": "56.935392",
+              "older": {
+                "source": "nist-srd144",
+                "edition": "ame2012",
+                "evidence": "NIST SRD 144 shows 56.93539284(49), equal to AME2012 (56.935392841)"
+              }
+            }
+          },
+          {
+            "mass_number": 58,
+            "abundance": {
+              "value": 0.282,
+              "status": "verified",
+              "refs": [
+                "ciaaw-abundances",
+                "nist-srd144",
+                "iaea-livechart",
+                "nubase2020"
+              ],
+              "text": "0.282"
+            },
+            "mass": {
+              "value": 57.933273575,
+              "status": "verified",
+              "refs": [
+                "ame2020",
+                "nist-srd144",
+                "iaea-livechart"
+              ],
+              "text": "57.933274"
+            }
+          }
+        ],
+        "longest_lived_isotope": null,
+        "config": {
+          "value": "[Ar] 3d6 4s2",
+          "status": "unverified",
+          "refs": [
+            "mendeleev"
+          ],
+          "agree": [
+            "nist-asd",
+            "pubchem"
+          ],
+          "note": "only two sources available (NIST ASD, PubChem)",
+          "full": "1s2 2s2 2p6 3s2 3p6 3d6 4s2"
+        },
+        "en_pauling": {
+          "value": 1.83,
+          "status": "unverified",
+          "refs": [
+            "crc2014"
+          ],
+          "agree": [
+            "pubchem"
+          ]
+        },
+        "covalent_radius_pm": {
+          "value": 116.0,
+          "status": "unverified",
+          "refs": [
+            "pyykko2009"
+          ]
+        },
+        "oxidation_states": {
+          "value": {
+            "main": [
+              2,
+              3
+            ],
+            "other": [
+              -4,
+              -2,
+              -1,
+              0,
+              1,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "status": "unverified",
+          "refs": [
+            "wikipedia-oxidation"
+          ]
+        }
+      }
+    }
+  },
+  "run": {
+    "tool": "element",
+    "tool_id": "REF-01",
+    "number": 1,
+    "folder": "/fixture/cache/recent/00001-element",
+    "recorded": true,
+    "elapsed_s": 0.1,
+    "peak_memory_mb": null
+  }
+}
