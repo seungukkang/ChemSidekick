@@ -126,10 +126,10 @@ describe("CliTransport with a fake csk", () => {
       ] as [number, number, number][],
       comment: "",
     };
-    const r = await transport.gif({ frame, title: "H2" });
+    const r = await transport.gif({ frame });
     expect(r.ok && "path" in r && r.path).toMatch(/spin\.gif$/);
     expect(readFileSync(join(dir, "args.txt"), "utf-8").trim()).toBe("gif --json");
-    expect(JSON.parse(readFileSync(join(dir, "stdin.txt"), "utf-8"))).toEqual({ frame, title: "H2" });
+    expect(JSON.parse(readFileSync(join(dir, "stdin.txt"), "utf-8"))).toEqual({ frame });
   });
 
   it("stops a csk that hangs", async () => {

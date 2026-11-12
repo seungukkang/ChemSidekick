@@ -52,7 +52,7 @@ from chemsidekick.core.registry import Registry, ToolSpec, discover
 from chemsidekick.core.results import RecentStore
 from chemsidekick.core.runner import RunError, run_tool
 from chemsidekick.core.schemas import Artifact, ToolError, ToolResult
-from chemsidekick.core.spin import FRAMES, spin_card
+from chemsidekick.core.spin import FRAMES, spin_gif
 from chemsidekick.core.theme import THEME_COLOR
 from chemsidekick.core.viewer import viewer_html
 
@@ -464,15 +464,16 @@ def build_app(registry: Registry) -> typer.Typer:
     def gif(as_json: bool = _JSON_OPTION) -> None:
         """Rotating 3D view of one structure as an animated GIF.
 
-        Input on standard input, as JSON: {"frame": {"symbols": [...], "coords": [...]},
-        "title": "...", "note": "..."}; a frame of any tool's 3D result (e.g. stereo, xyz).
+        Input on standard input, as JSON: {"frame": {"symbols": [...], "coords": [...]}},
+        a frame of any tool's 3D result (e.g. stereo, xyz). It looks like the 2D
+        drawings, so it can replace one in place.
         """
 
         def body() -> None:
             request = GifRequest.model_validate(_read_json_input())
             config = _load_config()
             folder = RecentStore(limit=config.recent_limit).scratch_folder("gif")
-            path = spin_card(request.frame, folder / "spin.gif", request.title, request.note)
+            path = spin_gif(request.frame, folder / "spin.gif")
             if as_json:
                 typer.echo(GifResponse(path=str(path), frames=FRAMES).model_dump_json(indent=2))
             else:

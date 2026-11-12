@@ -152,8 +152,6 @@ class GifRequest(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
     frame: Frame  # one frame of a result's Structure3D (symbols, coords in Å, comment)
-    title: str = ""  # caption under the view, e.g. "#1 · meso"
-    note: str = ""  # smaller gray line, e.g. "(2R,3S)"
 
 
 class GifResponse(_Envelope):

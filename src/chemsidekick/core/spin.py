@@ -1,37 +1,28 @@
-"""A rotating 3D view of a structure as an animated GIF "card".
+"""A rotating 3D view of a structure as an animated GIF.
 
 A view of a tool's 3D result, like the HTML viewer (core/viewer.py), not a tool:
 `csk gif` makes it for one structure frame. Launchers such as Raycast cannot run
 an interactive 3D viewer, but they show animated GIFs.
 
-The card has the same layout as the 2D drawing cards the Raycast extension
-builds (apps/raycast/src/lib/cards.ts): a white card with a gray border, the
-drawing area with the theme-color border, and a centered caption (title, then a
-smaller gray note).
-
-The structure turns once around the vertical axis, seen slightly from above,
-with perspective (nearer atoms larger), shaded spheres, and depth fog (farther
-atoms paler), so it reads as 3D. Bonds are inferred from distances only.
+It looks like the 2D drawings (core/drawing.py): the same size, a white backdrop
+with rounded corners and a border in the theme color, so an interface can swap
+a drawing for its 3D view in place. The structure turns once around the vertical
+axis, seen slightly from above, with perspective (nearer atoms larger), shaded
+spheres, and depth fog (farther atoms paler), so it reads as 3D. Bonds are
+inferred from distances only.
 """
 
-from functools import cache
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
+from chemsidekick.core.drawing import BORDER_COLOR, BORDER_WIDTH, CORNER_RADIUS
 from chemsidekick.core.schemas import Frame
-from chemsidekick.core.theme import THEME_COLOR
 
-# Card layout (px). Keep in sync with apps/raycast/src/lib/cards.ts.
-CARD_W, CARD_H = 320, 296
-PAD = 10
-IMG_W, IMG_H = 300, 240
-TITLE_Y, NOTE_Y = 270, 287  # text baselines
-TITLE_SIZE, NOTE_SIZE = 14, 11
-CARD_BORDER = (200, 200, 200)
-TEXT_COLOR = (34, 34, 34)
-NOTE_COLOR = (138, 138, 138)
+# Same size as the RDKit drawings of the stereo tool.
+WIDTH, HEIGHT = 300, 240
+MARGIN = 8  # between the border and the structure
 
 FRAMES = 36  # 10° per frame
 FRAME_MS = 80  # one turn in about 3 s
@@ -87,16 +78,6 @@ def bonds(frame: Frame) -> list[tuple[int, int]]:
     return list(zip(i.tolist(), j.tolist(), strict=True))
 
 
-@cache
-def _font(size: int, bold: bool) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-    try:
-        return ImageFont.truetype(
-            "/System/Library/Fonts/Helvetica.ttc", size, index=1 if bold else 0
-        )
-    except OSError:  # not macOS
-        return ImageFont.load_default(size)
-
-
 def _sphere(d: ImageDraw.ImageDraw, x: float, y: float, r: float, color: RGB, fog: float) -> None:
     """A sphere lit from the upper left: dark rim, then the base color, then a highlight."""
     base = _mix(color, WHITE, fog)
@@ -131,30 +112,22 @@ def _stick(d: ImageDraw.ImageDraw, a, b, wa: float, wb: float, ca: RGB, cb: RGB)
         )
 
 
-def _card_background(title: str, note: str) -> Image.Image:
-    """The card without the molecule, drawn at SS× size."""
-    s = SS
-    img = Image.new("RGB", (CARD_W * s, CARD_H * s), WHITE)
-    d = ImageDraw.Draw(img)
-    d.rounded_rectangle(
-        [s * 0.75, s * 0.75, (CARD_W - 0.75) * s, (CARD_H - 0.75) * s],
-        radius=12 * s, fill=WHITE, outline=CARD_BORDER, width=int(1.5 * s),
-    )  # fmt: skip
-    d.rounded_rectangle(
-        [(PAD + 1) * s, (PAD + 1) * s, (PAD + IMG_W - 1) * s, (PAD + IMG_H - 1) * s],
-        radius=10 * s, fill=WHITE, outline=_rgb(THEME_COLOR), width=2 * s,
-    )  # fmt: skip
-    if title:
-        d.text((CARD_W / 2 * s, TITLE_Y * s), title, fill=TEXT_COLOR, anchor="ms",
-               font=_font(TITLE_SIZE * s, bold=True))  # fmt: skip
-    if note:
-        d.text((CARD_W / 2 * s, NOTE_Y * s), note, fill=NOTE_COLOR, anchor="ms",
-               font=_font(NOTE_SIZE * s, bold=False))  # fmt: skip
+def _background() -> Image.Image:
+    """White, with the drawings' rounded border, drawn at SS× size."""
+    s, h = SS, BORDER_WIDTH / 2
+    img = Image.new("RGB", (WIDTH * s, HEIGHT * s), WHITE)
+    ImageDraw.Draw(img).rounded_rectangle(
+        [h * s, h * s, (WIDTH - h) * s, (HEIGHT - h) * s],
+        radius=CORNER_RADIUS * s,
+        fill=WHITE,
+        outline=_rgb(BORDER_COLOR),
+        width=int(BORDER_WIDTH * s),
+    )
     return img
 
 
-def spin_card(frame: Frame, path: Path, title: str = "", note: str = "") -> Path:
-    """Write the rotating card for one structure as an animated GIF."""
+def spin_gif(frame: Frame, path: Path) -> Path:
+    """Write the rotating view of one structure as an animated GIF."""
     xyz = np.array(frame.coords, dtype=float)
     xyz -= xyz.mean(axis=0)
     symbols = frame.symbols
@@ -176,11 +149,11 @@ def spin_card(frame: Frame, path: Path, title: str = "", note: str = "") -> Path
     views = [view(k) for k in range(FRAMES)]
     ext_x = max(float(np.max((np.abs(p[:, 0]) + rad) * f)) for p, f in views)
     ext_y = max(float(np.max((np.abs(p[:, 1]) + rad) * f)) for p, f in views)
-    inner_w, inner_h = (IMG_W - 16) * SS, (IMG_H - 16) * SS
+    inner_w, inner_h = (WIDTH - 2 * MARGIN) * SS, (HEIGHT - 2 * MARGIN) * SS
     px = min(inner_w / (2 * ext_x), inner_h / (2 * ext_y))
-    cx, cy = (PAD + IMG_W / 2) * SS, (PAD + IMG_H / 2) * SS
+    cx, cy = WIDTH / 2 * SS, HEIGHT / 2 * SS
 
-    background = _card_background(title, note)
+    background = _background()
     frames = []
     for p, f in views:
         img = background.copy()
@@ -198,15 +171,42 @@ def spin_card(frame: Frame, path: Path, title: str = "", note: str = "") -> Path
                 _stick(
                     d, (sx[i], sy[i]), (sx[j], sy[j]), 0.16 * px * f[i], 0.16 * px * f[j], ci, cj
                 )
-        frames.append(img.resize((CARD_W, CARD_H), Image.LANCZOS))
+        frames.append(img.resize((WIDTH, HEIGHT), Image.LANCZOS))
     # One palette for all frames, chosen from several viewing angles: about half the
     # file size of a palette per frame, and no flicker between frames.
-    sample = Image.new("RGB", (CARD_W * 4, CARD_H))
+    sample = Image.new("RGB", (WIDTH * 4, HEIGHT))
     for n, k in enumerate(range(0, FRAMES, FRAMES // 4)):
-        sample.paste(frames[k], (n * CARD_W, 0))
+        sample.paste(frames[k], (n * WIDTH, 0))
     palette = sample.quantize(colors=PALETTE_COLORS, method=Image.Quantize.MEDIANCUT)
-    indexed = [f.quantize(palette=palette, dither=Image.Dither.NONE) for f in frames]
+    # Averaging in the palette turns the white background slightly gray: snap
+    # near-white entries back to white so it matches the 2D drawings.
+    colors = palette.getpalette()[: 3 * PALETTE_COLORS]
+    colors = [255 if min(colors[k : k + 3]) >= 245 else v for k in range(0, len(colors), 3)
+              for v in colors[k : k + 3]]  # fmt: skip
+    # One extra entry, used only for the transparent corners outside the rounded border.
+    palette.putpalette([*colors, 255, 0, 255])
+    outside = _outside_mask()
+    indexed = []
+    for f in frames:
+        q = f.quantize(palette=palette, dither=Image.Dither.NONE)
+        q.paste(TRANSPARENT, mask=outside)
+        indexed.append(q)
     indexed[0].save(
-        path, save_all=True, append_images=indexed[1:], duration=FRAME_MS, loop=0, optimize=True
-    )
+        path, save_all=True, append_images=indexed[1:], duration=FRAME_MS, loop=0,
+        transparency=TRANSPARENT, disposal=2, optimize=False,
+    )  # fmt: skip
     return path
+
+
+TRANSPARENT = PALETTE_COLORS  # palette index of the transparent corners
+
+
+def _outside_mask() -> Image.Image:
+    """255 outside the rounded border (the corners), 0 inside, at the final size."""
+    s = SS
+    big = Image.new("L", (WIDTH * s, HEIGHT * s), 255)
+    ImageDraw.Draw(big).rounded_rectangle(
+        [0, 0, WIDTH * s - 1, HEIGHT * s - 1], radius=CORNER_RADIUS * s, fill=0
+    )
+    # Only clearly outside pixels become transparent; the antialiased edge stays.
+    return big.resize((WIDTH, HEIGHT), Image.LANCZOS).point(lambda v: 255 if v > 200 else 0)

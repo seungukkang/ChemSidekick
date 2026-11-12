@@ -67,9 +67,7 @@ FIXTURES: dict[str, tuple[list[str], str | None]] = {
                     "symbols": ["O", "H", "H"],
                     "coords": [[0, 0, 0.1173], [0, 0.7572, -0.4692], [0, -0.7572, -0.4692]],
                     "comment": "water",
-                },
-                "title": "water",
-                "note": "H2O",
+                }
             }
         ),
     ),

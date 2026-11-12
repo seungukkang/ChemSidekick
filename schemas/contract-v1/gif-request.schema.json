@@ -92,16 +92,6 @@
   "properties": {
     "frame": {
       "$ref": "#/$defs/Frame"
-    },
-    "title": {
-      "default": "",
-      "title": "Title",
-      "type": "string"
-    },
-    "note": {
-      "default": "",
-      "title": "Note",
-      "type": "string"
     }
   },
   "required": [

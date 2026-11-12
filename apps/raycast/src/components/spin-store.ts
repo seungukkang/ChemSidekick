@@ -1,10 +1,10 @@
-// Which cards show their rotating 3D view, shared by the result view and the
-// drawings grid (a pushed view does not get its parent's state updates).
+// Which drawings show their rotating 3D view instead, shared by every view of a
+// result (a pushed view does not get its parent's state updates).
 // GIFs are made on demand with `csk gif` and kept for the session.
 import { showToast, Toast } from "@raycast/api";
 import { useSyncExternalStore } from "react";
 import { getTransport } from "../connection";
-import type { SpinTarget } from "../lib/cards";
+import type { SpinTarget } from "../lib/spin";
 
 const gifs = new Map<string, string>(); // target key -> GIF path
 const shown = new Set<string>();
@@ -28,11 +28,7 @@ async function makeGif(target: SpinTarget) {
   const toast = await showToast({ style: Toast.Style.Animated, title: "Making the 3D view…" });
   try {
     const { symbols, coords, comment } = target.frame;
-    const response = await getTransport().gif({
-      frame: { symbols, coords, comment },
-      title: target.title,
-      note: target.note,
-    });
+    const response = await getTransport().gif({ frame: { symbols, coords, comment } });
     if (!response.ok) throw new Error(response.error.message);
     gifs.set(target.key, response.path);
     await toast.hide();

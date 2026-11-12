@@ -1,7 +1,7 @@
 from PIL import Image
 
 from chemsidekick.core.schemas import Frame
-from chemsidekick.core.spin import CARD_H, CARD_W, FRAMES, bonds, spin_card
+from chemsidekick.core.spin import FRAMES, HEIGHT, WIDTH, bonds, spin_gif
 
 WATER = Frame(
     symbols=["O", "H", "H"],
@@ -33,27 +33,32 @@ def test_bonds_from_distances():
     assert (0, 3) not in pairs
 
 
-def test_spin_card_is_an_endless_animated_gif(tmp_path):
-    path = spin_card(BENZENE, tmp_path / "b.gif", "#1 · benzene", "D6h")
+def test_spin_gif_is_an_endless_animated_gif(tmp_path):
+    path = spin_gif(BENZENE, tmp_path / "b.gif")
     with Image.open(path) as im:
         assert im.format == "GIF"
-        assert im.size == (CARD_W, CARD_H)
+        assert im.size == (WIDTH, HEIGHT) == (300, 240)  # same as the 2D drawings
         assert im.n_frames == FRAMES
         assert im.info.get("loop") == 0
 
 
 def test_frames_differ_as_it_turns(tmp_path):
-    with Image.open(spin_card(WATER, tmp_path / "w.gif")) as im:
+    with Image.open(spin_gif(WATER, tmp_path / "w.gif")) as im:
         first = im.convert("RGB").tobytes()
         im.seek(FRAMES // 4)
         assert im.convert("RGB").tobytes() != first
 
 
-def test_caption_is_drawn_only_when_given(tmp_path):
-    def caption_ink(path) -> int:
-        with Image.open(path) as im:
-            strip = im.convert("L").crop((40, 256, CARD_W - 40, CARD_H - 4))
-            return sum(1 for v in strip.tobytes() if v < 200)
+def test_looks_like_the_drawings_white_with_a_theme_border(tmp_path):
+    with Image.open(spin_gif(WATER, tmp_path / "w.gif")) as im:
+        rgb = im.convert("RGB")
+        r, g, b = rgb.getpixel((WIDTH // 2, 1))  # top edge: the border
+        assert r > 200 and g < 120 and b < 120  # red theme color
+        assert min(rgb.getpixel((12, HEIGHT // 2))) >= 245  # inside: white (after the palette)
 
-    assert caption_ink(spin_card(WATER, tmp_path / "plain.gif")) == 0
-    assert caption_ink(spin_card(WATER, tmp_path / "titled.gif", "#1 · water", "(x)")) > 50
+
+def test_corners_outside_the_rounded_border_are_transparent(tmp_path):
+    with Image.open(spin_gif(WATER, tmp_path / "w.gif")) as im:
+        rgba = im.convert("RGBA")
+        assert rgba.getpixel((0, 0))[3] == 0  # corner: see-through on a dark page
+        assert rgba.getpixel((WIDTH // 2, HEIGHT // 2))[3] == 255

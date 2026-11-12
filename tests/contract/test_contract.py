@@ -263,9 +263,7 @@ def test_save_without_results_is_input_error():
 def test_gif_from_a_stereo_frame():
     stereo = ok_run(runner.invoke(app, ["stereo", "CC(Br)C(Br)C", "--no-open", "--json"]))
     frame = stereo.result.structures[0].frames[0]
-    payload = json.dumps(
-        {"frame": frame.model_dump(mode="json"), "title": "#1 · meso", "note": "(2R,3S)"}
-    )
+    payload = json.dumps({"frame": frame.model_dump(mode="json")})
     result = runner.invoke(app, ["gif", "--json"], input=payload)
     assert result.exit_code == 0, result.output
     r = GifResponse.model_validate(only_json(result))
