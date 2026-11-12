@@ -29,7 +29,7 @@ describe("renderResult", () => {
       `![#1 · meso](/fixture/cache/recent/00003-stereo/isomers/isomer-01.svg?raycast-width=${DRAWING_WIDTH}) ` +
         `![#2 · enantiomer of #3](/fixture/cache/recent/00003-stereo/isomers/isomer-02.svg?raycast-width=${DRAWING_WIDTH})`,
     );
-    expect(view.markdown).toContain("**#1 · meso** (2R,3S) · **#2 · enantiomer of #3** (2R,3R)");
+    expect(view.markdown).toContain("**#1 · meso** (2R,3S)\n\n**#2 · enantiomer of #3** (2R,3R)\n");
     expect(lines.filter((l) => l.includes("isomer-03.svg"))).toHaveLength(1); // third on its own row
     expect(view.drawings).toHaveLength(3);
     expect(view.viewer).toMatch(/viewer\.html$/);

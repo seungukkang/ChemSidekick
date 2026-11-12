@@ -71,7 +71,8 @@ function drawingRows(drawings: Artifact[]): string[] {
     );
     const captions = row.map((a) => [a.title && `**${a.title}**`, a.note].filter(Boolean).join(" ")).filter(Boolean);
     md.push(images.join(" "), "");
-    if (captions.length) md.push(captions.join(" · "), "");
+    // One caption per line (a separate paragraph each: a plain line break would be joined).
+    for (const caption of captions) md.push(caption, "");
   }
   return md;
 }
