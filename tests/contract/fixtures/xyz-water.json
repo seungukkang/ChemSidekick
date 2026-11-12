@@ -39,6 +39,7 @@
       "[4] S. Kim et al., PubChem 2023 update, Nucleic Acids Res. 2023, 51, D1373–D1380; PubChem Periodic Table, National Center for Biotechnology Information."
     ],
     "notes": [
+      "The 2D drawing uses bonds inferred from the coordinates (RDKit DetermineBonds, xyz2mol method, assuming a neutral molecule); it shows no stereochemistry. Check it against what you expect, especially for metals, ions, radicals, and transition states.",
       "Bonds in the 3D view are drawn by 3Dmol.js from interatomic distances only. They are not bond orders or chemical bond assignments; in transition states, forming and breaking bonds may look different from reality.",
       "Check: ✓ confirmed by 3 references (1 primary + 2 compilations) · ≈ 2 references agree, the third reproduces an older edition · def a definition · ? not confirmed by 3 references, value from mendeleev. Numbers refer to References."
     ],
@@ -73,6 +74,10 @@
           [
             "Comment line",
             "water"
+          ],
+          [
+            "SMILES (inferred, no stereo)",
+            "O"
           ]
         ],
         "minor_columns": [],
@@ -157,6 +162,12 @@
     ],
     "artifacts": [
       {
+        "kind": "svg",
+        "path": "/fixture/cache/recent/00002-xyz/structure.svg",
+        "title": "H₂O",
+        "note": "bonds inferred from coordinates"
+      },
+      {
         "kind": "xyz",
         "path": "/fixture/cache/recent/00002-xyz/structure.xyz",
         "title": "Standard XYZ",
@@ -175,6 +186,8 @@
       "n_atoms": 3,
       "n_frames": 1,
       "molecular_weight": 18.015,
+      "smiles_inferred": "O",
+      "bond_orders_inferred": true,
       "closest_atoms_A": [
         0.9578
       ]

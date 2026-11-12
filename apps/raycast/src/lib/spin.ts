@@ -25,10 +25,17 @@ export function spinTargets(result: ToolResult): SpinTarget[] {
   const frames = result.structures.flatMap((s) => s.frames);
   const drawings = drawingsOf(result);
   if (drawings.length) {
-    return drawings.flatMap((d) => {
+    const matched = drawings.flatMap((d) => {
       const frame = frameForDrawing(frames, d.title);
       return frame ? [{ key: d.path, frame, title: d.title, drawing: d }] : [];
     });
+    // One drawing of one structure (xyz): they belong together.
+    if (!matched.length && drawings.length === 1 && result.structures.length === 1) {
+      const s = result.structures[0];
+      const frame = s.frames[s.start_frame] ?? s.frames[0];
+      return [{ key: drawings[0].path, frame, title: drawings[0].title, drawing: drawings[0] }];
+    }
+    return matched;
   }
   return result.structures.map((s, i) => ({
     key: `structure:${i}`,

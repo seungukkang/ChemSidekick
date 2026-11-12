@@ -20,6 +20,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from chemsidekick.chem.xyz_bonds import infer
 from chemsidekick.core.registry import tool
 from chemsidekick.core.runner import workdir
 from chemsidekick.core.schemas import (
@@ -34,6 +35,13 @@ from chemsidekick.core.schemas import (
 from chemsidekick.tools.reference.element import CHECK_LEGEND, Refs, by_symbol, check_mark, find
 
 OVERLAP_A = 0.5  # closer than this (Å): atoms probably overlap
+
+DRAWING_NOTE = (
+    "The 2D drawing uses bonds inferred from the coordinates (RDKit DetermineBonds, "
+    "xyz2mol method, assuming a neutral molecule); it shows no stereochemistry. "
+    "Check it against what you expect, especially for metals, ions, radicals, and "
+    "transition states."
+)
 
 BOND_NOTE = (
     "Bonds in the 3D view are drawn by 3Dmol.js from interatomic distances only. "
@@ -358,6 +366,14 @@ def _result(parsed: Parsed, start: int, inp: XyzInput) -> ToolResult:
         more = f"; and {len(overlaps) - 5} more" if len(overlaps) > 5 else ""
         warnings.append(f"Atoms may overlap (closer than {OVERLAP_A} Å): {listed}{more}.")
 
+    # 2D drawing from bonds inferred from the coordinates (frame shown first).
+    inferred = infer(shown)
+    if not inferred.orders:
+        warnings.append(
+            "Bond orders could not be determined from the coordinates "
+            f"({inferred.reason}); the 2D drawing shows connectivity only."
+        )
+
     summary = [
         ["Formula", formula],
         ["Atoms", shown.n_atoms],
@@ -368,6 +384,8 @@ def _result(parsed: Parsed, start: int, inp: XyzInput) -> ToolResult:
         summary.append(["Closest atoms", _pair(shown, closest[start])])
     if n_frames == 1 and shown.comment:
         summary.append(["Comment line", shown.comment])
+    if inferred.smiles:
+        summary.append(["SMILES (inferred, no stereo)", inferred.smiles])
     tables = [
         Table(title="Summary", columns=["Property", "Value"], rows=summary),
         Table(
@@ -391,6 +409,11 @@ def _result(parsed: Parsed, start: int, inp: XyzInput) -> ToolResult:
 
     path = workdir() / "structure.xyz"
     path.write_text(_write_xyz(frames), encoding="utf-8")
+    drawing = workdir() / "structure.svg"
+    drawing.write_text(inferred.svg, encoding="utf-8")
+    drawing_title = formula.translate(_SUBSCRIPT) + (
+        f" · frame {start + 1}" if n_frames > 1 else ""
+    )
 
     frame_word = "frame" if n_frames == 1 else "frames"
     return ToolResult(
@@ -415,20 +438,32 @@ def _result(parsed: Parsed, start: int, inp: XyzInput) -> ToolResult:
                 start_frame=start,
             )
         ],
-        artifacts=[Artifact(kind="xyz", path=path, title="Standard XYZ")],
+        artifacts=[
+            Artifact(
+                kind="svg",
+                path=drawing,
+                title=drawing_title,
+                note="bonds inferred from coordinates"
+                if inferred.orders
+                else "connectivity only (bond orders not determined)",
+            ),
+            Artifact(kind="xyz", path=path, title="Standard XYZ"),
+        ],
         warnings=warnings,
         assumptions=[
             "Coordinates are in Å.",
             "Molecular weight: abridged atomic weights × atom counts; their uncertainties "
             "are added linearly (a conservative estimate).",
         ],
-        notes=[*parsed.notes, BOND_NOTE, CHECK_LEGEND],
+        notes=[*parsed.notes, DRAWING_NOTE, BOND_NOTE, CHECK_LEGEND],
         sources=refs.lines(),
         data={
             "formula": formula,
             "n_atoms": shown.n_atoms,
             "n_frames": n_frames,
             "molecular_weight": mw_value,
+            "smiles_inferred": inferred.smiles,
+            "bond_orders_inferred": inferred.orders,
             "closest_atoms_A": [round(c[0], 4) if c else None for c in closest],
         },
     )

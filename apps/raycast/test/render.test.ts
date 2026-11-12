@@ -57,6 +57,16 @@ describe("renderResult", () => {
     expect(grid[0]).toBe("   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18");
   });
 
+  it("xyz: the drawing and its rotating 3D view side by side, then the information", () => {
+    const r = run("xyz-water");
+    const drawing = r.result.artifacts.find((a) => a.kind === "svg")!;
+    const view = renderResult(r.result, r.run, { beside: { [drawing.path]: "/gifs/w.gif" } });
+    const row = view.markdown.split("\n").find((l) => l.includes("structure.svg"))!;
+    expect(row).toContain("/gifs/w.gif");
+    expect(view.markdown).toContain("bonds inferred from coordinates · 2D and rotating 3D");
+    expect(view.markdown.indexOf("structure.svg")).toBeLessThan(view.markdown.indexOf("### Summary"));
+  });
+
   it("shows a figure in place of a clickable grid when one is given", () => {
     const r = run("element-periodic-table");
     const md = renderResult(r.result, r.run, { grids: { 0: "![Periodic table](/img/pt.svg)" } }).markdown;

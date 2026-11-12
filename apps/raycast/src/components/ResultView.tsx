@@ -12,7 +12,7 @@ import { ErrorView } from "./ErrorView";
 import { ToolForm } from "./ToolForm";
 import { periodicTableMarkdown } from "./PeriodicTableView";
 import { PickList } from "./PickList";
-import { toggle3D, useSpinState } from "./spin-store";
+import { ensureGif, toggle3D, useSpinState } from "./spin-store";
 
 const NO_OPTIONS: RunOptions = {};
 const SHOW_DETAILS: Keyboard.Shortcut = { modifiers: ["cmd"], key: "i" };
@@ -143,6 +143,12 @@ export function ResultDetail({
 }) {
   const targets = useMemo(() => spinTargets(data.result), [data]);
   const spin = useSpinState();
+  // One drawing of one structure (xyz): show its rotating 3D view beside it right away.
+  const pair = targets.length === 1 && targets[0].drawing ? targets[0] : undefined;
+  useEffect(() => {
+    if (pair) ensureGif(pair);
+  }, [pair?.key]);
+  const beside = pair && spin.made(pair.key) ? { [pair.key]: spin.made(pair.key)! } : {};
   const swaps = Object.fromEntries(
     targets.flatMap((t) => (t.drawing && spin.gif(t.key) ? [[t.key, spin.gif(t.key)!]] : [])),
   );
@@ -155,7 +161,7 @@ export function ResultDetail({
       ) as Record<number, string>,
     [data],
   );
-  const view = renderResult(data.result, data.run, { swaps, spins, grids });
+  const view = renderResult(data.result, data.run, { swaps, spins, grids, beside });
   return (
     <Detail
       navigationTitle={tool.title}
@@ -169,7 +175,7 @@ export function ResultDetail({
       }
       actions={
         <ActionPanel>
-          {targets.length === 1 && <Switch3D target={targets[0]} is3D={spin.is3D(targets[0].key)} />}
+          {targets.length === 1 && !pair && <Switch3D target={targets[0]} is3D={spin.is3D(targets[0].key)} />}
           {targets.length > 1 && (
             <ActionPanel.Submenu title="Switch 2D / 3D" icon={Icon.RotateClockwise} shortcut={SWITCH_3D}>
               {targets.map((t) => (

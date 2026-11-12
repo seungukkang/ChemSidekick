@@ -43,6 +43,12 @@ async function makeGif(target: SpinTarget) {
   }
 }
 
+// Make the GIF (if not made yet) without switching anything: for views that show
+// the 2D drawing and the 3D view side by side.
+export function ensureGif(target: SpinTarget) {
+  if (!gifs.has(target.key) && !loading.has(target.key)) void makeGif(target);
+}
+
 export function toggle3D(target: SpinTarget) {
   if (shown.has(target.key)) {
     shown.delete(target.key);
@@ -57,6 +63,7 @@ export function toggle3D(target: SpinTarget) {
 export interface SpinState {
   is3D(key: string): boolean; // switched to 3D (the GIF may still be in the making)
   gif(key: string): string | undefined; // GIF to show now, if switched to 3D and ready
+  made(key: string): string | undefined; // the GIF if it exists, switched or not
 }
 
 export function useSpinState(): SpinState {
@@ -64,5 +71,6 @@ export function useSpinState(): SpinState {
   return {
     is3D: (key) => shown.has(key),
     gif: (key) => (shown.has(key) ? gifs.get(key) : undefined),
+    made: (key) => gifs.get(key),
   };
 }
