@@ -1,5 +1,4 @@
-// The element tool's periodic-table result -> a searchable element list and a
-// periodic table drawing. The drawing is a figure, not a layout trick: a
+// The element tool's periodic-table result -> a periodic table drawing. The drawing is a figure, not a layout trick: a
 // transparent background and colors for Raycast's light or dark appearance, so
 // it sits on the page like native content. Pure, so it can be tested.
 import type { Table } from "./contract";
@@ -10,44 +9,11 @@ export type Appearance = "light" | "dark";
 // in the order of Table.tags: s, p, d, f).
 const TAG_COLORS = ["#f43f5e", "#f59e0b", "#3b82f6", "#10b981", "#8b5cf6", "#f97316"];
 
-export interface ElementEntry {
-  symbol: string;
-  z: number;
-  name: string;
-  block: string; // "s", "p", "d", "f"
-  weight: string; // as shown on the tile, e.g. "55.845" or "[98]"
-  period: number;
-  group: number | null; // null for the f-block rows (Ln, An)
-}
-
 export function blockColors(table: Table): Record<string, string> {
   return Object.fromEntries(Object.keys(table.tags).map((tag, i) => [tag, TAG_COLORS[i % TAG_COLORS.length]]));
 }
 
 const F_ROW_PERIOD: Record<string, number> = { Ln: 6, An: 7 };
-
-export function elementsFromTable(table: Table): ElementEntry[] {
-  const out: ElementEntry[] = [];
-  table.rows.forEach((row) => {
-    const label = String(row[0] ?? "");
-    const period = Number(label) || F_ROW_PERIOD[label] || 0;
-    row.forEach((cell, col) => {
-      const symbol = typeof cell === "string" ? cell : "";
-      const info = table.cells[symbol];
-      if (col === 0 || !info) return;
-      out.push({
-        symbol,
-        z: Number(info.top),
-        name: info.lines[0] ?? "",
-        weight: info.lines[1] ?? "",
-        block: info.tag,
-        period,
-        group: F_ROW_PERIOD[label] ? null : col,
-      });
-    });
-  });
-  return out.sort((a, b) => a.z - b.z);
-}
 
 // --- Drawing -------------------------------------------------------------------
 

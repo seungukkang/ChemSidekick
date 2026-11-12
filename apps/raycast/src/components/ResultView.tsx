@@ -5,10 +5,12 @@ import { useMemo } from "react";
 import { getTransport } from "../connection";
 import type { Artifact, RunResponse, ToolInfo } from "../lib/contract";
 import { isGrid, renderResult } from "../lib/render";
+import { clickableTable } from "../lib/pick";
 import { drawingsOf, type SpinTarget, spinTargets } from "../lib/spin";
 import type { RunOptions } from "../lib/transport";
 import { ErrorView } from "./ErrorView";
 import { periodicTableMarkdown } from "./PeriodicTableView";
+import { PickList } from "./PickList";
 import { toggle3D, useSpinState } from "./spin-store";
 
 const NO_OPTIONS: RunOptions = {};
@@ -37,8 +39,9 @@ async function save(number: number) {
   }
 }
 
-// Runs one tool and shows its result. Used by every tool (generic view): results
-// with several drawings (stereoisomers) as a grid of cards, others as a page.
+// Runs one tool and shows its result. Used by every tool (generic view): a
+// clickable table (periodic table) as a searchable list, several drawings
+// (stereoisomers) as a grid of cards, anything else as a page.
 export function ResultView({
   tool,
   input,
@@ -53,6 +56,8 @@ export function ResultView({
   });
   if (error) return <ErrorView error={error} onRetry={revalidate} />;
   if (!data) return <Detail isLoading={isLoading} navigationTitle={tool.title} markdown={`Running ${tool.title}…`} />;
+  const pick = clickableTable(data.result);
+  if (pick && Object.keys(pick.cells).length) return <PickList tool={tool} table={pick} />;
   if (drawingsOf(data.result).length > 1) return <DrawingsResult tool={tool} data={data} />;
   return <ResultDetail tool={tool} data={data} />;
 }

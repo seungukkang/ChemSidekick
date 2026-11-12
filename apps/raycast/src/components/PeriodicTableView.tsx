@@ -13,12 +13,20 @@ export function periodicTableMarkdown(table: Table, selected?: string): string {
   return `![Periodic table](${encodeURI(path)}?raycast-width=${width})`;
 }
 
-export function PeriodicTableView({ table, selected }: { table: Table; selected?: string }) {
+export function PeriodicTableView({
+  table,
+  selected,
+  title = "Periodic Table",
+}: {
+  table: Table;
+  selected?: string;
+  title?: string;
+}) {
   const markdown = useMemo(() => periodicTableMarkdown(table, selected), [table, selected]);
   return (
     <Detail
-      navigationTitle="Periodic Table"
-      markdown={`${markdown}\n\n_Press Esc to go back to the list and pick an element._`}
+      navigationTitle={title}
+      markdown={`${markdown}\n\n_Press Esc to go back to the list and pick another one._`}
       actions={
         <ActionPanel>{selected && <Action.CopyToClipboard title="Copy Symbol" content={selected} />}</ActionPanel>
       }

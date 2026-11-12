@@ -1,32 +1,30 @@
 import { existsSync, utimesSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import type { RunResponse } from "../src/lib/contract";
-import { blockColors, elementsFromTable, periodicTableSize, periodicTableSvg } from "../src/lib/elements";
+import { blockColors, periodicTableSize, periodicTableSvg } from "../src/lib/elements";
 import { pruneImages, writeImage } from "../src/lib/images";
+import { clickableTable, pickItems } from "../src/lib/pick";
 import { fixture, tempDir } from "./helpers";
 
-const table = (JSON.parse(fixture("element-periodic-table")) as RunResponse).result.tables[0];
+const periodic = (JSON.parse(fixture("element-periodic-table")) as RunResponse).result;
+const table = periodic.tables[0];
 
-describe("elementsFromTable", () => {
-  const elements = elementsFromTable(table);
+describe("clickable table as a list", () => {
+  const items = pickItems(table);
 
-  it("lists all 118 elements in order of atomic number", () => {
-    expect(elements).toHaveLength(118);
-    expect(elements.map((e) => e.z)).toEqual(Array.from({ length: 118 }, (_, i) => i + 1));
+  it("finds the clickable table only in the periodic table result", () => {
+    expect(clickableTable(periodic)).toBe(table);
+    expect(clickableTable((JSON.parse(fixture("element-card")) as RunResponse).result)).toBeUndefined();
   });
 
-  it("reads position and tile text", () => {
-    expect(elements[25]).toEqual({
-      symbol: "Fe",
-      z: 26,
-      name: "Iron",
-      weight: "55.845",
-      block: "d",
-      period: 4,
-      group: 8,
-    });
-    expect(elements[57]).toMatchObject({ symbol: "Ce", block: "f", period: 6, group: null });
-    expect(elements[117]).toMatchObject({ symbol: "Og", period: 7, group: 18 });
+  it("lists all 118 elements in order of atomic number", () => {
+    expect(items).toHaveLength(118);
+    expect(items.map((i) => Number(i.top))).toEqual(Array.from({ length: 118 }, (_, i) => i + 1));
+  });
+
+  it("keeps what search needs: symbol, number, name", () => {
+    expect(items[25]).toEqual({ value: "Fe", top: "26", name: "Iron", extra: "55.845", tag: "d" });
+    expect(items[57]).toMatchObject({ value: "Ce", tag: "f" });
   });
 
   it("colors blocks like the web UI", () => {
