@@ -473,7 +473,7 @@ def build_app(registry: Registry) -> typer.Typer:
             request = GifRequest.model_validate(_read_json_input())
             config = _load_config()
             folder = RecentStore(limit=config.recent_limit).scratch_folder("gif")
-            path = spin_gif(request.frame, folder / "spin.gif")
+            path = spin_gif(request.frame, folder / "spin.gif", beside_2d=request.beside_2d)
             if as_json:
                 typer.echo(GifResponse(path=str(path), frames=FRAMES).model_dump_json(indent=2))
             else:

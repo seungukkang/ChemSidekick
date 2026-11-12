@@ -12,7 +12,7 @@ import { ErrorView } from "./ErrorView";
 import { ToolForm } from "./ToolForm";
 import { periodicTableMarkdown } from "./PeriodicTableView";
 import { PickList } from "./PickList";
-import { ensureGif, toggle3D, useSpinState } from "./spin-store";
+import { combinedKey, ensureCombined, toggle3D, useSpinState } from "./spin-store";
 
 const NO_OPTIONS: RunOptions = {};
 const SHOW_DETAILS: Keyboard.Shortcut = { modifiers: ["cmd"], key: "i" };
@@ -143,12 +143,14 @@ export function ResultDetail({
 }) {
   const targets = useMemo(() => spinTargets(data.result), [data]);
   const spin = useSpinState();
-  // One drawing of one structure (xyz): show its rotating 3D view beside it right away.
+  // One drawing of one structure (xyz): one wide card with the 2D drawing and the
+  // rotating 3D view, made when the page opens (the 2D drawing shows meanwhile).
   const pair = targets.length === 1 && targets[0].drawing ? targets[0] : undefined;
   useEffect(() => {
-    if (pair) ensureGif(pair);
+    if (pair) ensureCombined(pair);
   }, [pair?.key]);
-  const beside = pair && spin.made(pair.key) ? { [pair.key]: spin.made(pair.key)! } : {};
+  const card = pair ? spin.made(combinedKey(pair.key)) : undefined;
+  const combined = pair && card ? { [pair.key]: card } : {};
   const swaps = Object.fromEntries(
     targets.flatMap((t) => (t.drawing && spin.gif(t.key) ? [[t.key, spin.gif(t.key)!]] : [])),
   );
@@ -161,7 +163,7 @@ export function ResultDetail({
       ) as Record<number, string>,
     [data],
   );
-  const view = renderResult(data.result, data.run, { swaps, spins, grids, beside });
+  const view = renderResult(data.result, data.run, { swaps, spins, grids, combined });
   return (
     <Detail
       navigationTitle={tool.title}

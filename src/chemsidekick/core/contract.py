@@ -152,6 +152,9 @@ class GifRequest(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
     frame: Frame  # one frame of a result's Structure3D (symbols, coords in Å, comment)
+    # One wide card: the 2D drawing from bonds inferred from the coordinates on
+    # the left, the rotating view on the right (for xyz results).
+    beside_2d: bool = False
 
 
 class GifResponse(_Envelope):

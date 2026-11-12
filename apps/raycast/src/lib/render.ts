@@ -6,6 +6,7 @@ import type { Artifact, Cell, RunInfo, Table, ToolResult } from "./contract";
 export const MAX_TABLE_ROWS = 60;
 export const DRAWINGS_PER_ROW = 2;
 export const DRAWING_WIDTH = 220; // px: two fit side by side in the Detail view
+export const COMBINED_WIDTH = 2 * DRAWING_WIDTH + 4; // one 2D + 3D card, as wide as two drawings
 export const HIGHLIGHTS_PER_ROW = 3;
 
 export interface RenderedResult {
@@ -67,7 +68,7 @@ export interface ViewImages {
   swaps?: Record<string, string>; // drawing path -> GIF
   spins?: string[]; // GIFs of the structures of a result without drawings (xyz)
   grids?: Record<number, string>; // table index -> markdown of a figure drawn for it (periodic table)
-  beside?: Record<string, string>; // drawing path -> GIF shown next to it (2D and 3D side by side)
+  combined?: Record<string, string>; // drawing path -> one wide GIF card: that 2D drawing + rotating 3D
 }
 
 function image(alt: string, path: string, width: number): string {
@@ -75,17 +76,14 @@ function image(alt: string, path: string, width: number): string {
   return `![${cellText(alt) || "image"}](${encodeURI(path)}?raycast-width=${width})`;
 }
 
-function drawingRows(drawings: Artifact[], swaps: Record<string, string>, beside: Record<string, string>): string[] {
+function drawingRows(drawings: Artifact[], swaps: Record<string, string>, combined: Record<string, string>): string[] {
   const md: string[] = [];
-  // A single drawing with its 3D view: both on one row, the caption below.
-  if (drawings.length === 1 && beside[drawings[0].path]) {
+  // A single drawing with its 3D view in one wide card, the caption below.
+  if (drawings.length === 1 && combined[drawings[0].path]) {
     const a = drawings[0];
-    md.push(
-      `${image(`${a.title} 2D`, a.path, DRAWING_WIDTH)} ${image(`${a.title} 3D`, beside[a.path], DRAWING_WIDTH)}`,
-      "",
-    );
+    md.push(image(`${a.title} 2D and 3D`, combined[a.path], COMBINED_WIDTH), "");
     const caption = [a.title && `**${a.title}**`, a.note].filter(Boolean).join(" · ");
-    if (caption) md.push(`${caption} · 2D and rotating 3D`, "");
+    if (caption) md.push(caption, "");
     return md;
   }
   for (let i = 0; i < drawings.length; i += DRAWINGS_PER_ROW) {
@@ -118,12 +116,13 @@ export function renderResult(result: ToolResult, run?: RunInfo, images: ViewImag
   const md: string[] = [];
   for (const w of result.warnings) md.push(`> ⚠️ ${w}`, "");
   md.push(`# ${result.answer}`, "");
-  if (result.highlights.length) md.push(highlightsMarkdown(result.highlights), "");
   for (const spin of images.spins ?? []) md.push(image("rotating 3D view", spin, DRAWING_WIDTH), "");
 
   // The result itself: drawings, then tables
   const drawings = result.artifacts.filter((a) => IMAGE_KINDS.has(a.kind));
-  md.push(...drawingRows(drawings, images.swaps ?? {}, images.beside ?? {}));
+  md.push(...drawingRows(drawings, images.swaps ?? {}, images.combined ?? {}));
+  // Then the information: key values, tables, evidence.
+  if (result.highlights.length) md.push(highlightsMarkdown(result.highlights), "");
   result.tables.forEach((t, i) => {
     md.push(images.grids?.[i] ?? (isGrid(t) ? gridMarkdown(t) : tableMarkdown(t)), "");
   });

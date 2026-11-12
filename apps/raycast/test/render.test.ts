@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { RunResponse, Table } from "../src/lib/contract";
-import { DRAWING_WIDTH, MAX_TABLE_ROWS, renderResult, tableMarkdown } from "../src/lib/render";
+import { COMBINED_WIDTH, DRAWING_WIDTH, MAX_TABLE_ROWS, renderResult, tableMarkdown } from "../src/lib/render";
 import { fixture } from "./helpers";
 
 const run = (name: string) => JSON.parse(fixture(name)) as RunResponse;
@@ -57,14 +57,15 @@ describe("renderResult", () => {
     expect(grid[0]).toBe("   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18");
   });
 
-  it("xyz: the drawing and its rotating 3D view side by side, then the information", () => {
+  it("xyz: one wide card with the 2D drawing and the rotating 3D view first, then the information", () => {
     const r = run("xyz-water");
     const drawing = r.result.artifacts.find((a) => a.kind === "svg")!;
-    const view = renderResult(r.result, r.run, { beside: { [drawing.path]: "/gifs/w.gif" } });
-    const row = view.markdown.split("\n").find((l) => l.includes("structure.svg"))!;
-    expect(row).toContain("/gifs/w.gif");
-    expect(view.markdown).toContain("bonds inferred from coordinates · 2D and rotating 3D");
-    expect(view.markdown.indexOf("structure.svg")).toBeLessThan(view.markdown.indexOf("### Summary"));
+    const view = renderResult(r.result, r.run, { combined: { [drawing.path]: "/gifs/w.gif" } });
+    expect(view.markdown).toContain(`(/gifs/w.gif?raycast-width=${COMBINED_WIDTH})`);
+    expect(view.markdown).not.toContain("structure.svg"); // the card replaces the plain drawing
+    const card = view.markdown.indexOf("/gifs/w.gif");
+    expect(card).toBeLessThan(view.markdown.indexOf("| Formula |")); // key values after the pictures
+    expect(card).toBeLessThan(view.markdown.indexOf("### Summary"));
   });
 
   it("shows a figure in place of a clickable grid when one is given", () => {

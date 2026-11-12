@@ -94,3 +94,18 @@ def test_stereo_marks_are_drawn_as_badges(tmp_path):
 def test_double_bond_marks_sit_between_two_atoms(tmp_path):
     marked = BENZENE.model_copy(update={"marks": [Mark(atoms=[0, 1], label="E")]})
     assert _count(spin_gif(marked, tmp_path / "e.gif"), (0xEA, 0x58, 0x0C)) > 30
+
+
+def test_combined_card_has_the_2d_drawing_on_the_left(tmp_path):
+    path = spin_gif(BENZENE, tmp_path / "c.gif", beside_2d=True)
+    with Image.open(path) as im:
+        assert im.size == (2 * WIDTH, HEIGHT)  # one wide card
+        assert im.n_frames == FRAMES
+        first = im.convert("RGB")
+        im.seek(FRAMES // 4)
+        later = im.convert("RGB")
+    left = (8, 24, WIDTH - 8, HEIGHT - 8)
+    right = (WIDTH + 8, 24, 2 * WIDTH - 8, HEIGHT - 8)
+    assert first.crop(left).tobytes() == later.crop(left).tobytes()  # 2D stays still
+    assert first.crop(right).tobytes() != later.crop(right).tobytes()  # 3D turns
+    assert min(first.crop(left).convert("L").tobytes()) < 100  # the 2D drawing is there

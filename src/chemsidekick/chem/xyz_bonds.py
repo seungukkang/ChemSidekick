@@ -37,24 +37,33 @@ def _mol_from_frame(frame: Frame):
     return rw
 
 
-def _draw(mol) -> str:
+def _layout(mol) -> None:
     from rdkit.Chem import rdDepictor
-    from rdkit.Chem.Draw import rdMolDraw2D
 
     rdDepictor.SetPreferCoordGen(True)
     rdDepictor.Compute2DCoords(mol)
-    d = rdMolDraw2D.MolDraw2DSVG(*DRAWING_SIZE)
+
+
+def _options(d) -> None:
     opts = d.drawOptions()
-    opts.clearBackground = False  # transparent; the white backdrop is added below
+    opts.clearBackground = False  # transparent; a white backdrop is added by the caller
     opts.padding = 0.08
     opts.prepareMolsBeforeDrawing = False  # do not re-kekulize or re-sanitize
+
+
+def _draw(mol) -> str:
+    from rdkit.Chem.Draw import rdMolDraw2D
+
+    _layout(mol)
+    d = rdMolDraw2D.MolDraw2DSVG(*DRAWING_SIZE)
+    _options(d)
     d.DrawMolecule(mol)
     d.FinishDrawing()
     return with_backdrop(d.GetDrawingText())
 
 
-def infer(frame: Frame) -> Inferred:
-    """Bonds from the coordinates, and a 2D drawing (hydrogens on carbon hidden)."""
+def _bonded(frame: Frame):
+    """(molecule to draw, bond orders found, SMILES, reason they were not found)."""
     from rdkit import Chem
     from rdkit.Chem import rdDetermineBonds
 
@@ -70,7 +79,7 @@ def infer(frame: Frame) -> Inferred:
             smiles = Chem.MolToSmiles(heavy, isomericSmiles=False)
             drawn = Chem.Mol(heavy)
             Chem.Kekulize(drawn, clearAromaticFlags=True)  # alternating double bonds, as usual
-            return Inferred(svg=_draw(drawn), orders=True, smiles=smiles, reason="")
+            return drawn, True, smiles, ""
         except Exception as e:  # RDKit raises plain errors (ValueError, RuntimeError, ...)
             reason = str(e).strip().splitlines()[0] if str(e).strip() else type(e).__name__
             mol = _mol_from_frame(frame)
@@ -80,4 +89,27 @@ def infer(frame: Frame) -> Inferred:
         drawn = Chem.RemoveHs(mol, sanitize=False)
     except Exception:
         drawn = mol
-    return Inferred(svg=_draw(Chem.Mol(drawn)), orders=False, smiles="", reason=reason)
+    return Chem.Mol(drawn), False, "", reason
+
+
+def infer(frame: Frame) -> Inferred:
+    """Bonds from the coordinates, and a 2D drawing (hydrogens on carbon hidden)."""
+    drawn, orders, smiles, reason = _bonded(frame)
+    return Inferred(svg=_draw(drawn), orders=orders, smiles=smiles, reason=reason)
+
+
+def drawing_image(frame: Frame, width: int, height: int):
+    """The same 2D drawing as a Pillow RGBA image (transparent background), e.g.
+    to combine with the rotating 3D view (core/spin.py)."""
+    import io
+
+    from PIL import Image
+    from rdkit.Chem.Draw import rdMolDraw2D
+
+    drawn, _, _, _ = _bonded(frame)
+    _layout(drawn)
+    d = rdMolDraw2D.MolDraw2DCairo(width, height)
+    _options(d)
+    d.DrawMolecule(drawn)
+    d.FinishDrawing()
+    return Image.open(io.BytesIO(d.GetDrawingText())).convert("RGBA")

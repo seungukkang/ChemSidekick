@@ -173,6 +173,7 @@ export interface SaveResponse extends Envelope {
 // `csk gif`: a rotating 3D view of one structure frame (a view, not a tool).
 export interface GifRequest {
   frame: Pick<Frame, "symbols" | "coords" | "comment" | "marks">; // marks: stereo labels drawn on the view
+  beside_2d?: boolean; // one wide card: 2D drawing (bonds inferred from the coordinates) + rotating 3D
 }
 
 export interface GifResponse extends Envelope {

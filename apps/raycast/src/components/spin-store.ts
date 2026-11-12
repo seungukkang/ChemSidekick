@@ -22,31 +22,41 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener);
 }
 
-async function makeGif(target: SpinTarget) {
-  loading.add(target.key);
+// The combined card (2D drawing + rotating 3D) is kept under its own key.
+export function combinedKey(key: string): string {
+  return `${key}|with-2d`;
+}
+
+async function makeGif(target: SpinTarget, beside2D = false) {
+  const key = beside2D ? combinedKey(target.key) : target.key;
+  loading.add(key);
   changed();
   const toast = await showToast({ style: Toast.Style.Animated, title: "Making the 3D view…" });
   try {
     const { symbols, coords, comment, marks } = target.frame;
-    const response = await getTransport().gif({ frame: { symbols, coords, comment, marks } });
+    const response = await getTransport().gif({
+      frame: { symbols, coords, comment, marks },
+      ...(beside2D ? { beside_2d: true } : {}),
+    });
     if (!response.ok) throw new Error(response.error.message);
-    gifs.set(target.key, response.path);
+    gifs.set(key, response.path);
     await toast.hide();
   } catch (e) {
-    shown.delete(target.key);
+    shown.delete(key);
     toast.style = Toast.Style.Failure;
     toast.title = "Could not make the 3D view";
     toast.message = e instanceof Error ? e.message : String(e);
   } finally {
-    loading.delete(target.key);
+    loading.delete(key);
     changed();
   }
 }
 
-// Make the GIF (if not made yet) without switching anything: for views that show
-// the 2D drawing and the 3D view side by side.
-export function ensureGif(target: SpinTarget) {
-  if (!gifs.has(target.key) && !loading.has(target.key)) void makeGif(target);
+// Make the combined card (2D drawing + rotating 3D, one GIF) if not made yet,
+// without switching anything: for a page that shows both from the start (xyz).
+export function ensureCombined(target: SpinTarget) {
+  const key = combinedKey(target.key);
+  if (!gifs.has(key) && !loading.has(key)) void makeGif(target, true);
 }
 
 export function toggle3D(target: SpinTarget) {

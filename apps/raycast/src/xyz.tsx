@@ -1,6 +1,6 @@
 // XYZ Viewer: the xyz tool's form, filled in from the clipboard when it holds
 // coordinates, so one Enter shows the formula, molecular weight, and 3D view.
-import { Clipboard, Form, getPreferenceValues } from "@raycast/api";
+import { Clipboard, Detail, getPreferenceValues } from "@raycast/api";
 import { usePromise } from "@raycast/utils";
 import { ErrorView } from "./components/ErrorView";
 import { ToolForm } from "./components/ToolForm";
@@ -17,7 +17,9 @@ export default function Command() {
   const { tool, error, revalidate } = useToolInfo("xyz");
   const clip = usePromise(clipboardXyz);
   if (error) return <ErrorView error={error} onRetry={revalidate} />;
-  if (!tool || clip.isLoading) return <Form isLoading />;
+  // Not a Form while waiting: Raycast applies a form field's defaultValue only when
+  // the form first appears, so an empty placeholder form would keep the field empty.
+  if (!tool || clip.isLoading) return <Detail isLoading markdown="Reading the clipboard…" />;
   return (
     <ToolForm tool={tool} input={clip.data ? { text: clip.data } : undefined} autoOpenViewer={autoOpen3D !== false} />
   );

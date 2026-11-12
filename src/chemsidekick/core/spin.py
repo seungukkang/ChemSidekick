@@ -171,25 +171,59 @@ def _draw_marks(img: Image.Image, marks: list[Mark], sx, sy, f, px: float) -> Im
     return out.convert("RGB")
 
 
-def _background() -> Image.Image:
-    """White, with the drawings' rounded border, drawn at SS× size."""
+DIVIDER = (226, 226, 226)  # between the 2D and 3D halves of a combined card
+LABEL_COLOR = (150, 150, 150)
+LABEL_PX = 10
+
+
+@cache
+def _font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    try:
+        return ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", size, index=0)
+    except OSError:  # not macOS
+        return ImageFont.load_default(size)
+
+
+def _background(width: int, left: Image.Image | None = None) -> Image.Image:
+    """White, with the drawings' rounded border, drawn at SS× size. With `left`
+    (a 2D drawing, RGBA), one card holds the drawing on the left half and leaves
+    the right half for the 3D view, with a light divider and small labels."""
     s, h = SS, BORDER_WIDTH / 2
-    img = Image.new("RGB", (WIDTH * s, HEIGHT * s), WHITE)
-    ImageDraw.Draw(img).rounded_rectangle(
-        [h * s, h * s, (WIDTH - h) * s, (HEIGHT - h) * s],
+    img = Image.new("RGB", (width * s, HEIGHT * s), WHITE)
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle(
+        [h * s, h * s, (width - h) * s, (HEIGHT - h) * s],
         radius=CORNER_RADIUS * s,
         fill=WHITE,
         outline=_rgb(BORDER_COLOR),
         width=int(BORDER_WIDTH * s),
     )
+    if left is not None:
+        layer = img.convert("RGBA")
+        layer.alpha_composite(left, (0, 0))
+        img = layer.convert("RGB")
+        d = ImageDraw.Draw(img)
+        d.line([(WIDTH * s, 18 * s), (WIDTH * s, (HEIGHT - 18) * s)], fill=DIVIDER, width=s)
+        for x, text in ((12, "2D"), (WIDTH + 12, "3D")):
+            d.text((x * s, 10 * s), text, fill=LABEL_COLOR, font=_font(LABEL_PX * s))
     return img
 
 
-def spin_gif(frame: Frame, path: Path, marks: bool = True) -> Path:
+def spin_gif(frame: Frame, path: Path, marks: bool = True, beside_2d: bool = False) -> Path:
     """Write the rotating view of one structure as an animated GIF.
 
     With `marks`, the frame's stereo marks (R/S, r/s, E/Z) are drawn as in the viewer.
+    With `beside_2d`, one wide card: the 2D drawing from bonds inferred from the
+    coordinates (chem/xyz_bonds.py) on the left, the rotating view on the right.
     """
+    width = 2 * WIDTH if beside_2d else WIDTH
+    left = None
+    if beside_2d:
+        from chemsidekick.chem.xyz_bonds import drawing_image
+
+        # Drawn at its final size, so lines and labels match the other 2D drawings,
+        # then enlarged to the working size (the frames are shrunk back at the end).
+        left = drawing_image(frame, WIDTH, HEIGHT).resize((WIDTH * SS, HEIGHT * SS), Image.LANCZOS)
     marks = marks and bool(frame.marks)
     xyz = np.array(frame.coords, dtype=float)
     xyz -= xyz.mean(axis=0)
@@ -214,9 +248,9 @@ def spin_gif(frame: Frame, path: Path, marks: bool = True) -> Path:
     ext_y = max(float(np.max((np.abs(p[:, 1]) + rad) * f)) for p, f in views)
     inner_w, inner_h = (WIDTH - 2 * MARGIN) * SS, (HEIGHT - 2 * MARGIN) * SS
     px = min(inner_w / (2 * ext_x), inner_h / (2 * ext_y))
-    cx, cy = WIDTH / 2 * SS, HEIGHT / 2 * SS
+    cx, cy = (width - WIDTH / 2) * SS, HEIGHT / 2 * SS  # the right half of a combined card
 
-    background = _background()
+    background = _background(width, left)
     frames = []
     for p, f in views:
         img = background.copy()
@@ -236,12 +270,12 @@ def spin_gif(frame: Frame, path: Path, marks: bool = True) -> Path:
                 )
         if marks:
             img = _draw_marks(img, frame.marks, sx, sy, f, px)
-        frames.append(img.resize((WIDTH, HEIGHT), Image.LANCZOS))
+        frames.append(img.resize((width, HEIGHT), Image.LANCZOS))
     # One palette for all frames, chosen from several viewing angles: about half the
     # file size of a palette per frame, and no flicker between frames.
-    sample = Image.new("RGB", (WIDTH * 4, HEIGHT))
+    sample = Image.new("RGB", (width * 4, HEIGHT))
     for n, k in enumerate(range(0, FRAMES, FRAMES // 4)):
-        sample.paste(frames[k], (n * WIDTH, 0))
+        sample.paste(frames[k], (n * width, 0))
     palette = sample.quantize(colors=PALETTE_COLORS, method=Image.Quantize.MEDIANCUT)
     # Averaging in the palette turns the white background slightly gray: snap
     # near-white entries back to white so it matches the 2D drawings.
@@ -250,7 +284,7 @@ def spin_gif(frame: Frame, path: Path, marks: bool = True) -> Path:
               for v in colors[k : k + 3]]  # fmt: skip
     # One extra entry, used only for the transparent corners outside the rounded border.
     palette.putpalette([*colors, 255, 0, 255])
-    outside = _outside_mask()
+    outside = _outside_mask(width)
     indexed = []
     for f in frames:
         q = f.quantize(palette=palette, dither=Image.Dither.NONE)
@@ -266,12 +300,12 @@ def spin_gif(frame: Frame, path: Path, marks: bool = True) -> Path:
 TRANSPARENT = PALETTE_COLORS  # palette index of the transparent corners
 
 
-def _outside_mask() -> Image.Image:
+def _outside_mask(width: int) -> Image.Image:
     """255 outside the rounded border (the corners), 0 inside, at the final size."""
     s = SS
-    big = Image.new("L", (WIDTH * s, HEIGHT * s), 255)
+    big = Image.new("L", (width * s, HEIGHT * s), 255)
     ImageDraw.Draw(big).rounded_rectangle(
-        [0, 0, WIDTH * s - 1, HEIGHT * s - 1], radius=CORNER_RADIUS * s, fill=0
+        [0, 0, width * s - 1, HEIGHT * s - 1], radius=CORNER_RADIUS * s, fill=0
     )
     # Only clearly outside pixels become transparent; the antialiased edge stays.
-    return big.resize((WIDTH, HEIGHT), Image.LANCZOS).point(lambda v: 255 if v > 200 else 0)
+    return big.resize((width, HEIGHT), Image.LANCZOS).point(lambda v: 255 if v > 200 else 0)
