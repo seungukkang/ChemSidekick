@@ -32,4 +32,5 @@ jobs:
       # `ray lint` also checks the author against raycast.com, so CI runs
       # ESLint, Prettier and tsc directly instead.
       - run: npm run check
+      - run: npm test
       - run: npx ray build -e dist -o "$RUNNER_TEMP/raycast-build"
