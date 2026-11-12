@@ -41,7 +41,8 @@
     "@types/react": "19.3.0",
     "eslint": "^10.14.0",
     "prettier": "^3.9.10",
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "vitest": "^5.1.0"
   },
   "engines": {
     "node": ">=22.22.2"
@@ -52,6 +53,7 @@
     "fix-lint": "ray lint --fix",
     "build": "ray build",
     "typecheck": "tsc --noEmit",
-    "check": "eslint src && prettier --check src && tsc --noEmit"
+    "check": "eslint src test && prettier --check src test && tsc --noEmit",
+    "test": "vitest run"
   }
 }

@@ -1,41 +1,54 @@
-// Placeholder command (M0): shows where csk was found and how long it takes to run
-// from inside Raycast. The tool list, forms, and results come in M2-M3.
-import { Action, ActionPanel, Detail } from "@raycast/api";
+// The generic command: every registered tool, from `csk list --json`.
+// M2: list and error screens. M3 adds the generated input form and result view.
+import { Action, ActionPanel, Icon, List } from "@raycast/api";
 import { usePromise } from "@raycast/utils";
-import { cskPath, runCsk } from "./csk";
+import { ErrorView } from "./components/ErrorView";
+import { getTransport } from "./connection";
+import type { ToolInfo, ToolListResponse } from "./lib/contract";
 
-const CHECKS: { label: string; args: string[] }[] = [
-  { label: "csk --version", args: ["--version"] },
-  { label: "csk element Fe --json", args: ["element", "Fe", "--json"] },
-  {
-    label: "csk stereo CC(O)C(O)C(O)C --json --no-3d",
-    args: ["stereo", "CC(O)C(O)C(O)C", "--json", "--no-3d", "--no-open"],
-  },
-  { label: "csk stereo CC(O)C(O)C(O)C --json (with 3D)", args: ["stereo", "CC(O)C(O)C(O)C", "--json", "--no-open"] },
-];
-
-async function measure(): Promise<string> {
-  const lines = [`# ChemSidekick`, "", `csk: \`${cskPath()}\``, "", "| Command | Time | Exit |", "|---|---|---|"];
-  for (const check of CHECKS) {
-    const run = await runCsk(check.args);
-    lines.push(`| \`${check.label}\` | ${(run.elapsedMs / 1000).toFixed(2)} s | ${run.exitCode} |`);
-  }
-  lines.push("", "_Times are for reference only (measured from Raycast, one run each)._");
-  return lines.join("\n");
+async function loadTools(): Promise<ToolListResponse> {
+  const response = await getTransport().listTools();
+  if (!response.ok) throw response.error; // ErrorInfo: shown by ErrorView
+  return response;
 }
 
-export default function Command() {
-  const { data, isLoading, error, revalidate } = usePromise(measure);
-  const markdown = error ? `# csk not available\n\n${error.message}` : (data ?? "Running csk…");
+function ToolItem({ tool }: { tool: ToolInfo }) {
+  const accessories: List.Item.Accessory[] = [{ text: tool.resources }, { tag: tool.id }];
+  if (!tool.available) accessories.unshift({ icon: Icon.Warning, tooltip: tool.unavailable_reason });
   return (
-    <Detail
-      isLoading={isLoading}
-      markdown={markdown}
+    <List.Item
+      title={tool.title}
+      subtitle={tool.summary}
+      icon={tool.available ? Icon.Box : Icon.Warning}
+      keywords={[tool.name, tool.id, ...tool.keywords]}
+      accessories={accessories}
       actions={
         <ActionPanel>
-          <Action title="Measure Again" onAction={revalidate} />
+          <Action.CopyToClipboard title="Copy Csk Command" content={`csk ${tool.name}`} />
         </ActionPanel>
       }
     />
+  );
+}
+
+export default function Command() {
+  const { data, isLoading, error, revalidate } = usePromise(loadTools, [], {
+    failureToastOptions: { title: "ChemSidekick" },
+  });
+  if (error) return <ErrorView error={error} onRetry={revalidate} />;
+  return (
+    <List isLoading={isLoading} navigationTitle={data ? `ChemSidekick · csk ${data.csk_version}` : "ChemSidekick"}>
+      {data?.categories.map((category) => {
+        const tools = data.tools.filter((t) => t.category === category.name);
+        if (!tools.length) return null;
+        return (
+          <List.Section key={category.name} title={category.title}>
+            {tools.map((tool) => (
+              <ToolItem key={tool.id} tool={tool} />
+            ))}
+          </List.Section>
+        );
+      })}
+    </List>
   );
 }
