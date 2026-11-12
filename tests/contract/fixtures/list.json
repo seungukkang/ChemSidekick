@@ -4,17 +4,58 @@
   "ok": true,
   "categories": [
     {
-      "name": "structure",
-      "code": "STR",
-      "title": "Structure"
-    },
-    {
       "name": "reference",
       "code": "REF",
       "title": "Reference"
+    },
+    {
+      "name": "structure",
+      "code": "STR",
+      "title": "Structure"
     }
   ],
   "tools": [
+    {
+      "id": "REF-01",
+      "name": "element",
+      "title": "Element",
+      "summary": "Element properties, electron configuration, isotopes; or the periodic table",
+      "category": "reference",
+      "keywords": [
+        "periodic table",
+        "atomic weight",
+        "electron configuration",
+        "isotope"
+      ],
+      "resources": "light",
+      "requires": [],
+      "available": true,
+      "unavailable_reason": "",
+      "icon": "science",
+      "start_view": "Periodic table",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Symbol, English name, or atomic number (e.g. Fe, iron, 26). Leave empty for the full periodic table.",
+            "label": "Element",
+            "positional": true,
+            "title": "Query"
+          }
+        },
+        "title": "ElementInput",
+        "type": "object"
+      }
+    },
     {
       "id": "STR-01",
       "name": "xyz",
@@ -144,47 +185,6 @@
           "smiles"
         ],
         "title": "StereoInput",
-        "type": "object"
-      }
-    },
-    {
-      "id": "REF-01",
-      "name": "element",
-      "title": "Element",
-      "summary": "Element properties, electron configuration, isotopes; or the periodic table",
-      "category": "reference",
-      "keywords": [
-        "periodic table",
-        "atomic weight",
-        "electron configuration",
-        "isotope"
-      ],
-      "resources": "light",
-      "requires": [],
-      "available": true,
-      "unavailable_reason": "",
-      "icon": "science",
-      "start_view": "Periodic table",
-      "input_schema": {
-        "properties": {
-          "query": {
-            "anyOf": [
-              {
-                "minLength": 1,
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "description": "Symbol, English name, or atomic number (e.g. Fe, iron, 26). Leave empty for the full periodic table.",
-            "label": "Element",
-            "positional": true,
-            "title": "Query"
-          }
-        },
-        "title": "ElementInput",
         "type": "object"
       }
     }

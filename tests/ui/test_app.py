@@ -111,7 +111,7 @@ def test_new_tools_show_up_in_grid_by_category_and_search():
     def lookup(inp: In) -> ToolResult:
         return ToolResult(answer="")
 
-    assert [t.name for t in visible_tools(reg, ALL, "")] == ["viewer", "lookup"]
+    assert [t.name for t in visible_tools(reg, ALL, "")] == ["lookup", "viewer"]
     assert [t.name for t in visible_tools(reg, "Structure", "")] == ["viewer"]
     assert [t.name for t in visible_tools(reg, "Reference", "geometry")] == ["viewer"]
 

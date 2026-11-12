@@ -4,6 +4,7 @@ Changes in each version, newest first.
 
 | Version | Date | Summary |
 |---|---|---|
+| [v0.2.0](v0.2.0.md) | 2026-11-13 | Raycast extension, `csk --json` for scripts, 2D drawing in `xyz`. |
 | [v0.1.0](v0.1.0.md) | 2026-11-10 | First release: `element`, `xyz`, `stereo` tools; CLI and web interface. |
 
 ## How to write

@@ -44,7 +44,7 @@ def test_ids():
     assert reg.get("echo").id == "REF-01"
     assert reg.get("shape").id == "STR-01"
     assert reg.by_id("ref-01").name == "echo"
-    assert [s.id for s in reg.all()] == ["STR-01", "REF-01"]
+    assert [s.id for s in reg.all()] == ["REF-01", "STR-01"]
     assert reg.search("str-01")[0].name == "shape"
 
 
@@ -59,7 +59,7 @@ def test_register_and_run():
 def test_group_by_category_keeps_category_order_and_skips_empty():
     reg = make_registry()
     groups = reg.by_category()
-    assert list(groups) == ["structure", "reference"]
+    assert list(groups) == ["reference", "structure"]
     assert [s.name for s in groups["structure"]] == ["shape"]
 
 
@@ -82,7 +82,7 @@ def test_search(query, expected_first):
 def test_search_no_match_and_empty_query():
     reg = make_registry()
     assert reg.search("zzz") == []
-    assert [s.name for s in reg.search("  ")] == ["shape", "echo"]
+    assert [s.name for s in reg.search("  ")] == ["echo", "shape"]
 
 
 def _declare(reg: Registry, **overrides):
