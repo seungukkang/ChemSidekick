@@ -1,21 +1,32 @@
 import { Action, ActionPanel, Alert, confirmAlert, Form, Icon, useNavigation } from "@raycast/api";
 import { useState } from "react";
 import type { ToolInfo } from "../lib/contract";
-import { type FieldSpec, formSpec, type FormValues, toInput } from "../lib/form";
+import { type FieldSpec, formDefaults, formSpec, type FormValues, toInput } from "../lib/form";
 import { ResultView } from "./ResultView";
 
 const TIMEOUT_FIELD = "__csk_timeout"; // heavy tools need a time limit (csk --timeout)
 
-function Field({ f, error, onChange }: { f: FieldSpec; error?: string; onChange: () => void }) {
+function Field({
+  f,
+  value,
+  error,
+  onChange,
+}: {
+  f: FieldSpec;
+  value: string | boolean | undefined;
+  error?: string;
+  onChange: () => void;
+}) {
   const common = { id: f.name, info: f.description || undefined, error, onChange };
+  const text = typeof value === "string" ? value : String(f.default);
   switch (f.kind) {
     case "textarea":
-      return <Form.TextArea {...common} title={f.label} defaultValue={String(f.default)} enableMarkdown={false} />;
+      return <Form.TextArea {...common} title={f.label} defaultValue={text} enableMarkdown={false} />;
     case "checkbox":
-      return <Form.Checkbox {...common} label={f.label} defaultValue={f.default === true} />;
+      return <Form.Checkbox {...common} label={f.label} defaultValue={value === true} />;
     case "dropdown":
       return (
-        <Form.Dropdown {...common} title={f.label} defaultValue={String(f.default) || f.options[0]}>
+        <Form.Dropdown {...common} title={f.label} defaultValue={text || f.options[0]}>
           {f.options.map((o) => (
             <Form.Dropdown.Item key={o} value={o} title={o} />
           ))}
@@ -27,7 +38,7 @@ function Field({ f, error, onChange }: { f: FieldSpec; error?: string; onChange:
         <Form.TextField
           {...common}
           title={f.label}
-          defaultValue={String(f.default)}
+          defaultValue={text}
           placeholder={f.required ? "Required" : range || (f.nullable ? "Optional" : undefined)}
         />
       );
@@ -35,10 +46,20 @@ function Field({ f, error, onChange }: { f: FieldSpec; error?: string; onChange:
   }
 }
 
-// The input form of any tool, generated from its input JSON Schema.
-export function ToolForm({ tool }: { tool: ToolInfo }) {
+// The input form of any tool, generated from its input JSON Schema. `input`
+// fills it in (e.g. the previous run's input, or text from the clipboard).
+export function ToolForm({
+  tool,
+  input,
+  autoOpenViewer = false,
+}: {
+  tool: ToolInfo;
+  input?: Record<string, unknown>;
+  autoOpenViewer?: boolean;
+}) {
   const { push } = useNavigation();
   const spec = formSpec(tool.input_schema);
+  const initial = formDefaults(spec.fields, input);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const heavy = tool.resources === "heavy";
 
@@ -59,7 +80,9 @@ export function ToolForm({ tool }: { tool: ToolInfo }) {
       });
       if (!ok) return;
     }
-    push(<ResultView tool={tool} input={input} options={{ confirmed: heavy, timeoutS }} />);
+    push(
+      <ResultView tool={tool} input={input} options={{ confirmed: heavy, timeoutS }} autoOpenViewer={autoOpenViewer} />,
+    );
   }
 
   const clear = (name: string) => () => {
@@ -83,7 +106,7 @@ export function ToolForm({ tool }: { tool: ToolInfo }) {
     >
       <Form.Description title={tool.id} text={tool.summary} />
       {spec.fields.map((f) => (
-        <Field key={f.name} f={f} error={errors[f.name]} onChange={clear(f.name)} />
+        <Field key={f.name} f={f} value={initial[f.name]} error={errors[f.name]} onChange={clear(f.name)} />
       ))}
       {heavy && (
         <Form.TextField

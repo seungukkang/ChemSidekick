@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Detail, Grid, Icon, Keyboard, open, showToast, Toast } from "@raycast/api";
 import { usePromise } from "@raycast/utils";
 import { dirname } from "node:path";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { getTransport } from "../connection";
 import type { Artifact, RunResponse, ToolInfo } from "../lib/contract";
 import { isGrid, renderResult } from "../lib/render";
@@ -9,6 +9,7 @@ import { clickableTable } from "../lib/pick";
 import { drawingsOf, type SpinTarget, spinTargets } from "../lib/spin";
 import type { RunOptions } from "../lib/transport";
 import { ErrorView } from "./ErrorView";
+import { ToolForm } from "./ToolForm";
 import { periodicTableMarkdown } from "./PeriodicTableView";
 import { PickList } from "./PickList";
 import { toggle3D, useSpinState } from "./spin-store";
@@ -46,24 +47,40 @@ export function ResultView({
   tool,
   input,
   options = NO_OPTIONS,
+  autoOpenViewer = false,
 }: {
   tool: ToolInfo;
   input: Record<string, unknown>;
   options?: RunOptions;
+  autoOpenViewer?: boolean; // open the HTML 3D viewer in the browser when the result arrives
 }) {
   const { data, isLoading, error, revalidate } = usePromise(runTool, [tool.name, input, options], {
     failureToastOptions: { title: tool.title },
   });
+  useEffect(() => {
+    const viewer = data?.result.artifacts.find((a) => a.kind === "html")?.path;
+    if (autoOpenViewer && viewer) open(viewer);
+  }, [data, autoOpenViewer]);
   if (error) return <ErrorView error={error} onRetry={revalidate} />;
   if (!data) return <Detail isLoading={isLoading} navigationTitle={tool.title} markdown={`Running ${tool.title}…`} />;
   const pick = clickableTable(data.result);
   if (pick && Object.keys(pick.cells).length) return <PickList tool={tool} table={pick} />;
-  if (drawingsOf(data.result).length > 1) return <DrawingsResult tool={tool} data={data} />;
-  return <ResultDetail tool={tool} data={data} />;
+  if (drawingsOf(data.result).length > 1) return <DrawingsResult tool={tool} data={data} input={input} />;
+  return <ResultDetail tool={tool} data={data} input={input} />;
 }
 
 // Actions every view of a result offers.
-function CommonActions({ data, markdown }: { data: RunResponse; markdown: string }) {
+function CommonActions({
+  tool,
+  data,
+  input,
+  markdown,
+}: {
+  tool: ToolInfo;
+  data: RunResponse;
+  input: Record<string, unknown>;
+  markdown: string;
+}) {
   const viewer = data.result.artifacts.find((a) => a.kind === "html")?.path;
   const files = data.result.artifacts.filter((a) => !["svg", "png", "html"].includes(a.kind));
   return (
@@ -74,6 +91,14 @@ function CommonActions({ data, markdown }: { data: RunResponse; markdown: string
           icon={Icon.Globe}
           shortcut={Keyboard.Shortcut.Common.Open}
           onAction={() => open(viewer)}
+        />
+      )}
+      {Object.keys(tool.input_schema).length > 0 && (
+        <Action.Push
+          title="Change Input"
+          icon={Icon.Pencil}
+          shortcut={Keyboard.Shortcut.Common.Edit}
+          target={<ToolForm tool={tool} input={input} />}
         />
       )}
       <Action.CopyToClipboard title="Copy Answer" content={data.result.answer} />
@@ -107,7 +132,15 @@ function Switch3D({ target, is3D }: { target: SpinTarget; is3D: boolean }) {
 }
 
 // The whole result as a page: answer, key values, drawings, tables, evidence, references.
-export function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse }) {
+export function ResultDetail({
+  tool,
+  data,
+  input,
+}: {
+  tool: ToolInfo;
+  data: RunResponse;
+  input: Record<string, unknown>;
+}) {
   const targets = useMemo(() => spinTargets(data.result), [data]);
   const spin = useSpinState();
   const swaps = Object.fromEntries(
@@ -148,7 +181,7 @@ export function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse
               ))}
             </ActionPanel.Submenu>
           )}
-          <CommonActions data={data} markdown={view.markdown} />
+          <CommonActions tool={tool} data={data} input={input} markdown={view.markdown} />
         </ActionPanel>
       }
     />
@@ -158,7 +191,7 @@ export function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse
 // Several drawings (e.g. stereoisomers): native cards, two per row, with the
 // title and the stereodescriptors as text. Enter switches a card to its rotating
 // 3D view in place; cmd-I shows the whole result (tables, references).
-function DrawingsResult({ tool, data }: { tool: ToolInfo; data: RunResponse }) {
+function DrawingsResult({ tool, data, input }: { tool: ToolInfo; data: RunResponse; input: Record<string, unknown> }) {
   const targets = useMemo(() => spinTargets(data.result), [data]);
   const spin = useSpinState();
   const markdown = renderResult(data.result, data.run).markdown;
@@ -186,9 +219,9 @@ function DrawingsResult({ tool, data }: { tool: ToolInfo; data: RunResponse }) {
               title="Show Details"
               icon={Icon.Document}
               shortcut={SHOW_DETAILS}
-              target={<ResultDetail tool={tool} data={data} />}
+              target={<ResultDetail tool={tool} data={data} input={input} />}
             />
-            <CommonActions data={data} markdown={markdown} />
+            <CommonActions tool={tool} data={data} input={input} markdown={markdown} />
             <Action.Open title="Open Drawing" target={spin.gif(d.path) ?? d.path} />
           </ActionPanel>
         }
