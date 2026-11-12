@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "ErrorDetail": {
+      "properties": {
+        "field": {
+          "default": "",
+          "title": "Field",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "title": "ErrorDetail",
+      "type": "object"
+    },
+    "ErrorInfo": {
+      "properties": {
+        "type": {
+          "enum": [
+            "input",
+            "limit",
+            "crash",
+            "confirm",
+            "missing_program",
+            "config"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "details": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ErrorDetail"
+          },
+          "title": "Details",
+          "type": "array"
+        },
+        "traceback": {
+          "default": "",
+          "title": "Traceback",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "message"
+      ],
+      "title": "ErrorInfo",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "contract": {
+      "default": 1,
+      "title": "Contract",
+      "type": "integer"
+    },
+    "csk_version": {
+      "title": "Csk Version",
+      "type": "string"
+    },
+    "ok": {
+      "const": false,
+      "default": false,
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "error": {
+      "$ref": "#/$defs/ErrorInfo"
+    }
+  },
+  "required": [
+    "error"
+  ],
+  "title": "ErrorResponse",
+  "type": "object"
+}

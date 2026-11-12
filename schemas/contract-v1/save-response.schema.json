@@ -1,0 +1,33 @@
+{
+  "properties": {
+    "contract": {
+      "default": 1,
+      "title": "Contract",
+      "type": "integer"
+    },
+    "csk_version": {
+      "title": "Csk Version",
+      "type": "string"
+    },
+    "ok": {
+      "const": true,
+      "default": true,
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "number": {
+      "title": "Number",
+      "type": "integer"
+    },
+    "saved_to": {
+      "title": "Saved To",
+      "type": "string"
+    }
+  },
+  "required": [
+    "number",
+    "saved_to"
+  ],
+  "title": "SaveResponse",
+  "type": "object"
+}

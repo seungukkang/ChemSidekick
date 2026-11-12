@@ -37,7 +37,9 @@ csk ui                         # web interface in the browser
 ```
 
 - `csk list` and `csk search <word>` find tools; `csk <tool> --help` shows its options.
-- `--json` prints the full result as JSON.
+- `--json` prints one JSON object (`{"ok": true, "result": …, "run": …}` or `{"ok": false, "error": …}`), also for errors, and exits with a code per error type. `csk list --json` describes every tool and its inputs.
+- `csk run <tool> --json` takes the tool's input as JSON on standard input, for programs: `echo '{"smiles": "CC(Br)C(Br)C"}' | csk run stereo --json`. The format is versioned; its JSON Schemas are in [`schemas/`](schemas/).
+- `--no-record` runs without keeping a recent result.
 - Every run is kept as a recent result (newest 50). `csk recent` lists them and `csk save <number>` keeps one in `~/Documents/ChemSidekick`.
 - The 3D viewer loads [3Dmol.js](https://3dmol.csb.pitt.edu/) from a CDN, so it needs an internet connection.
 

@@ -41,8 +41,10 @@ def test_element_json_output():
     result = runner.invoke(app, ["element", "26", "--json"])
     assert result.exit_code == 0
     data = json.loads(result.stdout)
-    assert data["answer"] == "Fe · Iron · Z = 26"
-    assert data["data"]["element"]["config"]["value"] == "[Ar] 3d6 4s2"
+    assert data["ok"] is True and data["contract"] == 1
+    assert data["result"]["answer"] == "Fe · Iron · Z = 26"
+    assert data["result"]["data"]["element"]["config"]["value"] == "[Ar] 3d6 4s2"
+    assert data["run"]["tool_id"] == "REF-01" and data["run"]["recorded"] is True
 
 
 def test_element_unknown_is_a_clean_error():
@@ -134,7 +136,7 @@ WATER = "3\nwater\nO 0 0 0.1173\nH 0 0.7572 -0.4692\nH 0 -0.7572 -0.4692\n"
 def test_xyz_from_standard_input_writes_viewer():
     result = runner.invoke(app, ["xyz", "--no-open", "--json"], input=WATER)
     assert result.exit_code == 0, result.output
-    data = json.loads(result.stdout)
+    data = json.loads(result.stdout)["result"]
     assert data["answer"] == "H2O · 3 atoms · 1 frame"
     viewer = next(a for a in data["artifacts"] if a["kind"] == "html")
     page = open(viewer["path"], encoding="utf-8").read()
@@ -167,7 +169,7 @@ def test_xyz_opens_browser_unless_no_open(monkeypatch):
 def test_stereo_runs_in_a_subprocess_and_writes_files():
     result = runner.invoke(app, ["stereo", "CC(Br)C(Br)C", "--no-open", "--json"])
     assert result.exit_code == 0, result.output
-    data = json.loads(result.stdout)
+    data = json.loads(result.stdout)["result"]
     assert data["answer"] == "3 stereoisomers (1 pair of enantiomers, 1 meso)"
     assert {a["kind"] for a in data["artifacts"]} == {"svg", "sdf", "html"}
 

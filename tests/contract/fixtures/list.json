@@ -1,0 +1,192 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": true,
+  "categories": [
+    {
+      "name": "structure",
+      "code": "STR",
+      "title": "Structure"
+    },
+    {
+      "name": "reference",
+      "code": "REF",
+      "title": "Reference"
+    }
+  ],
+  "tools": [
+    {
+      "id": "STR-01",
+      "name": "xyz",
+      "title": "XYZ viewer",
+      "summary": "Paste XYZ coordinates: formula, molecular weight, closest atoms, and a 3D view",
+      "category": "structure",
+      "keywords": [
+        "xyz",
+        "3d",
+        "geometry",
+        "coordinates",
+        "viewer",
+        "molecular weight"
+      ],
+      "resources": "light",
+      "requires": [],
+      "available": true,
+      "unavailable_reason": "",
+      "icon": "view_in_ar",
+      "start_view": "",
+      "input_schema": {
+        "properties": {
+          "text": {
+            "default": "",
+            "description": "XYZ coordinates: standard XYZ (one or more frames), or just 'element x y z' lines. In the terminal: a file path, or pipe the text in.",
+            "file_input": true,
+            "label": "XYZ coordinates",
+            "multiline": true,
+            "positional": true,
+            "title": "Text",
+            "type": "string"
+          },
+          "frame": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Frame to show first (1 = first). Default: 1.",
+            "title": "Frame"
+          },
+          "style": {
+            "default": "ball-and-stick",
+            "description": "How atoms and bonds are drawn.",
+            "enum": [
+              "ball-and-stick",
+              "stick",
+              "sphere"
+            ],
+            "title": "Style",
+            "type": "string"
+          },
+          "labels": {
+            "default": false,
+            "description": "Show atom numbers (counted from 1).",
+            "title": "Labels",
+            "type": "boolean"
+          }
+        },
+        "title": "XyzInput",
+        "type": "object"
+      }
+    },
+    {
+      "id": "STR-02",
+      "name": "stereo",
+      "title": "Stereoisomers",
+      "summary": "All stereoisomers of a SMILES: R/S and E/Z labels, relations, 2D and 3D",
+      "category": "structure",
+      "keywords": [
+        "stereoisomer",
+        "chirality",
+        "enantiomer",
+        "diastereomer",
+        "meso",
+        "R/S",
+        "E/Z"
+      ],
+      "resources": "medium",
+      "requires": [],
+      "available": true,
+      "unavailable_reason": "",
+      "icon": "flip",
+      "start_view": "",
+      "input_schema": {
+        "properties": {
+          "smiles": {
+            "description": "SMILES of the molecule, e.g. CC(Br)C(Br)C. Stereo marks (@, /, \\) already in the SMILES are kept unless --enumerate-all is given. Simple condensed formulas such as CH3-CH(OH)-CH3 are also accepted.",
+            "label": "SMILES",
+            "minLength": 1,
+            "positional": true,
+            "title": "Smiles",
+            "type": "string"
+          },
+          "max_isomers": {
+            "default": 8,
+            "description": "Largest number of stereoisomers to make. More takes longer.",
+            "flag": "--max",
+            "label": "Max isomers",
+            "maximum": 1024,
+            "minimum": 1,
+            "title": "Max Isomers",
+            "type": "integer"
+          },
+          "enumerate_all": {
+            "default": false,
+            "description": "Also enumerate the stereo centers already given in the SMILES.",
+            "label": "Enumerate specified centers too",
+            "title": "Enumerate All",
+            "type": "boolean"
+          },
+          "skip_3d": {
+            "default": false,
+            "description": "Skip the 3D structures (much faster).",
+            "flag": "--no-3d",
+            "label": "Skip 3D (faster)",
+            "title": "Skip 3D",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "smiles"
+        ],
+        "title": "StereoInput",
+        "type": "object"
+      }
+    },
+    {
+      "id": "REF-01",
+      "name": "element",
+      "title": "Element",
+      "summary": "Element properties, electron configuration, isotopes; or the periodic table",
+      "category": "reference",
+      "keywords": [
+        "periodic table",
+        "atomic weight",
+        "electron configuration",
+        "isotope"
+      ],
+      "resources": "light",
+      "requires": [],
+      "available": true,
+      "unavailable_reason": "",
+      "icon": "science",
+      "start_view": "Periodic table",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Symbol, English name, or atomic number (e.g. Fe, iron, 26). Leave empty for the full periodic table.",
+            "label": "Element",
+            "positional": true,
+            "title": "Query"
+          }
+        },
+        "title": "ElementInput",
+        "type": "object"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": false,
+  "error": {
+    "type": "input",
+    "message": "max_isomers: Input should be greater than or equal to 1",
+    "details": [
+      {
+        "field": "max_isomers",
+        "message": "Input should be greater than or equal to 1"
+      }
+    ],
+    "traceback": ""
+  }
+}

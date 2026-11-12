@@ -37,7 +37,7 @@ Resources = Literal["light", "medium", "heavy"]
 RESOURCE_LEVELS: tuple[str, ...] = get_args(Resources)
 
 # Built-in CLI commands. A tool cannot use these names.
-RESERVED_NAMES = frozenset({"list", "search", "doctor", "ui", "recent", "save", "help"})
+RESERVED_NAMES = frozenset({"list", "search", "run", "doctor", "ui", "recent", "save", "help"})
 
 _NAME_PATTERN = re.compile(r"^[a-z][a-z0-9-]*$")
 

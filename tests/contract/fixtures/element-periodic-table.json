@@ -1,0 +1,1490 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": true,
+  "result": {
+    "answer": "Periodic table · 118 elements",
+    "highlights": [],
+    "formulas": [],
+    "constants": [],
+    "assumptions": [
+      "18-column layout with La and Ac in group 3; Ln = lanthanoids Ce–Lu, An = actinoids Th–Lr."
+    ],
+    "sources": [
+      "[1] IUPAC Periodic Table of the Elements (version 4 May 2022), International Union of Pure and Applied Chemistry. Used for atomic number, group, period, and block, which are definitions rather than measured values.",
+      "[2] CIAAW, Abridged Standard Atomic Weights 2024, www.ciaaw.org; T. Prohaska et al., Standard atomic weights of the elements 2021 (IUPAC Technical Report), Pure Appl. Chem. 2022, 94, 573–600.",
+      "[3] F. G. Kondev, M. Wang, W. J. Huang, S. Naimi, G. Audi, The NUBASE2020 evaluation of nuclear physics properties, Chin. Phys. C 2021, 45, 030001."
+    ],
+    "notes": [
+      "Click an element to open its card. Border colors show the block (s, p, d, f). Below each name: the abridged atomic weight (CIAAW 2024); for elements without stable isotopes, the mass number of the longest-lived isotope in brackets (NUBASE2020). Italic: not confirmed by 3 references."
+    ],
+    "tables": [
+      {
+        "title": "",
+        "columns": [
+          "",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ],
+        "rows": [
+          [
+            "1",
+            "H",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "He"
+          ],
+          [
+            "2",
+            "Li",
+            "Be",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "B",
+            "C",
+            "N",
+            "O",
+            "F",
+            "Ne"
+          ],
+          [
+            "3",
+            "Na",
+            "Mg",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "Al",
+            "Si",
+            "P",
+            "S",
+            "Cl",
+            "Ar"
+          ],
+          [
+            "4",
+            "K",
+            "Ca",
+            "Sc",
+            "Ti",
+            "V",
+            "Cr",
+            "Mn",
+            "Fe",
+            "Co",
+            "Ni",
+            "Cu",
+            "Zn",
+            "Ga",
+            "Ge",
+            "As",
+            "Se",
+            "Br",
+            "Kr"
+          ],
+          [
+            "5",
+            "Rb",
+            "Sr",
+            "Y",
+            "Zr",
+            "Nb",
+            "Mo",
+            "Tc",
+            "Ru",
+            "Rh",
+            "Pd",
+            "Ag",
+            "Cd",
+            "In",
+            "Sn",
+            "Sb",
+            "Te",
+            "I",
+            "Xe"
+          ],
+          [
+            "6",
+            "Cs",
+            "Ba",
+            "La",
+            "Hf",
+            "Ta",
+            "W",
+            "Re",
+            "Os",
+            "Ir",
+            "Pt",
+            "Au",
+            "Hg",
+            "Tl",
+            "Pb",
+            "Bi",
+            "Po",
+            "At",
+            "Rn"
+          ],
+          [
+            "7",
+            "Fr",
+            "Ra",
+            "Ac",
+            "Rf",
+            "Db",
+            "Sg",
+            "Bh",
+            "Hs",
+            "Mt",
+            "Ds",
+            "Rg",
+            "Cn",
+            "Nh",
+            "Fl",
+            "Mc",
+            "Lv",
+            "Ts",
+            "Og"
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Ln",
+            "",
+            "",
+            "",
+            "Ce",
+            "Pr",
+            "Nd",
+            "Pm",
+            "Sm",
+            "Eu",
+            "Gd",
+            "Tb",
+            "Dy",
+            "Ho",
+            "Er",
+            "Tm",
+            "Yb",
+            "Lu",
+            ""
+          ],
+          [
+            "An",
+            "",
+            "",
+            "",
+            "Th",
+            "Pa",
+            "U",
+            "Np",
+            "Pu",
+            "Am",
+            "Cm",
+            "Bk",
+            "Cf",
+            "Es",
+            "Fm",
+            "Md",
+            "No",
+            "Lr",
+            ""
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": "query",
+        "action_columns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "cells": {
+          "H": {
+            "top": "1",
+            "tag": "s",
+            "lines": [
+              "Hydrogen",
+              "1.0080"
+            ],
+            "unconfirmed": false
+          },
+          "He": {
+            "top": "2",
+            "tag": "s",
+            "lines": [
+              "Helium",
+              "4.0026"
+            ],
+            "unconfirmed": false
+          },
+          "Li": {
+            "top": "3",
+            "tag": "s",
+            "lines": [
+              "Lithium",
+              "6.94"
+            ],
+            "unconfirmed": false
+          },
+          "Be": {
+            "top": "4",
+            "tag": "s",
+            "lines": [
+              "Beryllium",
+              "9.0122"
+            ],
+            "unconfirmed": false
+          },
+          "B": {
+            "top": "5",
+            "tag": "p",
+            "lines": [
+              "Boron",
+              "10.81"
+            ],
+            "unconfirmed": false
+          },
+          "C": {
+            "top": "6",
+            "tag": "p",
+            "lines": [
+              "Carbon",
+              "12.011"
+            ],
+            "unconfirmed": false
+          },
+          "N": {
+            "top": "7",
+            "tag": "p",
+            "lines": [
+              "Nitrogen",
+              "14.007"
+            ],
+            "unconfirmed": false
+          },
+          "O": {
+            "top": "8",
+            "tag": "p",
+            "lines": [
+              "Oxygen",
+              "15.999"
+            ],
+            "unconfirmed": false
+          },
+          "F": {
+            "top": "9",
+            "tag": "p",
+            "lines": [
+              "Fluorine",
+              "18.998"
+            ],
+            "unconfirmed": false
+          },
+          "Ne": {
+            "top": "10",
+            "tag": "p",
+            "lines": [
+              "Neon",
+              "20.180"
+            ],
+            "unconfirmed": false
+          },
+          "Na": {
+            "top": "11",
+            "tag": "s",
+            "lines": [
+              "Sodium",
+              "22.990"
+            ],
+            "unconfirmed": false
+          },
+          "Mg": {
+            "top": "12",
+            "tag": "s",
+            "lines": [
+              "Magnesium",
+              "24.305"
+            ],
+            "unconfirmed": false
+          },
+          "Al": {
+            "top": "13",
+            "tag": "p",
+            "lines": [
+              "Aluminium",
+              "26.982"
+            ],
+            "unconfirmed": false
+          },
+          "Si": {
+            "top": "14",
+            "tag": "p",
+            "lines": [
+              "Silicon",
+              "28.085"
+            ],
+            "unconfirmed": false
+          },
+          "P": {
+            "top": "15",
+            "tag": "p",
+            "lines": [
+              "Phosphorus",
+              "30.974"
+            ],
+            "unconfirmed": false
+          },
+          "S": {
+            "top": "16",
+            "tag": "p",
+            "lines": [
+              "Sulfur",
+              "32.06"
+            ],
+            "unconfirmed": false
+          },
+          "Cl": {
+            "top": "17",
+            "tag": "p",
+            "lines": [
+              "Chlorine",
+              "35.45"
+            ],
+            "unconfirmed": false
+          },
+          "Ar": {
+            "top": "18",
+            "tag": "p",
+            "lines": [
+              "Argon",
+              "39.95"
+            ],
+            "unconfirmed": false
+          },
+          "K": {
+            "top": "19",
+            "tag": "s",
+            "lines": [
+              "Potassium",
+              "39.098"
+            ],
+            "unconfirmed": false
+          },
+          "Ca": {
+            "top": "20",
+            "tag": "s",
+            "lines": [
+              "Calcium",
+              "40.078"
+            ],
+            "unconfirmed": false
+          },
+          "Sc": {
+            "top": "21",
+            "tag": "d",
+            "lines": [
+              "Scandium",
+              "44.956"
+            ],
+            "unconfirmed": false
+          },
+          "Ti": {
+            "top": "22",
+            "tag": "d",
+            "lines": [
+              "Titanium",
+              "47.867"
+            ],
+            "unconfirmed": false
+          },
+          "V": {
+            "top": "23",
+            "tag": "d",
+            "lines": [
+              "Vanadium",
+              "50.942"
+            ],
+            "unconfirmed": false
+          },
+          "Cr": {
+            "top": "24",
+            "tag": "d",
+            "lines": [
+              "Chromium",
+              "51.996"
+            ],
+            "unconfirmed": false
+          },
+          "Mn": {
+            "top": "25",
+            "tag": "d",
+            "lines": [
+              "Manganese",
+              "54.938"
+            ],
+            "unconfirmed": false
+          },
+          "Fe": {
+            "top": "26",
+            "tag": "d",
+            "lines": [
+              "Iron",
+              "55.845"
+            ],
+            "unconfirmed": false
+          },
+          "Co": {
+            "top": "27",
+            "tag": "d",
+            "lines": [
+              "Cobalt",
+              "58.933"
+            ],
+            "unconfirmed": false
+          },
+          "Ni": {
+            "top": "28",
+            "tag": "d",
+            "lines": [
+              "Nickel",
+              "58.693"
+            ],
+            "unconfirmed": false
+          },
+          "Cu": {
+            "top": "29",
+            "tag": "d",
+            "lines": [
+              "Copper",
+              "63.546"
+            ],
+            "unconfirmed": false
+          },
+          "Zn": {
+            "top": "30",
+            "tag": "d",
+            "lines": [
+              "Zinc",
+              "65.38"
+            ],
+            "unconfirmed": false
+          },
+          "Ga": {
+            "top": "31",
+            "tag": "p",
+            "lines": [
+              "Gallium",
+              "69.723"
+            ],
+            "unconfirmed": false
+          },
+          "Ge": {
+            "top": "32",
+            "tag": "p",
+            "lines": [
+              "Germanium",
+              "72.630"
+            ],
+            "unconfirmed": false
+          },
+          "As": {
+            "top": "33",
+            "tag": "p",
+            "lines": [
+              "Arsenic",
+              "74.922"
+            ],
+            "unconfirmed": false
+          },
+          "Se": {
+            "top": "34",
+            "tag": "p",
+            "lines": [
+              "Selenium",
+              "78.971"
+            ],
+            "unconfirmed": false
+          },
+          "Br": {
+            "top": "35",
+            "tag": "p",
+            "lines": [
+              "Bromine",
+              "79.904"
+            ],
+            "unconfirmed": false
+          },
+          "Kr": {
+            "top": "36",
+            "tag": "p",
+            "lines": [
+              "Krypton",
+              "83.798"
+            ],
+            "unconfirmed": false
+          },
+          "Rb": {
+            "top": "37",
+            "tag": "s",
+            "lines": [
+              "Rubidium",
+              "85.468"
+            ],
+            "unconfirmed": false
+          },
+          "Sr": {
+            "top": "38",
+            "tag": "s",
+            "lines": [
+              "Strontium",
+              "87.62"
+            ],
+            "unconfirmed": false
+          },
+          "Y": {
+            "top": "39",
+            "tag": "d",
+            "lines": [
+              "Yttrium",
+              "88.906"
+            ],
+            "unconfirmed": false
+          },
+          "Zr": {
+            "top": "40",
+            "tag": "d",
+            "lines": [
+              "Zirconium",
+              "91.222"
+            ],
+            "unconfirmed": false
+          },
+          "Nb": {
+            "top": "41",
+            "tag": "d",
+            "lines": [
+              "Niobium",
+              "92.906"
+            ],
+            "unconfirmed": false
+          },
+          "Mo": {
+            "top": "42",
+            "tag": "d",
+            "lines": [
+              "Molybdenum",
+              "95.95"
+            ],
+            "unconfirmed": false
+          },
+          "Tc": {
+            "top": "43",
+            "tag": "d",
+            "lines": [
+              "Technetium",
+              "[97]"
+            ],
+            "unconfirmed": false
+          },
+          "Ru": {
+            "top": "44",
+            "tag": "d",
+            "lines": [
+              "Ruthenium",
+              "101.07"
+            ],
+            "unconfirmed": false
+          },
+          "Rh": {
+            "top": "45",
+            "tag": "d",
+            "lines": [
+              "Rhodium",
+              "102.91"
+            ],
+            "unconfirmed": false
+          },
+          "Pd": {
+            "top": "46",
+            "tag": "d",
+            "lines": [
+              "Palladium",
+              "106.42"
+            ],
+            "unconfirmed": false
+          },
+          "Ag": {
+            "top": "47",
+            "tag": "d",
+            "lines": [
+              "Silver",
+              "107.87"
+            ],
+            "unconfirmed": false
+          },
+          "Cd": {
+            "top": "48",
+            "tag": "d",
+            "lines": [
+              "Cadmium",
+              "112.41"
+            ],
+            "unconfirmed": false
+          },
+          "In": {
+            "top": "49",
+            "tag": "p",
+            "lines": [
+              "Indium",
+              "114.82"
+            ],
+            "unconfirmed": false
+          },
+          "Sn": {
+            "top": "50",
+            "tag": "p",
+            "lines": [
+              "Tin",
+              "118.71"
+            ],
+            "unconfirmed": false
+          },
+          "Sb": {
+            "top": "51",
+            "tag": "p",
+            "lines": [
+              "Antimony",
+              "121.76"
+            ],
+            "unconfirmed": false
+          },
+          "Te": {
+            "top": "52",
+            "tag": "p",
+            "lines": [
+              "Tellurium",
+              "127.60"
+            ],
+            "unconfirmed": false
+          },
+          "I": {
+            "top": "53",
+            "tag": "p",
+            "lines": [
+              "Iodine",
+              "126.90"
+            ],
+            "unconfirmed": false
+          },
+          "Xe": {
+            "top": "54",
+            "tag": "p",
+            "lines": [
+              "Xenon",
+              "131.29"
+            ],
+            "unconfirmed": false
+          },
+          "Cs": {
+            "top": "55",
+            "tag": "s",
+            "lines": [
+              "Caesium",
+              "132.91"
+            ],
+            "unconfirmed": false
+          },
+          "Ba": {
+            "top": "56",
+            "tag": "s",
+            "lines": [
+              "Barium",
+              "137.33"
+            ],
+            "unconfirmed": false
+          },
+          "La": {
+            "top": "57",
+            "tag": "d",
+            "lines": [
+              "Lanthanum",
+              "138.91"
+            ],
+            "unconfirmed": false
+          },
+          "Ce": {
+            "top": "58",
+            "tag": "f",
+            "lines": [
+              "Cerium",
+              "140.12"
+            ],
+            "unconfirmed": false
+          },
+          "Pr": {
+            "top": "59",
+            "tag": "f",
+            "lines": [
+              "Praseodymium",
+              "140.91"
+            ],
+            "unconfirmed": false
+          },
+          "Nd": {
+            "top": "60",
+            "tag": "f",
+            "lines": [
+              "Neodymium",
+              "144.24"
+            ],
+            "unconfirmed": false
+          },
+          "Pm": {
+            "top": "61",
+            "tag": "f",
+            "lines": [
+              "Promethium",
+              "[145]"
+            ],
+            "unconfirmed": false
+          },
+          "Sm": {
+            "top": "62",
+            "tag": "f",
+            "lines": [
+              "Samarium",
+              "150.36"
+            ],
+            "unconfirmed": false
+          },
+          "Eu": {
+            "top": "63",
+            "tag": "f",
+            "lines": [
+              "Europium",
+              "151.96"
+            ],
+            "unconfirmed": false
+          },
+          "Gd": {
+            "top": "64",
+            "tag": "f",
+            "lines": [
+              "Gadolinium",
+              "157.25"
+            ],
+            "unconfirmed": false
+          },
+          "Tb": {
+            "top": "65",
+            "tag": "f",
+            "lines": [
+              "Terbium",
+              "158.93"
+            ],
+            "unconfirmed": false
+          },
+          "Dy": {
+            "top": "66",
+            "tag": "f",
+            "lines": [
+              "Dysprosium",
+              "162.50"
+            ],
+            "unconfirmed": false
+          },
+          "Ho": {
+            "top": "67",
+            "tag": "f",
+            "lines": [
+              "Holmium",
+              "164.93"
+            ],
+            "unconfirmed": false
+          },
+          "Er": {
+            "top": "68",
+            "tag": "f",
+            "lines": [
+              "Erbium",
+              "167.26"
+            ],
+            "unconfirmed": false
+          },
+          "Tm": {
+            "top": "69",
+            "tag": "f",
+            "lines": [
+              "Thulium",
+              "168.93"
+            ],
+            "unconfirmed": false
+          },
+          "Yb": {
+            "top": "70",
+            "tag": "f",
+            "lines": [
+              "Ytterbium",
+              "173.05"
+            ],
+            "unconfirmed": false
+          },
+          "Lu": {
+            "top": "71",
+            "tag": "f",
+            "lines": [
+              "Lutetium",
+              "174.97"
+            ],
+            "unconfirmed": false
+          },
+          "Hf": {
+            "top": "72",
+            "tag": "d",
+            "lines": [
+              "Hafnium",
+              "178.49"
+            ],
+            "unconfirmed": false
+          },
+          "Ta": {
+            "top": "73",
+            "tag": "d",
+            "lines": [
+              "Tantalum",
+              "180.95"
+            ],
+            "unconfirmed": false
+          },
+          "W": {
+            "top": "74",
+            "tag": "d",
+            "lines": [
+              "Tungsten",
+              "183.84"
+            ],
+            "unconfirmed": false
+          },
+          "Re": {
+            "top": "75",
+            "tag": "d",
+            "lines": [
+              "Rhenium",
+              "186.21"
+            ],
+            "unconfirmed": false
+          },
+          "Os": {
+            "top": "76",
+            "tag": "d",
+            "lines": [
+              "Osmium",
+              "190.23"
+            ],
+            "unconfirmed": false
+          },
+          "Ir": {
+            "top": "77",
+            "tag": "d",
+            "lines": [
+              "Iridium",
+              "192.22"
+            ],
+            "unconfirmed": false
+          },
+          "Pt": {
+            "top": "78",
+            "tag": "d",
+            "lines": [
+              "Platinum",
+              "195.08"
+            ],
+            "unconfirmed": false
+          },
+          "Au": {
+            "top": "79",
+            "tag": "d",
+            "lines": [
+              "Gold",
+              "196.97"
+            ],
+            "unconfirmed": false
+          },
+          "Hg": {
+            "top": "80",
+            "tag": "d",
+            "lines": [
+              "Mercury",
+              "200.59"
+            ],
+            "unconfirmed": false
+          },
+          "Tl": {
+            "top": "81",
+            "tag": "p",
+            "lines": [
+              "Thallium",
+              "204.38"
+            ],
+            "unconfirmed": false
+          },
+          "Pb": {
+            "top": "82",
+            "tag": "p",
+            "lines": [
+              "Lead",
+              "207.2"
+            ],
+            "unconfirmed": false
+          },
+          "Bi": {
+            "top": "83",
+            "tag": "p",
+            "lines": [
+              "Bismuth",
+              "208.98"
+            ],
+            "unconfirmed": false
+          },
+          "Po": {
+            "top": "84",
+            "tag": "p",
+            "lines": [
+              "Polonium",
+              "[209]"
+            ],
+            "unconfirmed": false
+          },
+          "At": {
+            "top": "85",
+            "tag": "p",
+            "lines": [
+              "Astatine",
+              "[210]"
+            ],
+            "unconfirmed": true
+          },
+          "Rn": {
+            "top": "86",
+            "tag": "p",
+            "lines": [
+              "Radon",
+              "[222]"
+            ],
+            "unconfirmed": false
+          },
+          "Fr": {
+            "top": "87",
+            "tag": "s",
+            "lines": [
+              "Francium",
+              "[223]"
+            ],
+            "unconfirmed": false
+          },
+          "Ra": {
+            "top": "88",
+            "tag": "s",
+            "lines": [
+              "Radium",
+              "[226]"
+            ],
+            "unconfirmed": false
+          },
+          "Ac": {
+            "top": "89",
+            "tag": "d",
+            "lines": [
+              "Actinium",
+              "[227]"
+            ],
+            "unconfirmed": false
+          },
+          "Th": {
+            "top": "90",
+            "tag": "f",
+            "lines": [
+              "Thorium",
+              "232.04"
+            ],
+            "unconfirmed": false
+          },
+          "Pa": {
+            "top": "91",
+            "tag": "f",
+            "lines": [
+              "Protactinium",
+              "231.04"
+            ],
+            "unconfirmed": false
+          },
+          "U": {
+            "top": "92",
+            "tag": "f",
+            "lines": [
+              "Uranium",
+              "238.03"
+            ],
+            "unconfirmed": false
+          },
+          "Np": {
+            "top": "93",
+            "tag": "f",
+            "lines": [
+              "Neptunium",
+              "[237]"
+            ],
+            "unconfirmed": false
+          },
+          "Pu": {
+            "top": "94",
+            "tag": "f",
+            "lines": [
+              "Plutonium",
+              "[244]"
+            ],
+            "unconfirmed": false
+          },
+          "Am": {
+            "top": "95",
+            "tag": "f",
+            "lines": [
+              "Americium",
+              "[243]"
+            ],
+            "unconfirmed": false
+          },
+          "Cm": {
+            "top": "96",
+            "tag": "f",
+            "lines": [
+              "Curium",
+              "[247]"
+            ],
+            "unconfirmed": false
+          },
+          "Bk": {
+            "top": "97",
+            "tag": "f",
+            "lines": [
+              "Berkelium",
+              "[247]"
+            ],
+            "unconfirmed": false
+          },
+          "Cf": {
+            "top": "98",
+            "tag": "f",
+            "lines": [
+              "Californium",
+              "[251]"
+            ],
+            "unconfirmed": false
+          },
+          "Es": {
+            "top": "99",
+            "tag": "f",
+            "lines": [
+              "Einsteinium",
+              "[252]"
+            ],
+            "unconfirmed": false
+          },
+          "Fm": {
+            "top": "100",
+            "tag": "f",
+            "lines": [
+              "Fermium",
+              "[257]"
+            ],
+            "unconfirmed": false
+          },
+          "Md": {
+            "top": "101",
+            "tag": "f",
+            "lines": [
+              "Mendelevium",
+              "[258]"
+            ],
+            "unconfirmed": false
+          },
+          "No": {
+            "top": "102",
+            "tag": "f",
+            "lines": [
+              "Nobelium",
+              "[259]"
+            ],
+            "unconfirmed": true
+          },
+          "Lr": {
+            "top": "103",
+            "tag": "f",
+            "lines": [
+              "Lawrencium",
+              "[266]"
+            ],
+            "unconfirmed": true
+          },
+          "Rf": {
+            "top": "104",
+            "tag": "d",
+            "lines": [
+              "Rutherfordium",
+              "[267]"
+            ],
+            "unconfirmed": true
+          },
+          "Db": {
+            "top": "105",
+            "tag": "d",
+            "lines": [
+              "Dubnium",
+              "[268]"
+            ],
+            "unconfirmed": true
+          },
+          "Sg": {
+            "top": "106",
+            "tag": "d",
+            "lines": [
+              "Seaborgium",
+              "[269]"
+            ],
+            "unconfirmed": true
+          },
+          "Bh": {
+            "top": "107",
+            "tag": "d",
+            "lines": [
+              "Bohrium",
+              "[270]"
+            ],
+            "unconfirmed": true
+          },
+          "Hs": {
+            "top": "108",
+            "tag": "d",
+            "lines": [
+              "Hassium",
+              "[269]"
+            ],
+            "unconfirmed": true
+          },
+          "Mt": {
+            "top": "109",
+            "tag": "d",
+            "lines": [
+              "Meitnerium",
+              "[277]"
+            ],
+            "unconfirmed": true
+          },
+          "Ds": {
+            "top": "110",
+            "tag": "d",
+            "lines": [
+              "Darmstadtium",
+              "[282]"
+            ],
+            "unconfirmed": true
+          },
+          "Rg": {
+            "top": "111",
+            "tag": "d",
+            "lines": [
+              "Roentgenium",
+              "[282]"
+            ],
+            "unconfirmed": true
+          },
+          "Cn": {
+            "top": "112",
+            "tag": "d",
+            "lines": [
+              "Copernicium",
+              "[285]"
+            ],
+            "unconfirmed": true
+          },
+          "Nh": {
+            "top": "113",
+            "tag": "p",
+            "lines": [
+              "Nihonium",
+              "[286]"
+            ],
+            "unconfirmed": true
+          },
+          "Fl": {
+            "top": "114",
+            "tag": "p",
+            "lines": [
+              "Flerovium",
+              "[290]"
+            ],
+            "unconfirmed": true
+          },
+          "Mc": {
+            "top": "115",
+            "tag": "p",
+            "lines": [
+              "Moscovium",
+              "[290]"
+            ],
+            "unconfirmed": true
+          },
+          "Lv": {
+            "top": "116",
+            "tag": "p",
+            "lines": [
+              "Livermorium",
+              "[293]"
+            ],
+            "unconfirmed": true
+          },
+          "Ts": {
+            "top": "117",
+            "tag": "p",
+            "lines": [
+              "Tennessine",
+              "[294]"
+            ],
+            "unconfirmed": true
+          },
+          "Og": {
+            "top": "118",
+            "tag": "p",
+            "lines": [
+              "Oganesson",
+              "[295]"
+            ],
+            "unconfirmed": true
+          }
+        },
+        "tags": {
+          "s": "s-block",
+          "p": "p-block",
+          "d": "d-block",
+          "f": "f-block"
+        },
+        "column_gaps": [
+          3,
+          13
+        ]
+      }
+    ],
+    "structures": [],
+    "artifacts": [],
+    "warnings": [],
+    "data": {
+      "symbols": [
+        "H",
+        "He",
+        "Li",
+        "Be",
+        "B",
+        "C",
+        "N",
+        "O",
+        "F",
+        "Ne",
+        "Na",
+        "Mg",
+        "Al",
+        "Si",
+        "P",
+        "S",
+        "Cl",
+        "Ar",
+        "K",
+        "Ca",
+        "Sc",
+        "Ti",
+        "V",
+        "Cr",
+        "Mn",
+        "Fe",
+        "Co",
+        "Ni",
+        "Cu",
+        "Zn",
+        "Ga",
+        "Ge",
+        "As",
+        "Se",
+        "Br",
+        "Kr",
+        "Rb",
+        "Sr",
+        "Y",
+        "Zr",
+        "Nb",
+        "Mo",
+        "Tc",
+        "Ru",
+        "Rh",
+        "Pd",
+        "Ag",
+        "Cd",
+        "In",
+        "Sn",
+        "Sb",
+        "Te",
+        "I",
+        "Xe",
+        "Cs",
+        "Ba",
+        "La",
+        "Ce",
+        "Pr",
+        "Nd",
+        "Pm",
+        "Sm",
+        "Eu",
+        "Gd",
+        "Tb",
+        "Dy",
+        "Ho",
+        "Er",
+        "Tm",
+        "Yb",
+        "Lu",
+        "Hf",
+        "Ta",
+        "W",
+        "Re",
+        "Os",
+        "Ir",
+        "Pt",
+        "Au",
+        "Hg",
+        "Tl",
+        "Pb",
+        "Bi",
+        "Po",
+        "At",
+        "Rn",
+        "Fr",
+        "Ra",
+        "Ac",
+        "Th",
+        "Pa",
+        "U",
+        "Np",
+        "Pu",
+        "Am",
+        "Cm",
+        "Bk",
+        "Cf",
+        "Es",
+        "Fm",
+        "Md",
+        "No",
+        "Lr",
+        "Rf",
+        "Db",
+        "Sg",
+        "Bh",
+        "Hs",
+        "Mt",
+        "Ds",
+        "Rg",
+        "Cn",
+        "Nh",
+        "Fl",
+        "Mc",
+        "Lv",
+        "Ts",
+        "Og"
+      ]
+    }
+  },
+  "run": {
+    "tool": "element",
+    "tool_id": "REF-01",
+    "number": null,
+    "folder": "/fixture/cache/scratch/element-xxxxxxxx",
+    "recorded": false,
+    "elapsed_s": 0.1,
+    "peak_memory_mb": null
+  }
+}
