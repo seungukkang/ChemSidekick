@@ -40,7 +40,7 @@
       "name": "xyz",
       "title": "XYZ Viewer",
       "subtitle": "ChemSidekick",
-      "description": "Paste or copy XYZ coordinates: formula, molecular weight, closest atoms, and a 3D view.",
+      "description": "Paste XYZ coordinates: formula, molecular weight, closest atoms, and 2D and 3D views.",
       "mode": "view",
       "keywords": [
         "xyz",

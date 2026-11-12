@@ -34,8 +34,7 @@ function Field({
   const text = typeof value === "string" ? value : String(f.default);
   switch (f.kind) {
     case "textarea":
-      // Controlled by the form (not defaultValue), so text that arrives later
-      // (clipboard, "Paste from Clipboard") always shows.
+      // Controlled by the form (not defaultValue), so "Paste from Clipboard" can fill it.
       return (
         <Form.TextArea
           id={f.name}
@@ -92,8 +91,7 @@ export function ToolForm({
   const [texts, setTexts] = useState<Record<string, string>>(() =>
     Object.fromEntries(longFields.map((f) => [f.name, String(initial[f.name] ?? "")])),
   );
-  // Input given after the form appeared (e.g. the clipboard was read late) fills
-  // long-text fields that are still empty.
+  // Input given after the form appeared fills long-text fields that are still empty.
   useEffect(() => {
     setTexts((current) => {
       let next = current;
