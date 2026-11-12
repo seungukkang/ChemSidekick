@@ -9,6 +9,7 @@ import type { SpinTarget } from "../lib/spin";
 const gifs = new Map<string, string>(); // target key -> GIF path
 const shown = new Set<string>();
 const loading = new Set<string>();
+const failed = new Set<string>();
 const listeners = new Set<() => void>();
 let version = 0;
 
@@ -30,8 +31,10 @@ export function combinedKey(key: string): string {
 async function makeGif(target: SpinTarget, beside2D = false) {
   const key = beside2D ? combinedKey(target.key) : target.key;
   loading.add(key);
+  failed.delete(key);
   changed();
-  const toast = await showToast({ style: Toast.Style.Animated, title: "Making the 3D view…" });
+  // The combined card is awaited by its page (a loading indicator there), so no toast.
+  const toast = beside2D ? undefined : await showToast({ style: Toast.Style.Animated, title: "Making the 3D view…" });
   try {
     const { symbols, coords, comment, marks } = target.frame;
     const response = await getTransport().gif({
@@ -40,12 +43,18 @@ async function makeGif(target: SpinTarget, beside2D = false) {
     });
     if (!response.ok) throw new Error(response.error.message);
     gifs.set(key, response.path);
-    await toast.hide();
+    await toast?.hide();
   } catch (e) {
     shown.delete(key);
-    toast.style = Toast.Style.Failure;
-    toast.title = "Could not make the 3D view";
-    toast.message = e instanceof Error ? e.message : String(e);
+    failed.add(key);
+    const message = e instanceof Error ? e.message : String(e);
+    if (toast) {
+      toast.style = Toast.Style.Failure;
+      toast.title = "Could not make the 3D view";
+      toast.message = message;
+    } else {
+      await showToast({ style: Toast.Style.Failure, title: "Could not make the 3D view", message });
+    }
   } finally {
     loading.delete(key);
     changed();
@@ -74,6 +83,7 @@ export interface SpinState {
   is3D(key: string): boolean; // switched to 3D (the GIF may still be in the making)
   gif(key: string): string | undefined; // GIF to show now, if switched to 3D and ready
   made(key: string): string | undefined; // the GIF if it exists, switched or not
+  failed(key: string): boolean; // making it failed
 }
 
 export function useSpinState(): SpinState {
@@ -82,5 +92,6 @@ export function useSpinState(): SpinState {
     is3D: (key) => shown.has(key),
     gif: (key) => (shown.has(key) ? gifs.get(key) : undefined),
     made: (key) => gifs.get(key),
+    failed: (key) => failed.has(key),
   };
 }

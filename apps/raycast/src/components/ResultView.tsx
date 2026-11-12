@@ -144,13 +144,16 @@ export function ResultDetail({
   const targets = useMemo(() => spinTargets(data.result), [data]);
   const spin = useSpinState();
   // One drawing of one structure (xyz): one wide card with the 2D drawing and the
-  // rotating 3D view, made when the page opens (the 2D drawing shows meanwhile).
+  // rotating 3D view, made when the page opens.
   const pair = targets.length === 1 && targets[0].drawing ? targets[0] : undefined;
   useEffect(() => {
     if (pair) ensureCombined(pair);
   }, [pair?.key]);
   const card = pair ? spin.made(combinedKey(pair.key)) : undefined;
   const combined = pair && card ? { [pair.key]: card } : {};
+  // Show the page when the card is ready, so 2D and 3D appear together (the 2D
+  // drawing alone only if the card cannot be made).
+  const waiting = Boolean(pair && !card && !spin.failed(combinedKey(pair.key)));
   const swaps = Object.fromEntries(
     targets.flatMap((t) => (t.drawing && spin.gif(t.key) ? [[t.key, spin.gif(t.key)!]] : [])),
   );
@@ -164,6 +167,9 @@ export function ResultDetail({
     [data],
   );
   const view = renderResult(data.result, data.run, { swaps, spins, grids, combined });
+  if (waiting) {
+    return <Detail isLoading navigationTitle={tool.title} markdown={`# ${data.result.answer}\n\nDrawing 2D and 3D…`} />;
+  }
   return (
     <Detail
       navigationTitle={tool.title}
