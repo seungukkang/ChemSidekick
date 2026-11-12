@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { RunResponse, Table } from "../src/lib/contract";
-import { MAX_TABLE_ROWS, renderResult, tableMarkdown } from "../src/lib/render";
+import { DRAWING_WIDTH, MAX_TABLE_ROWS, renderResult, tableMarkdown } from "../src/lib/render";
 import { fixture } from "./helpers";
 
 const run = (name: string) => JSON.parse(fixture(name)) as RunResponse;
@@ -20,15 +20,37 @@ describe("renderResult", () => {
     expect(view.viewer).toBeUndefined();
   });
 
-  it("stereo: drawings with captions, 3D viewer, other files", () => {
+  it("stereo: drawings two per row with captions, 3D viewer, other files", () => {
     const r = run("stereo-dibromobutane");
     const view = renderResult(r.result, r.run);
-    expect(view.markdown).toContain("![#1 · meso](/fixture/cache/recent/00003-stereo/isomers/isomer-01.svg)");
-    expect(view.markdown).toContain("**#1 · meso** · (2R,3S)");
+    const lines = view.markdown.split("\n");
+    const pair = lines.find((l) => l.includes("isomer-01.svg"))!;
+    expect(pair).toBe(
+      `![#1 · meso](/fixture/cache/recent/00003-stereo/isomers/isomer-01.svg?raycast-width=${DRAWING_WIDTH}) ` +
+        `![#2 · enantiomer of #3](/fixture/cache/recent/00003-stereo/isomers/isomer-02.svg?raycast-width=${DRAWING_WIDTH})`,
+    );
+    expect(view.markdown).toContain("**#1 · meso** (2R,3S) · **#2 · enantiomer of #3** (2R,3R)");
+    expect(lines.filter((l) => l.includes("isomer-03.svg"))).toHaveLength(1); // third on its own row
+    expect(view.drawings).toHaveLength(3);
     expect(view.viewer).toMatch(/viewer\.html$/);
     expect(view.files.map((f) => f.kind)).toEqual(["sdf"]);
-    // drawings come before tables
     expect(view.markdown.indexOf("isomer-01.svg")).toBeLessThan(view.markdown.indexOf("### Stereoisomers"));
+  });
+
+  it("puts the evidence below the result", () => {
+    const r = run("element-periodic-table");
+    const view = renderResult(r.result, r.run);
+    expect(view.markdown.indexOf("### Assumptions")).toBeGreaterThan(view.markdown.indexOf("```"));
+  });
+
+  it("shows the periodic table as a fixed-width grid, not a markdown table", () => {
+    const r = run("element-periodic-table");
+    const md = renderResult(r.result, r.run).markdown;
+    expect(md).not.toContain("| Hg |");
+    const grid = md.split("```")[1].split("\n").filter(Boolean);
+    // Every cell padded to 2 characters, so columns line up and "Hg" stays on one line.
+    expect(grid).toContain("6  Cs Ba La Hf Ta W  Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn");
+    expect(grid[0]).toBe("   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18");
   });
 
   it("puts warnings above the answer", () => {

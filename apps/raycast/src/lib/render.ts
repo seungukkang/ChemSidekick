@@ -1,14 +1,17 @@
-// ToolResult -> what the Detail view shows, in the same order as the CLI and
-// Streamlit: answer -> evidence (formulas, constants, assumptions) -> details
-// (drawings, tables, files) -> notes and sources. Pure, so it can be tested.
+// ToolResult -> what the Detail view shows. In a launcher the result comes
+// first: warnings -> answer -> drawings -> tables -> evidence (formulas,
+// constants, assumptions) -> notes and references. Pure, so it can be tested.
 import type { Artifact, Cell, RunInfo, Table, ToolResult } from "./contract";
 
 export const MAX_TABLE_ROWS = 60;
+export const DRAWINGS_PER_ROW = 2;
+export const DRAWING_WIDTH = 220; // px in the result view; "Browse Drawings" shows them large
 
 export interface RenderedResult {
   markdown: string;
   metadata: { label: string; value: string }[]; // shown in the side panel
   viewer?: string; // path of the HTML 3D viewer, opened in the browser
+  drawings: Artifact[]; // SVG/PNG, for "Browse Drawings"
   files: Artifact[]; // other files (SDF, XYZ, JSON, ...) for "Show in Finder"
 }
 
@@ -20,7 +23,6 @@ function cellText(value: Cell): string {
 export function tableMarkdown(table: Table): string {
   const lines: string[] = [];
   if (table.title) lines.push(`### ${table.title}`, "");
-  // Clickable grids (e.g. the periodic table) show the cell text only.
   const columns = table.columns.map((c) => cellText(c) || " ");
   lines.push(`| ${columns.join(" | ")} |`, `| ${columns.map(() => "---").join(" | ")} |`);
   for (const row of table.rows.slice(0, MAX_TABLE_ROWS)) {
@@ -32,12 +34,57 @@ export function tableMarkdown(table: Table): string {
   return lines.join("\n");
 }
 
+// Clickable grids (e.g. the periodic table) have many narrow columns that a
+// markdown table squeezes until symbols break ("H" over "g"). Show them as a
+// fixed-width text grid instead.
+export function gridMarkdown(table: Table): string {
+  const rows = [table.columns, ...table.rows].map((row) => row.map((c) => (c === null ? "" : String(c))));
+  const width = Math.max(2, ...rows.flat().map((c) => c.length));
+  const out: string[] = [];
+  if (table.title) out.push(`### ${table.title}`, "");
+  out.push(
+    "```",
+    ...rows.map((row) =>
+      row
+        .map((c) => c.padEnd(width))
+        .join(" ")
+        .trimEnd(),
+    ),
+    "```",
+  );
+  return out.join("\n");
+}
+
+export function isGrid(table: Table): boolean {
+  return Object.keys(table.cells).length > 0;
+}
+
 const IMAGE_KINDS = new Set(["svg", "png"]);
+
+function drawingRows(drawings: Artifact[]): string[] {
+  const md: string[] = [];
+  for (let i = 0; i < drawings.length; i += DRAWINGS_PER_ROW) {
+    const row = drawings.slice(i, i + DRAWINGS_PER_ROW);
+    // Images on one line sit side by side. Paths are unique per run (Raycast caches by path).
+    const images = row.map(
+      (a) => `![${cellText(a.title) || "drawing"}](${encodeURI(a.path)}?raycast-width=${DRAWING_WIDTH})`,
+    );
+    const captions = row.map((a) => [a.title && `**${a.title}**`, a.note].filter(Boolean).join(" ")).filter(Boolean);
+    md.push(images.join(" "), "");
+    if (captions.length) md.push(captions.join(" · "), "");
+  }
+  return md;
+}
 
 export function renderResult(result: ToolResult, run?: RunInfo): RenderedResult {
   const md: string[] = [];
   for (const w of result.warnings) md.push(`> ⚠️ ${w}`, "");
   md.push(`# ${result.answer}`, "");
+
+  // The result itself: drawings, then tables
+  const drawings = result.artifacts.filter((a) => IMAGE_KINDS.has(a.kind));
+  md.push(...drawingRows(drawings));
+  for (const t of result.tables) md.push(isGrid(t) ? gridMarkdown(t) : tableMarkdown(t), "");
 
   // Evidence
   for (const f of result.formulas) md.push(`$$${f.latex}$$`, "");
@@ -51,16 +98,6 @@ export function renderResult(result: ToolResult, run?: RunInfo): RenderedResult 
   if (result.assumptions.length) {
     md.push("### Assumptions", "", ...result.assumptions.map((a) => `- ${a}`), "");
   }
-
-  // Details: drawings, then tables
-  const images = result.artifacts.filter((a) => IMAGE_KINDS.has(a.kind));
-  for (const a of images) {
-    // Paths are unique per run (Raycast caches images by path).
-    md.push(`![${cellText(a.title) || "drawing"}](${encodeURI(a.path)})`, "");
-    const caption = [a.title && `**${a.title}**`, a.note].filter(Boolean).join(" · ");
-    if (caption) md.push(caption, "");
-  }
-  for (const t of result.tables) md.push(tableMarkdown(t), "");
 
   // Small print
   if (result.notes.length) md.push("---", "", ...result.notes.map((n) => `_${n}_`), "");
@@ -80,6 +117,7 @@ export function renderResult(result: ToolResult, run?: RunInfo): RenderedResult 
     markdown: md.join("\n").trimEnd() + "\n",
     metadata,
     viewer: result.artifacts.find((a) => a.kind === "html")?.path,
+    drawings,
     files: result.artifacts.filter((a) => !IMAGE_KINDS.has(a.kind) && a.kind !== "html"),
   };
 }

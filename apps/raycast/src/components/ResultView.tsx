@@ -5,6 +5,7 @@ import { getTransport } from "../connection";
 import type { RunResponse, ToolInfo } from "../lib/contract";
 import { renderResult } from "../lib/render";
 import type { RunOptions } from "../lib/transport";
+import { DrawingsGrid } from "./DrawingsGrid";
 import { ErrorView } from "./ErrorView";
 
 const NO_OPTIONS: RunOptions = {};
@@ -69,6 +70,14 @@ export function ResultView({
               icon={Icon.Globe}
               shortcut={Keyboard.Shortcut.Common.Open}
               onAction={() => open(view.viewer!)}
+            />
+          )}
+          {view.drawings.length > 0 && (
+            <Action.Push
+              title="Browse Drawings"
+              icon={Icon.Image}
+              shortcut={{ modifiers: ["cmd"], key: "d" }}
+              target={<DrawingsGrid title={`${tool.title} · drawings`} drawings={view.drawings} />}
             />
           )}
           <Action.CopyToClipboard title="Copy Answer" content={data.result.answer} />
