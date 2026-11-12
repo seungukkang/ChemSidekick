@@ -61,6 +61,23 @@
       ]
     },
     {
+      "name": "profile",
+      "title": "Energy Profile",
+      "subtitle": "ChemSidekick",
+      "description": "Energy profile A → TS → products: rate constants, half-lives, kinetic and equilibrium ratios; or Boltzmann populations.",
+      "mode": "view",
+      "keywords": [
+        "eyring",
+        "kinetics",
+        "thermodynamics",
+        "barrier",
+        "half-life",
+        "selectivity",
+        "boltzmann",
+        "conformer"
+      ]
+    },
+    {
       "name": "xyz",
       "title": "XYZ Viewer",
       "subtitle": "ChemSidekick",

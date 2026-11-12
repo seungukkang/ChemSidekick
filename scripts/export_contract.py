@@ -64,6 +64,10 @@ FIXTURES: dict[str, tuple[list[str], str | None]] = {
     "units-error": (["run", "units", "--json"], '{"query": "5 foo"}'),
     "units-list": (["run", "units", "--no-record", "--json"], "{}"),
     "units-wavelength": (["run", "units", "--json"], '{"query": "300 nm (wavelength)"}'),
+    "profile-two-paths": (
+        ["run", "profile", "--json"],
+        json.dumps({"paths": "B\t20.0\t-3.0\nC\t22.0\t-5.0"}),
+    ),
     "gif": (
         ["gif", "--json"],
         json.dumps(

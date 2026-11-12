@@ -21,6 +21,7 @@ from chemsidekick.core.schemas import ToolError, ToolResult
 from chemsidekick.core.theme import THEME_COLOR
 from chemsidekick.ui.forms import draw, widget_specs
 from chemsidekick.ui.render import render_result
+from chemsidekick.ui.views import VIEWS
 
 ALL = "All"
 GRID_COLUMNS = 8
@@ -149,6 +150,9 @@ def _tool_page(spec: ToolSpec) -> None:
         unsafe_allow_html=True,
     )
     st.caption(spec.summary)
+    if spec.name in VIEWS:
+        VIEWS[spec.name](spec)
+        return
 
     pending = st.session_state.pop("pending", None)
     if pending and pending[0] == spec.name:

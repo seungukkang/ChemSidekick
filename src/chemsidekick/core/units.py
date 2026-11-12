@@ -433,8 +433,11 @@ def parse_duration(text: str | float) -> float:
 
 
 def format_duration(seconds: float) -> str:
-    """Readable duration: '51 s', '28.4 min', '3.2 h', '4.6 d', '2.1 yr'."""
+    """Readable duration: '189 ps', '51 s', '28.4 min', '3.2 h', '4.6 d', '2.1 yr'."""
     for limit, unit, size in [
+        (1e-12, "fs", 1e-15),
+        (1e-9, "ps", 1e-12),
+        (1e-6, "ns", 1e-9),
         (1e-3, "μs", 1e-6),
         (1, "ms", 1e-3),
         (120, "s", 1.0),

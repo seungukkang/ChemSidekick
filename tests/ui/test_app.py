@@ -151,3 +151,15 @@ def test_units_opens_on_the_unit_list_and_converts(app):
     app.button(key="FormSubmitter:form-units-Run").click().run()
     assert not app.exception and not app.error
     assert any("1 eV = 23\\.0605 kcal/mol" in m.value for m in app.markdown)  # markdown-escaped
+
+
+def test_profile_view_redraws_as_values_change(app):
+    app.button(key="tool-profile").click().run()
+    assert not app.exception and not app.error
+    assert any("Kinetic B : C = 96\\.7 : 3\\.3" in m.value for m in app.markdown)
+    assert app.image  # the profile drawing
+    app.text_input(key="pf-ts-1").input("19.0").run()  # TS→C below TS→B now
+    assert any("Kinetic B : C = 15\\.6 : 84\\.4" in m.value for m in app.markdown)
+    app.segmented_control(key="pf-mode").set_value("populations").run()
+    assert not app.exception
+    assert any("conf1 61\\.9 %" in m.value for m in app.markdown)

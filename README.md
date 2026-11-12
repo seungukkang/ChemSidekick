@@ -14,8 +14,9 @@ Use it from the terminal (`csk`), a local web interface, or Raycast.
 | REF-02 | `csk units` | Chemistry unit conversions a calculator does not do: kcal/mol ↔ eV ↔ hartree, cm⁻¹ ↔ nm ↔ K, molar entropy, bohr, debye, polarizability, M⁻¹s⁻¹ ↔ cm³ molecule⁻¹ s⁻¹, pressure, charge; with RT and kT |
 | STR-01 | `csk xyz` | Paste XYZ coordinates (one or many frames): formula, molecular weight, closest atoms, a 2D drawing from bonds inferred from the coordinates, and an interactive 3D view |
 | STR-02 | `csk stereo` | All stereoisomers of a SMILES (or a simple condensed formula): R/S, r/s and E/Z with IUPAC locants, enantiomer/diastereomer/meso relations, 2D drawings and 3D structures |
+| ENE-01 | `csk profile` | Energy profile A → TS → products: rate constants, half-lives, kinetic and equilibrium product ratios, diffusion-limited rates, the temperature for a target half-life, the ΔΔG‡ for a target selectivity; or Boltzmann populations of conformers |
 
-Every chemical value in `element` is cross-checked against one primary source and two authoritative compilations, and each value shows whether it was confirmed (see [`data/verification/elements.md`](data/verification/elements.md)). In `units`, conversions that use only defined constants are marked exact; the measured constants (hartree, Bohr radius, ε₀; CODATA 2022) are each checked against three references ([`data/verification/units.md`](data/verification/units.md)).
+Every chemical value in `element` is cross-checked against one primary source and two authoritative compilations, and each value shows whether it was confirmed (see [`data/verification/elements.md`](data/verification/elements.md)). In `units`, conversions that use only defined constants are marked exact; the measured constants (hartree, Bohr radius, ε₀; CODATA 2022) are each checked against three references ([`data/verification/units.md`](data/verification/units.md)). The solvent viscosities used for diffusion-limited rates in `profile` are listed only when three references agree ([`data/verification/solvents.md`](data/verification/solvents.md)).
 
 ## Install
 
@@ -37,6 +38,7 @@ csk element                    # periodic table
 csk units 1 eV to kcal/mol     # one conversion; `csk units 300 nm` shows every related unit
 csk xyz molecule.xyz           # or paste coordinates: pbpaste | csk xyz
 csk stereo "CC(O)C(O)C(O)C"    # stereoisomers; also accepts CH3-CH(OH)-CH3
+csk profile --paths $'B 20.0 -3.0\nC 22.0 -5.0'   # energy profile: two competing paths
 csk ui                         # web interface in the browser
 ```
 
@@ -66,6 +68,7 @@ npm run dev                     # loads the extension into Raycast; it stays aft
 | Convert Units | Type a value and pick its unit beside the search bar; every related unit is listed, with its definition, constants and sources on the right. Enter copies a value, ⌘⇧C at full precision, ⌘T sets the temperature for RT and kT |
 | XYZ Viewer | Paste coordinates; 2D drawing and rotating 3D view side by side, then the details |
 | Stereoisomers | Type `stereo` and a SMILES; isomers as cards, Enter turns a card into a rotating 3D view |
+| Energy Profile | Fill in the paths (product, TS, product energy) and pick the options from dropdowns; ⌘↵ draws the profile with rates and ratios, ⌘E goes back to change a value. The last input is remembered |
 
 - If `csk` is somewhere else, set its path in the extension preferences.
 - After Python dependencies change, reinstall with `uv tool install --editable . --reinstall`.

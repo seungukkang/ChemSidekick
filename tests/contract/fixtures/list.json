@@ -255,6 +255,227 @@
         "title": "StereoInput",
         "type": "object"
       }
+    },
+    {
+      "id": "ENE-01",
+      "name": "profile",
+      "title": "Energy profile",
+      "summary": "Energy profile A → TS → products: rate constants, half-lives, kinetic and equilibrium ratios; or Boltzmann populations",
+      "category": "energetics",
+      "keywords": [
+        "eyring",
+        "kinetics",
+        "thermodynamics",
+        "barrier",
+        "half-life",
+        "selectivity",
+        "boltzmann",
+        "conformer",
+        "equilibrium",
+        "curtin-hammett"
+      ],
+      "resources": "light",
+      "requires": [],
+      "available": true,
+      "unavailable_reason": "",
+      "icon": "show_chart",
+      "start_view": "",
+      "input_schema": {
+        "properties": {
+          "mode": {
+            "default": "reaction",
+            "description": "reaction: A → TS → products. populations: Boltzmann populations of states.",
+            "enum": [
+              "reaction",
+              "populations"
+            ],
+            "label": "Mode",
+            "title": "Mode",
+            "type": "string"
+          },
+          "paths": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Reaction mode: one path per line, 'product  TS  product-energy', relative to the reactant A (e.g. 'B 20.0 -3.0'). Use '-' for an unknown value.",
+            "label": "Paths",
+            "multiline": true,
+            "title": "Paths"
+          },
+          "states": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Populations mode: one state per line, 'label  energy  [degeneracy]  [property ...]'. Absolute energies (e.g. in hartree) are fine.",
+            "label": "States",
+            "multiline": true,
+            "title": "States"
+          },
+          "unit": {
+            "default": "kcal/mol",
+            "description": "Unit of the energies (Eh: populations mode only).",
+            "enum": [
+              "kcal/mol",
+              "kJ/mol",
+              "eV",
+              "Eh"
+            ],
+            "label": "Energy unit",
+            "title": "Unit",
+            "type": "string"
+          },
+          "ts_values": {
+            "default": "barrier",
+            "description": "What the TS column holds: the barrier ΔG‡, a rate constant k (s⁻¹, or M⁻¹ s⁻¹ for bimolecular), or a half-life (e.g. 30min, 2h).",
+            "enum": [
+              "barrier",
+              "rate constant",
+              "half-life"
+            ],
+            "label": "TS values are",
+            "title": "Ts Values",
+            "type": "string"
+          },
+          "product_values": {
+            "default": "free energy",
+            "description": "What the product column holds: ΔG, or the equilibrium constant K.",
+            "enum": [
+              "free energy",
+              "equilibrium constant"
+            ],
+            "label": "Product values are",
+            "title": "Product Values",
+            "type": "string"
+          },
+          "temperature": {
+            "default": "298.15",
+            "description": "Temperature: a number in K, or with a unit (25 C, -78 °C).",
+            "label": "Temperature",
+            "short": "-T",
+            "title": "Temperature",
+            "type": "string"
+          },
+          "molecularity": {
+            "default": "unimolecular",
+            "description": "unimolecular: k in s⁻¹. bimolecular (A + B): k in M⁻¹ s⁻¹, 1 M standard state.",
+            "enum": [
+              "unimolecular",
+              "bimolecular"
+            ],
+            "label": "Molecularity",
+            "title": "Molecularity",
+            "type": "string"
+          },
+          "partner": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Bimolecular: concentration of the other reactant in M, for pseudo-first-order half-lives (default 1 M).",
+            "label": "Partner concentration (M)",
+            "title": "Partner"
+          },
+          "control": {
+            "default": "activation",
+            "description": "activation: k from the barrier only. diffusion: bimolecular rates limited by diffusion, 1/k = 1/k_act + 1/k_diff.",
+            "enum": [
+              "activation",
+              "diffusion"
+            ],
+            "label": "Control",
+            "title": "Control",
+            "type": "string"
+          },
+          "solvent": {
+            "default": "water",
+            "description": "Diffusion control: solvent viscosity at 25 °C (or custom).",
+            "enum": [
+              "water",
+              "methanol",
+              "toluene",
+              "benzene",
+              "custom"
+            ],
+            "label": "Solvent",
+            "title": "Solvent",
+            "type": "string"
+          },
+          "viscosity": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Diffusion control with a custom solvent: viscosity in mPa s (= cP).",
+            "label": "Viscosity (mPa s)",
+            "title": "Viscosity"
+          },
+          "standard_state": {
+            "default": "1 M",
+            "description": "Standard state of the energies. 1 atm (gas-phase calculations) is converted to 1 M for bimolecular steps.",
+            "enum": [
+              "1 M",
+              "1 atm"
+            ],
+            "label": "Energies are for",
+            "title": "Standard State",
+            "type": "string"
+          },
+          "target_half_life": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Find the temperature at which each path has this half-life (e.g. 1h).",
+            "label": "Target half-life",
+            "title": "Target Half Life"
+          },
+          "target_selectivity": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Find the ΔΔG‡ needed for this selectivity: a ratio (95:5), an ee (90% ee), or a dr (10:1 dr).",
+            "label": "Target selectivity",
+            "title": "Target Selectivity"
+          }
+        },
+        "title": "ProfileInput",
+        "type": "object"
+      }
     }
   ]
 }

@@ -6,6 +6,7 @@ import { usePromise } from "@raycast/utils";
 import { ErrorView } from "./components/ErrorView";
 import { ResultView } from "./components/ResultView";
 import { ToolForm } from "./components/ToolForm";
+import { ProfileCommand } from "./components/ProfileForm";
 import { UnitsView } from "./components/UnitsView";
 import { getTransport } from "./connection";
 import type { ToolInfo, ToolListResponse } from "./lib/contract";
@@ -19,6 +20,7 @@ const NO_INPUT = {};
 // Tools with a screen made for them: opened directly instead of the generated form.
 const DEDICATED_VIEWS: Record<string, () => React.ReactNode> = {
   units: () => <UnitsView />,
+  profile: () => <ProfileCommand />,
 };
 
 async function loadTools(): Promise<ToolListResponse> {
