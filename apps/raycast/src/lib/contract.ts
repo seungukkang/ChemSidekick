@@ -54,6 +54,31 @@ export interface Constant {
   source: string;
 }
 
+export interface Mark {
+  atoms: number[]; // atom indexes from 0
+  label: string;
+}
+
+export interface Frame {
+  symbols: string[];
+  coords: [number, number, number][]; // Å
+  comment: string;
+  numbers: string[];
+  marks: Mark[];
+}
+
+export interface Structure3D {
+  frames: Frame[];
+  title: string;
+  style: string;
+  labels: boolean;
+  marks_shown: boolean;
+  start_frame: number;
+  navigation: "frames" | "pages" | (string & {});
+  page_name: string;
+  numbers_name: string;
+}
+
 export interface ToolResult {
   answer: string;
   highlights: Highlight[];
@@ -63,7 +88,7 @@ export interface ToolResult {
   sources: string[];
   notes: string[];
   tables: Table[];
-  structures: unknown[]; // drawn by the HTML 3D viewer, not by Raycast
+  structures: Structure3D[]; // the HTML 3D viewer and `csk gif` draw these
   artifacts: Artifact[];
   warnings: string[];
   data: Record<string, unknown>;
@@ -143,4 +168,17 @@ export interface SaveResponse extends Envelope {
   ok: true;
   number: number;
   saved_to: string;
+}
+
+// `csk gif`: a rotating 3D view of one structure frame (a view, not a tool).
+export interface GifRequest {
+  frame: Pick<Frame, "symbols" | "coords" | "comment">;
+  title?: string;
+  note?: string;
+}
+
+export interface GifResponse extends Envelope {
+  ok: true;
+  path: string;
+  frames: number;
 }

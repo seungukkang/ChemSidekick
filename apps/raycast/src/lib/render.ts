@@ -5,7 +5,10 @@ import type { Artifact, Cell, RunInfo, Table, ToolResult } from "./contract";
 
 export const MAX_TABLE_ROWS = 60;
 export const DRAWINGS_PER_ROW = 2;
-export const DRAWING_WIDTH = 220; // px in the result view; "Browse Drawings" shows them large
+// Display widths (px) in the result view. Two drawing cards per row line up with
+// the highlight cards above them. "Browse Drawings" shows the cards large.
+export const DRAWING_WIDTH = 280;
+export const HIGHLIGHTS_WIDTH = 2 * DRAWING_WIDTH + 4;
 
 export interface RenderedResult {
   markdown: string;
@@ -61,30 +64,44 @@ export function isGrid(table: Table): boolean {
 
 const IMAGE_KINDS = new Set(["svg", "png"]);
 
-function drawingRows(drawings: Artifact[]): string[] {
+// Images made by the extension for this view (lib/cards.ts), all optional.
+export interface ViewImages {
+  cards?: Record<string, string>; // drawing path -> card image (2D card SVG or 3D GIF), caption inside
+  highlights?: string; // highlight cards image; replaces the highlights in the side panel
+  spins?: string[]; // rotating 3D cards for results without drawings (xyz)
+}
+
+function image(alt: string, path: string, width: number): string {
+  // Paths are unique per run (Raycast caches images by path).
+  return `![${cellText(alt) || "image"}](${encodeURI(path)}?raycast-width=${width})`;
+}
+
+function drawingRows(drawings: Artifact[], cards: Record<string, string>): string[] {
   const md: string[] = [];
   for (let i = 0; i < drawings.length; i += DRAWINGS_PER_ROW) {
     const row = drawings.slice(i, i + DRAWINGS_PER_ROW);
-    // Images on one line sit side by side. Paths are unique per run (Raycast caches by path).
-    const images = row.map(
-      (a) => `![${cellText(a.title) || "drawing"}](${encodeURI(a.path)}?raycast-width=${DRAWING_WIDTH})`,
-    );
-    const captions = row.map((a) => [a.title && `**${a.title}**`, a.note].filter(Boolean).join(" ")).filter(Boolean);
-    md.push(images.join(" "), "");
-    // One caption per line (a separate paragraph each: a plain line break would be joined).
-    for (const caption of captions) md.push(caption, "");
+    // Images on one line sit side by side.
+    md.push(row.map((a) => image(a.title, cards[a.path] ?? a.path, DRAWING_WIDTH)).join(" "), "");
+    // Without a card, the caption goes below, one per line (a separate paragraph
+    // each: a plain line break would be joined).
+    for (const a of row.filter((d) => !cards[d.path])) {
+      const caption = [a.title && `**${a.title}**`, a.note].filter(Boolean).join(" ");
+      if (caption) md.push(caption, "");
+    }
   }
   return md;
 }
 
-export function renderResult(result: ToolResult, run?: RunInfo): RenderedResult {
+export function renderResult(result: ToolResult, run?: RunInfo, images: ViewImages = {}): RenderedResult {
   const md: string[] = [];
   for (const w of result.warnings) md.push(`> ⚠️ ${w}`, "");
   md.push(`# ${result.answer}`, "");
+  if (images.highlights) md.push(image("key values", images.highlights, HIGHLIGHTS_WIDTH), "");
+  for (const spin of images.spins ?? []) md.push(image("rotating 3D view", spin, DRAWING_WIDTH), "");
 
   // The result itself: drawings, then tables
   const drawings = result.artifacts.filter((a) => IMAGE_KINDS.has(a.kind));
-  md.push(...drawingRows(drawings));
+  md.push(...drawingRows(drawings, images.cards ?? {}));
   for (const t of result.tables) md.push(isGrid(t) ? gridMarkdown(t) : tableMarkdown(t), "");
 
   // Evidence
@@ -104,10 +121,9 @@ export function renderResult(result: ToolResult, run?: RunInfo): RenderedResult 
   if (result.notes.length) md.push("---", "", ...result.notes.map((n) => `_${n}_`), "");
   if (result.sources.length) md.push("### References", "", ...result.sources.map((s) => `- ${s}`), "");
 
-  const metadata = result.highlights.map((h) => ({
-    label: h.label,
-    value: h.note ? `${h.value}  (${h.note})` : h.value,
-  }));
+  const metadata = images.highlights
+    ? []
+    : result.highlights.map((h) => ({ label: h.label, value: h.note ? `${h.value}  (${h.note})` : h.value }));
   if (run) {
     metadata.push({ label: "Tool", value: `${run.tool_id} · ${run.tool}` });
     metadata.push({ label: "Time", value: `${run.elapsed_s.toFixed(2)} s` });

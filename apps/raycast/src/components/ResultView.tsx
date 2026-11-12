@@ -1,12 +1,15 @@
 import { Action, ActionPanel, Detail, Icon, Keyboard, open, showToast, Toast } from "@raycast/api";
 import { usePromise } from "@raycast/utils";
+import { useMemo } from "react";
 import { dirname } from "node:path";
 import { getTransport } from "../connection";
 import type { RunResponse, ToolInfo } from "../lib/contract";
+import { prepareCards } from "../lib/cards";
 import { renderResult } from "../lib/render";
 import type { RunOptions } from "../lib/transport";
 import { DrawingsGrid } from "./DrawingsGrid";
 import { ErrorView } from "./ErrorView";
+import { toggle3D, useSpinState } from "./spin-store";
 
 const NO_OPTIONS: RunOptions = {};
 
@@ -47,8 +50,20 @@ export function ResultView({
   });
   if (error) return <ErrorView error={error} onRetry={revalidate} />;
   if (!data) return <Detail isLoading={isLoading} navigationTitle={tool.title} markdown={`Running ${tool.title}…`} />;
+  return <ResultDetail tool={tool} data={data} />;
+}
 
-  const view = renderResult(data.result, data.run);
+function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse }) {
+  // Card images are written once per result; the 3D state swaps 2D cards for GIFs.
+  const prepared = useMemo(() => prepareCards(data.result), [data]);
+  const spin = useSpinState();
+  const cards = Object.fromEntries(
+    data.result.artifacts.map((a) => [a.path, spin.gif(a.path) ?? prepared.cards[a.path]]).filter(([, v]) => v),
+  );
+  const spins = prepared.targets.filter((t) => !t.drawing).flatMap((t) => (spin.gif(t.key) ? [spin.gif(t.key)!] : []));
+  const view = renderResult(data.result, data.run, { cards, highlights: prepared.highlights, spins });
+  const single = prepared.targets.length === 1 && !prepared.targets[0].drawing ? prepared.targets[0] : undefined;
+
   return (
     <Detail
       navigationTitle={tool.title}
@@ -72,12 +87,43 @@ export function ResultView({
               onAction={() => open(view.viewer!)}
             />
           )}
+          {single && (
+            <Action
+              title={spin.is3D(single.key) ? "Hide Rotating 3D View" : "Show Rotating 3D View"}
+              icon={Icon.RotateClockwise}
+              shortcut={{ modifiers: ["cmd"], key: "t" }}
+              onAction={() => toggle3D(single)}
+            />
+          )}
+          {!single && prepared.targets.length > 0 && (
+            <ActionPanel.Submenu
+              title="Switch 2D / 3D"
+              icon={Icon.RotateClockwise}
+              shortcut={{ modifiers: ["cmd"], key: "t" }}
+            >
+              {prepared.targets.map((t) => (
+                <Action
+                  key={t.key}
+                  title={`${spin.is3D(t.key) ? "2D" : "3D"} · ${t.title || "structure"}`}
+                  icon={spin.is3D(t.key) ? Icon.Image : Icon.RotateClockwise}
+                  onAction={() => toggle3D(t)}
+                />
+              ))}
+            </ActionPanel.Submenu>
+          )}
           {view.drawings.length > 0 && (
             <Action.Push
               title="Browse Drawings"
               icon={Icon.Image}
               shortcut={{ modifiers: ["cmd"], key: "d" }}
-              target={<DrawingsGrid title={`${tool.title} · drawings`} drawings={view.drawings} />}
+              target={
+                <DrawingsGrid
+                  title={`${tool.title} · drawings`}
+                  drawings={view.drawings}
+                  cards={prepared.cards}
+                  targets={prepared.targets}
+                />
+              }
             />
           )}
           <Action.CopyToClipboard title="Copy Answer" content={data.result.answer} />

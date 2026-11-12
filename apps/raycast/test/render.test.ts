@@ -53,6 +53,28 @@ describe("renderResult", () => {
     expect(grid[0]).toBe("   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18");
   });
 
+  it("uses card images: caption inside, key values as an image instead of the side panel", () => {
+    const r = run("stereo-dibromobutane");
+    const [d1, d2] = r.result.artifacts;
+    const view = renderResult(r.result, r.run, {
+      cards: { [d1.path]: "/cards/1.svg", [d2.path]: "/cards/2.gif" },
+      highlights: "/cards/h.svg",
+    });
+    expect(view.markdown).toContain(
+      `![#1 · meso](/cards/1.svg?raycast-width=${DRAWING_WIDTH}) ![#2 · enantiomer of #3](/cards/2.gif?`,
+    );
+    expect(view.markdown).not.toContain("**#1 · meso**"); // no caption below a card
+    expect(view.markdown).toContain("**#3 · enantiomer of #2** (2S,3S)"); // no card: caption below
+    expect(view.markdown.indexOf("/cards/h.svg")).toBeLessThan(view.markdown.indexOf("/cards/1.svg"));
+    expect(view.metadata.map((m) => m.label)).toEqual(["Tool", "Time", "Result"]);
+  });
+
+  it("shows rotating views of a structure without drawings near the top", () => {
+    const r = run("xyz-water");
+    const view = renderResult(r.result, r.run, { spins: ["/cards/spin.gif"] });
+    expect(view.markdown.indexOf("/cards/spin.gif")).toBeLessThan(view.markdown.indexOf("###"));
+  });
+
   it("puts warnings above the answer", () => {
     const r = run("xyz-water");
     const view = renderResult({ ...r.result, warnings: ["Atoms 1 and 2 are only 0.1 Å apart."] }, r.run);

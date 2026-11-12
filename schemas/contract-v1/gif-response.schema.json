@@ -1,0 +1,33 @@
+{
+  "properties": {
+    "contract": {
+      "default": 1,
+      "title": "Contract",
+      "type": "integer"
+    },
+    "csk_version": {
+      "title": "Csk Version",
+      "type": "string"
+    },
+    "ok": {
+      "const": true,
+      "default": true,
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "frames": {
+      "title": "Frames",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "path",
+    "frames"
+  ],
+  "title": "GifResponse",
+  "type": "object"
+}

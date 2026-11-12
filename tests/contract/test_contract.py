@@ -12,6 +12,7 @@ from chemsidekick.cli.main import app, build_app
 from chemsidekick.core.contract import (
     CONTRACT_VERSION,
     ErrorResponse,
+    GifResponse,
     RunResponse,
     SaveResponse,
     ToolListResponse,
@@ -254,3 +255,30 @@ def test_save_json(isolated_user_dirs):
 
 def test_save_without_results_is_input_error():
     failed(runner.invoke(app, ["save", "--json"]), "input", 1)
+
+
+# --- gif: rotating 3D view of a result's structure ----------------------------
+
+
+def test_gif_from_a_stereo_frame():
+    stereo = ok_run(runner.invoke(app, ["stereo", "CC(Br)C(Br)C", "--no-open", "--json"]))
+    frame = stereo.result.structures[0].frames[0]
+    payload = json.dumps(
+        {"frame": frame.model_dump(mode="json"), "title": "#1 · meso", "note": "(2R,3S)"}
+    )
+    result = runner.invoke(app, ["gif", "--json"], input=payload)
+    assert result.exit_code == 0, result.output
+    r = GifResponse.model_validate(only_json(result))
+    assert Path(r.path).exists() and r.path.endswith(".gif")
+    assert Path(r.path).parent.parent == RecentStore().scratch_root  # not a recent result
+    again = GifResponse.model_validate(
+        only_json(runner.invoke(app, ["gif", "--json"], input=payload))
+    )
+    assert again.path != r.path  # a fresh file each time (Raycast caches images by path)
+
+
+def test_gif_rejects_bad_frames():
+    bad = json.dumps({"frame": {"symbols": ["O", "H"], "coords": [[0, 0, 0]]}})
+    r = failed(runner.invoke(app, ["gif", "--json"], input=bad), "input", 1)
+    assert "frame" in r.error.message
+    failed(runner.invoke(app, ["gif", "--json"], input='{"frame": {}, "colour": 1}'), "input", 1)

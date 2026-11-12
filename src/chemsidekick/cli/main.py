@@ -1,6 +1,6 @@
 """Entry point for the `csk` command.
 
-Built-in commands (list, search, run, recent, save, doctor, ui) are defined here. Every tool
+Built-in commands (list, search, run, gif, recent, save, doctor, ui) are defined here. Every tool
 in the registry becomes a `csk <tool>` command automatically: its options are
 generated from the tool's Pydantic input model.
 
@@ -38,6 +38,8 @@ from chemsidekick.core.contract import (
     ErrorDetail,
     ErrorInfo,
     ErrorResponse,
+    GifRequest,
+    GifResponse,
     RunInfo,
     RunResponse,
     SaveResponse,
@@ -50,6 +52,7 @@ from chemsidekick.core.registry import Registry, ToolSpec, discover
 from chemsidekick.core.results import RecentStore
 from chemsidekick.core.runner import RunError, run_tool
 from chemsidekick.core.schemas import Artifact, ToolError, ToolResult
+from chemsidekick.core.spin import FRAMES, spin_card
 from chemsidekick.core.theme import THEME_COLOR
 from chemsidekick.core.viewer import viewer_html
 
@@ -456,6 +459,26 @@ def build_app(registry: Registry) -> typer.Typer:
         _guarded(as_json, body)
 
     app.command("run")(_run_command(registry))
+
+    @app.command("gif")
+    def gif(as_json: bool = _JSON_OPTION) -> None:
+        """Rotating 3D view of one structure as an animated GIF.
+
+        Input on standard input, as JSON: {"frame": {"symbols": [...], "coords": [...]},
+        "title": "...", "note": "..."}; a frame of any tool's 3D result (e.g. stereo, xyz).
+        """
+
+        def body() -> None:
+            request = GifRequest.model_validate(_read_json_input())
+            config = _load_config()
+            folder = RecentStore(limit=config.recent_limit).scratch_folder("gif")
+            path = spin_card(request.frame, folder / "spin.gif", request.title, request.note)
+            if as_json:
+                typer.echo(GifResponse(path=str(path), frames=FRAMES).model_dump_json(indent=2))
+            else:
+                console.print(str(path), highlight=False)
+
+        _guarded(as_json, body)
 
     @app.command("recent")
     def recent(
