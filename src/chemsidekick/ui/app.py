@@ -18,6 +18,7 @@ from chemsidekick.core.registry import CATEGORIES, Registry, ToolSpec, discover
 from chemsidekick.core.results import RecentStore
 from chemsidekick.core.runner import RunError, run_tool
 from chemsidekick.core.schemas import ToolError, ToolResult
+from chemsidekick.core.theme import THEME_COLOR
 from chemsidekick.ui.forms import draw, widget_specs
 from chemsidekick.ui.render import render_result
 
@@ -33,11 +34,11 @@ div[class*="st-key-tool-"] button, div[class*="st-key-selected-tool-"] button {
 }
 div[class*="st-key-tool-"] button p, div[class*="st-key-selected-tool-"] button p {
     font-size: 1.4rem; font-weight: 600; }
-div[class*="st-key-selected-"] button { border: 2px solid var(--primary-color, #ff4b4b); }
+div[class*="st-key-selected-"] button { border: 2px solid __THEME__; }
 .csk-tool-id { font-size: .68rem; letter-spacing: .08em; opacity: .45; margin-bottom: 2px; }
 .csk-tool-title { font-size: 1.5rem; font-weight: 600; line-height: 1.25; }
 </style>
-"""
+""".replace("__THEME__", THEME_COLOR)
 
 
 def visible_tools(registry: Registry, category: str, query: str) -> list[ToolSpec]:

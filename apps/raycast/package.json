@@ -1,0 +1,57 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "chemsidekick",
+  "title": "ChemSidekick",
+  "description": "Small chemistry tools, fast: elements, XYZ structures, stereoisomers.",
+  "icon": "extension-icon.png",
+  "license": "MIT",
+  "categories": [
+    "Developer Tools"
+  ],
+  "commands": [
+    {
+      "name": "chemsidekick",
+      "title": "ChemSidekick",
+      "description": "Check that csk is found and how fast it starts (placeholder until M2).",
+      "mode": "view"
+    },
+    {
+      "name": "image-test",
+      "title": "Image Test (Dev)",
+      "description": "Development check: which image references Detail markdown can show.",
+      "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "cskPath",
+      "title": "csk Path",
+      "description": "Absolute path to the csk executable. Leave empty to use ~/.local/bin/csk.",
+      "type": "file",
+      "required": false
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^2.11.1",
+    "@raycast/utils": "^2.3.3"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.2.0",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "eslint": "^10.14.0",
+    "prettier": "^3.9.10",
+    "typescript": "~5.9.3"
+  },
+  "engines": {
+    "node": ">=22.22.2"
+  },
+  "scripts": {
+    "dev": "ray develop",
+    "lint": "ray lint",
+    "fix-lint": "ray lint --fix",
+    "build": "ray build",
+    "typecheck": "tsc --noEmit",
+    "check": "eslint src && prettier --check src && tsc --noEmit"
+  }
+}
