@@ -1,16 +1,18 @@
 # ChemSidekick
 
-A personal toolbox of small chemistry calculators and visualizers, used from the terminal (`csk`) or a local web interface.
+You can find most of this by googling or asking AI. But sometimes the AI's sense of style isn't yours, or its drawing looks like a five-year-old drew it, and sometimes it's just a hassle for something you only want to check for two seconds. ChemSidekick collects those little things one by one and puts them behind a hotkey, so researchers can look them up quickly and get back to work.
 
-> **Status:** v0.1.0 — three tools, CLI and Streamlit web interface. A launcher (Raycast) and AI assistant (MCP) interfaces are planned.
+Use it from the terminal (`csk`), a local web interface, or Raycast.
+
+> **Status:** v0.2.0. Three tools; CLI, Streamlit web interface, and a Raycast extension. More tools coming soon!
 
 ## Tools
 
 | ID | Command | What it does |
 |---|---|---|
-| STR-01 | `csk xyz` | Paste XYZ coordinates (one or many frames): formula, molecular weight, closest atoms, and an interactive 3D view |
-| STR-02 | `csk stereo` | All stereoisomers of a SMILES (or a simple condensed formula): R/S, r/s and E/Z with IUPAC locants, enantiomer/diastereomer/meso relations, 2D drawings and 3D structures |
 | REF-01 | `csk element` | Element card (atomic weights, electron configuration, isotopes, …) or the periodic table |
+| STR-01 | `csk xyz` | Paste XYZ coordinates (one or many frames): formula, molecular weight, closest atoms, a 2D drawing from bonds inferred from the coordinates, and an interactive 3D view |
+| STR-02 | `csk stereo` | All stereoisomers of a SMILES (or a simple condensed formula): R/S, r/s and E/Z with IUPAC locants, enantiomer/diastereomer/meso relations, 2D drawings and 3D structures |
 
 Every chemical value in `element` is cross-checked against one primary source and two authoritative compilations, and each value shows whether it was confirmed (see [`data/verification/elements.md`](data/verification/elements.md)).
 
@@ -40,21 +42,42 @@ csk ui                         # web interface in the browser
 - `--json` prints one JSON object (`{"ok": true, "result": …, "run": …}` or `{"ok": false, "error": …}`), also for errors, and exits with a code per error type. `csk list --json` describes every tool and its inputs.
 - `csk run <tool> --json` takes the tool's input as JSON on standard input, for programs: `echo '{"smiles": "CC(Br)C(Br)C"}' | csk run stereo --json`. The format is versioned; its JSON Schemas are in [`schemas/`](schemas/).
 - `--no-record` runs without keeping a recent result.
-- `csk gif --json` turns one 3D structure (a frame from a result, as JSON on standard input) into a rotating GIF, for places without the interactive viewer.
+- `csk gif --json` turns one 3D structure (a frame from a result, as JSON on standard input) into a rotating GIF, for places without the interactive viewer (used by the Raycast extension).
 - Every run is kept as a recent result (newest 50). `csk recent` lists them and `csk save <number>` keeps one in `~/Documents/ChemSidekick`.
 - The 3D viewer loads [3Dmol.js](https://3dmol.csb.pitt.edu/) from a CDN, so it needs an internet connection.
+
+## Raycast extension
+
+The extension in [`apps/raycast/`](apps/raycast/) runs `csk` in the background. It needs [Raycast](https://www.raycast.com/) and Node.js 22.22.2 or newer.
+
+```sh
+uv tool install --editable .    # puts csk in ~/.local/bin, where the extension looks for it
+cd apps/raycast
+npm install
+npm run dev                     # loads the extension into Raycast; it stays after you stop this
+```
+
+| Command | What it does |
+|---|---|
+| ChemSidekick | All tools: pick one, fill in its form, see the result |
+| Element | Search elements by symbol, name, or atomic number; card on Enter, periodic table on ⌘T |
+| XYZ Viewer | Paste coordinates; 2D drawing and rotating 3D view side by side, then the details |
+| Stereoisomers | Type `stereo` and a SMILES; isomers as cards, Enter turns a card into a rotating 3D view |
+
+- If `csk` is somewhere else, set its path in the extension preferences.
+- After Python dependencies change, reinstall with `uv tool install --editable . --reinstall`.
 
 ## Architecture
 
 ```
-Interfaces (CLI · Streamlit; later Raycast · MCP)
-        │
+Interfaces (CLI · Streamlit · Raycast; later web app · MCP)
+        │            Raycast talks to csk through a versioned JSON format (schemas/)
    chemsidekick core (tool registry, runner with time/memory limits, result store)
         │
-   tools (each declares its inputs once; CLI options and web forms are generated)
+   tools (each declares its inputs once; CLI options and forms are generated)
 ```
 
-Adding a tool means adding one module under `src/chemsidekick/tools/`; no interface code changes.
+Adding a tool means adding one module under `src/chemsidekick/tools/`. It shows up in the CLI, the web interface, and the Raycast ChemSidekick command without interface changes.
 
 ## Development
 
@@ -62,6 +85,10 @@ Adding a tool means adding one module under `src/chemsidekick/tools/`; no interf
 uv run pytest          # tests
 uv run ruff check      # lint
 uv run ruff format     # format
+
+cd apps/raycast
+npm run check          # ESLint, Prettier, TypeScript
+npm test               # vitest
 ```
 
 ## Release notes
