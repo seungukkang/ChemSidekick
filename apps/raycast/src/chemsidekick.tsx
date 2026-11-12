@@ -1,10 +1,19 @@
-// The generic command: every registered tool, from `csk list --json`.
-// M2: list and error screens. M3 adds the generated input form and result view.
+// The generic command: every registered tool, from `csk list --json`. New tools
+// appear here without changing the extension: the form is generated from the
+// tool's input schema and the result view is shared by all tools.
 import { Action, ActionPanel, Icon, List } from "@raycast/api";
 import { usePromise } from "@raycast/utils";
 import { ErrorView } from "./components/ErrorView";
+import { ResultView } from "./components/ResultView";
+import { ToolForm } from "./components/ToolForm";
 import { getTransport } from "./connection";
 import type { ToolInfo, ToolListResponse } from "./lib/contract";
+import { formSpec } from "./lib/form";
+import type { RunOptions } from "./lib/transport";
+
+// A start view (e.g. the periodic table) runs with default input and is not kept.
+const START_VIEW: RunOptions = { record: false };
+const NO_INPUT = {};
 
 async function loadTools(): Promise<ToolListResponse> {
   const response = await getTransport().listTools();
@@ -13,8 +22,13 @@ async function loadTools(): Promise<ToolListResponse> {
 }
 
 function ToolItem({ tool }: { tool: ToolInfo }) {
+  const unsupported = formSpec(tool.input_schema).unsupported;
+  const supported = tool.available && unsupported.length === 0;
   const accessories: List.Item.Accessory[] = [{ text: tool.resources }, { tag: tool.id }];
   if (!tool.available) accessories.unshift({ icon: Icon.Warning, tooltip: tool.unavailable_reason });
+  if (unsupported.length) {
+    accessories.unshift({ icon: Icon.Info, tooltip: `Not in Raycast yet (input: ${unsupported.join(", ")})` });
+  }
   return (
     <List.Item
       title={tool.title}
@@ -24,6 +38,14 @@ function ToolItem({ tool }: { tool: ToolInfo }) {
       accessories={accessories}
       actions={
         <ActionPanel>
+          {supported && tool.start_view && (
+            <Action.Push
+              title={`Show ${tool.start_view}`}
+              icon={Icon.Eye}
+              target={<ResultView tool={tool} input={NO_INPUT} options={START_VIEW} />}
+            />
+          )}
+          {supported && <Action.Push title="Open Form" icon={Icon.Pencil} target={<ToolForm tool={tool} />} />}
           <Action.CopyToClipboard title="Copy Csk Command" content={`csk ${tool.name}`} />
         </ActionPanel>
       }

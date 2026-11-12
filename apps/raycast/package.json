@@ -12,13 +12,7 @@
     {
       "name": "chemsidekick",
       "title": "ChemSidekick",
-      "description": "Check that csk is found and how fast it starts (placeholder until M2).",
-      "mode": "view"
-    },
-    {
-      "name": "image-test",
-      "title": "Image Test (Dev)",
-      "description": "Development check: which image references Detail markdown can show.",
+      "description": "All ChemSidekick tools: pick one, fill in its form, see the result.",
       "mode": "view"
     }
   ],
