@@ -28,6 +28,60 @@
           "placeholder": "Fe, iron, 26",
           "required": false
         }
+      ],
+      "keywords": [
+        "periodic table",
+        "atomic weight",
+        "electron configuration",
+        "isotope"
+      ]
+    },
+    {
+      "name": "xyz",
+      "title": "XYZ Viewer",
+      "subtitle": "ChemSidekick",
+      "description": "Paste XYZ coordinates: formula, molecular weight, closest atoms, and 2D and 3D views.",
+      "mode": "view",
+      "keywords": [
+        "xyz",
+        "coordinates",
+        "geometry",
+        "3d",
+        "molecule"
+      ],
+      "preferences": [
+        {
+          "name": "autoOpen3D",
+          "title": "3D Viewer",
+          "label": "Open the 3D viewer in the browser with the result",
+          "description": "Open the interactive 3D viewer as soon as the result is ready.",
+          "type": "checkbox",
+          "default": true,
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "stereo",
+      "title": "Stereoisomers",
+      "subtitle": "ChemSidekick",
+      "description": "Every stereoisomer of a SMILES: R/S and E/Z labels, relations, 2D drawings, and a rotating 3D view.",
+      "mode": "view",
+      "keywords": [
+        "stereo",
+        "stereoisomer",
+        "smiles",
+        "chirality",
+        "enantiomer",
+        "R/S"
+      ],
+      "arguments": [
+        {
+          "name": "smiles",
+          "type": "text",
+          "placeholder": "SMILES, e.g. CC(Br)C(Br)C",
+          "required": true
+        }
       ]
     }
   ],

@@ -1,21 +1,59 @@
-import { Action, ActionPanel, Alert, confirmAlert, Form, Icon, useNavigation } from "@raycast/api";
-import { useState } from "react";
+import {
+  Action,
+  ActionPanel,
+  Alert,
+  Clipboard,
+  confirmAlert,
+  Form,
+  Icon,
+  showToast,
+  Toast,
+  useNavigation,
+} from "@raycast/api";
+import { useEffect, useState } from "react";
 import type { ToolInfo } from "../lib/contract";
-import { type FieldSpec, formSpec, type FormValues, toInput } from "../lib/form";
+import { type FieldSpec, formDefaults, formSpec, type FormValues, toInput } from "../lib/form";
 import { ResultView } from "./ResultView";
 
 const TIMEOUT_FIELD = "__csk_timeout"; // heavy tools need a time limit (csk --timeout)
 
-function Field({ f, error, onChange }: { f: FieldSpec; error?: string; onChange: () => void }) {
+function Field({
+  f,
+  value,
+  error,
+  onChange,
+  onText,
+}: {
+  f: FieldSpec;
+  value: string | boolean | undefined;
+  error?: string;
+  onChange: () => void;
+  onText: (text: string) => void;
+}) {
   const common = { id: f.name, info: f.description || undefined, error, onChange };
+  const text = typeof value === "string" ? value : String(f.default);
   switch (f.kind) {
     case "textarea":
-      return <Form.TextArea {...common} title={f.label} defaultValue={String(f.default)} enableMarkdown={false} />;
+      // Controlled by the form (not defaultValue), so "Paste from Clipboard" can fill it.
+      return (
+        <Form.TextArea
+          id={f.name}
+          info={f.description || undefined}
+          error={error}
+          title={f.label}
+          value={text}
+          onChange={(v) => {
+            onText(v);
+            onChange();
+          }}
+          enableMarkdown={false}
+        />
+      );
     case "checkbox":
-      return <Form.Checkbox {...common} label={f.label} defaultValue={f.default === true} />;
+      return <Form.Checkbox {...common} label={f.label} defaultValue={value === true} />;
     case "dropdown":
       return (
-        <Form.Dropdown {...common} title={f.label} defaultValue={String(f.default) || f.options[0]}>
+        <Form.Dropdown {...common} title={f.label} defaultValue={text || f.options[0]}>
           {f.options.map((o) => (
             <Form.Dropdown.Item key={o} value={o} title={o} />
           ))}
@@ -27,7 +65,7 @@ function Field({ f, error, onChange }: { f: FieldSpec; error?: string; onChange:
         <Form.TextField
           {...common}
           title={f.label}
-          defaultValue={String(f.default)}
+          defaultValue={text}
           placeholder={f.required ? "Required" : range || (f.nullable ? "Optional" : undefined)}
         />
       );
@@ -35,11 +73,45 @@ function Field({ f, error, onChange }: { f: FieldSpec; error?: string; onChange:
   }
 }
 
-// The input form of any tool, generated from its input JSON Schema.
-export function ToolForm({ tool }: { tool: ToolInfo }) {
+// The input form of any tool, generated from its input JSON Schema. `input`
+// fills it in (e.g. the previous run's input, or text from the clipboard).
+export function ToolForm({
+  tool,
+  input,
+  autoOpenViewer = false,
+}: {
+  tool: ToolInfo;
+  input?: Record<string, unknown>;
+  autoOpenViewer?: boolean;
+}) {
   const { push } = useNavigation();
   const spec = formSpec(tool.input_schema);
+  const initial = formDefaults(spec.fields, input);
+  const longFields = spec.fields.filter((f) => f.kind === "textarea");
+  const [texts, setTexts] = useState<Record<string, string>>(() =>
+    Object.fromEntries(longFields.map((f) => [f.name, String(initial[f.name] ?? "")])),
+  );
+  // Input given after the form appeared fills long-text fields that are still empty.
+  useEffect(() => {
+    setTexts((current) => {
+      let next = current;
+      for (const f of longFields) {
+        const given = input?.[f.name];
+        if (typeof given === "string" && given && !current[f.name]) next = { ...next, [f.name]: given };
+      }
+      return next;
+    });
+  }, [input]);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  async function pasteInto(name: string) {
+    const text = await Clipboard.readText();
+    if (!text) {
+      await showToast({ style: Toast.Style.Failure, title: "The clipboard has no text" });
+      return;
+    }
+    setTexts((current) => ({ ...current, [name]: text }));
+  }
   const heavy = tool.resources === "heavy";
 
   async function submit(values: FormValues) {
@@ -59,7 +131,9 @@ export function ToolForm({ tool }: { tool: ToolInfo }) {
       });
       if (!ok) return;
     }
-    push(<ResultView tool={tool} input={input} options={{ confirmed: heavy, timeoutS }} />);
+    push(
+      <ResultView tool={tool} input={input} options={{ confirmed: heavy, timeoutS }} autoOpenViewer={autoOpenViewer} />,
+    );
   }
 
   const clear = (name: string) => () => {
@@ -78,12 +152,27 @@ export function ToolForm({ tool }: { tool: ToolInfo }) {
       actions={
         <ActionPanel>
           <Action.SubmitForm title="Run" icon={Icon.Play} onSubmit={submit} />
+          {longFields[0] && (
+            <Action
+              title="Paste from Clipboard"
+              icon={Icon.Clipboard}
+              shortcut={{ modifiers: ["cmd", "shift"], key: "v" }}
+              onAction={() => pasteInto(longFields[0].name)}
+            />
+          )}
         </ActionPanel>
       }
     >
       <Form.Description title={tool.id} text={tool.summary} />
       {spec.fields.map((f) => (
-        <Field key={f.name} f={f} error={errors[f.name]} onChange={clear(f.name)} />
+        <Field
+          key={f.name}
+          f={f}
+          value={f.kind === "textarea" ? texts[f.name] : initial[f.name]}
+          error={errors[f.name]}
+          onChange={clear(f.name)}
+          onText={(t) => setTexts((current) => ({ ...current, [f.name]: t }))}
+        />
       ))}
       {heavy && (
         <Form.TextField

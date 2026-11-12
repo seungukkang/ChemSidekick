@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { ToolListResponse } from "../src/lib/contract";
-import { formSpec, toInput } from "../src/lib/form";
+import { formDefaults, formSpec, toInput } from "../src/lib/form";
 import { fixture } from "./helpers";
 
 const tools = (JSON.parse(fixture("list")) as ToolListResponse).tools;
@@ -69,5 +69,27 @@ describe("toInput", () => {
     expect(r.input).toEqual({ text: "3\n\nO 0 0 0\n", style: "stick", labels: false });
     const element = formSpec(schemaOf("element")).fields;
     expect(toInput(element, { query: "" }).input).toEqual({});
+  });
+});
+
+describe("formDefaults", () => {
+  const stereo = formSpec(schemaOf("stereo")).fields;
+
+  it("fills a form from a previous input, defaults for the rest", () => {
+    expect(formDefaults(stereo, { smiles: "CC(Br)C(Br)C", max_isomers: 16, skip_3d: true })).toEqual({
+      smiles: "CC(Br)C(Br)C",
+      max_isomers: "16",
+      enumerate_all: false,
+      skip_3d: true,
+    });
+  });
+
+  it("round-trips through toInput", () => {
+    const input = { smiles: "CCC(Br)C", max_isomers: 4, enumerate_all: true, skip_3d: false };
+    expect(toInput(stereo, formDefaults(stereo, input)).input).toEqual(input);
+  });
+
+  it("uses the defaults when there is no input", () => {
+    expect(formDefaults(stereo)).toEqual({ smiles: "", max_isomers: "8", enumerate_all: false, skip_3d: false });
   });
 });

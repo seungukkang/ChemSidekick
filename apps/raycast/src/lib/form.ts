@@ -142,3 +142,15 @@ export function toInput(fields: FieldSpec[], values: FormValues): ToInputResult 
   }
   return { input, errors };
 }
+
+// Tool input -> form values, to open a form filled in (e.g. "Change Input" on a
+// result, or coordinates from the clipboard). Fields not in `input` keep their default.
+export function formDefaults(fields: FieldSpec[], input: Record<string, unknown> = {}): FormValues {
+  const values: FormValues = {};
+  for (const f of fields) {
+    const v = input[f.name];
+    if (v === undefined || v === null) values[f.name] = f.default;
+    else values[f.name] = f.kind === "checkbox" ? v === true : String(v);
+  }
+  return values;
+}

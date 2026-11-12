@@ -92,6 +92,11 @@
   "properties": {
     "frame": {
       "$ref": "#/$defs/Frame"
+    },
+    "beside_2d": {
+      "default": false,
+      "title": "Beside 2D",
+      "type": "boolean"
     }
   },
   "required": [

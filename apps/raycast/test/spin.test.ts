@@ -16,10 +16,18 @@ describe("3D targets", () => {
     expect(targets[0].key).toMatch(/isomer-01\.svg$/);
   });
 
+  it("pairs the one drawing of one structure (xyz)", () => {
+    const r = run("xyz-water").result;
+    expect(drawingsOf(r)).toHaveLength(1);
+    const targets = spinTargets(r);
+    expect(targets).toHaveLength(1);
+    expect(targets[0].key).toMatch(/structure\.svg$/);
+    expect(targets[0].frame.symbols).toEqual(["O", "H", "H"]);
+  });
+
   it("uses the structure itself when there are no drawings", () => {
     const r = run("xyz-water").result;
-    expect(drawingsOf(r)).toEqual([]);
-    const targets = spinTargets(r);
+    const targets = spinTargets({ ...r, artifacts: r.artifacts.filter((a) => a.kind !== "svg") });
     expect(targets).toHaveLength(1);
     expect(targets[0].key).toBe("structure:0");
     expect(targets[0].drawing).toBeUndefined();

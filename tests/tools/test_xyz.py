@@ -167,6 +167,30 @@ def test_hill_formula():
 
 def test_standard_xyz_file_is_written():
     r = run(BENZENE_BARE)
-    text = r.artifacts[0].path.read_text()
+    text = next(a for a in r.artifacts if a.kind == "xyz").path.read_text()
     assert text.splitlines()[0] == "12"
     assert parse_xyz(text).frames[0].n_atoms == 12
+
+
+# --- 2D drawing from bonds inferred from the coordinates ---------------------
+
+
+def test_benzene_gets_an_aromatic_2d_drawing_and_inferred_smiles():
+    r = run(BENZENE_BARE)
+    drawing = next(a for a in r.artifacts if a.kind == "svg")
+    assert drawing.note == "bonds inferred from coordinates"
+    svg = drawing.path.read_text()
+    assert "<svg" in svg and "csk-backdrop" in svg  # same white card as the stereo drawings
+    summary = dict(r.tables[0].rows)
+    assert summary["SMILES (inferred, no stereo)"] == "c1ccccc1"
+    assert r.data["bond_orders_inferred"] is True
+    assert any("inferred from the coordinates" in n for n in r.notes)
+
+
+def test_when_bond_orders_fail_only_connectivity_is_drawn():
+    r = run("2\nCH radical\nC 0 0 0\nH 0 0 1.09\n")
+    drawing = next(a for a in r.artifacts if a.kind == "svg")
+    assert drawing.note == "connectivity only (bond orders not determined)"
+    assert any("Bond orders could not be determined" in w for w in r.warnings)
+    assert "SMILES (inferred, no stereo)" not in dict(r.tables[0].rows)
+    assert r.data["smiles_inferred"] == ""

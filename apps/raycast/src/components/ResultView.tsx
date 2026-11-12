@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Detail, Grid, Icon, Keyboard, open, showToast, Toast } from "@raycast/api";
 import { usePromise } from "@raycast/utils";
 import { dirname } from "node:path";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { getTransport } from "../connection";
 import type { Artifact, RunResponse, ToolInfo } from "../lib/contract";
 import { isGrid, renderResult } from "../lib/render";
@@ -9,9 +9,10 @@ import { clickableTable } from "../lib/pick";
 import { drawingsOf, type SpinTarget, spinTargets } from "../lib/spin";
 import type { RunOptions } from "../lib/transport";
 import { ErrorView } from "./ErrorView";
+import { ToolForm } from "./ToolForm";
 import { periodicTableMarkdown } from "./PeriodicTableView";
 import { PickList } from "./PickList";
-import { toggle3D, useSpinState } from "./spin-store";
+import { combinedKey, ensureCombined, toggle3D, useSpinState } from "./spin-store";
 
 const NO_OPTIONS: RunOptions = {};
 const SHOW_DETAILS: Keyboard.Shortcut = { modifiers: ["cmd"], key: "i" };
@@ -46,24 +47,40 @@ export function ResultView({
   tool,
   input,
   options = NO_OPTIONS,
+  autoOpenViewer = false,
 }: {
   tool: ToolInfo;
   input: Record<string, unknown>;
   options?: RunOptions;
+  autoOpenViewer?: boolean; // open the HTML 3D viewer in the browser when the result arrives
 }) {
   const { data, isLoading, error, revalidate } = usePromise(runTool, [tool.name, input, options], {
     failureToastOptions: { title: tool.title },
   });
+  useEffect(() => {
+    const viewer = data?.result.artifacts.find((a) => a.kind === "html")?.path;
+    if (autoOpenViewer && viewer) open(viewer);
+  }, [data, autoOpenViewer]);
   if (error) return <ErrorView error={error} onRetry={revalidate} />;
   if (!data) return <Detail isLoading={isLoading} navigationTitle={tool.title} markdown={`Running ${tool.title}…`} />;
   const pick = clickableTable(data.result);
   if (pick && Object.keys(pick.cells).length) return <PickList tool={tool} table={pick} />;
-  if (drawingsOf(data.result).length > 1) return <DrawingsResult tool={tool} data={data} />;
-  return <ResultDetail tool={tool} data={data} />;
+  if (drawingsOf(data.result).length > 1) return <DrawingsResult tool={tool} data={data} input={input} />;
+  return <ResultDetail tool={tool} data={data} input={input} />;
 }
 
 // Actions every view of a result offers.
-function CommonActions({ data, markdown }: { data: RunResponse; markdown: string }) {
+function CommonActions({
+  tool,
+  data,
+  input,
+  markdown,
+}: {
+  tool: ToolInfo;
+  data: RunResponse;
+  input: Record<string, unknown>;
+  markdown: string;
+}) {
   const viewer = data.result.artifacts.find((a) => a.kind === "html")?.path;
   const files = data.result.artifacts.filter((a) => !["svg", "png", "html"].includes(a.kind));
   return (
@@ -74,6 +91,14 @@ function CommonActions({ data, markdown }: { data: RunResponse; markdown: string
           icon={Icon.Globe}
           shortcut={Keyboard.Shortcut.Common.Open}
           onAction={() => open(viewer)}
+        />
+      )}
+      {Object.keys(tool.input_schema).length > 0 && (
+        <Action.Push
+          title="Change Input"
+          icon={Icon.Pencil}
+          shortcut={Keyboard.Shortcut.Common.Edit}
+          target={<ToolForm tool={tool} input={input} />}
         />
       )}
       <Action.CopyToClipboard title="Copy Answer" content={data.result.answer} />
@@ -107,9 +132,28 @@ function Switch3D({ target, is3D }: { target: SpinTarget; is3D: boolean }) {
 }
 
 // The whole result as a page: answer, key values, drawings, tables, evidence, references.
-export function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse }) {
+export function ResultDetail({
+  tool,
+  data,
+  input,
+}: {
+  tool: ToolInfo;
+  data: RunResponse;
+  input: Record<string, unknown>;
+}) {
   const targets = useMemo(() => spinTargets(data.result), [data]);
   const spin = useSpinState();
+  // One drawing of one structure (xyz): one wide card with the 2D drawing and the
+  // rotating 3D view, made when the page opens.
+  const pair = targets.length === 1 && targets[0].drawing ? targets[0] : undefined;
+  useEffect(() => {
+    if (pair) ensureCombined(pair);
+  }, [pair?.key]);
+  const card = pair ? spin.made(combinedKey(pair.key)) : undefined;
+  const combined = pair && card ? { [pair.key]: card } : {};
+  // Show the page when the card is ready, so 2D and 3D appear together (the 2D
+  // drawing alone only if the card cannot be made).
+  const waiting = Boolean(pair && !card && !spin.failed(combinedKey(pair.key)));
   const swaps = Object.fromEntries(
     targets.flatMap((t) => (t.drawing && spin.gif(t.key) ? [[t.key, spin.gif(t.key)!]] : [])),
   );
@@ -122,7 +166,10 @@ export function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse
       ) as Record<number, string>,
     [data],
   );
-  const view = renderResult(data.result, data.run, { swaps, spins, grids });
+  const view = renderResult(data.result, data.run, { swaps, spins, grids, combined });
+  if (waiting) {
+    return <Detail isLoading navigationTitle={tool.title} markdown={`# ${data.result.answer}\n\nDrawing 2D and 3D…`} />;
+  }
   return (
     <Detail
       navigationTitle={tool.title}
@@ -136,7 +183,7 @@ export function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse
       }
       actions={
         <ActionPanel>
-          {targets.length === 1 && <Switch3D target={targets[0]} is3D={spin.is3D(targets[0].key)} />}
+          {targets.length === 1 && !pair && <Switch3D target={targets[0]} is3D={spin.is3D(targets[0].key)} />}
           {targets.length > 1 && (
             <ActionPanel.Submenu title="Switch 2D / 3D" icon={Icon.RotateClockwise} shortcut={SWITCH_3D}>
               {targets.map((t) => (
@@ -148,7 +195,7 @@ export function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse
               ))}
             </ActionPanel.Submenu>
           )}
-          <CommonActions data={data} markdown={view.markdown} />
+          <CommonActions tool={tool} data={data} input={input} markdown={view.markdown} />
         </ActionPanel>
       }
     />
@@ -158,7 +205,7 @@ export function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse
 // Several drawings (e.g. stereoisomers): native cards, two per row, with the
 // title and the stereodescriptors as text. Enter switches a card to its rotating
 // 3D view in place; cmd-I shows the whole result (tables, references).
-function DrawingsResult({ tool, data }: { tool: ToolInfo; data: RunResponse }) {
+function DrawingsResult({ tool, data, input }: { tool: ToolInfo; data: RunResponse; input: Record<string, unknown> }) {
   const targets = useMemo(() => spinTargets(data.result), [data]);
   const spin = useSpinState();
   const markdown = renderResult(data.result, data.run).markdown;
@@ -186,9 +233,9 @@ function DrawingsResult({ tool, data }: { tool: ToolInfo; data: RunResponse }) {
               title="Show Details"
               icon={Icon.Document}
               shortcut={SHOW_DETAILS}
-              target={<ResultDetail tool={tool} data={data} />}
+              target={<ResultDetail tool={tool} data={data} input={input} />}
             />
-            <CommonActions data={data} markdown={markdown} />
+            <CommonActions tool={tool} data={data} input={input} markdown={markdown} />
             <Action.Open title="Open Drawing" target={spin.gif(d.path) ?? d.path} />
           </ActionPanel>
         }
