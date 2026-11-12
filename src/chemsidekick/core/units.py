@@ -385,6 +385,86 @@ def parse_temperature(text: str | float) -> float:
     return kelvin
 
 
+_DURATION_UNITS = {
+    "fs": 1e-15,
+    "ps": 1e-12,
+    "ns": 1e-9,
+    "μs": 1e-6,
+    "us": 1e-6,
+    "µs": 1e-6,
+    "ms": 1e-3,
+    "s": 1.0,
+    "sec": 1.0,
+    "second": 1.0,
+    "seconds": 1.0,
+    "min": 60.0,
+    "minute": 60.0,
+    "minutes": 60.0,
+    "h": 3600.0,
+    "hr": 3600.0,
+    "hour": 3600.0,
+    "hours": 3600.0,
+    "d": 86400.0,
+    "day": 86400.0,
+    "days": 86400.0,
+    "wk": 604800.0,
+    "week": 604800.0,
+    "weeks": 604800.0,
+    "yr": 31557600.0,  # Julian year, 365.25 d
+    "year": 31557600.0,
+    "years": 31557600.0,
+}
+
+
+def parse_duration(text: str | float) -> float:
+    """A duration in s. A bare number is s; "1 h", "30 min", "2 d" are converted."""
+    if isinstance(text, (int, float)):
+        seconds = float(text)
+    else:
+        value, rest = parse_number(text)
+        unit = rest.strip()
+        factor = _DURATION_UNITS.get(unit, _DURATION_UNITS.get(unit.lower()))
+        if value is None or (unit and factor is None):
+            raise UnitError(f"Cannot read the time {text.strip()!r}. Examples: 30 s, 5 min, 2 h.")
+        seconds = value * (factor or 1.0)
+    if not math.isfinite(seconds) or seconds <= 0:
+        raise UnitError(f"A time must be positive, got {text}.")
+    return seconds
+
+
+def format_duration(seconds: float) -> str:
+    """Readable duration: '51 s', '28.4 min', '3.2 h', '4.6 d', '2.1 yr'."""
+    for limit, unit, size in [
+        (1e-3, "μs", 1e-6),
+        (1, "ms", 1e-3),
+        (120, "s", 1.0),
+        (7200, "min", 60.0),
+        (172800, "h", 3600.0),
+        (3 * 31557600, "d", 86400.0),
+    ]:
+        if seconds < limit:
+            return f"{format_number(seconds / size, 3)} {unit}"
+    return f"{format_number(seconds / 31557600, 3)} yr"
+
+
+ENERGY_UNITS = ("kcal/mol", "kJ/mol", "eV", "Eh")
+
+
+def molar_energy(value: float, unit_text: str) -> float:
+    """A value in an energy unit (kcal/mol, kJ/mol, eV, Eh, …) -> J/mol."""
+    units = [u for u in find_unit(unit_text).units if u.group == "energy"]
+    if not units:
+        raise UnitError(
+            f"{unit_text!r} is not an energy unit. Use one of: {', '.join(ENERGY_UNITS)}."
+        )
+    return value * units[0].factor * load().constants["NA"].value
+
+
+def from_molar_energy(joule_per_mol: float, unit_text: str) -> float:
+    """J/mol -> the given energy unit (inverse of molar_energy)."""
+    return joule_per_mol / molar_energy(1.0, unit_text)
+
+
 # ---------------------------------------------------------------------------
 # Formatting
 # ---------------------------------------------------------------------------

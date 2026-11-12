@@ -12,6 +12,11 @@
       "name": "structure",
       "code": "STR",
       "title": "Structure"
+    },
+    {
+      "name": "energetics",
+      "code": "ENE",
+      "title": "Energetics"
     }
   ],
   "tools": [

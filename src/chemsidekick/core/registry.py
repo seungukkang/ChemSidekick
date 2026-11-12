@@ -31,6 +31,7 @@ class Category:
 CATEGORIES: dict[str, Category] = {
     "reference": Category("REF", "Reference"),
     "structure": Category("STR", "Structure"),
+    "energetics": Category("ENE", "Energetics"),
 }  # this order is the display order of categories and tools everywhere
 
 Resources = Literal["light", "medium", "heavy"]
