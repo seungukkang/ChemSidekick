@@ -29,9 +29,9 @@ class Category:
 
 # Add one line here for a new category. Codes must never change.
 CATEGORIES: dict[str, Category] = {
-    "structure": Category("STR", "Structure"),
     "reference": Category("REF", "Reference"),
-}
+    "structure": Category("STR", "Structure"),
+}  # this order is the display order of categories and tools everywhere
 
 Resources = Literal["light", "medium", "heavy"]
 RESOURCE_LEVELS: tuple[str, ...] = get_args(Resources)

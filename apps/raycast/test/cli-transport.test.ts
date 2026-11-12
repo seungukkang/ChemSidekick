@@ -35,7 +35,7 @@ describe("parseResponse", () => {
 
   it("reads the tool list with input schemas", () => {
     const r = parseResponse<ToolListResponse>(ok(fixture("list"))) as ToolListResponse;
-    expect(r.tools.map((t) => t.id)).toEqual(["STR-01", "STR-02", "REF-01"]);
+    expect(r.tools.map((t) => t.id)).toEqual(["REF-01", "STR-01", "STR-02"]);
     const stereo = r.tools.find((t) => t.name === "stereo")!;
     expect((stereo.input_schema.properties as Record<string, unknown>).smiles).toBeTruthy();
   });
