@@ -4,10 +4,11 @@ import { dirname } from "node:path";
 import { useMemo } from "react";
 import { getTransport } from "../connection";
 import type { Artifact, RunResponse, ToolInfo } from "../lib/contract";
-import { renderResult } from "../lib/render";
+import { isGrid, renderResult } from "../lib/render";
 import { drawingsOf, type SpinTarget, spinTargets } from "../lib/spin";
 import type { RunOptions } from "../lib/transport";
 import { ErrorView } from "./ErrorView";
+import { periodicTableMarkdown } from "./PeriodicTableView";
 import { toggle3D, useSpinState } from "./spin-store";
 
 const NO_OPTIONS: RunOptions = {};
@@ -108,7 +109,15 @@ export function ResultDetail({ tool, data }: { tool: ToolInfo; data: RunResponse
     targets.flatMap((t) => (t.drawing && spin.gif(t.key) ? [[t.key, spin.gif(t.key)!]] : [])),
   );
   const spins = targets.flatMap((t) => (!t.drawing && spin.gif(t.key) ? [spin.gif(t.key)!] : []));
-  const view = renderResult(data.result, data.run, { swaps, spins });
+  // Clickable grids (the periodic table) as a figure; a markdown table squeezes them.
+  const grids = useMemo(
+    () =>
+      Object.fromEntries(
+        data.result.tables.flatMap((t, i) => (isGrid(t) ? [[i, periodicTableMarkdown(t)]] : [])),
+      ) as Record<number, string>,
+    [data],
+  );
+  const view = renderResult(data.result, data.run, { swaps, spins, grids });
   return (
     <Detail
       navigationTitle={tool.title}

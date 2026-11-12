@@ -14,6 +14,21 @@
       "title": "ChemSidekick",
       "description": "All ChemSidekick tools: pick one, fill in its form, see the result.",
       "mode": "view"
+    },
+    {
+      "name": "element",
+      "title": "Element",
+      "subtitle": "ChemSidekick",
+      "description": "Find an element by symbol, name, or atomic number; its card and the periodic table.",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "type": "text",
+          "placeholder": "Fe, iron, 26",
+          "required": false
+        }
+      ]
     }
   ],
   "preferences": [

@@ -57,6 +57,13 @@ describe("renderResult", () => {
     expect(grid[0]).toBe("   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18");
   });
 
+  it("shows a figure in place of a clickable grid when one is given", () => {
+    const r = run("element-periodic-table");
+    const md = renderResult(r.result, r.run, { grids: { 0: "![Periodic table](/img/pt.svg)" } }).markdown;
+    expect(md).toContain("![Periodic table](/img/pt.svg)");
+    expect(md).not.toContain("```");
+  });
+
   it("swaps a drawing for its rotating 3D view in place, caption kept", () => {
     const r = run("stereo-dibromobutane");
     const [d1] = r.result.artifacts;
