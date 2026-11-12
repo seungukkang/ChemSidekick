@@ -57,6 +57,69 @@
       }
     },
     {
+      "id": "REF-02",
+      "name": "units",
+      "title": "Units",
+      "summary": "Chemistry unit conversions: energy, cm⁻¹/nm/K, dipole, polarizability, rate constants, pressure, charge",
+      "category": "reference",
+      "keywords": [
+        "unit",
+        "convert",
+        "conversion",
+        "kcal/mol",
+        "hartree",
+        "eV",
+        "wavenumber",
+        "debye",
+        "pressure",
+        "torr"
+      ],
+      "resources": "light",
+      "requires": [],
+      "available": true,
+      "unavailable_reason": "",
+      "icon": "swap_horiz",
+      "start_view": "All units",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "A value and unit, optionally with a target unit (e.g. 1 eV to kcal/mol, 300 nm, 760 Torr to bar). A group name (e.g. pressure) lists its units; leave empty to list all units.",
+            "label": "Conversion",
+            "positional": true,
+            "title": "Query",
+            "words": true
+          },
+          "temperature": {
+            "default": "298.15",
+            "description": "Temperature for the RT and kT values shown with energies: a number in K, or with a unit (25 C, 77 F).",
+            "label": "Temperature (for RT, kT)",
+            "short": "-T",
+            "title": "Temperature",
+            "type": "string"
+          },
+          "show_all": {
+            "default": false,
+            "description": "Also show less common units of each group.",
+            "flag": "--all",
+            "label": "Show all units",
+            "title": "Show All",
+            "type": "boolean"
+          }
+        },
+        "title": "UnitsInput",
+        "type": "object"
+      }
+    },
+    {
       "id": "STR-01",
       "name": "xyz",
       "title": "XYZ viewer",

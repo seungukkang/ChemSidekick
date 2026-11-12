@@ -2,7 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "chemsidekick",
   "title": "ChemSidekick",
-  "description": "Small chemistry tools, fast: elements, XYZ structures, stereoisomers.",
+  "description": "Small chemistry tools, fast: elements, unit conversions, XYZ structures, stereoisomers.",
   "icon": "extension-icon.png",
   "license": "MIT",
   "categories": [
@@ -34,6 +34,30 @@
         "atomic weight",
         "electron configuration",
         "isotope"
+      ]
+    },
+    {
+      "name": "units",
+      "title": "Convert Units",
+      "subtitle": "ChemSidekick",
+      "description": "Chemistry unit conversions as you type: kcal/mol, eV, hartree, cm⁻¹, nm, debye, rate constants, pressure, charge.",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "type": "text",
+          "placeholder": "1 eV to kcal/mol",
+          "required": false
+        }
+      ],
+      "keywords": [
+        "unit",
+        "convert",
+        "kcal/mol",
+        "hartree",
+        "wavenumber",
+        "debye",
+        "pressure"
       ]
     },
     {

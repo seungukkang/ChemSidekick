@@ -141,3 +141,13 @@ def test_clicking_an_element_opens_its_card_and_back_returns(app):
     next(b for b in app.button if b.key == "back").click().run()
     assert any("Periodic table · 118 elements" in m.value for m in app.markdown)
     assert app.text_input(key="in-element-query").value == ""
+
+
+def test_units_opens_on_the_unit_list_and_converts(app):
+    app.button(key="tool-units").click().run()
+    assert not app.exception
+    assert any("All units" in m.value for m in app.markdown)
+    app.text_input(key="in-units-query").input("1 eV to kcal/mol")
+    app.button(key="FormSubmitter:form-units-Run").click().run()
+    assert not app.exception and not app.error
+    assert any("1 eV = 23\\.0605 kcal/mol" in m.value for m in app.markdown)  # markdown-escaped

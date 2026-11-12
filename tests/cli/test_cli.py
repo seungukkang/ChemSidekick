@@ -203,3 +203,18 @@ def test_formulas_are_shown_as_text_in_the_terminal():
     text = out.getvalue()
     assert "k = κ kB T / h" in text
     assert r"\frac" not in text
+
+
+def test_words_field_takes_unquoted_text():
+    # `csk units 1 eV to kcal/mol`: the words are joined into one query.
+    result = runner.invoke(app, ["units", "1", "eV", "to", "kcal/mol", "--no-record", "--json"])
+    assert result.exit_code == 0, result.output
+    data = json.loads(result.stdout)
+    assert data["result"]["answer"] == "1 eV = 23.0605 kcal/mol"
+    quoted = runner.invoke(app, ["units", "1 eV to kcal/mol", "--no-record", "--json"])
+    assert json.loads(quoted.stdout)["result"]["answer"] == data["result"]["answer"]
+
+
+def test_words_field_left_out_uses_the_default():
+    result = runner.invoke(app, ["units", "--no-record", "--json"])
+    assert json.loads(result.stdout)["result"]["answer"].startswith("All units")

@@ -58,7 +58,12 @@ FIXTURES: dict[str, tuple[list[str], str | None]] = {
     ),
     "stereo-error": (["run", "stereo", "--no-open", "--json"], '{"smiles": "C1CC"}'),
     "validation-error": (["run", "stereo", "--json"], '{"smiles": "CC", "max_isomers": 0}'),
-    "save": (["save", "--json"], None),
+    "save": (["save", "--json"], None),  # saves the newest run above, so keep it here
+    "units-conversion": (["run", "units", "--json"], '{"query": "1 eV to kcal/mol"}'),
+    "units-overview": (["run", "units", "--json"], '{"query": "1 Hartree"}'),
+    "units-error": (["run", "units", "--json"], '{"query": "5 foo"}'),
+    "units-list": (["run", "units", "--no-record", "--json"], "{}"),
+    "units-wavelength": (["run", "units", "--json"], '{"query": "300 nm (wavelength)"}'),
     "gif": (
         ["gif", "--json"],
         json.dumps(

@@ -1,0 +1,606 @@
+# Units for the `units` tool (REF-02) and for unit inputs of other tools.
+#
+# Every factor is an expression over the constants below, so whether a
+# conversion is exact follows from the constants it uses: a conversion is exact
+# when every constant involved is exact (a definition), and approximate (≈)
+# otherwise. Measured constants list the references they were checked against;
+# scripts/build_units_report.py writes data/verification/units.md from them.
+#
+# Expressions may use numbers, + - * / **, parentheses, pi, and constant names.
+
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+
+[constants.h]
+name = "Planck constant"
+value = "6.62607015e-34"
+unit = "J s"
+exact = true
+source = "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+
+[constants.e]
+name = "elementary charge"
+value = "1.602176634e-19"
+unit = "C"
+exact = true
+source = "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+
+[constants.kB]
+name = "Boltzmann constant"
+value = "1.380649e-23"
+unit = "J/K"
+exact = true
+source = "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+
+[constants.NA]
+name = "Avogadro constant"
+value = "6.02214076e23"
+unit = "1/mol"
+exact = true
+source = "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+
+[constants.c]
+name = "speed of light in vacuum"
+value = "299792458"
+unit = "m/s"
+exact = true
+source = "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+
+[constants.cal]
+name = "thermochemical calorie"
+value = "4.184"
+unit = "J"
+exact = true
+source = "NIST SP 811 (2008), Appendix B.8: calorie (thermochemical) = 4.184 J"
+
+[constants.atm]
+name = "standard atmosphere"
+value = "101325"
+unit = "Pa"
+exact = true
+source = "IUPAC Green Book, 3rd ed. (2007), sec. 7.2; NIST SP 811 (2008), Appendix B.8"
+
+[constants.mmHg]
+name = "conventional millimetre of mercury"
+value = "13.5951 * 980.665e-2"
+unit = "Pa"
+exact = true
+source = "IUPAC Green Book, 3rd ed. (2007), sec. 7.2: mmHg = 13.5951 × 980.665 × 10⁻² Pa"
+
+[constants.psi]
+name = "pound-force per square inch"
+value = "0.45359237 * 9.80665 / 0.0254**2"
+unit = "Pa"
+exact = true
+source = "NIST SP 811 (2008), Appendix B.8 (lb = 0.45359237 kg, gₙ = 9.80665 m/s², in = 0.0254 m, all exact)"
+
+[constants.Eh]
+name = "Hartree energy"
+value = "4.3597447222060e-18"
+uncertainty = "0.0000000000048e-18"
+unit = "J"
+exact = false
+source = "CODATA 2022"
+checks = [
+  { ref = "nist", value = "4.3597447222060e-18" },
+  { ref = "codata2022", value = "4.3597447222060e-18" },
+  # PDG lists the Rydberg energy hcR∞ = 13.605693122990(15) eV; Eₕ = 2 hcR∞.
+  { ref = "pdg2025", value = "2 * 13.605693122990 * 1.602176634e-19" },
+]
+
+[constants.a0]
+name = "Bohr radius"
+value = "5.29177210544e-11"
+uncertainty = "0.00000000082e-11"
+unit = "m"
+exact = false
+source = "CODATA 2022"
+checks = [
+  { ref = "nist", value = "5.29177210544e-11" },
+  { ref = "codata2022", value = "5.29177210544e-11" },
+  { ref = "pdg2025", value = "0.529177210544e-10" },
+]
+
+[constants.eps0]
+name = "vacuum electric permittivity"
+value = "8.8541878188e-12"
+uncertainty = "0.0000000014e-12"
+unit = "F/m"
+exact = false
+source = "CODATA 2022"
+checks = [
+  { ref = "nist", value = "8.8541878188e-12" },
+  { ref = "codata2022", value = "8.8541878188e-12" },
+  { ref = "pdg2025", value = "8.8541878188e-12" },
+]
+
+[references]
+nist = "NIST CODATA 2022 values, physics.nist.gov/cuu/Constants (retrieved 2026-11-13)"
+codata2022 = "P. J. Mohr, D. B. Newell, B. N. Taylor, E. Tiesinga, CODATA Recommended Values of the Fundamental Physical Constants: 2022, Rev. Mod. Phys. 97, 025002 (2025)"
+pdg2025 = "Particle Data Group, Review of Particle Physics 2025, Physical Constants table (based on CODATA 2022)"
+
+# ---------------------------------------------------------------------------
+# Groups (display order). `base` is the unit every factor converts to.
+# `headline`: units shown in the one-line answer when no target is given.
+# ---------------------------------------------------------------------------
+
+[[group]]
+id = "energy"
+title = "Energy"
+base = "J"
+headline = ["kcal/mol", "kJ/mol", "eV"]
+example = "1 eV to kcal/mol"
+
+[[group]]
+id = "equivalents"
+title = "Energy equivalents"
+base = "J"
+headline = ["cm-1", "eV"]
+example = "300 nm"
+
+[[group]]
+id = "entropy"
+title = "Molar entropy, heat capacity"
+base = "J/(mol K)"
+headline = ["cal/(mol K)", "J/(mol K)"]
+example = "10 cal/(mol K) to J/(mol K)"
+
+[[group]]
+id = "length"
+title = "Length (atomic scale)"
+base = "m"
+headline = ["Å", "bohr"]
+example = "1 bohr to Å"
+
+[[group]]
+id = "dipole"
+title = "Dipole moment"
+base = "C m"
+headline = ["D", "e Å", "au"]
+example = "1.85 D"
+
+[[group]]
+id = "polarizability"
+title = "Polarizability"
+base = "m³ (volume)"
+headline = ["Å³", "bohr³"]
+example = "10 bohr3 to Å3"
+
+[[group]]
+id = "rate2"
+title = "Rate constant (2nd order)"
+base = "m³ mol⁻¹ s⁻¹"
+headline = ["M⁻¹ s⁻¹", "cm³ molecule⁻¹ s⁻¹"]
+example = "2e9 M-1 s-1"
+
+[[group]]
+id = "density"
+title = "Concentration ↔ number density"
+base = "mol/m³"
+headline = ["M", "molecule/cm³"]
+example = "1 mM to molecule/cm3"
+
+[[group]]
+id = "pressure"
+title = "Pressure"
+base = "Pa"
+headline = ["bar", "atm", "Torr"]
+example = "760 Torr to bar"
+
+[[group]]
+id = "charge"
+title = "Charge"
+base = "C"
+headline = ["C", "mAh", "mol e⁻"]
+example = "2500 mAh to C"
+
+# ---------------------------------------------------------------------------
+# Units. `symbol` is how the unit is shown; `aliases` are other accepted
+# spellings (matched after normalization: superscripts, ^, ·, *, and spaces
+# are ignored, so "M^-1 s^-1", "M⁻¹s⁻¹" and "M-1 s-1" are the same).
+# `kind = "wavelength"` units are inversely related to energy (E = hc/λ).
+# ---------------------------------------------------------------------------
+
+# Energy, per mole
+[[unit]]
+symbol = "kcal/mol"
+aliases = ["kcal mol-1", "kcalpermol"]
+group = "energy"
+factor = "1000 * cal / NA"
+
+[[unit]]
+symbol = "kJ/mol"
+aliases = ["kJ mol-1", "kjpermol"]
+group = "energy"
+factor = "1000 / NA"
+
+[[unit]]
+symbol = "J/mol"
+aliases = ["J mol-1"]
+group = "energy"
+factor = "1 / NA"
+
+[[unit]]
+symbol = "cal/mol"
+aliases = ["cal mol-1"]
+group = "energy"
+factor = "cal / NA"
+more = true
+
+# Energy, per particle
+[[unit]]
+symbol = "eV"
+aliases = ["electronvolt", "electron volt"]
+group = "energy"
+factor = "e"
+
+[[unit]]
+symbol = "meV"
+group = "energy"
+factor = "1e-3 * e"
+
+[[unit]]
+symbol = "Eh"
+aliases = ["Ha", "hartree", "Hartree", "Eₕ"]
+group = "energy"
+factor = "Eh"
+
+[[unit]]
+symbol = "J"
+aliases = ["joule"]
+group = "energy"
+factor = "1"
+
+[[unit]]
+symbol = "kJ"
+group = "energy"
+factor = "1000"
+more = true
+
+[[unit]]
+symbol = "cal"
+aliases = ["calorie"]
+group = "energy"
+factor = "cal"
+more = true
+
+[[unit]]
+symbol = "kcal"
+group = "energy"
+factor = "1000 * cal"
+more = true
+
+[[unit]]
+symbol = "Ry"
+aliases = ["rydberg"]
+group = "energy"
+factor = "Eh / 2"
+more = true
+
+[[unit]]
+symbol = "zJ"
+group = "energy"
+factor = "1e-21"
+more = true
+
+# Energy equivalents
+[[unit]]
+symbol = "cm⁻¹"
+aliases = ["cm-1", "wavenumber", "wavenumbers", "1/cm"]
+group = "equivalents"
+factor = "h * c * 100"
+
+[[unit]]
+symbol = "nm"
+aliases = ["nanometer", "nanometre"]
+group = "equivalents"
+kind = "wavelength"
+factor = "1e-9"
+label = "nm (wavelength)"
+
+[[unit]]
+symbol = "Hz"
+aliases = ["hertz", "s-1"]
+group = "equivalents"
+factor = "h"
+more = true
+
+[[unit]]
+symbol = "THz"
+group = "equivalents"
+factor = "1e12 * h"
+
+[[unit]]
+symbol = "GHz"
+group = "equivalents"
+factor = "1e9 * h"
+more = true
+
+[[unit]]
+symbol = "MHz"
+group = "equivalents"
+factor = "1e6 * h"
+more = true
+
+[[unit]]
+symbol = "K"
+aliases = ["kelvin"]
+group = "equivalents"
+factor = "kB"
+label = "K (temperature equivalent)"
+
+[[unit]]
+symbol = "μm"
+aliases = ["um", "micron", "micrometer", "micrometre"]
+group = "equivalents"
+kind = "wavelength"
+factor = "1e-6"
+label = "μm (wavelength)"
+more = true
+
+# Molar entropy, heat capacity
+[[unit]]
+symbol = "J/(mol K)"
+aliases = ["J mol-1 K-1", "J/mol/K", "J/(K mol)", "J K-1 mol-1"]
+group = "entropy"
+factor = "1"
+
+[[unit]]
+symbol = "kJ/(mol K)"
+aliases = ["kJ mol-1 K-1", "kJ/mol/K", "kJ K-1 mol-1"]
+group = "entropy"
+factor = "1000"
+more = true
+
+[[unit]]
+symbol = "cal/(mol K)"
+aliases = ["cal mol-1 K-1", "cal/mol/K", "cal K-1 mol-1", "e.u.", "eu"]
+group = "entropy"
+factor = "cal"
+
+[[unit]]
+symbol = "kcal/(mol K)"
+aliases = ["kcal mol-1 K-1", "kcal/mol/K"]
+group = "entropy"
+factor = "1000 * cal"
+more = true
+
+# Length (atomic scale)
+[[unit]]
+symbol = "Å"
+aliases = ["A°", "angstrom", "Angstrom", "Ang", "Å"]
+group = "length"
+factor = "1e-10"
+
+[[unit]]
+symbol = "bohr"
+aliases = ["a0", "a₀", "Bohr"]
+group = "length"
+factor = "a0"
+
+[[unit]]
+symbol = "pm"
+group = "length"
+factor = "1e-12"
+
+[[unit]]
+symbol = "nm"
+group = "length"
+factor = "1e-9"
+
+# Dipole moment
+[[unit]]
+symbol = "D"
+aliases = ["debye", "Debye"]
+group = "dipole"
+factor = "1e-21 / c"
+
+[[unit]]
+symbol = "e Å"
+aliases = ["eÅ", "e A°", "e angstrom", "eAngstrom"]
+group = "dipole"
+factor = "e * 1e-10"
+
+[[unit]]
+symbol = "C m"
+aliases = ["Cm"]
+group = "dipole"
+factor = "1"
+
+[[unit]]
+symbol = "au"
+aliases = ["e a0", "ea0", "e bohr", "a.u."]
+group = "dipole"
+factor = "e * a0"
+label = "a.u. (e a₀)"
+
+# Polarizability: base is the polarizability volume α' = α / (4π ε0)
+[[unit]]
+symbol = "Å³"
+aliases = ["A3", "Å3", "angstrom3", "A°3"]
+group = "polarizability"
+factor = "1e-30"
+
+[[unit]]
+symbol = "bohr³"
+aliases = ["bohr3", "a03", "a.u. polarizability"]
+group = "polarizability"
+factor = "a0**3"
+label = "bohr³ (a.u.)"
+
+[[unit]]
+symbol = "cm³"
+aliases = ["cm3"]
+group = "polarizability"
+factor = "1e-6"
+more = true
+
+[[unit]]
+symbol = "C m²/V"
+aliases = ["C m2 V-1", "Cm2/V", "C2 m2 J-1", "C²m²/J"]
+group = "polarizability"
+factor = "1 / (4 * pi * eps0)"
+label = "C m²/V (SI)"
+
+# Rate constant (2nd order)
+[[unit]]
+symbol = "M⁻¹ s⁻¹"
+aliases = ["M-1 s-1", "M-1s-1", "/M/s", "1/(M s)", "L mol-1 s-1", "L/(mol s)", "dm3 mol-1 s-1"]
+group = "rate2"
+factor = "1e-3"
+
+[[unit]]
+symbol = "cm³ molecule⁻¹ s⁻¹"
+aliases = ["cm3 molecule-1 s-1", "cm3/(molecule s)", "cm3 molec-1 s-1", "cm3/molecule/s"]
+group = "rate2"
+factor = "1e-6 * NA"
+
+[[unit]]
+symbol = "m³ mol⁻¹ s⁻¹"
+aliases = ["m3 mol-1 s-1", "m3/(mol s)"]
+group = "rate2"
+factor = "1"
+more = true
+
+# Concentration ↔ number density
+[[unit]]
+symbol = "M"
+aliases = ["mol/L", "mol L-1", "molar", "mol/dm3"]
+group = "density"
+factor = "1000"
+
+[[unit]]
+symbol = "mM"
+aliases = ["mmol/L"]
+group = "density"
+factor = "1"
+
+[[unit]]
+symbol = "μM"
+aliases = ["uM", "µM"]
+group = "density"
+factor = "1e-3"
+
+[[unit]]
+symbol = "nM"
+group = "density"
+factor = "1e-6"
+more = true
+
+[[unit]]
+symbol = "molecule/cm³"
+aliases = ["molecule cm-3", "molecules/cm3", "molecule/cm3", "cm-3", "molec cm-3"]
+group = "density"
+factor = "1e6 / NA"
+
+[[unit]]
+symbol = "mol/m³"
+aliases = ["mol m-3", "mol/m3"]
+group = "density"
+factor = "1"
+more = true
+
+# Pressure
+[[unit]]
+symbol = "Pa"
+aliases = ["pascal"]
+group = "pressure"
+factor = "1"
+
+[[unit]]
+symbol = "kPa"
+group = "pressure"
+factor = "1e3"
+
+[[unit]]
+symbol = "MPa"
+group = "pressure"
+factor = "1e6"
+more = true
+
+[[unit]]
+symbol = "bar"
+group = "pressure"
+factor = "1e5"
+
+[[unit]]
+symbol = "mbar"
+aliases = ["hPa"]
+group = "pressure"
+factor = "100"
+
+[[unit]]
+symbol = "atm"
+aliases = ["atmosphere"]
+group = "pressure"
+factor = "atm"
+
+[[unit]]
+symbol = "Torr"
+aliases = ["torr"]
+group = "pressure"
+factor = "atm / 760"
+
+[[unit]]
+symbol = "mTorr"
+aliases = ["mtorr"]
+group = "pressure"
+factor = "atm / 760e3"
+more = true
+
+[[unit]]
+symbol = "mmHg"
+aliases = ["mm Hg"]
+group = "pressure"
+factor = "mmHg"
+
+[[unit]]
+symbol = "psi"
+aliases = ["lbf/in2", "lb/in2"]
+group = "pressure"
+factor = "psi"
+
+# Charge
+[[unit]]
+symbol = "C"
+aliases = ["coulomb"]
+group = "charge"
+factor = "1"
+
+[[unit]]
+symbol = "mC"
+group = "charge"
+factor = "1e-3"
+more = true
+
+[[unit]]
+symbol = "μC"
+aliases = ["uC", "µC"]
+group = "charge"
+factor = "1e-6"
+more = true
+
+[[unit]]
+symbol = "e"
+aliases = ["elementary charge"]
+group = "charge"
+factor = "e"
+
+[[unit]]
+symbol = "mAh"
+aliases = ["mA h"]
+group = "charge"
+factor = "3.6"
+
+[[unit]]
+symbol = "Ah"
+aliases = ["A h"]
+group = "charge"
+factor = "3600"
+
+[[unit]]
+symbol = "mol e⁻"
+aliases = ["mol e-", "mole-", "mol electrons", "faraday"]
+group = "charge"
+factor = "e * NA"
