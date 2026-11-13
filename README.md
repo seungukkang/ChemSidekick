@@ -4,7 +4,7 @@ You can find most of this by googling or asking AI. But sometimes the AI's sense
 
 Use it from the terminal (`csk`), a local web interface, or Raycast.
 
-> **Status:** v0.2.0. Three tools; CLI, Streamlit web interface, and a Raycast extension. More tools coming soon!
+> **Status:** v0.2.1. Five tools; CLI, Streamlit web interface, and a Raycast extension. More tools coming soon!
 
 ## Tools
 
