@@ -1,0 +1,495 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": true,
+  "result": {
+    "answer": "1 Eh ≈ 627.509 kcal/mol ≈ 2625.5 kJ/mol ≈ 27.2114 eV",
+    "highlights": [
+      {
+        "label": "RT at 298.15 K",
+        "value": "0.592485 kcal/mol",
+        "note": "25.00 °C"
+      }
+    ],
+    "formulas": [
+      {
+        "latex": "1\\ \\text{Eh} ≈ 4.359744722 \\times 10^{-18}\\ \\text{J}",
+        "text": "1 Eh ≈ 4.359744722 × 10⁻¹⁸ J   (Eh)"
+      }
+    ],
+    "constants": [
+      {
+        "name": "Boltzmann constant",
+        "symbol": "kB",
+        "value": 1.380649e-23,
+        "unit": "J/K",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+      },
+      {
+        "name": "Avogadro constant",
+        "symbol": "NA",
+        "value": 6.02214076e+23,
+        "unit": "1/mol",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+      },
+      {
+        "name": "thermochemical calorie",
+        "symbol": "cal",
+        "value": 4.184,
+        "unit": "J",
+        "source": "NIST SP 811 (2008), Appendix B.8: calorie (thermochemical) = 4.184 J"
+      },
+      {
+        "name": "Hartree energy",
+        "symbol": "Eh",
+        "value": 4.359744722206e-18,
+        "unit": "J",
+        "source": "CODATA 2022"
+      }
+    ],
+    "assumptions": [
+      "Molar energies are per mole of particles (× N_A).",
+      "Energy equivalents are photon/thermal relations (E = hν = hc·ν̃ = hc/λ = k_B·T); K here is a temperature equivalent, not a temperature."
+    ],
+    "sources": [
+      "SI Brochure, 9th ed. (BIPM, 2019)",
+      "NIST SP 811 (2008), Appendix B.8",
+      "P. J. Mohr, D. B. Newell, B. N. Taylor, E. Tiesinga, CODATA Recommended Values of the Fundamental Physical Constants: 2022, Rev. Mod. Phys. 97, 025002 (2025)"
+    ],
+    "notes": [
+      "exact: the conversion uses only defined constants. ≈: it uses a measured constant (CODATA 2022), so the last digits carry its uncertainty.",
+      "Values are shown to 6 significant figures; the JSON output keeps full precision.",
+      "cal is the thermochemical calorie, 4.184 J."
+    ],
+    "tables": [
+      {
+        "title": "Energy",
+        "columns": [
+          "Unit",
+          "Value",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "kcal/mol",
+            "627.509",
+            "≈"
+          ],
+          [
+            "kJ/mol",
+            "2625.5",
+            "≈"
+          ],
+          [
+            "J/mol",
+            "2.6255 × 10⁶",
+            "≈"
+          ],
+          [
+            "eV",
+            "27.2114",
+            "≈"
+          ],
+          [
+            "meV",
+            "27211.4",
+            "≈"
+          ],
+          [
+            "Eh",
+            "1",
+            "≈"
+          ],
+          [
+            "J",
+            "4.35974 × 10⁻¹⁸",
+            "≈"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Energy equivalents",
+        "columns": [
+          "Unit",
+          "Value",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "cm⁻¹",
+            "219475",
+            "≈"
+          ],
+          [
+            "nm (wavelength)",
+            "45.5634",
+            "≈"
+          ],
+          [
+            "THz",
+            "6579.68",
+            "≈"
+          ],
+          [
+            "K (temperature equivalent)",
+            "315775",
+            "≈"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Thermal energy at 298.15 K (25.00 °C)",
+        "columns": [
+          "Quantity",
+          "Value",
+          "Unit"
+        ],
+        "rows": [
+          [
+            "RT",
+            "0.592485",
+            "kcal/mol"
+          ],
+          [
+            "RT",
+            "2.47896",
+            "kJ/mol"
+          ],
+          [
+            "kT",
+            "25.6926",
+            "meV"
+          ],
+          [
+            "kT",
+            "207.225",
+            "cm⁻¹"
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      }
+    ],
+    "structures": [],
+    "artifacts": [],
+    "warnings": [],
+    "data": {
+      "query": {
+        "value": 1.0,
+        "unit": {
+          "symbol": "Eh",
+          "label": "Eh",
+          "group": "energy",
+          "group_title": "Energy",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 Eh ≈ 4.359744722 × 10⁻¹⁸ J",
+          "constants": [
+            "Eh"
+          ]
+        },
+        "target": null,
+        "temperature_K": 298.15
+      },
+      "conversions": [
+        {
+          "symbol": "kcal/mol",
+          "label": "kcal/mol",
+          "group": "energy",
+          "group_title": "Energy",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 kcal/mol = 6.947695457 × 10⁻²¹ J",
+          "constants": [
+            "NA",
+            "cal"
+          ],
+          "value": 627.5094740628974,
+          "text": "627.509"
+        },
+        {
+          "symbol": "kJ/mol",
+          "label": "kJ/mol",
+          "group": "energy",
+          "group_title": "Energy",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 kJ/mol = 1.660539067 × 10⁻²¹ J",
+          "constants": [
+            "NA"
+          ],
+          "value": 2625.499639479163,
+          "text": "2625.5"
+        },
+        {
+          "symbol": "J/mol",
+          "label": "J/mol",
+          "group": "energy",
+          "group_title": "Energy",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 J/mol = 1.660539067 × 10⁻²⁴ J",
+          "constants": [
+            "NA"
+          ],
+          "value": 2625499.639479163,
+          "text": "2.6255 × 10⁶"
+        },
+        {
+          "symbol": "eV",
+          "label": "eV",
+          "group": "energy",
+          "group_title": "Energy",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 eV = 1.602176634 × 10⁻¹⁹ J",
+          "constants": [
+            "e"
+          ],
+          "value": 27.211386245981167,
+          "text": "27.2114"
+        },
+        {
+          "symbol": "meV",
+          "label": "meV",
+          "group": "energy",
+          "group_title": "Energy",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 meV = 1.602176634 × 10⁻²² J",
+          "constants": [
+            "e"
+          ],
+          "value": 27211.386245981168,
+          "text": "27211.4"
+        },
+        {
+          "symbol": "Eh",
+          "label": "Eh",
+          "group": "energy",
+          "group_title": "Energy",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 Eh ≈ 4.359744722 × 10⁻¹⁸ J",
+          "constants": [
+            "Eh"
+          ],
+          "value": 1.0,
+          "text": "1"
+        },
+        {
+          "symbol": "J",
+          "label": "J",
+          "group": "energy",
+          "group_title": "Energy",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 J = 1 J",
+          "constants": [],
+          "value": 4.359744722206e-18,
+          "text": "4.35974 × 10⁻¹⁸"
+        },
+        {
+          "symbol": "cm⁻¹",
+          "label": "cm⁻¹",
+          "group": "equivalents",
+          "group_title": "Energy equivalents",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 cm⁻¹ = 1.986445857 × 10⁻²³ J (E = hc·ν̃)",
+          "constants": [
+            "c",
+            "h"
+          ],
+          "value": 219474.63136314112,
+          "text": "219475"
+        },
+        {
+          "symbol": "nm",
+          "label": "nm (wavelength)",
+          "group": "equivalents",
+          "group_title": "Energy equivalents",
+          "exact": false,
+          "kind": "wavelength",
+          "definition": "E = hc / λ (inversely proportional)",
+          "constants": [
+            "c",
+            "h"
+          ],
+          "value": 45.56335252913159,
+          "text": "45.5634"
+        },
+        {
+          "symbol": "THz",
+          "label": "THz",
+          "group": "equivalents",
+          "group_title": "Energy equivalents",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 THz = 6.62607015 × 10⁻²² J (E = h·ν)",
+          "constants": [
+            "h"
+          ],
+          "value": 6579.683920499997,
+          "text": "6579.68"
+        },
+        {
+          "symbol": "K",
+          "label": "K (temperature equivalent)",
+          "group": "equivalents",
+          "group_title": "Energy equivalents",
+          "exact": false,
+          "kind": "linear",
+          "definition": "1 K = 1.380649 × 10⁻²³ J (E = k_B·T)",
+          "constants": [
+            "kB"
+          ],
+          "value": 315775.02480398706,
+          "text": "315775"
+        }
+      ],
+      "thermal": [
+        {
+          "quantity": "RT",
+          "value": 0.5924849497137641,
+          "text": "0.592485",
+          "unit": "kcal/mol",
+          "temperature_K": 298.15,
+          "definition": "RT = N_A·k_B·T",
+          "constants": [
+            "kB",
+            "NA"
+          ]
+        },
+        {
+          "quantity": "RT",
+          "value": 2.478957029602389,
+          "text": "2.47896",
+          "unit": "kJ/mol",
+          "temperature_K": 298.15,
+          "definition": "RT = N_A·k_B·T",
+          "constants": [
+            "kB",
+            "NA"
+          ]
+        },
+        {
+          "quantity": "kT",
+          "value": 25.69257912108585,
+          "text": "25.6926",
+          "unit": "meV",
+          "temperature_K": 298.15,
+          "definition": "kT = k_B·T",
+          "constants": [
+            "kB"
+          ]
+        },
+        {
+          "quantity": "kT",
+          "value": 207.2246257649389,
+          "text": "207.225",
+          "unit": "cm⁻¹",
+          "temperature_K": 298.15,
+          "definition": "kT = k_B·T",
+          "constants": [
+            "kB"
+          ]
+        }
+      ],
+      "constants": {
+        "h": {
+          "symbol": "h",
+          "name": "Planck constant",
+          "value": 6.62607015e-34,
+          "text": "6.62607015 × 10⁻³⁴",
+          "unit": "J s",
+          "exact": true,
+          "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+        },
+        "e": {
+          "symbol": "e",
+          "name": "elementary charge",
+          "value": 1.602176634e-19,
+          "text": "1.602176634 × 10⁻¹⁹",
+          "unit": "C",
+          "exact": true,
+          "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+        },
+        "kB": {
+          "symbol": "kB",
+          "name": "Boltzmann constant",
+          "value": 1.380649e-23,
+          "text": "1.380649 × 10⁻²³",
+          "unit": "J/K",
+          "exact": true,
+          "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+        },
+        "NA": {
+          "symbol": "NA",
+          "name": "Avogadro constant",
+          "value": 6.02214076e+23,
+          "text": "6.02214076 × 10²³",
+          "unit": "1/mol",
+          "exact": true,
+          "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+        },
+        "c": {
+          "symbol": "c",
+          "name": "speed of light in vacuum",
+          "value": 299792458.0,
+          "text": "2.99792458 × 10⁸",
+          "unit": "m/s",
+          "exact": true,
+          "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+        },
+        "cal": {
+          "symbol": "cal",
+          "name": "thermochemical calorie",
+          "value": 4.184,
+          "text": "4.184",
+          "unit": "J",
+          "exact": true,
+          "source": "NIST SP 811 (2008), Appendix B.8: calorie (thermochemical) = 4.184 J"
+        },
+        "Eh": {
+          "symbol": "Eh",
+          "name": "Hartree energy",
+          "value": 4.359744722206e-18,
+          "text": "4.3597447222 × 10⁻¹⁸",
+          "unit": "J",
+          "exact": false,
+          "source": "CODATA 2022"
+        }
+      }
+    }
+  },
+  "run": {
+    "tool": "units",
+    "tool_id": "REF-02",
+    "number": 5,
+    "folder": "/fixture/cache/recent/00005-units",
+    "recorded": true,
+    "elapsed_s": 0.1,
+    "peak_memory_mb": null
+  }
+}

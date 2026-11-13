@@ -151,6 +151,12 @@ def _parameter(name: str, field: FieldInfo) -> inspect.Parameter:
         return inspect.Parameter(
             name, inspect.Parameter.KEYWORD_ONLY, default=info, annotation=str | None
         )
+    if extra.get("words"):
+        # Free text typed as several words, e.g. `csk units 1 eV to kcal/mol`.
+        info = typer.Argument(None, show_default=False, metavar="[TEXT]...", **common)
+        return inspect.Parameter(
+            name, inspect.Parameter.KEYWORD_ONLY, default=info, annotation=list[str] | None
+        )
     if extra.get("positional"):
         info = typer.Argument(default, show_default=False, **common)
     else:
@@ -203,12 +209,16 @@ _COMMON_PARAMS = [
 ]
 
 
-def _file_fields(model: type[BaseModel]) -> list[str]:
+def _fields_with(model: type[BaseModel], key: str) -> list[str]:
     return [
         n
         for n, f in model.model_fields.items()
-        if isinstance(f.json_schema_extra, dict) and f.json_schema_extra.get("file_input")
+        if isinstance(f.json_schema_extra, dict) and f.json_schema_extra.get(key)
     ]
+
+
+def _file_fields(model: type[BaseModel]) -> list[str]:
+    return _fields_with(model, "file_input")
 
 
 def _read_text_input(value: str | None) -> str:
@@ -333,6 +343,10 @@ def _tool_command(spec: ToolSpec):
         def body() -> None:
             for name in _file_fields(model):
                 kwargs[name] = _read_text_input(kwargs[name])
+            for name in _fields_with(model, "words"):
+                words = kwargs.pop(name)
+                if words:
+                    kwargs[name] = " ".join(words)
             _execute(spec, model(**kwargs), common)
 
         _guarded(common["csk_json"], body)

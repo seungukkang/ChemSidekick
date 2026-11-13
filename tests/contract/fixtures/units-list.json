@@ -1,0 +1,1702 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": true,
+  "result": {
+    "answer": "All units · 63 units",
+    "highlights": [],
+    "formulas": [],
+    "constants": [
+      {
+        "name": "Planck constant",
+        "symbol": "h",
+        "value": 6.62607015e-34,
+        "unit": "J s",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+      },
+      {
+        "name": "elementary charge",
+        "symbol": "e",
+        "value": 1.602176634e-19,
+        "unit": "C",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+      },
+      {
+        "name": "Boltzmann constant",
+        "symbol": "kB",
+        "value": 1.380649e-23,
+        "unit": "J/K",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+      },
+      {
+        "name": "Avogadro constant",
+        "symbol": "NA",
+        "value": 6.02214076e+23,
+        "unit": "1/mol",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+      },
+      {
+        "name": "speed of light in vacuum",
+        "symbol": "c",
+        "value": 299792458.0,
+        "unit": "m/s",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019): defining constant"
+      },
+      {
+        "name": "thermochemical calorie",
+        "symbol": "cal",
+        "value": 4.184,
+        "unit": "J",
+        "source": "NIST SP 811 (2008), Appendix B.8: calorie (thermochemical) = 4.184 J"
+      },
+      {
+        "name": "standard atmosphere",
+        "symbol": "atm",
+        "value": 101325.0,
+        "unit": "Pa",
+        "source": "IUPAC Green Book, 3rd ed. (2007), sec. 7.2; NIST SP 811 (2008), Appendix B.8"
+      },
+      {
+        "name": "conventional millimetre of mercury",
+        "symbol": "mmHg",
+        "value": 133.322387415,
+        "unit": "Pa",
+        "source": "IUPAC Green Book, 3rd ed. (2007), sec. 7.2: mmHg = 13.5951 × 980.665 × 10⁻² Pa"
+      },
+      {
+        "name": "pound-force per square inch",
+        "symbol": "psi",
+        "value": 6894.757293168361,
+        "unit": "Pa",
+        "source": "NIST SP 811 (2008), Appendix B.8 (lb = 0.45359237 kg, gₙ = 9.80665 m/s², in = 0.0254 m, all exact)"
+      },
+      {
+        "name": "Hartree energy",
+        "symbol": "Eh",
+        "value": 4.359744722206e-18,
+        "unit": "J",
+        "source": "CODATA 2022"
+      },
+      {
+        "name": "Bohr radius",
+        "symbol": "a0",
+        "value": 5.29177210544e-11,
+        "unit": "m",
+        "source": "CODATA 2022"
+      },
+      {
+        "name": "vacuum electric permittivity",
+        "symbol": "eps0",
+        "value": 8.8541878188e-12,
+        "unit": "F/m",
+        "source": "CODATA 2022"
+      }
+    ],
+    "assumptions": [],
+    "sources": [
+      "SI Brochure, 9th ed. (BIPM, 2019)",
+      "NIST SP 811 (2008), Appendix B.8",
+      "IUPAC Green Book, 3rd ed. (2007), sec. 7.2; NIST SP 811 (2008), Appendix B.8",
+      "IUPAC Green Book, 3rd ed. (2007), sec. 7.2",
+      "NIST SP 811 (2008), Appendix B.8 (lb = 0.45359237 kg, gₙ = 9.80665 m/s², in = 0.0254 m, all exact)",
+      "P. J. Mohr, D. B. Newell, B. N. Taylor, E. Tiesinga, CODATA Recommended Values of the Fundamental Physical Constants: 2022, Rev. Mod. Phys. 97, 025002 (2025)"
+    ],
+    "notes": [
+      "Type a value and a unit, e.g. 1 eV to kcal/mol, 300 nm, 1.85 D, 760 Torr to bar. Spaces, ^, · and superscripts in units are optional (M-1 s-1 = M⁻¹s⁻¹).",
+      "exact: the conversion uses only defined constants. ≈: it uses a measured constant (CODATA 2022), so the last digits carry its uncertainty."
+    ],
+    "tables": [
+      {
+        "title": "Energy (base: J)",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "kcal/mol",
+            "kcal mol-1, kcalpermol",
+            "exact"
+          ],
+          [
+            "kJ/mol",
+            "kJ mol-1, kjpermol",
+            "exact"
+          ],
+          [
+            "J/mol",
+            "J mol-1",
+            "exact"
+          ],
+          [
+            "cal/mol",
+            "cal mol-1",
+            "exact"
+          ],
+          [
+            "eV",
+            "electronvolt, electron volt",
+            "exact"
+          ],
+          [
+            "meV",
+            "—",
+            "exact"
+          ],
+          [
+            "Eh",
+            "Ha, hartree, Hartree, Eₕ",
+            "≈"
+          ],
+          [
+            "J",
+            "joule",
+            "exact"
+          ],
+          [
+            "kJ",
+            "—",
+            "exact"
+          ],
+          [
+            "cal",
+            "calorie",
+            "exact"
+          ],
+          [
+            "kcal",
+            "—",
+            "exact"
+          ],
+          [
+            "Ry",
+            "rydberg",
+            "≈"
+          ],
+          [
+            "zJ",
+            "—",
+            "exact"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Energy equivalents (base: J)",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "cm⁻¹",
+            "wavenumber, wavenumbers, 1/cm",
+            "exact"
+          ],
+          [
+            "nm (wavelength)",
+            "nanometer, nanometre",
+            "exact"
+          ],
+          [
+            "Hz",
+            "hertz, s-1",
+            "exact"
+          ],
+          [
+            "THz",
+            "—",
+            "exact"
+          ],
+          [
+            "GHz",
+            "—",
+            "exact"
+          ],
+          [
+            "MHz",
+            "—",
+            "exact"
+          ],
+          [
+            "K (temperature equivalent)",
+            "kelvin",
+            "exact"
+          ],
+          [
+            "μm (wavelength)",
+            "um, micron, micrometer, micrometre",
+            "exact"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Molar entropy, heat capacity (base: J/(mol K))",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "J/(mol K)",
+            "J mol-1 K-1, J/mol/K, J/(K mol), J K-1 mol-1",
+            "exact"
+          ],
+          [
+            "kJ/(mol K)",
+            "kJ mol-1 K-1, kJ/mol/K, kJ K-1 mol-1",
+            "exact"
+          ],
+          [
+            "cal/(mol K)",
+            "cal mol-1 K-1, cal/mol/K, cal K-1 mol-1, e.u., eu",
+            "exact"
+          ],
+          [
+            "kcal/(mol K)",
+            "kcal mol-1 K-1, kcal/mol/K",
+            "exact"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Length (atomic scale) (base: m)",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "Å",
+            "A°, angstrom, Angstrom, Ang",
+            "exact"
+          ],
+          [
+            "bohr",
+            "a0, a₀, Bohr",
+            "≈"
+          ],
+          [
+            "pm",
+            "—",
+            "exact"
+          ],
+          [
+            "nm",
+            "—",
+            "exact"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Dipole moment (base: C m)",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "D",
+            "debye, Debye",
+            "exact"
+          ],
+          [
+            "e Å",
+            "e A°, e angstrom, eAngstrom",
+            "exact"
+          ],
+          [
+            "C m",
+            "—",
+            "exact"
+          ],
+          [
+            "a.u. (e a₀)",
+            "e a0, ea0, e bohr, a.u.",
+            "≈"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Polarizability (base: m³ (volume))",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "Å³",
+            "A3, angstrom3, A°3",
+            "exact"
+          ],
+          [
+            "bohr³ (a.u.)",
+            "a03, a.u. polarizability",
+            "≈"
+          ],
+          [
+            "cm³",
+            "—",
+            "exact"
+          ],
+          [
+            "C m²/V (SI)",
+            "C m2 V-1, C2 m2 J-1, C²m²/J",
+            "≈"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Rate constant (2nd order) (base: m³ mol⁻¹ s⁻¹)",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "M⁻¹ s⁻¹",
+            "/M/s, 1/(M s), L mol-1 s-1, L/(mol s), dm3 mol-1 s-1",
+            "exact"
+          ],
+          [
+            "cm³ molecule⁻¹ s⁻¹",
+            "cm3/(molecule s), cm3 molec-1 s-1, cm3/molecule/s",
+            "exact"
+          ],
+          [
+            "m³ mol⁻¹ s⁻¹",
+            "m3/(mol s)",
+            "exact"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Concentration ↔ number density (base: mol/m³)",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "M",
+            "mol/L, mol L-1, molar, mol/dm3",
+            "exact"
+          ],
+          [
+            "mM",
+            "mmol/L",
+            "exact"
+          ],
+          [
+            "μM",
+            "uM",
+            "exact"
+          ],
+          [
+            "nM",
+            "—",
+            "exact"
+          ],
+          [
+            "molecule/cm³",
+            "molecule cm-3, molecules/cm3, cm-3, molec cm-3",
+            "exact"
+          ],
+          [
+            "mol/m³",
+            "mol m-3",
+            "exact"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Pressure (base: Pa)",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "Pa",
+            "pascal",
+            "exact"
+          ],
+          [
+            "kPa",
+            "—",
+            "exact"
+          ],
+          [
+            "MPa",
+            "—",
+            "exact"
+          ],
+          [
+            "bar",
+            "—",
+            "exact"
+          ],
+          [
+            "mbar",
+            "hPa",
+            "exact"
+          ],
+          [
+            "atm",
+            "atmosphere",
+            "exact"
+          ],
+          [
+            "Torr",
+            "torr",
+            "exact"
+          ],
+          [
+            "mTorr",
+            "mtorr",
+            "exact"
+          ],
+          [
+            "mmHg",
+            "—",
+            "exact"
+          ],
+          [
+            "psi",
+            "lbf/in2, lb/in2",
+            "exact"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Charge (base: C)",
+        "columns": [
+          "Unit",
+          "Also accepted",
+          "Exact"
+        ],
+        "rows": [
+          [
+            "C",
+            "coulomb",
+            "exact"
+          ],
+          [
+            "mC",
+            "—",
+            "exact"
+          ],
+          [
+            "μC",
+            "uC",
+            "exact"
+          ],
+          [
+            "e",
+            "elementary charge",
+            "exact"
+          ],
+          [
+            "mAh",
+            "—",
+            "exact"
+          ],
+          [
+            "Ah",
+            "—",
+            "exact"
+          ],
+          [
+            "mol e⁻",
+            "mol electrons, faraday",
+            "exact"
+          ]
+        ],
+        "minor_columns": [
+          2
+        ],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      }
+    ],
+    "structures": [],
+    "artifacts": [],
+    "warnings": [],
+    "data": {
+      "groups": [
+        {
+          "id": "energy",
+          "title": "Energy",
+          "base": "J",
+          "example": "1 eV to kcal/mol",
+          "units": [
+            {
+              "symbol": "kcal/mol",
+              "label": "kcal/mol",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 kcal/mol = 6.947695457 × 10⁻²¹ J",
+              "constants": [
+                "NA",
+                "cal"
+              ],
+              "aliases": [
+                "kcal mol-1",
+                "kcalpermol"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "kJ/mol",
+              "label": "kJ/mol",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 kJ/mol = 1.660539067 × 10⁻²¹ J",
+              "constants": [
+                "NA"
+              ],
+              "aliases": [
+                "kJ mol-1",
+                "kjpermol"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "J/mol",
+              "label": "J/mol",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 J/mol = 1.660539067 × 10⁻²⁴ J",
+              "constants": [
+                "NA"
+              ],
+              "aliases": [
+                "J mol-1"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "cal/mol",
+              "label": "cal/mol",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 cal/mol = 6.947695457 × 10⁻²⁴ J",
+              "constants": [
+                "NA",
+                "cal"
+              ],
+              "aliases": [
+                "cal mol-1"
+              ],
+              "more": true
+            },
+            {
+              "symbol": "eV",
+              "label": "eV",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 eV = 1.602176634 × 10⁻¹⁹ J",
+              "constants": [
+                "e"
+              ],
+              "aliases": [
+                "electronvolt",
+                "electron volt"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "meV",
+              "label": "meV",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 meV = 1.602176634 × 10⁻²² J",
+              "constants": [
+                "e"
+              ],
+              "aliases": [],
+              "more": false
+            },
+            {
+              "symbol": "Eh",
+              "label": "Eh",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": false,
+              "kind": "linear",
+              "definition": "1 Eh ≈ 4.359744722 × 10⁻¹⁸ J",
+              "constants": [
+                "Eh"
+              ],
+              "aliases": [
+                "Ha",
+                "hartree",
+                "Hartree",
+                "Eₕ"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "J",
+              "label": "J",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 J = 1 J",
+              "constants": [],
+              "aliases": [
+                "joule"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "kJ",
+              "label": "kJ",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 kJ = 1000 J",
+              "constants": [],
+              "aliases": [],
+              "more": true
+            },
+            {
+              "symbol": "cal",
+              "label": "cal",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 cal = 4.184 J",
+              "constants": [
+                "cal"
+              ],
+              "aliases": [
+                "calorie"
+              ],
+              "more": true
+            },
+            {
+              "symbol": "kcal",
+              "label": "kcal",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 kcal = 4184 J",
+              "constants": [
+                "cal"
+              ],
+              "aliases": [],
+              "more": true
+            },
+            {
+              "symbol": "Ry",
+              "label": "Ry",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": false,
+              "kind": "linear",
+              "definition": "1 Ry ≈ 2.179872361 × 10⁻¹⁸ J",
+              "constants": [
+                "Eh"
+              ],
+              "aliases": [
+                "rydberg"
+              ],
+              "more": true
+            },
+            {
+              "symbol": "zJ",
+              "label": "zJ",
+              "group": "energy",
+              "group_title": "Energy",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 zJ = 1 × 10⁻²¹ J",
+              "constants": [],
+              "aliases": [],
+              "more": true
+            }
+          ]
+        },
+        {
+          "id": "equivalents",
+          "title": "Energy equivalents",
+          "base": "J",
+          "example": "300 nm",
+          "units": [
+            {
+              "symbol": "cm⁻¹",
+              "label": "cm⁻¹",
+              "group": "equivalents",
+              "group_title": "Energy equivalents",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 cm⁻¹ = 1.986445857 × 10⁻²³ J (E = hc·ν̃)",
+              "constants": [
+                "c",
+                "h"
+              ],
+              "aliases": [
+                "cm-1",
+                "wavenumber",
+                "wavenumbers",
+                "1/cm"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "nm",
+              "label": "nm (wavelength)",
+              "group": "equivalents",
+              "group_title": "Energy equivalents",
+              "exact": true,
+              "kind": "wavelength",
+              "definition": "E = hc / λ (inversely proportional)",
+              "constants": [
+                "c",
+                "h"
+              ],
+              "aliases": [
+                "nanometer",
+                "nanometre"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "Hz",
+              "label": "Hz",
+              "group": "equivalents",
+              "group_title": "Energy equivalents",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 Hz = 6.62607015 × 10⁻³⁴ J (E = h·ν)",
+              "constants": [
+                "h"
+              ],
+              "aliases": [
+                "hertz",
+                "s-1"
+              ],
+              "more": true
+            },
+            {
+              "symbol": "THz",
+              "label": "THz",
+              "group": "equivalents",
+              "group_title": "Energy equivalents",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 THz = 6.62607015 × 10⁻²² J (E = h·ν)",
+              "constants": [
+                "h"
+              ],
+              "aliases": [],
+              "more": false
+            },
+            {
+              "symbol": "GHz",
+              "label": "GHz",
+              "group": "equivalents",
+              "group_title": "Energy equivalents",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 GHz = 6.62607015 × 10⁻²⁵ J (E = h·ν)",
+              "constants": [
+                "h"
+              ],
+              "aliases": [],
+              "more": true
+            },
+            {
+              "symbol": "MHz",
+              "label": "MHz",
+              "group": "equivalents",
+              "group_title": "Energy equivalents",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 MHz = 6.62607015 × 10⁻²⁸ J (E = h·ν)",
+              "constants": [
+                "h"
+              ],
+              "aliases": [],
+              "more": true
+            },
+            {
+              "symbol": "K",
+              "label": "K (temperature equivalent)",
+              "group": "equivalents",
+              "group_title": "Energy equivalents",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 K = 1.380649 × 10⁻²³ J (E = k_B·T)",
+              "constants": [
+                "kB"
+              ],
+              "aliases": [
+                "kelvin"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "μm",
+              "label": "μm (wavelength)",
+              "group": "equivalents",
+              "group_title": "Energy equivalents",
+              "exact": true,
+              "kind": "wavelength",
+              "definition": "E = hc / λ (inversely proportional)",
+              "constants": [
+                "c",
+                "h"
+              ],
+              "aliases": [
+                "um",
+                "micron",
+                "micrometer",
+                "micrometre"
+              ],
+              "more": true
+            }
+          ]
+        },
+        {
+          "id": "entropy",
+          "title": "Molar entropy, heat capacity",
+          "base": "J/(mol K)",
+          "example": "10 cal/(mol K) to J/(mol K)",
+          "units": [
+            {
+              "symbol": "J/(mol K)",
+              "label": "J/(mol K)",
+              "group": "entropy",
+              "group_title": "Molar entropy, heat capacity",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 J/(mol K) = 1 J/(mol K)",
+              "constants": [],
+              "aliases": [
+                "J mol-1 K-1",
+                "J/mol/K",
+                "J/(K mol)",
+                "J K-1 mol-1"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "kJ/(mol K)",
+              "label": "kJ/(mol K)",
+              "group": "entropy",
+              "group_title": "Molar entropy, heat capacity",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 kJ/(mol K) = 1000 J/(mol K)",
+              "constants": [],
+              "aliases": [
+                "kJ mol-1 K-1",
+                "kJ/mol/K",
+                "kJ K-1 mol-1"
+              ],
+              "more": true
+            },
+            {
+              "symbol": "cal/(mol K)",
+              "label": "cal/(mol K)",
+              "group": "entropy",
+              "group_title": "Molar entropy, heat capacity",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 cal/(mol K) = 4.184 J/(mol K)",
+              "constants": [
+                "cal"
+              ],
+              "aliases": [
+                "cal mol-1 K-1",
+                "cal/mol/K",
+                "cal K-1 mol-1",
+                "e.u.",
+                "eu"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "kcal/(mol K)",
+              "label": "kcal/(mol K)",
+              "group": "entropy",
+              "group_title": "Molar entropy, heat capacity",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 kcal/(mol K) = 4184 J/(mol K)",
+              "constants": [
+                "cal"
+              ],
+              "aliases": [
+                "kcal mol-1 K-1",
+                "kcal/mol/K"
+              ],
+              "more": true
+            }
+          ]
+        },
+        {
+          "id": "length",
+          "title": "Length (atomic scale)",
+          "base": "m",
+          "example": "1 bohr to Å",
+          "units": [
+            {
+              "symbol": "Å",
+              "label": "Å",
+              "group": "length",
+              "group_title": "Length (atomic scale)",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 Å = 1 × 10⁻¹⁰ m",
+              "constants": [],
+              "aliases": [
+                "A°",
+                "angstrom",
+                "Angstrom",
+                "Ang",
+                "Å"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "bohr",
+              "label": "bohr",
+              "group": "length",
+              "group_title": "Length (atomic scale)",
+              "exact": false,
+              "kind": "linear",
+              "definition": "1 bohr ≈ 5.291772105 × 10⁻¹¹ m",
+              "constants": [
+                "a0"
+              ],
+              "aliases": [
+                "a0",
+                "a₀",
+                "Bohr"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "pm",
+              "label": "pm",
+              "group": "length",
+              "group_title": "Length (atomic scale)",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 pm = 1 × 10⁻¹² m",
+              "constants": [],
+              "aliases": [],
+              "more": false
+            },
+            {
+              "symbol": "nm",
+              "label": "nm",
+              "group": "length",
+              "group_title": "Length (atomic scale)",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 nm = 1 × 10⁻⁹ m",
+              "constants": [],
+              "aliases": [],
+              "more": false
+            }
+          ]
+        },
+        {
+          "id": "dipole",
+          "title": "Dipole moment",
+          "base": "C m",
+          "example": "1.85 D",
+          "units": [
+            {
+              "symbol": "D",
+              "label": "D",
+              "group": "dipole",
+              "group_title": "Dipole moment",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 D = 3.335640952 × 10⁻³⁰ C m",
+              "constants": [
+                "c"
+              ],
+              "aliases": [
+                "debye",
+                "Debye"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "e Å",
+              "label": "e Å",
+              "group": "dipole",
+              "group_title": "Dipole moment",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 e Å = 1.602176634 × 10⁻²⁹ C m",
+              "constants": [
+                "e"
+              ],
+              "aliases": [
+                "eÅ",
+                "e A°",
+                "e angstrom",
+                "eAngstrom"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "C m",
+              "label": "C m",
+              "group": "dipole",
+              "group_title": "Dipole moment",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 C m = 1 C m",
+              "constants": [],
+              "aliases": [
+                "Cm"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "au",
+              "label": "a.u. (e a₀)",
+              "group": "dipole",
+              "group_title": "Dipole moment",
+              "exact": false,
+              "kind": "linear",
+              "definition": "1 au ≈ 8.47835362 × 10⁻³⁰ C m",
+              "constants": [
+                "a0",
+                "e"
+              ],
+              "aliases": [
+                "e a0",
+                "ea0",
+                "e bohr",
+                "a.u."
+              ],
+              "more": false
+            }
+          ]
+        },
+        {
+          "id": "polarizability",
+          "title": "Polarizability",
+          "base": "m³ (volume)",
+          "example": "10 bohr3 to Å3",
+          "units": [
+            {
+              "symbol": "Å³",
+              "label": "Å³",
+              "group": "polarizability",
+              "group_title": "Polarizability",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 Å³ = 1 × 10⁻³⁰ m³ (volume)",
+              "constants": [],
+              "aliases": [
+                "A3",
+                "Å3",
+                "angstrom3",
+                "A°3"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "bohr³",
+              "label": "bohr³ (a.u.)",
+              "group": "polarizability",
+              "group_title": "Polarizability",
+              "exact": false,
+              "kind": "linear",
+              "definition": "1 bohr³ ≈ 1.481847112 × 10⁻³¹ m³ (volume)",
+              "constants": [
+                "a0"
+              ],
+              "aliases": [
+                "bohr3",
+                "a03",
+                "a.u. polarizability"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "cm³",
+              "label": "cm³",
+              "group": "polarizability",
+              "group_title": "Polarizability",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 cm³ = 1 × 10⁻⁶ m³ (volume)",
+              "constants": [],
+              "aliases": [
+                "cm3"
+              ],
+              "more": true
+            },
+            {
+              "symbol": "C m²/V",
+              "label": "C m²/V (SI)",
+              "group": "polarizability",
+              "group_title": "Polarizability",
+              "exact": false,
+              "kind": "linear",
+              "definition": "1 C m²/V ≈ 8.987551786 × 10⁹ m³ (volume)",
+              "constants": [
+                "eps0"
+              ],
+              "aliases": [
+                "C m2 V-1",
+                "Cm2/V",
+                "C2 m2 J-1",
+                "C²m²/J"
+              ],
+              "more": false
+            }
+          ]
+        },
+        {
+          "id": "rate2",
+          "title": "Rate constant (2nd order)",
+          "base": "m³ mol⁻¹ s⁻¹",
+          "example": "2e9 M-1 s-1",
+          "units": [
+            {
+              "symbol": "M⁻¹ s⁻¹",
+              "label": "M⁻¹ s⁻¹",
+              "group": "rate2",
+              "group_title": "Rate constant (2nd order)",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 M⁻¹ s⁻¹ = 0.001 m³ mol⁻¹ s⁻¹",
+              "constants": [],
+              "aliases": [
+                "M-1 s-1",
+                "M-1s-1",
+                "/M/s",
+                "1/(M s)",
+                "L mol-1 s-1",
+                "L/(mol s)",
+                "dm3 mol-1 s-1"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "cm³ molecule⁻¹ s⁻¹",
+              "label": "cm³ molecule⁻¹ s⁻¹",
+              "group": "rate2",
+              "group_title": "Rate constant (2nd order)",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 cm³ molecule⁻¹ s⁻¹ = 6.02214076 × 10¹⁷ m³ mol⁻¹ s⁻¹",
+              "constants": [
+                "NA"
+              ],
+              "aliases": [
+                "cm3 molecule-1 s-1",
+                "cm3/(molecule s)",
+                "cm3 molec-1 s-1",
+                "cm3/molecule/s"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "m³ mol⁻¹ s⁻¹",
+              "label": "m³ mol⁻¹ s⁻¹",
+              "group": "rate2",
+              "group_title": "Rate constant (2nd order)",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 m³ mol⁻¹ s⁻¹ = 1 m³ mol⁻¹ s⁻¹",
+              "constants": [],
+              "aliases": [
+                "m3 mol-1 s-1",
+                "m3/(mol s)"
+              ],
+              "more": true
+            }
+          ]
+        },
+        {
+          "id": "density",
+          "title": "Concentration ↔ number density",
+          "base": "mol/m³",
+          "example": "1 mM to molecule/cm3",
+          "units": [
+            {
+              "symbol": "M",
+              "label": "M",
+              "group": "density",
+              "group_title": "Concentration ↔ number density",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 M = 1000 mol/m³",
+              "constants": [],
+              "aliases": [
+                "mol/L",
+                "mol L-1",
+                "molar",
+                "mol/dm3"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "mM",
+              "label": "mM",
+              "group": "density",
+              "group_title": "Concentration ↔ number density",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 mM = 1 mol/m³",
+              "constants": [],
+              "aliases": [
+                "mmol/L"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "μM",
+              "label": "μM",
+              "group": "density",
+              "group_title": "Concentration ↔ number density",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 μM = 0.001 mol/m³",
+              "constants": [],
+              "aliases": [
+                "uM",
+                "µM"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "nM",
+              "label": "nM",
+              "group": "density",
+              "group_title": "Concentration ↔ number density",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 nM = 1 × 10⁻⁶ mol/m³",
+              "constants": [],
+              "aliases": [],
+              "more": true
+            },
+            {
+              "symbol": "molecule/cm³",
+              "label": "molecule/cm³",
+              "group": "density",
+              "group_title": "Concentration ↔ number density",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 molecule/cm³ = 1.660539067 × 10⁻¹⁸ mol/m³",
+              "constants": [
+                "NA"
+              ],
+              "aliases": [
+                "molecule cm-3",
+                "molecules/cm3",
+                "molecule/cm3",
+                "cm-3",
+                "molec cm-3"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "mol/m³",
+              "label": "mol/m³",
+              "group": "density",
+              "group_title": "Concentration ↔ number density",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 mol/m³ = 1 mol/m³",
+              "constants": [],
+              "aliases": [
+                "mol m-3",
+                "mol/m3"
+              ],
+              "more": true
+            }
+          ]
+        },
+        {
+          "id": "pressure",
+          "title": "Pressure",
+          "base": "Pa",
+          "example": "760 Torr to bar",
+          "units": [
+            {
+              "symbol": "Pa",
+              "label": "Pa",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 Pa = 1 Pa",
+              "constants": [],
+              "aliases": [
+                "pascal"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "kPa",
+              "label": "kPa",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 kPa = 1000 Pa",
+              "constants": [],
+              "aliases": [],
+              "more": false
+            },
+            {
+              "symbol": "MPa",
+              "label": "MPa",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 MPa = 1 × 10⁶ Pa",
+              "constants": [],
+              "aliases": [],
+              "more": true
+            },
+            {
+              "symbol": "bar",
+              "label": "bar",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 bar = 100000 Pa",
+              "constants": [],
+              "aliases": [],
+              "more": false
+            },
+            {
+              "symbol": "mbar",
+              "label": "mbar",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 mbar = 100 Pa",
+              "constants": [],
+              "aliases": [
+                "hPa"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "atm",
+              "label": "atm",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 atm = 101325 Pa",
+              "constants": [
+                "atm"
+              ],
+              "aliases": [
+                "atmosphere"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "Torr",
+              "label": "Torr",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 Torr = 133.3223684 Pa",
+              "constants": [
+                "atm"
+              ],
+              "aliases": [
+                "torr"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "mTorr",
+              "label": "mTorr",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 mTorr = 0.1333223684 Pa",
+              "constants": [
+                "atm"
+              ],
+              "aliases": [
+                "mtorr"
+              ],
+              "more": true
+            },
+            {
+              "symbol": "mmHg",
+              "label": "mmHg",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 mmHg = 133.3223874 Pa",
+              "constants": [
+                "mmHg"
+              ],
+              "aliases": [
+                "mm Hg"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "psi",
+              "label": "psi",
+              "group": "pressure",
+              "group_title": "Pressure",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 psi = 6894.757293 Pa",
+              "constants": [
+                "psi"
+              ],
+              "aliases": [
+                "lbf/in2",
+                "lb/in2"
+              ],
+              "more": false
+            }
+          ]
+        },
+        {
+          "id": "charge",
+          "title": "Charge",
+          "base": "C",
+          "example": "2500 mAh to C",
+          "units": [
+            {
+              "symbol": "C",
+              "label": "C",
+              "group": "charge",
+              "group_title": "Charge",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 C = 1 C",
+              "constants": [],
+              "aliases": [
+                "coulomb"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "mC",
+              "label": "mC",
+              "group": "charge",
+              "group_title": "Charge",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 mC = 0.001 C",
+              "constants": [],
+              "aliases": [],
+              "more": true
+            },
+            {
+              "symbol": "μC",
+              "label": "μC",
+              "group": "charge",
+              "group_title": "Charge",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 μC = 1 × 10⁻⁶ C",
+              "constants": [],
+              "aliases": [
+                "uC",
+                "µC"
+              ],
+              "more": true
+            },
+            {
+              "symbol": "e",
+              "label": "e",
+              "group": "charge",
+              "group_title": "Charge",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 e = 1.602176634 × 10⁻¹⁹ C",
+              "constants": [
+                "e"
+              ],
+              "aliases": [
+                "elementary charge"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "mAh",
+              "label": "mAh",
+              "group": "charge",
+              "group_title": "Charge",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 mAh = 3.6 C",
+              "constants": [],
+              "aliases": [
+                "mA h"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "Ah",
+              "label": "Ah",
+              "group": "charge",
+              "group_title": "Charge",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 Ah = 3600 C",
+              "constants": [],
+              "aliases": [
+                "A h"
+              ],
+              "more": false
+            },
+            {
+              "symbol": "mol e⁻",
+              "label": "mol e⁻",
+              "group": "charge",
+              "group_title": "Charge",
+              "exact": true,
+              "kind": "linear",
+              "definition": "1 mol e⁻ = 96485.33212 C",
+              "constants": [
+                "NA",
+                "e"
+              ],
+              "aliases": [
+                "mol e-",
+                "mole-",
+                "mol electrons",
+                "faraday"
+              ],
+              "more": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "run": {
+    "tool": "units",
+    "tool_id": "REF-02",
+    "number": null,
+    "folder": "/fixture/cache/scratch/units-xxxxxxxx",
+    "recorded": false,
+    "elapsed_s": 0.1,
+    "peak_memory_mb": null
+  }
+}

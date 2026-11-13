@@ -217,7 +217,7 @@ def test_list_json():
     result = runner.invoke(app, ["list", "--json"])
     assert result.exit_code == 0
     r = ToolListResponse.model_validate(only_json(result))
-    assert [t.id for t in r.tools] == ["REF-01", "STR-01", "STR-02"]
+    assert [t.id for t in r.tools] == ["REF-01", "REF-02", "STR-01", "STR-02"]
     assert {c.code for c in r.categories} >= {"STR", "REF"}
     stereo = next(t for t in r.tools if t.name == "stereo")
     props = stereo.input_schema["properties"]

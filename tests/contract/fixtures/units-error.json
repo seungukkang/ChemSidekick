@@ -1,0 +1,11 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": false,
+  "error": {
+    "type": "input",
+    "message": "Unknown unit 'foo'. Supported: energy, energy equivalents, molar entropy, heat capacity, length (atomic scale), dipole moment, polarizability, rate constant (2nd order), concentration ↔ number density, pressure, charge.",
+    "details": [],
+    "traceback": ""
+  }
+}

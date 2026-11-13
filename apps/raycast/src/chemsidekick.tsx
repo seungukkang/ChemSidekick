@@ -6,6 +6,7 @@ import { usePromise } from "@raycast/utils";
 import { ErrorView } from "./components/ErrorView";
 import { ResultView } from "./components/ResultView";
 import { ToolForm } from "./components/ToolForm";
+import { UnitsView } from "./components/UnitsView";
 import { getTransport } from "./connection";
 import type { ToolInfo, ToolListResponse } from "./lib/contract";
 import { formSpec } from "./lib/form";
@@ -14,6 +15,11 @@ import type { RunOptions } from "./lib/transport";
 // A start view (e.g. the periodic table) runs with default input and is not kept.
 const START_VIEW: RunOptions = { record: false };
 const NO_INPUT = {};
+
+// Tools with a screen made for them: opened directly instead of the generated form.
+const DEDICATED_VIEWS: Record<string, () => React.ReactNode> = {
+  units: () => <UnitsView />,
+};
 
 async function loadTools(): Promise<ToolListResponse> {
   const response = await getTransport().listTools();
@@ -38,14 +44,19 @@ function ToolItem({ tool }: { tool: ToolInfo }) {
       accessories={accessories}
       actions={
         <ActionPanel>
-          {supported && tool.start_view && (
+          {supported && DEDICATED_VIEWS[tool.name] && (
+            <Action.Push title={`Open ${tool.title}`} icon={Icon.ArrowRight} target={DEDICATED_VIEWS[tool.name]()} />
+          )}
+          {supported && !DEDICATED_VIEWS[tool.name] && tool.start_view && (
             <Action.Push
               title={`Show ${tool.start_view}`}
               icon={Icon.Eye}
               target={<ResultView tool={tool} input={NO_INPUT} options={START_VIEW} />}
             />
           )}
-          {supported && <Action.Push title="Open Form" icon={Icon.Pencil} target={<ToolForm tool={tool} />} />}
+          {supported && !DEDICATED_VIEWS[tool.name] && (
+            <Action.Push title="Open Form" icon={Icon.Pencil} target={<ToolForm tool={tool} />} />
+          )}
           <Action.CopyToClipboard title="Copy Csk Command" content={`csk ${tool.name}`} />
         </ActionPanel>
       }

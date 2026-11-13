@@ -11,10 +11,11 @@ Use it from the terminal (`csk`), a local web interface, or Raycast.
 | ID | Command | What it does |
 |---|---|---|
 | REF-01 | `csk element` | Element card (atomic weights, electron configuration, isotopes, …) or the periodic table |
+| REF-02 | `csk units` | Chemistry unit conversions a calculator does not do: kcal/mol ↔ eV ↔ hartree, cm⁻¹ ↔ nm ↔ K, molar entropy, bohr, debye, polarizability, M⁻¹s⁻¹ ↔ cm³ molecule⁻¹ s⁻¹, pressure, charge; with RT and kT |
 | STR-01 | `csk xyz` | Paste XYZ coordinates (one or many frames): formula, molecular weight, closest atoms, a 2D drawing from bonds inferred from the coordinates, and an interactive 3D view |
 | STR-02 | `csk stereo` | All stereoisomers of a SMILES (or a simple condensed formula): R/S, r/s and E/Z with IUPAC locants, enantiomer/diastereomer/meso relations, 2D drawings and 3D structures |
 
-Every chemical value in `element` is cross-checked against one primary source and two authoritative compilations, and each value shows whether it was confirmed (see [`data/verification/elements.md`](data/verification/elements.md)).
+Every chemical value in `element` is cross-checked against one primary source and two authoritative compilations, and each value shows whether it was confirmed (see [`data/verification/elements.md`](data/verification/elements.md)). In `units`, conversions that use only defined constants are marked exact; the measured constants (hartree, Bohr radius, ε₀; CODATA 2022) are each checked against three references ([`data/verification/units.md`](data/verification/units.md)).
 
 ## Install
 
@@ -33,6 +34,7 @@ Run commands with `uv run csk …`, or install the `csk` command once with `uv t
 ```sh
 csk element Fe                 # element card
 csk element                    # periodic table
+csk units 1 eV to kcal/mol     # one conversion; `csk units 300 nm` shows every related unit
 csk xyz molecule.xyz           # or paste coordinates: pbpaste | csk xyz
 csk stereo "CC(O)C(O)C(O)C"    # stereoisomers; also accepts CH3-CH(OH)-CH3
 csk ui                         # web interface in the browser
@@ -61,6 +63,7 @@ npm run dev                     # loads the extension into Raycast; it stays aft
 |---|---|
 | ChemSidekick | All tools: pick one, fill in its form, see the result |
 | Element | Search elements by symbol, name, or atomic number; card on Enter, periodic table on ⌘T |
+| Convert Units | Type a value and pick its unit beside the search bar; every related unit is listed, with its definition, constants and sources on the right. Enter copies a value, ⌘⇧C at full precision, ⌘T sets the temperature for RT and kT |
 | XYZ Viewer | Paste coordinates; 2D drawing and rotating 3D view side by side, then the details |
 | Stereoisomers | Type `stereo` and a SMILES; isomers as cards, Enter turns a card into a rotating 3D view |
 
