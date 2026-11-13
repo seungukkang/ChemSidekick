@@ -39,6 +39,10 @@ SolventChoice = Literal["water", "methanol", "toluene", "benzene", "custom"]
 
 MISSING = {"-", "–", "—", "?", ""}
 DECIMALS = {"kcal/mol": 1, "kJ/mol": 1, "eV": 3, "Eh": 6}
+# Below this barrier (in units of RT) the Eyring rate is only qualitative: the
+# reaction is no longer much slower than thermal equilibration (TST's
+# quasi-equilibrium), the usual criterion being ΔG‡ ≳ 5RT.
+LOW_BARRIER_RT = 5.0
 
 
 class ProfileInput(BaseModel):
@@ -320,9 +324,20 @@ def _reaction(inp: ProfileInput, temperature: float) -> ToolResult:
             warnings.append(f"{p.label}: the TS lies below the product.")
         if not diffusion and _bimolecular(inp) and p.k_act > 1e8:
             warnings.append(
-                f"{p.label}: k = {U.format_number(p.k_act, 3)} M⁻¹ s⁻¹ approaches the diffusion "
+                f"{p.label}: k = {U.format_sig(p.k_act)} M⁻¹ s⁻¹ approaches the diffusion "
                 "limit (~10⁹–10¹⁰); try diffusion control."
             )
+
+    # Eyring/TST needs barriers well above kT: thermal equilibration must be much
+    # faster than the reaction. Below about 5RT the rates are only qualitative.
+    low = [p for p in paths if p.dg_act is not None and 0 <= p.dg_act < LOW_BARRIER_RT * rt]
+    if low:
+        limit_text = _energy_text(LOW_BARRIER_RT * rt, unit, True)
+        names = ", ".join(p.label for p in low)
+        warnings.append(
+            f"Low barrier ({names}): ΔG‡ below 5RT = {limit_text} {unit}. The Eyring rate is "
+            "only qualitative here; read it as nearly barrierless."
+        )
 
     kinetic = [p for p in paths if p.k is not None]
     thermo = [p for p in paths if p.dg is not None]
@@ -343,22 +358,46 @@ def _reaction(inp: ProfileInput, temperature: float) -> ToolResult:
         stable = max(equilibrium_pct, key=equilibrium_pct.get)
         if fast != stable:
             answer_parts.append(f"kinetic product {fast}, thermodynamic product {stable}")
+    single = len(paths) == 1
     if not answer_parts and kinetic:
         p = kinetic[0]
-        answer_parts.append(
-            f"k = {U.format_number(p.k, 3)} {k_unit} · t½ = {U.format_duration(_t_half(p, inp))}"
-        )
-    if not answer_parts and thermo:
-        answer_parts.append(f"K = {U.format_number(E.k_eq(thermo[0].dg, temperature), 4)}")
+        answer_parts.append(f"k = {U.format_sig(p.k)} {k_unit}")
+        answer_parts.append(f"t½ = {U.format_duration(_t_half(p, inp))}")
+        if single:
+            t99 = E.time_to_conversion(_k_eff(p, inp), 99)
+            answer_parts.append(f"99 % done in {U.format_duration(t99)}")
+    if (not answer_parts or single) and thermo:
+        p = thermo[0]
+        k_eq = E.k_eq(p.dg, temperature)
+        share = k_eq / (1 + k_eq) * 100
+        k_text = U.format_sig(k_eq)
+        answer_parts.append(f"K = {k_text} ({U.format_percent(share)} % {p.label} at equilibrium)")
 
-    for p in kinetic[:3]:
+    if single and kinetic:
+        # One path: what a chemist asks next about it.
+        p = kinetic[0]
+        highlights.append(Highlight(label="t½", value=U.format_duration(_t_half(p, inp)),
+                                    note=f"k = {U.format_sig(p.k)} {k_unit}"))  # fmt: skip
         highlights.append(
             Highlight(
-                label=f"t½ via {p.label}",
-                value=U.format_duration(_t_half(p, inp)),
-                note=f"k = {U.format_number(p.k, 4)} {k_unit}",
+                label="90 % / 99 % done",
+                value=f"{U.format_duration(E.time_to_conversion(_k_eff(p, inp), 90))} / "
+                f"{U.format_duration(E.time_to_conversion(_k_eff(p, inp), 99))}",
             )
         )
+        if p.dg_act is not None:
+            faster = E.eyring_k(p.dg_act, temperature + 10, p.kappa) / p.k_act
+            faster_text = f"{U.format_sig(faster)}× faster"
+            highlights.append(Highlight(label="10 °C warmer", value=faster_text))
+    else:
+        for p in kinetic[:3]:
+            highlights.append(
+                Highlight(
+                    label=f"t½ via {p.label}",
+                    value=U.format_duration(_t_half(p, inp)),
+                    note=f"k = {U.format_sig(p.k)} {k_unit}",
+                )
+            )
 
     tables = []
     if kinetic:
@@ -368,17 +407,22 @@ def _reaction(inp: ProfileInput, temperature: float) -> ToolResult:
                 [
                     p.label,
                     _energy_text(p.dg_act, unit, p.ts_entered),
-                    f"{U.format_number(p.k, 4)}",
+                    f"{U.format_sig(p.k)}",
                     U.format_duration(_t_half(p, inp)),
+                    U.format_duration(E.time_to_conversion(_k_eff(p, inp), 90)),
+                    U.format_duration(E.time_to_conversion(_k_eff(p, inp), 99)),
                 ]
             )
         tables.append(
             Table(
                 title="Rates",
-                columns=["Path", f"ΔG‡ ({unit})", f"k ({k_unit})", "t½"],
+                columns=["Path", f"ΔG‡ ({unit})", f"k ({k_unit})", "t½", "90 %", "99 %"],
                 rows=rows,
             )
         )
+        practical = _practical_temperatures(inp, kinetic)
+        if practical:
+            tables.append(practical)
         if diffusion:
             tables.append(
                 Table(
@@ -387,8 +431,8 @@ def _reaction(inp: ProfileInput, temperature: float) -> ToolResult:
                     rows=[
                         [
                             p.label,
-                            U.format_number(p.k_act, 3),
-                            U.format_number(p.k_diff, 3),
+                            U.format_sig(p.k_act),
+                            U.format_sig(p.k_diff),
                             _limited_by(p),
                         ]
                         for p in kinetic
@@ -399,13 +443,21 @@ def _reaction(inp: ProfileInput, temperature: float) -> ToolResult:
         tables.append(
             Table(
                 title="Equilibria",
-                columns=["Product", f"ΔG ({unit})", "K", "Reverse ΔG‡"],
+                columns=["Product", f"ΔG ({unit})", "K", "% at eq.", "Reverse ΔG‡", "Reverse t½"],
                 rows=[
                     [
                         p.label,
                         _energy_text(p.dg, unit, p.product_entered),
-                        U.format_number(E.k_eq(p.dg, temperature), 4),
+                        U.format_sig(E.k_eq(p.dg, temperature)),
+                        U.format_percent(
+                            E.k_eq(p.dg, temperature) / (1 + E.k_eq(p.dg, temperature)) * 100
+                        ),
                         _energy_text(p.dg_act - p.dg, unit, True) if p.dg_act is not None else "—",
+                        U.format_duration(
+                            E.half_life(E.eyring_k(p.dg_act - p.dg, temperature, p.kappa))
+                        )
+                        if p.dg_act is not None
+                        else "—",
                     ]
                     for p in thermo
                 ],
@@ -420,8 +472,8 @@ def _reaction(inp: ProfileInput, temperature: float) -> ToolResult:
                 rows=[
                     [
                         name,
-                        f"{kinetic_pct[name]:.1f}" if name in kinetic_pct else "—",
-                        f"{equilibrium_pct[name]:.1f}" if name in equilibrium_pct else "—",
+                        U.format_percent(kinetic_pct[name]) if name in kinetic_pct else "—",
+                        U.format_percent(equilibrium_pct[name]) if name in equilibrium_pct else "—",
                     ]
                     for name in products
                 ],
@@ -475,7 +527,9 @@ def _reaction(inp: ProfileInput, temperature: float) -> ToolResult:
         for p in paths
     ]
     limit = to_unit(E.dg_act_from_k(k_diff, temperature)) if k_diff is not None else None
-    svg = reaction_profile(Level("A", 0.0), branches, unit, decimals=dec, diffusion_limit=limit)
+    formulas = _reaction_formulas(bool(kinetic), bool(thermo), diffusion)
+    svg = reaction_profile(Level("A", 0.0), branches, unit, decimals=dec, diffusion_limit=limit,
+                           formulas=[f.latex for f in formulas])  # fmt: skip
     path = workdir() / "profile.svg"
     path.write_text(svg, encoding="utf-8")
 
@@ -509,15 +563,14 @@ def _reaction(inp: ProfileInput, temperature: float) -> ToolResult:
     return ToolResult(
         answer=" · ".join(answer_parts),
         highlights=highlights,
-        formulas=_reaction_formulas(bool(kinetic), bool(thermo), diffusion),
+        formulas=formulas,
         constants=_constants(used),
         assumptions=assumptions,
         sources=_sources(used, diffusion and inp.solvent != "custom"),
         notes=[
             "Energies are relative to the reactant A. Values computed from k, t½ or K are "
             "drawn in italics.",
-            f"RT = {U.format_number(U.from_molar_energy(rt, unit), 4)} {unit} "
-            f"at {temperature:g} K.",
+            f"RT = {U.format_sig(U.from_molar_energy(rt, unit))} {unit} at {temperature:g} K.",
         ],
         tables=tables,
         artifacts=[Artifact(kind="svg", path=path, title="Energy profile")],
@@ -534,6 +587,33 @@ def _reaction(inp: ProfileInput, temperature: float) -> ToolResult:
             "diffusion_limit": limit,
             "k_diff": k_diff,
         },
+    )
+
+
+PRACTICAL_HALF_LIVES = [("1 min", 60.0), ("1 h", 3600.0), ("1 day", 86400.0)]
+
+
+def _practical_temperatures(inp: ProfileInput, paths: list[Path]) -> Table | None:
+    """The temperature at which each path has a half-life of 1 min, 1 h, 1 day."""
+    rows = []
+    factor = _partner(inp) if _bimolecular(inp) else 1.0
+    for p in paths:
+        if p.dg_act is None:
+            continue
+        row = [p.label]
+        for _, seconds in PRACTICAL_HALF_LIVES:
+            try:
+                kelvin = E.temperature_for_half_life(p.dg_act, seconds * factor, p.kappa)
+                row.append(f"{kelvin - 273.15:.0f} °C")
+            except ValueError:
+                row.append("—")
+        rows.append(row)
+    if not rows:
+        return None
+    return Table(
+        title="Temperature for a half-life of (ΔG‡ taken as independent of temperature)",
+        columns=["Path", *(f"t½ {name}" for name, _ in PRACTICAL_HALF_LIVES)],
+        rows=rows,
     )
 
 
@@ -587,7 +667,7 @@ def _equilibrium_shares(
 
 def _ratio_text(shares: dict[str, float]) -> str:
     names = " : ".join(shares)
-    values = " : ".join(f"{v:.1f}" for v in shares.values())
+    values = " : ".join(U.format_percent(v) for v in shares.values())
     return f"{names} = {values}"
 
 
@@ -694,19 +774,21 @@ def _populations(inp: ProfileInput, temperature: float) -> ToolResult:
     if U.from_molar_energy(max(energies) - low, "Eh") > 1:
         warnings.append("Energies span more than 1 hartree: check the unit.")
 
+    # The most populated states, in order, until they add up to 95 %.
     order = sorted(range(len(labels)), key=lambda i: -pops[i])
-    cumulative, covered = 0.0, 0
+    cumulative, top_95 = 0.0, set()
     for i in order:
         if cumulative < 95:
-            covered += 1
+            top_95.add(i)
         cumulative += pops[i] * 100
+    covered = len(top_95)
 
     rows = [
         [
             labels[i],
             f"{rel_display[i]:.2f}",
-            f"{pops[i] * 100:.1f}",
-            f"{sum(pops[j] for j in order[: k + 1]) * 100:.1f}",
+            U.format_percent(pops[i] * 100),
+            U.format_percent(sum(pops[j] for j in order[: k + 1]) * 100),
         ]
         for k, i in enumerate(order)
     ]
@@ -731,7 +813,7 @@ def _populations(inp: ProfileInput, temperature: float) -> ToolResult:
             avg = sum(p * v for p, v in zip(pops, values, strict=True))  # type: ignore[misc]
             name = prop_names[j] if j < len(prop_names) else f"Property {j + 1}"
             averages[name] = avg
-            avg_rows.append([name, U.format_number(avg, 5)])
+            avg_rows.append([name, U.format_sig(avg)])
         tables.append(
             Table(
                 title="Boltzmann-weighted averages", columns=["Property", "Average"], rows=avg_rows
@@ -739,12 +821,13 @@ def _populations(inp: ProfileInput, temperature: float) -> ToolResult:
         )
 
     states = [(labels[i], rel_display[i], pops[i]) for i in range(len(labels))]
-    svg = population_ladder(states, display_unit)
+    svg = population_ladder(states, display_unit,
+                            formulas=[f.latex for f in POPULATION_FORMULAS])  # fmt: skip
     path = workdir() / "populations.svg"
     path.write_text(svg, encoding="utf-8")
 
     top = labels[order[0]]
-    answer = f"{top} {pops[order[0]] * 100:.1f} %"
+    answer = f"{top} {U.format_percent(pops[order[0]] * 100)} %"
     if len(labels) > 1:
         answer += f" · {covered} of {len(labels)} states cover 95 %"
     used = (
@@ -757,17 +840,12 @@ def _populations(inp: ProfileInput, temperature: float) -> ToolResult:
         highlights=[
             Highlight(
                 label=labels[i],
-                value=f"{pops[i] * 100:.1f} %",
+                value=f"{U.format_percent(pops[i] * 100)} %",
                 note=f"ΔG = {rel_display[i]:.2f} {display_unit}",
             )
             for i in order[:3]
         ],
-        formulas=[
-            Formula(
-                latex=r"p_i = \frac{g_i\,e^{-\Delta G_i/RT}}{\sum_j g_j\,e^{-\Delta G_j/RT}}",
-                text="p_i = g_i exp(−ΔG_i/RT) / Σ g_j exp(−ΔG_j/RT)",
-            )
-        ],
+        formulas=POPULATION_FORMULAS,
         constants=_constants(used),
         assumptions=[
             "Boltzmann distribution at equilibrium among the states.",
@@ -788,9 +866,12 @@ def _populations(inp: ProfileInput, temperature: float) -> ToolResult:
                     "energy": rel_display[i],
                     "degeneracy": degeneracy[i],
                     "percent": pops[i] * 100,
+                    "percent_text": U.format_percent(pops[i] * 100),
+                    "in_top_95": i in top_95,  # among the states that make up 95 %
                 }
                 for i in range(len(labels))
             ],
+            "top_95_count": covered,
             "averages": averages,
             "relative_input_unit": rel,
         },
@@ -802,7 +883,18 @@ def _populations(inp: ProfileInput, temperature: float) -> ToolResult:
 # ---------------------------------------------------------------------------
 
 
+POPULATION_FORMULAS = [
+    Formula(
+        latex=r"p_i = \frac{g_i\,e^{-\Delta G_i/RT}}{\sum_j g_j\,e^{-\Delta G_j/RT}}",
+        text="p_i = g_i exp(−ΔG_i/RT) / Σ g_j exp(−ΔG_j/RT)",
+        in_drawing=True,
+    )
+]
+
+
 def _reaction_formulas(kinetic: bool, thermo: bool, diffusion: bool) -> list[Formula]:
+    """The formulas used, in the order they are drawn under the profile (all
+    marked in_drawing: they are typeset at the bottom of the drawing)."""
     out = []
     if kinetic:
         out.append(
@@ -815,14 +907,14 @@ def _reaction_formulas(kinetic: bool, thermo: bool, diffusion: bool) -> list[For
     if diffusion:
         out.append(
             Formula(
-                latex=r"\frac{1}{k} = \frac{1}{k_\mathrm{act}} + \frac{1}{k_\mathrm{diff}},"
-                r"\quad k_\mathrm{diff} = \frac{8RT}{3\eta}",
-                text="1/k = 1/k_act + 1/k_diff,  k_diff = 8RT/(3η)",
+                latex=r"\frac{1}{k} = \frac{1}{k_\mathrm{act}} + \frac{1}{k_\mathrm{diff}}",
+                text="1/k = 1/k_act + 1/k_diff",
             )
         )
+        out.append(Formula(latex=r"k_\mathrm{diff} = \frac{8RT}{3\eta}", text="k_diff = 8RT/(3η)"))
     if thermo:
         out.append(Formula(latex=r"K = e^{-\Delta G/RT}", text="K = exp(−ΔG/RT)"))
-    return out
+    return [f.model_copy(update={"in_drawing": True}) for f in out]
 
 
 def _constants(keys: set[str]) -> list[Constant]:

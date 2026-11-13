@@ -116,6 +116,11 @@
         "text": {
           "title": "Text",
           "type": "string"
+        },
+        "in_drawing": {
+          "default": false,
+          "title": "In Drawing",
+          "type": "boolean"
         }
       },
       "required": [

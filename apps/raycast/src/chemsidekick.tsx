@@ -6,7 +6,7 @@ import { usePromise } from "@raycast/utils";
 import { ErrorView } from "./components/ErrorView";
 import { ResultView } from "./components/ResultView";
 import { ToolForm } from "./components/ToolForm";
-import { ProfileCommand } from "./components/ProfileForm";
+import { ProfileCommand } from "./components/ProfileView";
 import { UnitsView } from "./components/UnitsView";
 import { getTransport } from "./connection";
 import type { ToolInfo, ToolListResponse } from "./lib/contract";

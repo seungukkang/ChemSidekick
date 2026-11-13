@@ -433,7 +433,8 @@ def parse_duration(text: str | float) -> float:
 
 
 def format_duration(seconds: float) -> str:
-    """Readable duration: '189 ps', '51 s', '28.4 min', '3.2 h', '4.6 d', '2.1 yr'."""
+    """Readable duration to 3 significant figures: '189 ps', '51.0 s', '28.4 min',
+    '3.20 h', '4.60 d', '2.10 yr'."""
     for limit, unit, size in [
         (1e-12, "fs", 1e-15),
         (1e-9, "ps", 1e-12),
@@ -446,8 +447,8 @@ def format_duration(seconds: float) -> str:
         (3 * 31557600, "d", 86400.0),
     ]:
         if seconds < limit:
-            return f"{format_number(seconds / size, 3)} {unit}"
-    return f"{format_number(seconds / 31557600, 3)} yr"
+            return f"{format_sig(seconds / size)} {unit}"
+    return f"{format_sig(seconds / 31557600)} yr"
 
 
 ENERGY_UNITS = ("kcal/mol", "kJ/mol", "eV", "Eh")
@@ -495,6 +496,31 @@ def format_number(x: float, digits: int = 6) -> str:
             return _trim(text)
     mantissa, exp = f"{x:.{digits - 1}e}".split("e")
     return f"{_trim(mantissa)} × 10{str(int(exp)).translate(_SUPERSCRIPT)}"
+
+
+def format_sig(x: float, digits: int = 3) -> str:
+    """Exactly `digits` significant figures, trailing zeros kept ('51.0', '0.0136',
+    '158'); scientific notation below 10⁻³ or from 10³, where the zeros of a
+    plain number would be ambiguous ('1.34 × 10⁹')."""
+    if x == 0:
+        return "0"
+    if not math.isfinite(x):
+        return str(x)
+    exponent = math.floor(math.log10(abs(float(f"{x:.{digits - 1}e}"))))
+    if -3 <= exponent < 3:
+        return f"{x:.{max(digits - 1 - exponent, 0)}f}"
+    mantissa, exp = f"{x:.{digits - 1}e}".split("e")
+    return f"{mantissa} × 10{str(int(exp)).translate(_SUPERSCRIPT)}"
+
+
+def format_percent(x: float) -> str:
+    """A percentage to one decimal ('96.7'), or, when that would read 0.0, three
+    significant figures in scientific notation ('1.01 × 10⁻⁸') so a minor share
+    is still visible."""
+    if 0 < abs(x) < 0.05:
+        mantissa, exp = f"{x:.2e}".split("e")
+        return f"{mantissa} × 10{str(int(exp)).translate(_SUPERSCRIPT)}"
+    return f"{x:.1f}"
 
 
 _RELATION = {

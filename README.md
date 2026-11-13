@@ -68,7 +68,7 @@ npm run dev                     # loads the extension into Raycast; it stays aft
 | Convert Units | Type a value and pick its unit beside the search bar; every related unit is listed, with its definition, constants and sources on the right. Enter copies a value, ⌘⇧C at full precision, ⌘T sets the temperature for RT and kT |
 | XYZ Viewer | Paste coordinates; 2D drawing and rotating 3D view side by side, then the details |
 | Stereoisomers | Type `stereo` and a SMILES; isomers as cards, Enter turns a card into a rotating 3D view |
-| Energy Profile | Fill in the paths (product, TS, product energy) and pick the options from dropdowns; ⌘↵ draws the profile with rates and ratios, ⌘E goes back to change a value. The last input is remembered |
+| Energy Profile | The paths on the left, the drawing and the answer on the right, redrawn as values change. Type `D 21 -4` (name, TS, product) in the search bar and press Enter to add a path; Enter on a path edits it. Reaction or Boltzmann populations beside the search bar; temperature (typed, in K) and unit in the list, the rest under More options; ⌘↵ shows the full result. The last input is remembered |
 
 - If `csk` is somewhere else, set its path in the extension preferences.
 - After Python dependencies change, reinstall with `uv tool install --editable . --reinstall`.

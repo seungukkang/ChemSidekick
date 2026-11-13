@@ -14,7 +14,8 @@
     "formulas": [
       {
         "latex": "1\\ \\text{Eh} ≈ 4.359744722 \\times 10^{-18}\\ \\text{J}",
-        "text": "1 Eh ≈ 4.359744722 × 10⁻¹⁸ J   (Eh)"
+        "text": "1 Eh ≈ 4.359744722 × 10⁻¹⁸ J   (Eh)",
+        "in_drawing": false
       }
     ],
     "constants": [

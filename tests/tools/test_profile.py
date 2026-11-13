@@ -47,14 +47,28 @@ def test_paths_with_the_same_product_add_up():
 
 def test_only_a_barrier():
     r = run(paths="B 22.0 -")
-    assert r.answer == "k = 4.65 × 10⁻⁴ s⁻¹ · t½ = 24.9 min"
+    assert r.answer == "k = 4.65 × 10⁻⁴ s⁻¹ · t½ = 24.9 min · 99 % done in 2.75 h"
     assert path(r, "B")["K"] is None
 
 
 def test_only_a_product_energy():
     r = run(paths="B - -1.0")
-    assert r.answer == "K = 5.408"
+    assert r.answer == "K = 5.41 (84.4 % B at equilibrium)"
     assert not any(t.title == "Rates" for t in r.tables)
+
+
+def test_one_path_tells_what_follows_from_it():
+    r = run(paths="B 20.0 -3.0")
+    assert r.answer == (
+        "k = 0.0136 s⁻¹ · t½ = 51.0 s · 99 % done in 5.65 min · K = 158 (99.4 % B at equilibrium)"
+    )
+    values = {h.label: h.value for h in r.highlights}
+    assert values["90 % / 99 % done"] == "2.82 min / 5.65 min"
+    assert values["10 °C warmer"] == "3.09× faster"
+    eq = next(t for t in r.tables if t.title == "Equilibria")
+    assert eq.rows[0][3:] == ["99.4", "23.0", "2.24 h"]  # % at eq., reverse ΔG‡, reverse t½
+    practical = next(t for t in r.tables if t.title.startswith("Temperature for a half-life"))
+    assert practical.rows[0] == ["B", "24 °C", "-8 °C", "-28 °C"]
 
 
 def test_half_life_and_rate_constant_inputs_give_the_barrier():
@@ -223,3 +237,29 @@ def test_solvent_choices_match_the_data():
     from chemsidekick.tools.energetics.profile import SolventChoice
 
     assert set(get_args(SolventChoice)) == set(load_solvents().solvents) | {"custom"}
+
+
+def test_low_barrier_is_computed_but_flagged_as_qualitative():
+    r = run(paths="B 20.0 -3.0\nP2 1.0 -14")
+    assert path(r, "P2")["k"] is not None  # still computed
+    (warning,) = [w for w in r.warnings if w.startswith("Low barrier")]
+    assert "(P2)" in warning and "5RT = 3.0 kcal/mol" in warning and "qualitative" in warning
+    assert not any(w.startswith("Low barrier") for w in run(paths="B 20.0 -3.0").warnings)
+
+
+def test_formulas_are_drawn_under_the_diagram():
+    for r in (run(paths="B 20.0 -3.0"), run(mode="populations", states="a 0\nb 1")):
+        assert [a.kind for a in r.artifacts] == ["svg"]  # one card: diagram + formulas
+        assert r.formulas and all(f.in_drawing for f in r.formulas)
+        svg = r.artifacts[0].path.read_text()
+        assert "#e5e7eb" in svg  # the divider
+        assert "<use" not in svg  # glyphs as paths (macOS renderer)
+
+
+def test_populations_mark_the_states_that_make_up_95_percent():
+    r = run(mode="populations", states="conf1 0\nconf2 0.3\nconf3 0.8\nconf4 1.2\nconf5 2.5")
+    states = {s["label"]: s for s in r.data["states"]}
+    assert r.data["top_95_count"] == 4
+    assert [label for label, s in states.items() if not s["in_top_95"]] == ["conf5"]
+    assert states["conf1"]["percent_text"] == "49.8"
+    assert r.answer == "conf1 49.8 % · 4 of 5 states cover 95 %"  # CLI answer unchanged

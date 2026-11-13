@@ -140,7 +140,8 @@ export function renderResult(result: ToolResult, run?: RunInfo, images: ViewImag
   });
 
   // Evidence
-  for (const f of result.formulas) md.push(`$$${f.latex}$$`, "");
+  // Formulas already typeset inside the drawing are not repeated.
+  for (const f of result.formulas.filter((x) => !x.in_drawing)) md.push(`$$${f.latex}$$`, "");
   if (result.constants.length) {
     md.push("### Constants", "", "| Name | Symbol | Value | Unit | Source |", "| --- | --- | --- | --- | --- |");
     for (const c of result.constants) {

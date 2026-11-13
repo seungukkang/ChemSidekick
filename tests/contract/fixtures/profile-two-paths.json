@@ -7,27 +7,30 @@
     "highlights": [
       {
         "label": "t½ via B",
-        "value": "51 s",
-        "note": "k = 0.01359 s⁻¹"
+        "value": "51.0 s",
+        "note": "k = 0.0136 s⁻¹"
       },
       {
         "label": "t½ via C",
         "value": "24.9 min",
-        "note": "k = 4.647 × 10⁻⁴ s⁻¹"
+        "note": "k = 4.65 × 10⁻⁴ s⁻¹"
       }
     ],
     "formulas": [
       {
         "latex": "k = \\kappa\\,\\frac{k_\\mathrm{B}T}{h}\\,e^{-\\Delta G^\\ddagger/RT}",
-        "text": "k = κ (k_B T / h) exp(−ΔG‡/RT)"
+        "text": "k = κ (k_B T / h) exp(−ΔG‡/RT)",
+        "in_drawing": true
       },
       {
         "latex": "t_{1/2} = \\frac{\\ln 2}{k}",
-        "text": "t½ = ln 2 / k"
+        "text": "t½ = ln 2 / k",
+        "in_drawing": true
       },
       {
         "latex": "K = e^{-\\Delta G/RT}",
-        "text": "K = exp(−ΔG/RT)"
+        "text": "K = exp(−ΔG/RT)",
+        "in_drawing": true
       }
     ],
     "constants": [
@@ -73,7 +76,7 @@
     ],
     "notes": [
       "Energies are relative to the reactant A. Values computed from k, t½ or K are drawn in italics.",
-      "RT = 0.5925 kcal/mol at 298.15 K."
+      "RT = 0.592 kcal/mol at 298.15 K."
     ],
     "tables": [
       {
@@ -82,20 +85,55 @@
           "Path",
           "ΔG‡ (kcal/mol)",
           "k (s⁻¹)",
-          "t½"
+          "t½",
+          "90 %",
+          "99 %"
         ],
         "rows": [
           [
             "B",
             "20.0",
-            "0.01359",
-            "51 s"
+            "0.0136",
+            "51.0 s",
+            "2.82 min",
+            "5.65 min"
           ],
           [
             "C",
             "22.0",
-            "4.647 × 10⁻⁴",
-            "24.9 min"
+            "4.65 × 10⁻⁴",
+            "24.9 min",
+            "82.6 min",
+            "2.75 h"
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Temperature for a half-life of (ΔG‡ taken as independent of temperature)",
+        "columns": [
+          "Path",
+          "t½ 1 min",
+          "t½ 1 h",
+          "t½ 1 day"
+        ],
+        "rows": [
+          [
+            "B",
+            "24 °C",
+            "-8 °C",
+            "-28 °C"
+          ],
+          [
+            "C",
+            "52 °C",
+            "18 °C",
+            "-4 °C"
           ]
         ],
         "minor_columns": [],
@@ -111,20 +149,26 @@
           "Product",
           "ΔG (kcal/mol)",
           "K",
-          "Reverse ΔG‡"
+          "% at eq.",
+          "Reverse ΔG‡",
+          "Reverse t½"
         ],
         "rows": [
           [
             "B",
             "-3.0",
-            "158.1",
-            "23.0"
+            "158",
+            "99.4",
+            "23.0",
+            "2.24 h"
           ],
           [
             "C",
             "-5.0",
-            "4624",
-            "27.0"
+            "4.62 × 10³",
+            "100.0",
+            "27.0",
+            "79.8 d"
           ]
         ],
         "minor_columns": [],

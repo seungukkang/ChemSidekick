@@ -14,7 +14,8 @@
     "formulas": [
       {
         "latex": "E = \\frac{hc}{\\lambda}",
-        "text": "E = hc / λ"
+        "text": "E = hc / λ",
+        "in_drawing": false
       }
     ],
     "constants": [

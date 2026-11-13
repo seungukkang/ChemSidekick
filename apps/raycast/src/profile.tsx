@@ -1,6 +1,6 @@
-// Energy Profile: a form for the paths A → TS → products (or the states for
-// populations), then the profile drawing with rates, ratios and equilibria.
-import { ProfileCommand } from "./components/ProfileForm";
+// Energy Profile: the paths A → TS → products (or the states for
+// populations) on the left, the drawing with rates and ratios on the right.
+import { ProfileCommand } from "./components/ProfileView";
 
 export default function Command() {
   return <ProfileCommand />;

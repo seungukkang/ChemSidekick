@@ -158,8 +158,21 @@ def test_profile_view_redraws_as_values_change(app):
     assert not app.exception and not app.error
     assert any("Kinetic B : C = 96\\.7 : 3\\.3" in m.value for m in app.markdown)
     assert app.image  # the profile drawing
-    app.text_input(key="pf-ts-1").input("19.0").run()  # TS→C below TS→B now
-    assert any("Kinetic B : C = 15\\.6 : 84\\.4" in m.value for m in app.markdown)
+    app.text_input(key="pf-T").input("100 C").run()  # hotter: less selective
+    assert not app.exception and not app.error
+    assert any("Kinetic B : C = 93\\." in m.value for m in app.markdown)
+    app.text_input(key="pf-T").input("298.15").run()
     app.segmented_control(key="pf-mode").set_value("populations").run()
     assert not app.exception
     assert any("conf1 61\\.9 %" in m.value for m in app.markdown)
+
+
+def test_profile_table_rows_become_paths():
+    from chemsidekick.ui.profile_view import paths_text
+
+    rows = [
+        {"name": "", "ts": "20", "product": None},
+        {"name": "C", "ts": "", "product": ""},
+        {"name": "two words", "ts": " 1 h ", "product": "-2"},
+    ]
+    assert paths_text(rows) == "P1\t20\t-\ntwo_words\t1h\t-2"

@@ -231,3 +231,29 @@ def test_measured_constants_are_verified_and_report_is_current():
     assert (ROOT / "data/verification/units.md").read_text(encoding="utf-8") == mod.report(), (
         "run: uv run python scripts/build_units_report.py"
     )
+
+
+def test_format_percent_keeps_minor_shares_visible():
+    assert U.format_percent(96.66) == "96.7"
+    assert U.format_percent(0.05) == "0.1"
+    assert U.format_percent(1.18e-12) == "1.18 × 10⁻¹²"
+    assert U.format_percent(0.0123) == "1.23 × 10⁻²"
+    assert U.format_percent(0) == "0.0"
+
+
+@pytest.mark.parametrize(
+    ("x", "text"),
+    [
+        (51.0, "51.0"),
+        (0.013588, "0.0136"),
+        (158.1, "158"),
+        (3.0, "3.00"),
+        (999.6, "1.00 × 10³"),  # rounds up past 999: scientific, no ambiguous zeros
+        (1.343e9, "1.34 × 10⁹"),
+        (4.647e-4, "4.65 × 10⁻⁴"),
+        (-2.5, "-2.50"),
+        (0, "0"),
+    ],
+)
+def test_format_sig_keeps_three_significant_figures(x, text):
+    assert U.format_sig(x) == text
