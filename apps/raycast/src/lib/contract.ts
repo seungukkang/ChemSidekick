@@ -44,6 +44,7 @@ export interface Highlight {
 export interface Formula {
   latex: string;
   text: string;
+  in_drawing?: boolean; // already typeset inside the result's drawing
 }
 
 export interface Constant {

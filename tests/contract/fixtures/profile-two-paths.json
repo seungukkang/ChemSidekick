@@ -1,0 +1,277 @@
+{
+  "contract": 1,
+  "csk_version": "0.0.0",
+  "ok": true,
+  "result": {
+    "answer": "Kinetic B : C = 96.7 : 3.3 · Equilibrium B : C = 3.3 : 96.7 · kinetic product B, thermodynamic product C",
+    "highlights": [
+      {
+        "label": "t½ via B",
+        "value": "51.0 s",
+        "note": "k = 0.0136 s⁻¹"
+      },
+      {
+        "label": "t½ via C",
+        "value": "24.9 min",
+        "note": "k = 4.65 × 10⁻⁴ s⁻¹"
+      }
+    ],
+    "formulas": [
+      {
+        "latex": "k = \\kappa\\,\\frac{k_\\mathrm{B}T}{h}\\,e^{-\\Delta G^\\ddagger/RT}",
+        "text": "k = κ (k_B T / h) exp(−ΔG‡/RT)",
+        "in_drawing": true
+      },
+      {
+        "latex": "t_{1/2} = \\frac{\\ln 2}{k}",
+        "text": "t½ = ln 2 / k",
+        "in_drawing": true
+      },
+      {
+        "latex": "K = e^{-\\Delta G/RT}",
+        "text": "K = exp(−ΔG/RT)",
+        "in_drawing": true
+      }
+    ],
+    "constants": [
+      {
+        "name": "Planck constant",
+        "symbol": "h",
+        "value": 6.62607015e-34,
+        "unit": "J s",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019)"
+      },
+      {
+        "name": "Boltzmann constant",
+        "symbol": "kB",
+        "value": 1.380649e-23,
+        "unit": "J/K",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019)"
+      },
+      {
+        "name": "Avogadro constant",
+        "symbol": "NA",
+        "value": 6.02214076e+23,
+        "unit": "1/mol",
+        "source": "SI Brochure, 9th ed. (BIPM, 2019)"
+      },
+      {
+        "name": "thermochemical calorie",
+        "symbol": "cal",
+        "value": 4.184,
+        "unit": "J",
+        "source": "NIST SP 811 (2008), Appendix B.8"
+      }
+    ],
+    "assumptions": [
+      "Rate control: each step is irreversible over the time scale shown.",
+      "Half-lives are first order.",
+      "Curtin–Hammett: the kinetic ratio is the ratio of rate constants from the same reactant.",
+      "Equilibrium: products interconvert through the reactant.",
+      "Standard state 1 M; T = 298.15 K (25.00 °C)."
+    ],
+    "sources": [
+      "SI Brochure, 9th ed. (BIPM, 2019)",
+      "NIST SP 811 (2008), Appendix B.8"
+    ],
+    "notes": [
+      "Energies are relative to the reactant A. Values computed from k, t½ or K are drawn in italics.",
+      "RT = 0.592 kcal/mol at 298.15 K."
+    ],
+    "tables": [
+      {
+        "title": "Rates",
+        "columns": [
+          "Path",
+          "ΔG‡ (kcal/mol)",
+          "k (s⁻¹)",
+          "t½",
+          "90 %",
+          "99 %"
+        ],
+        "rows": [
+          [
+            "B",
+            "20.0",
+            "0.0136",
+            "51.0 s",
+            "2.82 min",
+            "5.65 min"
+          ],
+          [
+            "C",
+            "22.0",
+            "4.65 × 10⁻⁴",
+            "24.9 min",
+            "82.6 min",
+            "2.75 h"
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Temperature for a half-life of (ΔG‡ taken as independent of temperature)",
+        "columns": [
+          "Path",
+          "t½ 1 min",
+          "t½ 1 h",
+          "t½ 1 day"
+        ],
+        "rows": [
+          [
+            "B",
+            "24 °C",
+            "-8 °C",
+            "-28 °C"
+          ],
+          [
+            "C",
+            "52 °C",
+            "18 °C",
+            "-4 °C"
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Equilibria",
+        "columns": [
+          "Product",
+          "ΔG (kcal/mol)",
+          "K",
+          "% at eq.",
+          "Reverse ΔG‡",
+          "Reverse t½"
+        ],
+        "rows": [
+          [
+            "B",
+            "-3.0",
+            "158",
+            "99.4",
+            "23.0",
+            "2.24 h"
+          ],
+          [
+            "C",
+            "-5.0",
+            "4.62 × 10³",
+            "100.0",
+            "27.0",
+            "79.8 d"
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      },
+      {
+        "title": "Product ratio",
+        "columns": [
+          "Product",
+          "Kinetic %",
+          "Equilibrium %"
+        ],
+        "rows": [
+          [
+            "B",
+            "96.7",
+            "3.3"
+          ],
+          [
+            "C",
+            "3.3",
+            "96.7"
+          ]
+        ],
+        "minor_columns": [],
+        "action_field": null,
+        "action_columns": [],
+        "cells": {},
+        "tags": {},
+        "column_gaps": []
+      }
+    ],
+    "structures": [],
+    "artifacts": [
+      {
+        "kind": "svg",
+        "path": "/fixture/cache/recent/00007-profile/profile.svg",
+        "title": "Energy profile",
+        "note": ""
+      }
+    ],
+    "warnings": [],
+    "data": {
+      "mode": "reaction",
+      "unit": "kcal/mol",
+      "temperature_K": 298.15,
+      "k_unit": "s⁻¹",
+      "paths": [
+        {
+          "label": "B",
+          "barrier": 20.0,
+          "barrier_entered": true,
+          "energy": -3.0,
+          "energy_entered": true,
+          "kappa": 1.0,
+          "k_act": 0.01358815004787466,
+          "k_diff": null,
+          "k": 0.01358815004787466,
+          "half_life_s": 51.011151489923485,
+          "t90_s": 169.45537728693216,
+          "t99_s": 338.91075457386427,
+          "K": 158.1303601076713
+        },
+        {
+          "label": "C",
+          "barrier": 22.0,
+          "barrier_entered": true,
+          "energy": -5.0,
+          "energy_entered": true,
+          "kappa": 1.0,
+          "k_act": 0.0004646759127091762,
+          "k_diff": null,
+          "k": 0.0004646759127091762,
+          "half_life_s": 1491.6787412515635,
+          "t90_s": 4955.249519109785,
+          "t99_s": 9910.499038219568,
+          "K": 4624.081002477702
+        }
+      ],
+      "kinetic_percent": {
+        "B": 96.69336321382954,
+        "C": 3.306636786170451
+      },
+      "equilibrium_percent": {
+        "B": 3.3066367861704573,
+        "C": 96.69336321382954
+      },
+      "equilibrium_reactant_percent": 0.020906456441002644,
+      "diffusion_limit": null,
+      "k_diff": null
+    }
+  },
+  "run": {
+    "tool": "profile",
+    "tool_id": "ENE-01",
+    "number": 7,
+    "folder": "/fixture/cache/recent/00007-profile",
+    "recorded": true,
+    "elapsed_s": 0.1,
+    "peak_memory_mb": null
+  }
+}

@@ -69,6 +69,7 @@ export interface ViewImages {
   spins?: string[]; // GIFs of the structures of a result without drawings (xyz)
   grids?: Record<number, string>; // table index -> markdown of a figure drawn for it (periodic table)
   combined?: Record<string, string>; // drawing path -> one wide GIF card: that 2D drawing + rotating 3D
+  drawingWidth?: number; // px for a single drawing (e.g. a wide energy profile); default DRAWING_WIDTH
 }
 
 function image(alt: string, path: string, width: number): string {
@@ -76,8 +77,19 @@ function image(alt: string, path: string, width: number): string {
   return `![${cellText(alt) || "image"}](${encodeURI(path)}?raycast-width=${width})`;
 }
 
-function drawingRows(drawings: Artifact[], swaps: Record<string, string>, combined: Record<string, string>): string[] {
+function drawingRows(
+  drawings: Artifact[],
+  swaps: Record<string, string>,
+  combined: Record<string, string>,
+  singleWidth?: number,
+): string[] {
   const md: string[] = [];
+  // One wide drawing (an energy profile): full width, caption below.
+  if (drawings.length === 1 && singleWidth && !combined[drawings[0].path]) {
+    const a = drawings[0];
+    md.push(image(a.title, swaps[a.path] ?? a.path, singleWidth), "");
+    return md;
+  }
   // A single drawing with its 3D view in one wide card, the caption below.
   if (drawings.length === 1 && combined[drawings[0].path]) {
     const a = drawings[0];
@@ -120,7 +132,7 @@ export function renderResult(result: ToolResult, run?: RunInfo, images: ViewImag
 
   // The result itself: drawings, then tables
   const drawings = result.artifacts.filter((a) => IMAGE_KINDS.has(a.kind));
-  md.push(...drawingRows(drawings, images.swaps ?? {}, images.combined ?? {}));
+  md.push(...drawingRows(drawings, images.swaps ?? {}, images.combined ?? {}, images.drawingWidth));
   // Then the information: key values, tables, evidence.
   if (result.highlights.length) md.push(highlightsMarkdown(result.highlights), "");
   result.tables.forEach((t, i) => {
@@ -128,7 +140,8 @@ export function renderResult(result: ToolResult, run?: RunInfo, images: ViewImag
   });
 
   // Evidence
-  for (const f of result.formulas) md.push(`$$${f.latex}$$`, "");
+  // Formulas already typeset inside the drawing are not repeated.
+  for (const f of result.formulas.filter((x) => !x.in_drawing)) md.push(`$$${f.latex}$$`, "");
   if (result.constants.length) {
     md.push("### Constants", "", "| Name | Symbol | Value | Unit | Source |", "| --- | --- | --- | --- | --- |");
     for (const c of result.constants) {

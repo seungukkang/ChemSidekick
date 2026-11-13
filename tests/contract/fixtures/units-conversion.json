@@ -19,11 +19,13 @@
     "formulas": [
       {
         "latex": "1\\ \\text{eV} = 1.602176634 \\times 10^{-19}\\ \\text{J}",
-        "text": "1 eV = 1.602176634 × 10⁻¹⁹ J   (e)"
+        "text": "1 eV = 1.602176634 × 10⁻¹⁹ J   (e)",
+        "in_drawing": false
       },
       {
         "latex": "1\\ \\text{kcal/mol} = 6.947695457 \\times 10^{-21}\\ \\text{J}",
-        "text": "1 kcal/mol = 6.947695457 × 10⁻²¹ J   (1000 * cal / NA)"
+        "text": "1 kcal/mol = 6.947695457 × 10⁻²¹ J   (1000 * cal / NA)",
+        "in_drawing": false
       }
     ],
     "constants": [

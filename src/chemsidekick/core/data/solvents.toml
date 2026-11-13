@@ -1,0 +1,66 @@
+# Solvent viscosities at 25 °C (298.15 K, 1 atm), for diffusion-limited rate
+# constants (energy profile, ENE-01).
+#
+# A solvent is listed only when at least three references agree with the
+# adopted value within `tolerance` (relative). scripts/build_solvents_report.py
+# writes data/verification/solvents.md from these records.
+#
+# Checked on 2026-11-13 and left out for now (fewer than three references found
+# at 25 °C): acetonitrile, DMSO, THF, dichloromethane, acetone (CRC only),
+# ethanol and DMF (HSDB and CRC only). Users can type their viscosity instead.
+
+tolerance = 0.02
+temperature_K = 298.15
+
+[references]
+nist = "NIST Chemistry WebBook, SRD 69, Thermophysical Properties of Fluid Systems, 298.15 K and 0.101325 MPa (retrieved 2026-11-13)"
+hsdb = "Hazardous Substances Data Bank (HSDB), via PubChem, value at 25 °C (retrieved 2026-11-13)"
+crc85 = "CRC Handbook of Chemistry and Physics, 85th ed. (2004), viscosity at 25 °C, as tabulated by Diversified Enterprises (accudynetest.com/visc_table.html, retrieved 2026-11-13)"
+icsc = "ILO-WHO International Chemical Safety Cards, via PubChem (retrieved 2026-11-13)"
+
+# viscosity in mPa s (= cP)
+
+[[solvent]]
+id = "water"
+name = "Water"
+viscosity = 0.890022
+source = "nist"
+checks = [
+  { ref = "nist", value = 0.890022 },
+  { ref = "hsdb", value = 0.8949 },
+  { ref = "crc85", value = 0.89 },
+]
+
+[[solvent]]
+id = "methanol"
+name = "Methanol"
+viscosity = 0.543712
+source = "nist"
+checks = [
+  { ref = "nist", value = 0.543712 },
+  { ref = "hsdb", value = 0.544 },
+  { ref = "crc85", value = 0.54 },
+  { ref = "icsc", value = 0.544 },
+]
+
+[[solvent]]
+id = "toluene"
+name = "Toluene"
+viscosity = 0.552198
+source = "nist"
+checks = [
+  { ref = "nist", value = 0.552198 },
+  { ref = "hsdb", value = 0.560 },
+  { ref = "crc85", value = 0.56 },
+]
+
+[[solvent]]
+id = "benzene"
+name = "Benzene"
+viscosity = 0.603006
+source = "nist"
+checks = [
+  { ref = "nist", value = 0.603006 },
+  { ref = "hsdb", value = 0.604 },
+  { ref = "crc85", value = 0.60 },
+]

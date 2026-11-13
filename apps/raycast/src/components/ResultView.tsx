@@ -48,11 +48,15 @@ export function ResultView({
   input,
   options = NO_OPTIONS,
   autoOpenViewer = false,
+  drawingWidth,
+  onEdit,
 }: {
   tool: ToolInfo;
   input: Record<string, unknown>;
   options?: RunOptions;
   autoOpenViewer?: boolean; // open the HTML 3D viewer in the browser when the result arrives
+  drawingWidth?: number; // px for a single drawing (default: small drawings side by side)
+  onEdit?: () => void; // "Change Input" goes back to a tool's own form instead of the generated one
 }) {
   const { data, isLoading, error, revalidate } = usePromise(runTool, [tool.name, input, options], {
     failureToastOptions: { title: tool.title },
@@ -66,7 +70,7 @@ export function ResultView({
   const pick = clickableTable(data.result);
   if (pick && Object.keys(pick.cells).length) return <PickList tool={tool} table={pick} />;
   if (drawingsOf(data.result).length > 1) return <DrawingsResult tool={tool} data={data} input={input} />;
-  return <ResultDetail tool={tool} data={data} input={input} />;
+  return <ResultDetail tool={tool} data={data} input={input} drawingWidth={drawingWidth} onEdit={onEdit} />;
 }
 
 // Actions every view of a result offers.
@@ -75,11 +79,13 @@ function CommonActions({
   data,
   input,
   markdown,
+  onEdit,
 }: {
   tool: ToolInfo;
   data: RunResponse;
   input: Record<string, unknown>;
   markdown: string;
+  onEdit?: () => void;
 }) {
   const viewer = data.result.artifacts.find((a) => a.kind === "html")?.path;
   const files = data.result.artifacts.filter((a) => !["svg", "png", "html"].includes(a.kind));
@@ -93,7 +99,10 @@ function CommonActions({
           onAction={() => open(viewer)}
         />
       )}
-      {Object.keys(tool.input_schema).length > 0 && (
+      {onEdit && (
+        <Action title="Change Input" icon={Icon.Pencil} shortcut={Keyboard.Shortcut.Common.Edit} onAction={onEdit} />
+      )}
+      {!onEdit && Object.keys(tool.input_schema).length > 0 && (
         <Action.Push
           title="Change Input"
           icon={Icon.Pencil}
@@ -136,10 +145,14 @@ export function ResultDetail({
   tool,
   data,
   input,
+  drawingWidth,
+  onEdit,
 }: {
   tool: ToolInfo;
   data: RunResponse;
   input: Record<string, unknown>;
+  drawingWidth?: number;
+  onEdit?: () => void;
 }) {
   const targets = useMemo(() => spinTargets(data.result), [data]);
   const spin = useSpinState();
@@ -166,7 +179,7 @@ export function ResultDetail({
       ) as Record<number, string>,
     [data],
   );
-  const view = renderResult(data.result, data.run, { swaps, spins, grids, combined });
+  const view = renderResult(data.result, data.run, { swaps, spins, grids, combined, drawingWidth });
   if (waiting) {
     return <Detail isLoading navigationTitle={tool.title} markdown={`# ${data.result.answer}\n\nDrawing 2D and 3D…`} />;
   }
@@ -195,7 +208,7 @@ export function ResultDetail({
               ))}
             </ActionPanel.Submenu>
           )}
-          <CommonActions tool={tool} data={data} input={input} markdown={view.markdown} />
+          <CommonActions tool={tool} data={data} input={input} markdown={view.markdown} onEdit={onEdit} />
         </ActionPanel>
       }
     />

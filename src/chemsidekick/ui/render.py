@@ -318,8 +318,10 @@ def render_result(
     for w in result.warnings:
         st.warning(w)
 
+    # Formulas already typeset inside the drawing are not repeated.
     for f in result.formulas:
-        st.latex(f.latex)
+        if not f.in_drawing:
+            st.latex(f.latex)
 
     # Drawings and 3D structures are the main content of a result, so they come
     # before the tables.

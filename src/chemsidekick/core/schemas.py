@@ -115,6 +115,9 @@ class Formula(_Model):
 
     latex: str
     text: str
+    # True when the formula is already typeset inside the result's drawing, so
+    # interfaces that show the drawing need not show it again.
+    in_drawing: bool = False
 
 
 class Constant(_Model):

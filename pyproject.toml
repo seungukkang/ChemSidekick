@@ -15,6 +15,7 @@ dependencies = [
     "rdkit>=2026.9.1",
     "streamlit>=1.67.0",
     "typer>=0.28.0",
+    "ziamath>=0.13",
 ]
 
 [project.scripts]
@@ -37,6 +38,8 @@ extend-immutable-calls = ["typer.Option", "typer.Argument"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# ziamath (formula typesetting) still calls importlib.resources.path internally.
+filterwarnings = ["ignore:path is deprecated:DeprecationWarning:ziamath"]
 
 [dependency-groups]
 dev = [

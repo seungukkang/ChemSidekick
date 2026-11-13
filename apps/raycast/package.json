@@ -2,7 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "chemsidekick",
   "title": "ChemSidekick",
-  "description": "Small chemistry tools, fast: elements, unit conversions, XYZ structures, stereoisomers.",
+  "description": "Small chemistry tools, fast: elements, unit conversions, XYZ structures, stereoisomers, energy profiles.",
   "icon": "extension-icon.png",
   "license": "MIT",
   "categories": [
@@ -58,6 +58,23 @@
         "wavenumber",
         "debye",
         "pressure"
+      ]
+    },
+    {
+      "name": "profile",
+      "title": "Energy Profile",
+      "subtitle": "ChemSidekick",
+      "description": "Energy profile A → TS → products: rate constants, half-lives, kinetic and equilibrium ratios; or Boltzmann populations.",
+      "mode": "view",
+      "keywords": [
+        "eyring",
+        "kinetics",
+        "thermodynamics",
+        "barrier",
+        "half-life",
+        "selectivity",
+        "boltzmann",
+        "conformer"
       ]
     },
     {
