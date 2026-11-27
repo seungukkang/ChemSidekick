@@ -1,0 +1,4812 @@
+{
+ "meta": {
+  "retrieved": {
+   "ccd": "2026-11-26",
+   "pubchem": "2026-11-26",
+   "chebi": "2026-11-26",
+   "expasy_kd": "2026-11-26",
+   "ncbi_gc": "2026-11-26"
+  },
+  "classes": {
+   "nonpolar": "Nonpolar, aliphatic",
+   "aromatic": "Aromatic",
+   "polar": "Polar, uncharged",
+   "positive": "Positively charged",
+   "negative": "Negatively charged",
+   "other": "Other proteinogenic"
+  },
+  "references": {
+   "jcbn1984": {
+    "citation": "IUPAC-IUB Joint Commission on Biochemical Nomenclature (JCBN), Nomenclature and Symbolism for Amino Acids and Peptides (Recommendations 1983), Pure Appl. Chem. 1984, 56, 595–624."
+   },
+   "ccd": {
+    "citation": "wwPDB Chemical Component Dictionary (CCD), J. D. Westbrook et al., Bioinformatics 2015, 31, 1274–1278; files.rcsb.org/ligands."
+   },
+   "pubchem": {
+    "citation": "PubChem (NCBI), S. Kim et al., Nucleic Acids Res. 2025, 53, D1516–D1525; compound records by CID."
+   },
+   "chebi": {
+    "citation": "ChEBI (EMBL-EBI), A. Malik et al., Nucleic Acids Res. 2026; compound records by ChEBI ID."
+   },
+   "kd1982": {
+    "citation": "J. Kyte, R. F. Doolittle, A simple method for displaying the hydropathic character of a protein, J. Mol. Biol. 1982, 157, 105–132 (Table 2)."
+   },
+   "expasy": {
+    "citation": "ExPASy ProtScale, Amino acid scale: Hydropathicity (Kyte & Doolittle), SIB Swiss Institute of Bioinformatics, web.expasy.org/protscale."
+   },
+   "ncbi_gc": {
+    "citation": "NCBI, The Genetic Codes, Table 1 (Standard Code), www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi; gc.prt."
+   },
+   "lehninger7": {
+    "citation": "D. L. Nelson, M. M. Cox, Lehninger Principles of Biochemistry, 7th ed., W. H. Freeman, 2017, Table 3-1 and Fig. 3-5."
+   }
+  },
+  "stop_codons": [
+   "UAA",
+   "UAG",
+   "UGA"
+  ],
+  "element_weight_status": {
+   "H": "verified",
+   "C": "verified",
+   "N": "verified",
+   "O": "verified",
+   "S": "verified",
+   "Se": "verified"
+  }
+ },
+ "amino_acids": [
+  {
+   "one": "G",
+   "three": "Gly",
+   "name": "Glycine",
+   "class": "nonpolar",
+   "essential": false,
+   "ids": {
+    "ccd": "GLY",
+    "pubchem_cid": 750,
+    "chebi": "CHEBI:15428"
+   },
+   "smiles": "NCC(=O)O",
+   "smiles_ph7": "[NH3+]CC(=O)[O-]",
+   "inchikey": "DHMQDGOQFOQNFH-UHFFFAOYSA-N",
+   "formula": "C2H5NO2",
+   "iupac_name": "2-aminoacetic acid",
+   "stereo": {
+    "alpha": null,
+    "beta": null,
+    "other": [],
+    "text": "achiral"
+   },
+   "mass": {
+    "mono": 75.032028,
+    "avg": 75.067,
+    "residue_mono": 57.021464,
+    "residue_avg": 57.052
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.34,
+    "alpha_nh3": 9.6,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.97,
+   "hydropathy_kd": -0.4,
+   "hydropathy_status": "partial",
+   "codons": [
+    "GGU",
+    "GGC",
+    "GGA",
+    "GGG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "OXT",
+     "H",
+     "H2",
+     "HA2",
+     "HA3",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.931,
+      0.09,
+      -0.034
+     ],
+     [
+      0.761,
+      -0.799,
+      -0.008
+     ],
+     [
+      -0.498,
+      0.029,
+      -0.005
+     ],
+     [
+      -0.429,
+      1.235,
+      -0.023
+     ],
+     [
+      -1.697,
+      -0.574,
+      0.018
+     ],
+     [
+      1.91,
+      0.738,
+      0.738
+     ],
+     [
+      2.788,
+      -0.442,
+      -0.037
+     ],
+     [
+      0.772,
+      -1.44,
+      -0.889
+     ],
+     [
+      0.793,
+      -1.415,
+      0.891
+     ],
+     [
+      -2.477,
+      -0.002,
+      0.019
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "A",
+   "three": "Ala",
+   "name": "Alanine",
+   "class": "nonpolar",
+   "essential": false,
+   "ids": {
+    "ccd": "ALA",
+    "pubchem_cid": 5950,
+    "chebi": "CHEBI:16977"
+   },
+   "smiles": "C[C@H](N)C(=O)O",
+   "smiles_ph7": "C[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "QNAYBMKLOCPYGJ-REOHCLBHSA-N",
+   "formula": "C3H7NO2",
+   "iupac_name": "(2S)-2-aminopropanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 89.047678,
+    "avg": 89.094,
+    "residue_mono": 71.037114,
+    "residue_avg": 71.079
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.34,
+    "alpha_nh3": 9.69,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 6.01,
+   "hydropathy_kd": 1.8,
+   "hydropathy_status": "partial",
+   "codons": [
+    "GCU",
+    "GCC",
+    "GCA",
+    "GCG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB1",
+     "HB2",
+     "HB3",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -0.966,
+      0.493,
+      1.5
+     ],
+     [
+      0.257,
+      0.418,
+      0.692
+     ],
+     [
+      -0.094,
+      0.017,
+      -0.716
+     ],
+     [
+      -1.056,
+      -0.682,
+      -0.923
+     ],
+     [
+      1.204,
+      -0.62,
+      1.296
+     ],
+     [
+      0.661,
+      0.439,
+      -1.742
+     ],
+     [
+      -1.383,
+      -0.425,
+      1.482
+     ],
+     [
+      -0.676,
+      0.661,
+      2.452
+     ],
+     [
+      0.746,
+      1.392,
+      0.682
+     ],
+     [
+      1.459,
+      -0.33,
+      2.316
+     ],
+     [
+      0.715,
+      -1.594,
+      1.307
+     ],
+     [
+      2.113,
+      -0.676,
+      0.697
+     ],
+     [
+      0.435,
+      0.182,
+      -2.647
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "P",
+   "three": "Pro",
+   "name": "Proline",
+   "class": "nonpolar",
+   "essential": false,
+   "ids": {
+    "ccd": "PRO",
+    "pubchem_cid": 145742,
+    "chebi": "CHEBI:17203"
+   },
+   "smiles": "OC(=O)[C@@H]1CCCN1",
+   "smiles_ph7": "[O-]C(=O)[C@@H]1CCC[NH2+]1",
+   "inchikey": "ONIBWKKTOPOVIA-BYPYZUCNSA-N",
+   "formula": "C5H9NO2",
+   "iupac_name": "(2S)-pyrrolidine-2-carboxylic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 115.063329,
+    "avg": 115.132,
+    "residue_mono": 97.052764,
+    "residue_avg": 97.117
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 1.99,
+    "alpha_nh3": 10.96,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 6.47,
+   "hydropathy_kd": -1.6,
+   "hydropathy_status": "partial",
+   "codons": [
+    "CCU",
+    "CCC",
+    "CCA",
+    "CCG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "CD",
+     "OXT",
+     "H",
+     "HA",
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -0.816,
+      1.108,
+      0.254
+     ],
+     [
+      0.001,
+      -0.107,
+      0.509
+     ],
+     [
+      1.408,
+      0.091,
+      0.005
+     ],
+     [
+      1.65,
+      0.98,
+      -0.777
+     ],
+     [
+      -0.703,
+      -1.227,
+      -0.286
+     ],
+     [
+      -2.163,
+      -0.753,
+      -0.439
+     ],
+     [
+      -2.218,
+      0.614,
+      0.276
+     ],
+     [
+      2.391,
+      -0.721,
+      0.424
+     ],
+     [
+      -0.707,
+      1.708,
+      1.057
+     ],
+     [
+      0.009,
+      -0.343,
+      1.573
+     ],
+     [
+      -0.24,
+      -1.345,
+      -1.266
+     ],
+     [
+      -0.666,
+      -2.165,
+      0.267
+     ],
+     [
+      -2.416,
+      -0.638,
+      -1.493
+     ],
+     [
+      -2.843,
+      -1.458,
+      0.04
+     ],
+     [
+      -2.872,
+      1.3,
+      -0.263
+     ],
+     [
+      -2.559,
+      0.492,
+      1.304
+     ],
+     [
+      3.293,
+      -0.594,
+      0.101
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "V",
+   "three": "Val",
+   "name": "Valine",
+   "class": "nonpolar",
+   "essential": true,
+   "ids": {
+    "ccd": "VAL",
+    "pubchem_cid": 6287,
+    "chebi": "CHEBI:16414"
+   },
+   "smiles": "CC(C)[C@H](N)C(=O)O",
+   "smiles_ph7": "CC(C)[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "KZSNJWFQEVHDMF-BYPYZUCNSA-N",
+   "formula": "C5H11NO2",
+   "iupac_name": "(2S)-2-amino-3-methylbutanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 117.078979,
+    "avg": 117.148,
+    "residue_mono": 99.068414,
+    "residue_avg": 99.133
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.32,
+    "alpha_nh3": 9.62,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.97,
+   "hydropathy_kd": 4.2,
+   "hydropathy_status": "partial",
+   "codons": [
+    "GUU",
+    "GUC",
+    "GUA",
+    "GUG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG1",
+     "CG2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB",
+     "HG11",
+     "HG12",
+     "HG13",
+     "HG21",
+     "HG22",
+     "HG23",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.564,
+      -0.642,
+      0.454
+     ],
+     [
+      0.145,
+      -0.698,
+      0.079
+     ],
+     [
+      -0.037,
+      -0.093,
+      -1.288
+     ],
+     [
+      0.703,
+      0.784,
+      -1.664
+     ],
+     [
+      -0.682,
+      0.086,
+      1.098
+     ],
+     [
+      -0.497,
+      -0.528,
+      2.487
+     ],
+     [
+      -0.218,
+      1.543,
+      1.119
+     ],
+     [
+      -1.022,
+      -0.529,
+      -2.089
+     ],
+     [
+      1.825,
+      0.332,
+      0.455
+     ],
+     [
+      1.624,
+      -0.959,
+      1.41
+     ],
+     [
+      -0.186,
+      -1.736,
+      0.064
+     ],
+     [
+      -1.736,
+      0.044,
+      0.82
+     ],
+     [
+      -1.087,
+      0.031,
+      3.214
+     ],
+     [
+      -0.828,
+      -1.566,
+      2.472
+     ],
+     [
+      0.555,
+      -0.486,
+      2.765
+     ],
+     [
+      0.835,
+      1.585,
+      1.397
+     ],
+     [
+      -0.35,
+      1.981,
+      0.13
+     ],
+     [
+      -0.808,
+      2.103,
+      1.845
+     ],
+     [
+      -1.139,
+      -0.14,
+      -2.967
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "L",
+   "three": "Leu",
+   "name": "Leucine",
+   "class": "nonpolar",
+   "essential": true,
+   "ids": {
+    "ccd": "LEU",
+    "pubchem_cid": 6106,
+    "chebi": "CHEBI:15603"
+   },
+   "smiles": "CC(C)C[C@H](N)C(=O)O",
+   "smiles_ph7": "CC(C)C[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "ROHFNLRQFUQHCH-YFKPBYRVSA-N",
+   "formula": "C6H13NO2",
+   "iupac_name": "(2S)-2-amino-4-methylpentanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 131.094629,
+    "avg": 131.175,
+    "residue_mono": 113.084064,
+    "residue_avg": 113.16
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.36,
+    "alpha_nh3": 9.6,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.98,
+   "hydropathy_kd": 3.8,
+   "hydropathy_status": "partial",
+   "codons": [
+    "UUA",
+    "UUG",
+    "CUU",
+    "CUC",
+    "CUA",
+    "CUG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "CD1",
+     "CD2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HG",
+     "HD11",
+     "HD12",
+     "HD13",
+     "HD21",
+     "HD22",
+     "HD23",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "C",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -1.661,
+      0.627,
+      -0.406
+     ],
+     [
+      -0.205,
+      0.441,
+      -0.467
+     ],
+     [
+      0.18,
+      -0.055,
+      -1.836
+     ],
+     [
+      -0.591,
+      -0.731,
+      -2.474
+     ],
+     [
+      0.221,
+      -0.583,
+      0.585
+     ],
+     [
+      -0.17,
+      -0.079,
+      1.976
+     ],
+     [
+      0.256,
+      -1.104,
+      3.029
+     ],
+     [
+      0.526,
+      1.254,
+      2.25
+     ],
+     [
+      1.382,
+      0.254,
+      -2.348
+     ],
+     [
+      -2.077,
+      -0.272,
+      -0.592
+     ],
+     [
+      -1.884,
+      0.858,
+      0.55
+     ],
+     [
+      0.291,
+      1.391,
+      -0.271
+     ],
+     [
+      1.301,
+      -0.722,
+      0.54
+     ],
+     [
+      -0.275,
+      -1.534,
+      0.39
+     ],
+     [
+      -1.25,
+      0.058,
+      2.021
+     ],
+     [
+      -0.022,
+      -0.745,
+      4.019
+     ],
+     [
+      -0.24,
+      -2.055,
+      2.833
+     ],
+     [
+      1.336,
+      -1.243,
+      2.984
+     ],
+     [
+      1.606,
+      1.115,
+      2.205
+     ],
+     [
+      0.222,
+      1.984,
+      1.5
+     ],
+     [
+      0.247,
+      1.613,
+      3.241
+     ],
+     [
+      1.63,
+      -0.064,
+      -3.226
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "I",
+   "three": "Ile",
+   "name": "Isoleucine",
+   "class": "nonpolar",
+   "essential": true,
+   "ids": {
+    "ccd": "ILE",
+    "pubchem_cid": 6306,
+    "chebi": "CHEBI:17191"
+   },
+   "smiles": "CC[C@H](C)[C@H](N)C(=O)O",
+   "smiles_ph7": "CC[C@H](C)[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "AGPKZVBTJJNPAG-WHFBIAKZSA-N",
+   "formula": "C6H13NO2",
+   "iupac_name": "(2S,3S)-2-amino-3-methylpentanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": "S",
+    "other": [],
+    "text": "(2S,3S)"
+   },
+   "mass": {
+    "mono": 131.094629,
+    "avg": 131.175,
+    "residue_mono": 113.084064,
+    "residue_avg": 113.16
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.36,
+    "alpha_nh3": 9.68,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 6.02,
+   "hydropathy_kd": 4.5,
+   "hydropathy_status": "partial",
+   "codons": [
+    "AUU",
+    "AUC",
+    "AUA"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG1",
+     "CG2",
+     "CD1",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB",
+     "HG12",
+     "HG13",
+     "HG21",
+     "HG22",
+     "HG23",
+     "HD11",
+     "HD12",
+     "HD13",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "C",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -1.944,
+      0.335,
+      -0.343
+     ],
+     [
+      -0.487,
+      0.519,
+      -0.369
+     ],
+     [
+      0.066,
+      -0.032,
+      -1.657
+     ],
+     [
+      -0.484,
+      -0.958,
+      -2.203
+     ],
+     [
+      0.14,
+      -0.219,
+      0.814
+     ],
+     [
+      -0.421,
+      0.341,
+      2.122
+     ],
+     [
+      1.658,
+      -0.027,
+      0.788
+     ],
+     [
+      0.206,
+      -0.397,
+      3.305
+     ],
+     [
+      1.171,
+      0.504,
+      -2.197
+     ],
+     [
+      -2.112,
+      -0.656,
+      -0.41
+     ],
+     [
+      -2.256,
+      0.622,
+      0.572
+     ],
+     [
+      -0.253,
+      1.582,
+      -0.299
+     ],
+     [
+      -0.092,
+      -1.281,
+      0.744
+     ],
+     [
+      -1.502,
+      0.204,
+      2.141
+     ],
+     [
+      -0.188,
+      1.403,
+      2.192
+     ],
+     [
+      1.891,
+      1.034,
+      0.857
+     ],
+     [
+      2.105,
+      -0.554,
+      1.631
+     ],
+     [
+      2.059,
+      -0.427,
+      -0.143
+     ],
+     [
+      -0.193,
+      0.001,
+      4.237
+     ],
+     [
+      -0.026,
+      -1.46,
+      3.235
+     ],
+     [
+      1.287,
+      -0.261,
+      3.286
+     ],
+     [
+      1.527,
+      0.15,
+      -3.024
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "M",
+   "three": "Met",
+   "name": "Methionine",
+   "class": "nonpolar",
+   "essential": true,
+   "ids": {
+    "ccd": "MET",
+    "pubchem_cid": 6137,
+    "chebi": "CHEBI:16643"
+   },
+   "smiles": "CSCC[C@H](N)C(=O)O",
+   "smiles_ph7": "CSCC[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "FFEARJCKVFRZRR-BYPYZUCNSA-N",
+   "formula": "C5H11NO2S",
+   "iupac_name": "(2S)-2-amino-4-methylsulfanylbutanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 149.05105,
+    "avg": 149.208,
+    "residue_mono": 131.040485,
+    "residue_avg": 131.193
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.28,
+    "alpha_nh3": 9.21,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.74,
+   "hydropathy_kd": 1.9,
+   "hydropathy_status": "partial",
+   "codons": [
+    "AUG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "SD",
+     "CE",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE1",
+     "HE2",
+     "HE3",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "S",
+     "C",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -1.816,
+      0.142,
+      -1.166
+     ],
+     [
+      -0.392,
+      0.499,
+      -1.214
+     ],
+     [
+      0.206,
+      0.002,
+      -2.504
+     ],
+     [
+      -0.236,
+      -0.989,
+      -3.033
+     ],
+     [
+      0.334,
+      -0.145,
+      -0.032
+     ],
+     [
+      -0.273,
+      0.359,
+      1.277
+     ],
+     [
+      0.589,
+      -0.405,
+      2.678
+     ],
+     [
+      -0.314,
+      0.353,
+      4.056
+     ],
+     [
+      1.232,
+      0.661,
+      -3.066
+     ],
+     [
+      -1.865,
+      -0.864,
+      -1.22
+     ],
+     [
+      -2.149,
+      0.399,
+      -0.248
+     ],
+     [
+      -0.287,
+      1.582,
+      -1.158
+     ],
+     [
+      1.391,
+      0.119,
+      -0.068
+     ],
+     [
+      0.229,
+      -1.229,
+      -0.088
+     ],
+     [
+      -1.33,
+      0.094,
+      1.313
+     ],
+     [
+      -0.168,
+      1.442,
+      1.333
+     ],
+     [
+      0.09,
+      -0.01,
+      5.0
+     ],
+     [
+      -0.207,
+      1.436,
+      4.008
+     ],
+     [
+      -1.369,
+      0.088,
+      3.988
+     ],
+     [
+      1.616,
+      0.342,
+      -3.894
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "F",
+   "three": "Phe",
+   "name": "Phenylalanine",
+   "class": "aromatic",
+   "essential": true,
+   "ids": {
+    "ccd": "PHE",
+    "pubchem_cid": 6140,
+    "chebi": "CHEBI:17295"
+   },
+   "smiles": "N[C@@H](Cc1ccccc1)C(=O)O",
+   "smiles_ph7": "[NH3+][C@@H](Cc1ccccc1)C(=O)[O-]",
+   "inchikey": "COLNVLDHVKWLRT-QMMMGPOBSA-N",
+   "formula": "C9H11NO2",
+   "iupac_name": "(2S)-2-amino-3-phenylpropanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 165.078979,
+    "avg": 165.192,
+    "residue_mono": 147.068414,
+    "residue_avg": 147.177
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 1.83,
+    "alpha_nh3": 9.13,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.48,
+   "hydropathy_kd": 2.8,
+   "hydropathy_status": "partial",
+   "codons": [
+    "UUU",
+    "UUC"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "CD1",
+     "CD2",
+     "CE1",
+     "CE2",
+     "CZ",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HD1",
+     "HD2",
+     "HE1",
+     "HE2",
+     "HZ",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "C",
+     "C",
+     "C",
+     "C",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.317,
+      0.962,
+      1.014
+     ],
+     [
+      -0.02,
+      0.426,
+      1.3
+     ],
+     [
+      -0.109,
+      0.047,
+      2.756
+     ],
+     [
+      0.879,
+      -0.317,
+      3.346
+     ],
+     [
+      -0.27,
+      -0.809,
+      0.434
+     ],
+     [
+      -0.181,
+      -0.43,
+      -1.02
+     ],
+     [
+      1.031,
+      -0.498,
+      -1.68
+     ],
+     [
+      -1.314,
+      -0.018,
+      -1.698
+     ],
+     [
+      1.112,
+      -0.15,
+      -3.015
+     ],
+     [
+      -1.231,
+      0.333,
+      -3.032
+     ],
+     [
+      -0.018,
+      0.265,
+      -3.691
+     ],
+     [
+      -1.286,
+      0.113,
+      3.396
+     ],
+     [
+      1.975,
+      0.23,
+      1.235
+     ],
+     [
+      1.365,
+      1.104,
+      0.017
+     ],
+     [
+      -0.77,
+      1.184,
+      1.076
+     ],
+     [
+      0.48,
+      -1.568,
+      0.659
+     ],
+     [
+      -1.262,
+      -1.207,
+      0.646
+     ],
+     [
+      1.915,
+      -0.824,
+      -1.152
+     ],
+     [
+      -2.262,
+      0.034,
+      -1.183
+     ],
+     [
+      2.06,
+      -0.203,
+      -3.53
+     ],
+     [
+      -2.116,
+      0.659,
+      -3.56
+     ],
+     [
+      0.045,
+      0.538,
+      -4.734
+     ],
+     [
+      -1.343,
+      -0.13,
+      4.33
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "Y",
+   "three": "Tyr",
+   "name": "Tyrosine",
+   "class": "aromatic",
+   "essential": false,
+   "ids": {
+    "ccd": "TYR",
+    "pubchem_cid": 6057,
+    "chebi": "CHEBI:17895"
+   },
+   "smiles": "N[C@@H](Cc1ccc(O)cc1)C(=O)O",
+   "smiles_ph7": "[NH3+][C@@H](Cc1ccc(O)cc1)C(=O)[O-]",
+   "inchikey": "OUYCCCASQSFEME-QMMMGPOBSA-N",
+   "formula": "C9H11NO3",
+   "iupac_name": "(2S)-2-amino-3-(4-hydroxyphenyl)propanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 181.073893,
+    "avg": 181.191,
+    "residue_mono": 163.063329,
+    "residue_avg": 163.176
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.2,
+    "alpha_nh3": 9.11,
+    "side_chain": 10.07,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.63,
+   "hydropathy_kd": -1.3,
+   "hydropathy_status": "partial",
+   "codons": [
+    "UAU",
+    "UAC"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "CD1",
+     "CD2",
+     "CE1",
+     "CE2",
+     "CZ",
+     "OH",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HD1",
+     "HD2",
+     "HE1",
+     "HE2",
+     "HH",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "C",
+     "C",
+     "C",
+     "C",
+     "O",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.32,
+      0.952,
+      1.428
+     ],
+     [
+      -0.018,
+      0.429,
+      1.734
+     ],
+     [
+      -0.103,
+      0.094,
+      3.201
+     ],
+     [
+      0.886,
+      -0.254,
+      3.799
+     ],
+     [
+      -0.274,
+      -0.831,
+      0.907
+     ],
+     [
+      -0.189,
+      -0.496,
+      -0.559
+     ],
+     [
+      1.022,
+      -0.589,
+      -1.219
+     ],
+     [
+      -1.324,
+      -0.102,
+      -1.244
+     ],
+     [
+      1.103,
+      -0.282,
+      -2.563
+     ],
+     [
+      -1.247,
+      0.21,
+      -2.587
+     ],
+     [
+      -0.032,
+      0.118,
+      -3.252
+     ],
+     [
+      0.044,
+      0.42,
+      -4.574
+     ],
+     [
+      -1.279,
+      0.184,
+      3.842
+     ],
+     [
+      1.977,
+      0.225,
+      1.669
+     ],
+     [
+      1.365,
+      1.063,
+      0.426
+     ],
+     [
+      -0.767,
+      1.183,
+      1.489
+     ],
+     [
+      0.473,
+      -1.585,
+      1.152
+     ],
+     [
+      -1.268,
+      -1.219,
+      1.134
+     ],
+     [
+      1.905,
+      -0.902,
+      -0.683
+     ],
+     [
+      -2.269,
+      -0.031,
+      -0.727
+     ],
+     [
+      2.049,
+      -0.354,
+      -3.078
+     ],
+     [
+      -2.132,
+      0.523,
+      -3.121
+     ],
+     [
+      -0.123,
+      -0.399,
+      -5.059
+     ],
+     [
+      -1.333,
+      -0.03,
+      4.784
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "W",
+   "three": "Trp",
+   "name": "Tryptophan",
+   "class": "aromatic",
+   "essential": true,
+   "ids": {
+    "ccd": "TRP",
+    "pubchem_cid": 6305,
+    "chebi": "CHEBI:16828"
+   },
+   "smiles": "N[C@@H](Cc1c[nH]c2ccccc12)C(=O)O",
+   "smiles_ph7": "[NH3+][C@@H](Cc1c[nH]c2ccccc12)C(=O)[O-]",
+   "inchikey": "QIVBCDIJIAJPQS-VIFPVBQESA-N",
+   "formula": "C11H12N2O2",
+   "iupac_name": "(2S)-2-amino-3-(1H-indol-3-yl)propanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 204.089878,
+    "avg": 204.229,
+    "residue_mono": 186.079313,
+    "residue_avg": 186.214
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.38,
+    "alpha_nh3": 9.39,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.88,
+   "hydropathy_kd": -0.9,
+   "hydropathy_status": "partial",
+   "codons": [
+    "UGG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "CD1",
+     "CD2",
+     "NE1",
+     "CE2",
+     "CE3",
+     "CZ2",
+     "CZ3",
+     "CH2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HE3",
+     "HZ2",
+     "HZ3",
+     "HH2",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "C",
+     "N",
+     "C",
+     "C",
+     "C",
+     "C",
+     "C",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.278,
+      1.121,
+      2.059
+     ],
+     [
+      -0.008,
+      0.417,
+      1.97
+     ],
+     [
+      -0.49,
+      0.076,
+      3.357
+     ],
+     [
+      0.308,
+      -0.13,
+      4.24
+     ],
+     [
+      0.168,
+      -0.868,
+      1.161
+     ],
+     [
+      0.65,
+      -0.526,
+      -0.225
+     ],
+     [
+      1.928,
+      -0.418,
+      -0.622
+     ],
+     [
+      -0.186,
+      -0.256,
+      -1.396
+     ],
+     [
+      1.978,
+      -0.095,
+      -1.951
+     ],
+     [
+      0.701,
+      0.014,
+      -2.454
+     ],
+     [
+      -1.564,
+      -0.21,
+      -1.615
+     ],
+     [
+      0.19,
+      0.314,
+      -3.712
+     ],
+     [
+      -2.044,
+      0.086,
+      -2.859
+     ],
+     [
+      -1.173,
+      0.348,
+      -3.907
+     ],
+     [
+      -1.806,
+      0.001,
+      3.61
+     ],
+     [
+      1.921,
+      0.493,
+      2.518
+     ],
+     [
+      1.611,
+      1.237,
+      1.113
+     ],
+     [
+      -0.74,
+      1.058,
+      1.479
+     ],
+     [
+      0.9,
+      -1.509,
+      1.652
+     ],
+     [
+      -0.786,
+      -1.39,
+      1.095
+     ],
+     [
+      2.789,
+      -0.564,
+      0.012
+     ],
+     [
+      2.791,
+      0.036,
+      -2.462
+     ],
+     [
+      -2.248,
+      -0.413,
+      -0.804
+     ],
+     [
+      0.86,
+      0.521,
+      -4.534
+     ],
+     [
+      -3.11,
+      0.116,
+      -3.029
+     ],
+     [
+      -1.567,
+      0.582,
+      -4.885
+     ],
+     [
+      -2.115,
+      -0.217,
+      4.5
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "S",
+   "three": "Ser",
+   "name": "Serine",
+   "class": "polar",
+   "essential": false,
+   "ids": {
+    "ccd": "SER",
+    "pubchem_cid": 5951,
+    "chebi": "CHEBI:17115"
+   },
+   "smiles": "N[C@@H](CO)C(=O)O",
+   "smiles_ph7": "[NH3+][C@@H](CO)C(=O)[O-]",
+   "inchikey": "MTCFGRXMJLQNBG-REOHCLBHSA-N",
+   "formula": "C3H7NO3",
+   "iupac_name": "(2S)-2-amino-3-hydroxypropanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 105.042593,
+    "avg": 105.093,
+    "residue_mono": 87.032028,
+    "residue_avg": 87.078
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.21,
+    "alpha_nh3": 9.15,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.68,
+   "hydropathy_kd": -0.8,
+   "hydropathy_status": "partial",
+   "codons": [
+    "UCU",
+    "UCC",
+    "UCA",
+    "UCG",
+    "AGU",
+    "AGC"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "OG",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HG",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "O",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.525,
+      0.493,
+      -0.608
+     ],
+     [
+      0.1,
+      0.469,
+      -0.252
+     ],
+     [
+      -0.053,
+      0.004,
+      1.173
+     ],
+     [
+      0.751,
+      -0.76,
+      1.649
+     ],
+     [
+      -0.642,
+      -0.489,
+      -1.184
+     ],
+     [
+      -0.496,
+      -0.049,
+      -2.535
+     ],
+     [
+      -1.084,
+      0.44,
+      1.913
+     ],
+     [
+      1.867,
+      -0.449,
+      -0.499
+     ],
+     [
+      1.574,
+      0.707,
+      -1.593
+     ],
+     [
+      -0.316,
+      1.471,
+      -0.354
+     ],
+     [
+      -0.225,
+      -1.491,
+      -1.081
+     ],
+     [
+      -1.699,
+      -0.507,
+      -0.92
+     ],
+     [
+      -0.978,
+      -0.679,
+      -3.088
+     ],
+     [
+      -1.183,
+      0.142,
+      2.828
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "T",
+   "three": "Thr",
+   "name": "Threonine",
+   "class": "polar",
+   "essential": true,
+   "ids": {
+    "ccd": "THR",
+    "pubchem_cid": 6288,
+    "chebi": "CHEBI:16857"
+   },
+   "smiles": "C[C@@H](O)[C@H](N)C(=O)O",
+   "smiles_ph7": "C[C@@H](O)[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "AYFVYJQAPQTCCC-GBXIJSLDSA-N",
+   "formula": "C4H9NO3",
+   "iupac_name": "(2S,3R)-2-amino-3-hydroxybutanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": "R",
+    "other": [],
+    "text": "(2S,3R)"
+   },
+   "mass": {
+    "mono": 119.058243,
+    "avg": 119.12,
+    "residue_mono": 101.047678,
+    "residue_avg": 101.105
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.11,
+    "alpha_nh3": 9.62,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.86,
+   "hydropathy_kd": -0.7,
+   "hydropathy_status": "partial",
+   "codons": [
+    "ACU",
+    "ACC",
+    "ACA",
+    "ACG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "OG1",
+     "CG2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB",
+     "HG1",
+     "HG21",
+     "HG22",
+     "HG23",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "O",
+     "C",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.543,
+      -0.702,
+      0.43
+     ],
+     [
+      0.122,
+      -0.706,
+      0.056
+     ],
+     [
+      -0.038,
+      -0.09,
+      -1.309
+     ],
+     [
+      0.732,
+      0.761,
+      -1.683
+     ],
+     [
+      -0.675,
+      0.104,
+      1.079
+     ],
+     [
+      -0.193,
+      1.448,
+      1.103
+     ],
+     [
+      -0.511,
+      -0.521,
+      2.466
+     ],
+     [
+      -1.039,
+      -0.488,
+      -2.11
+     ],
+     [
+      1.839,
+      0.261,
+      0.434
+     ],
+     [
+      1.593,
+      -1.025,
+      1.385
+     ],
+     [
+      -0.245,
+      -1.732,
+      0.038
+     ],
+     [
+      -1.729,
+      0.101,
+      0.802
+     ],
+     [
+      0.74,
+      1.406,
+      1.352
+     ],
+     [
+      -1.08,
+      0.056,
+      3.194
+     ],
+     [
+      -0.879,
+      -1.547,
+      2.448
+     ],
+     [
+      0.542,
+      -0.518,
+      2.743
+     ],
+     [
+      -1.143,
+      -0.092,
+      -2.986
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "C",
+   "three": "Cys",
+   "name": "Cysteine",
+   "class": "polar",
+   "essential": false,
+   "ids": {
+    "ccd": "CYS",
+    "pubchem_cid": 5862,
+    "chebi": "CHEBI:17561"
+   },
+   "smiles": "N[C@@H](CS)C(=O)O",
+   "smiles_ph7": "[NH3+][C@@H](CS)C(=O)[O-]",
+   "inchikey": "XUJNEKJLAYXESH-REOHCLBHSA-N",
+   "formula": "C3H7NO2S",
+   "iupac_name": "(2R)-2-amino-3-sulfanylpropanoic acid",
+   "stereo": {
+    "alpha": "R",
+    "beta": null,
+    "other": [],
+    "text": "(2R)"
+   },
+   "mass": {
+    "mono": 121.01975,
+    "avg": 121.154,
+    "residue_mono": 103.009185,
+    "residue_avg": 103.139
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 1.96,
+    "alpha_nh3": 10.28,
+    "side_chain": 8.18,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.07,
+   "hydropathy_kd": 2.5,
+   "hydropathy_status": "partial",
+   "codons": [
+    "UGU",
+    "UGC"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "SG",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HG",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "S",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.585,
+      0.483,
+      -0.081
+     ],
+     [
+      0.141,
+      0.45,
+      0.186
+     ],
+     [
+      -0.095,
+      0.006,
+      1.606
+     ],
+     [
+      0.685,
+      -0.742,
+      2.143
+     ],
+     [
+      -0.533,
+      -0.53,
+      -0.774
+     ],
+     [
+      -0.247,
+      0.004,
+      -2.484
+     ],
+     [
+      -1.174,
+      0.443,
+      2.275
+     ],
+     [
+      1.928,
+      -0.454,
+      0.063
+     ],
+     [
+      1.693,
+      0.682,
+      -1.065
+     ],
+     [
+      -0.277,
+      1.446,
+      0.042
+     ],
+     [
+      -0.114,
+      -1.526,
+      -0.63
+     ],
+     [
+      -1.604,
+      -0.554,
+      -0.575
+     ],
+     [
+      -0.904,
+      -0.965,
+      -3.145
+     ],
+     [
+      -1.326,
+      0.158,
+      3.186
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "N",
+   "three": "Asn",
+   "name": "Asparagine",
+   "class": "polar",
+   "essential": false,
+   "ids": {
+    "ccd": "ASN",
+    "pubchem_cid": 6267,
+    "chebi": "CHEBI:17196"
+   },
+   "smiles": "NC(=O)C[C@H](N)C(=O)O",
+   "smiles_ph7": "NC(=O)C[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "DCXYFEDJOCDNAF-REOHCLBHSA-N",
+   "formula": "C4H8N2O3",
+   "iupac_name": "(2S)-2,4-diamino-4-oxobutanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 132.053492,
+    "avg": 132.119,
+    "residue_mono": 114.042927,
+    "residue_avg": 114.104
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.02,
+    "alpha_nh3": 8.8,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.41,
+   "hydropathy_kd": -3.5,
+   "hydropathy_status": "partial",
+   "codons": [
+    "AAU",
+    "AAC"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "OD1",
+     "ND2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HD21",
+     "HD22",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "O",
+     "N",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -0.293,
+      1.686,
+      0.094
+     ],
+     [
+      -0.448,
+      0.292,
+      -0.34
+     ],
+     [
+      -1.846,
+      -0.179,
+      -0.031
+     ],
+     [
+      -2.51,
+      0.402,
+      0.794
+     ],
+     [
+      0.562,
+      -0.588,
+      0.401
+     ],
+     [
+      1.96,
+      -0.197,
+      -0.002
+     ],
+     [
+      2.132,
+      0.697,
+      -0.804
+     ],
+     [
+      3.019,
+      -0.841,
+      0.527
+     ],
+     [
+      -2.353,
+      -1.243,
+      -0.673
+     ],
+     [
+      -0.904,
+      2.297,
+      -0.427
+     ],
+     [
+      -0.453,
+      1.776,
+      1.086
+     ],
+     [
+      -0.27,
+      0.223,
+      -1.413
+     ],
+     [
+      0.442,
+      -0.451,
+      1.476
+     ],
+     [
+      0.389,
+      -1.633,
+      0.146
+     ],
+     [
+      2.881,
+      -1.556,
+      1.168
+     ],
+     [
+      3.919,
+      -0.59,
+      0.268
+     ],
+     [
+      -3.254,
+      -1.508,
+      -0.441
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "Q",
+   "three": "Gln",
+   "name": "Glutamine",
+   "class": "polar",
+   "essential": false,
+   "ids": {
+    "ccd": "GLN",
+    "pubchem_cid": 5961,
+    "chebi": "CHEBI:18050"
+   },
+   "smiles": "NC(=O)CC[C@H](N)C(=O)O",
+   "smiles_ph7": "NC(=O)CC[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "ZDXPYRJPNDTMRX-VKHMYHEASA-N",
+   "formula": "C5H10N2O3",
+   "iupac_name": "(2S)-2,5-diamino-5-oxopentanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 146.069142,
+    "avg": 146.146,
+    "residue_mono": 128.058578,
+    "residue_avg": 128.131
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.17,
+    "alpha_nh3": 9.13,
+    "side_chain": null,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 5.65,
+   "hydropathy_kd": -3.5,
+   "hydropathy_status": "partial",
+   "codons": [
+    "CAA",
+    "CAG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "CD",
+     "OE1",
+     "NE2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE21",
+     "HE22",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "O",
+     "N",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.858,
+      -0.148,
+      1.125
+     ],
+     [
+      0.517,
+      0.451,
+      1.112
+     ],
+     [
+      -0.236,
+      0.022,
+      2.344
+     ],
+     [
+      -0.005,
+      -1.049,
+      2.851
+     ],
+     [
+      -0.236,
+      -0.013,
+      -0.135
+     ],
+     [
+      0.529,
+      0.421,
+      -1.385
+     ],
+     [
+      -0.213,
+      -0.036,
+      -2.614
+     ],
+     [
+      -1.252,
+      -0.65,
+      -2.5
+     ],
+     [
+      0.277,
+      0.236,
+      -3.839
+     ],
+     [
+      -1.165,
+      0.831,
+      2.878
+     ],
+     [
+      1.729,
+      -1.148,
+      1.137
+     ],
+     [
+      2.286,
+      0.078,
+      0.24
+     ],
+     [
+      0.605,
+      1.537,
+      1.099
+     ],
+     [
+      -0.324,
+      -1.1,
+      -0.122
+     ],
+     [
+      -1.231,
+      0.431,
+      -0.144
+     ],
+     [
+      0.617,
+      1.508,
+      -1.398
+     ],
+     [
+      1.524,
+      -0.023,
+      -1.375
+     ],
+     [
+      -0.2,
+      -0.058,
+      -4.63
+     ],
+     [
+      1.109,
+      0.727,
+      -3.93
+     ],
+     [
+      -1.649,
+      0.556,
+      3.669
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "K",
+   "three": "Lys",
+   "name": "Lysine",
+   "class": "positive",
+   "essential": true,
+   "ids": {
+    "ccd": "LYS",
+    "pubchem_cid": 5962,
+    "chebi": "CHEBI:18019"
+   },
+   "smiles": "NCCCC[C@H](N)C(=O)O",
+   "smiles_ph7": "[NH3+]CCCC[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "KDXKERNSBIXSRK-YFKPBYRVSA-N",
+   "formula": "C6H14N2O2",
+   "iupac_name": "(2S)-2,6-diaminohexanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 146.105528,
+    "avg": 146.19,
+    "residue_mono": 128.094963,
+    "residue_avg": 128.175
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.18,
+    "alpha_nh3": 8.95,
+    "side_chain": 10.53,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 9.74,
+   "hydropathy_kd": -3.9,
+   "hydropathy_status": "partial",
+   "codons": [
+    "AAA",
+    "AAG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "CD",
+     "CE",
+     "NZ",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "C",
+     "N",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.422,
+      1.796,
+      0.198
+     ],
+     [
+      1.394,
+      0.355,
+      0.484
+     ],
+     [
+      2.657,
+      -0.284,
+      -0.032
+     ],
+     [
+      3.316,
+      0.275,
+      -0.876
+     ],
+     [
+      0.184,
+      -0.278,
+      -0.206
+     ],
+     [
+      -1.102,
+      0.282,
+      0.407
+     ],
+     [
+      -2.313,
+      -0.351,
+      -0.283
+     ],
+     [
+      -3.598,
+      0.208,
+      0.329
+     ],
+     [
+      -4.761,
+      -0.4,
+      -0.332
+     ],
+     [
+      3.05,
+      -1.476,
+      0.446
+     ],
+     [
+      1.489,
+      1.891,
+      -0.804
+     ],
+     [
+      0.521,
+      2.162,
+      0.464
+     ],
+     [
+      1.322,
+      0.2,
+      1.56
+     ],
+     [
+      0.21,
+      -0.047,
+      -1.27
+     ],
+     [
+      0.211,
+      -1.359,
+      -0.068
+     ],
+     [
+      -1.128,
+      0.05,
+      1.471
+     ],
+     [
+      -1.13,
+      1.363,
+      0.269
+     ],
+     [
+      -2.287,
+      -0.12,
+      -1.348
+     ],
+     [
+      -2.285,
+      -1.432,
+      -0.145
+     ],
+     [
+      -3.625,
+      -0.023,
+      1.394
+     ],
+     [
+      -3.626,
+      1.289,
+      0.192
+     ],
+     [
+      -4.736,
+      -0.185,
+      -1.318
+     ],
+     [
+      -4.735,
+      -1.4,
+      -0.205
+     ],
+     [
+      -5.609,
+      -0.031,
+      0.071
+     ],
+     [
+      3.861,
+      -1.886,
+      0.115
+     ]
+    ],
+    "alpha": 1,
+    "charge": 1
+   }
+  },
+  {
+   "one": "H",
+   "three": "His",
+   "name": "Histidine",
+   "class": "positive",
+   "essential": true,
+   "ids": {
+    "ccd": "HIS",
+    "pubchem_cid": 6274,
+    "chebi": "CHEBI:15971"
+   },
+   "smiles": "N[C@@H](Cc1c[nH]cn1)C(=O)O",
+   "smiles_ph7": "[NH3+][C@@H](Cc1c[nH]cn1)C(=O)[O-]",
+   "inchikey": "HNDVDQJCIGZPNO-YFKPBYRVSA-N",
+   "formula": "C6H9N3O2",
+   "iupac_name": "(2S)-2-amino-3-(1H-imidazol-5-yl)propanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 155.069477,
+    "avg": 155.157,
+    "residue_mono": 137.058912,
+    "residue_avg": 137.142
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 1.82,
+    "alpha_nh3": 9.17,
+    "side_chain": 6.0,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 7.59,
+   "hydropathy_kd": -3.2,
+   "hydropathy_status": "partial",
+   "codons": [
+    "CAU",
+    "CAC"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "ND1",
+     "CD2",
+     "CE1",
+     "NE2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HD1",
+     "HD2",
+     "HE1",
+     "HE2",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "N",
+     "C",
+     "C",
+     "N",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -0.04,
+      -1.21,
+      0.053
+     ],
+     [
+      1.172,
+      -1.709,
+      0.652
+     ],
+     [
+      1.083,
+      -3.207,
+      0.905
+     ],
+     [
+      0.04,
+      -3.77,
+      1.222
+     ],
+     [
+      1.484,
+      -0.975,
+      1.962
+     ],
+     [
+      2.94,
+      -1.06,
+      2.353
+     ],
+     [
+      3.38,
+      -2.075,
+      3.129
+     ],
+     [
+      3.96,
+      -0.251,
+      2.046
+     ],
+     [
+      4.693,
+      -1.908,
+      3.317
+     ],
+     [
+      5.058,
+      -0.801,
+      2.662
+     ],
+     [
+      2.247,
+      -3.882,
+      0.744
+     ],
+     [
+      -0.102,
+      -1.155,
+      -0.95
+     ],
+     [
+      -0.715,
+      -0.741,
+      0.634
+     ],
+     [
+      1.965,
+      -1.558,
+      -0.089
+     ],
+     [
+      1.215,
+      0.087,
+      1.879
+     ],
+     [
+      0.859,
+      -1.368,
+      2.775
+     ],
+     [
+      2.828,
+      -2.838,
+      3.511
+     ],
+     [
+      4.108,
+      0.647,
+      1.479
+     ],
+     [
+      5.34,
+      -2.55,
+      3.892
+     ],
+     [
+      6.002,
+      -0.428,
+      2.627
+     ],
+     [
+      2.188,
+      -4.848,
+      0.901
+     ]
+    ],
+    "alpha": 1,
+    "charge": 1
+   }
+  },
+  {
+   "one": "R",
+   "three": "Arg",
+   "name": "Arginine",
+   "class": "positive",
+   "essential": false,
+   "ids": {
+    "ccd": "ARG",
+    "pubchem_cid": 6322,
+    "chebi": "CHEBI:16467"
+   },
+   "smiles": "NC(=N)NCCC[C@H](N)C(=O)O",
+   "smiles_ph7": "NC(=[NH2+])NCCC[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "ODKSFYDXXFIFQN-BYPYZUCNSA-N",
+   "formula": "C6H14N4O2",
+   "iupac_name": "(2S)-2-amino-5-(diaminomethylideneamino)pentanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 174.111676,
+    "avg": 174.204,
+    "residue_mono": 156.101111,
+    "residue_avg": 156.189
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.17,
+    "alpha_nh3": 9.04,
+    "side_chain": 12.48,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 10.76,
+   "hydropathy_kd": -4.5,
+   "hydropathy_status": "partial",
+   "codons": [
+    "CGU",
+    "CGC",
+    "CGA",
+    "CGG",
+    "AGA",
+    "AGG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "CD",
+     "NE",
+     "CZ",
+     "NH1",
+     "NH2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "N",
+     "C",
+     "N",
+     "N",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -0.469,
+      1.11,
+      -0.993
+     ],
+     [
+      0.004,
+      2.294,
+      -1.708
+     ],
+     [
+      -0.907,
+      2.521,
+      -2.901
+     ],
+     [
+      -1.827,
+      1.789,
+      -3.242
+     ],
+     [
+      1.475,
+      2.15,
+      -2.127
+     ],
+     [
+      1.745,
+      1.017,
+      -3.13
+     ],
+     [
+      3.21,
+      0.954,
+      -3.557
+     ],
+     [
+      4.071,
+      0.726,
+      -2.421
+     ],
+     [
+      5.469,
+      0.624,
+      -2.528
+     ],
+     [
+      6.259,
+      0.404,
+      -1.405
+     ],
+     [
+      6.078,
+      0.744,
+      -3.773
+     ],
+     [
+      -0.588,
+      3.659,
+      -3.574
+     ],
+     [
+      -0.058,
+      0.903,
+      -0.109
+     ],
+     [
+      -1.024,
+      0.452,
+      -1.494
+     ],
+     [
+      -0.103,
+      3.152,
+      -1.034
+     ],
+     [
+      2.086,
+      1.988,
+      -1.23
+     ],
+     [
+      1.814,
+      3.099,
+      -2.563
+     ],
+     [
+      1.136,
+      1.17,
+      -4.029
+     ],
+     [
+      1.447,
+      0.054,
+      -2.698
+     ],
+     [
+      3.348,
+      0.133,
+      -4.269
+     ],
+     [
+      3.505,
+      1.88,
+      -4.062
+     ],
+     [
+      3.674,
+      0.627,
+      -1.479
+     ],
+     [
+      7.271,
+      0.331,
+      -1.484
+     ],
+     [
+      5.858,
+      0.307,
+      -0.476
+     ],
+     [
+      5.53,
+      0.906,
+      -4.614
+     ],
+     [
+      7.088,
+      0.675,
+      -3.874
+     ],
+     [
+      -1.149,
+      3.855,
+      -4.355
+     ]
+    ],
+    "alpha": 1,
+    "charge": 1
+   }
+  },
+  {
+   "one": "D",
+   "three": "Asp",
+   "name": "Aspartate",
+   "class": "negative",
+   "essential": false,
+   "ids": {
+    "ccd": "ASP",
+    "pubchem_cid": 5960,
+    "chebi": "CHEBI:17053"
+   },
+   "smiles": "N[C@@H](CC(=O)O)C(=O)O",
+   "smiles_ph7": "[NH3+][C@@H](CC(=O)[O-])C(=O)[O-]",
+   "inchikey": "CKLJMWTZIZZHCS-REOHCLBHSA-N",
+   "formula": "C4H7NO4",
+   "iupac_name": "(2S)-2-aminobutanedioic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 133.037508,
+    "avg": 133.103,
+    "residue_mono": 115.026943,
+    "residue_avg": 115.088
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 1.88,
+    "alpha_nh3": 9.6,
+    "side_chain": 3.65,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 2.76,
+   "hydropathy_kd": -3.5,
+   "hydropathy_status": "partial",
+   "codons": [
+    "GAU",
+    "GAC"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "OD1",
+     "OD2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HD2",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "O",
+     "O",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -0.317,
+      1.688,
+      0.066
+     ],
+     [
+      -0.47,
+      0.286,
+      -0.344
+     ],
+     [
+      -1.868,
+      -0.18,
+      -0.029
+     ],
+     [
+      -2.534,
+      0.415,
+      0.786
+     ],
+     [
+      0.539,
+      -0.58,
+      0.413
+     ],
+     [
+      1.938,
+      -0.195,
+      0.004
+     ],
+     [
+      2.109,
+      0.681,
+      -0.81
+     ],
+     [
+      2.992,
+      -0.826,
+      0.543
+     ],
+     [
+      -2.374,
+      -1.256,
+      -0.652
+     ],
+     [
+      -0.928,
+      2.289,
+      -0.467
+     ],
+     [
+      -0.478,
+      1.795,
+      1.056
+     ],
+     [
+      -0.292,
+      0.199,
+      -1.416
+     ],
+     [
+      0.419,
+      -0.425,
+      1.485
+     ],
+     [
+      0.367,
+      -1.63,
+      0.176
+     ],
+     [
+      3.869,
+      -0.545,
+      0.25
+     ],
+     [
+      -3.275,
+      -1.517,
+      -0.416
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "E",
+   "three": "Glu",
+   "name": "Glutamate",
+   "class": "negative",
+   "essential": false,
+   "ids": {
+    "ccd": "GLU",
+    "pubchem_cid": 33032,
+    "chebi": "CHEBI:16015"
+   },
+   "smiles": "N[C@@H](CCC(=O)O)C(=O)O",
+   "smiles_ph7": "[NH3+][C@@H](CCC(=O)[O-])C(=O)[O-]",
+   "inchikey": "WHUUTDBJXJRKMK-VKHMYHEASA-N",
+   "formula": "C5H9NO4",
+   "iupac_name": "(2S)-2-aminopentanedioic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [],
+    "text": "(2S)"
+   },
+   "mass": {
+    "mono": 147.053158,
+    "avg": 147.13,
+    "residue_mono": 129.042593,
+    "residue_avg": 129.115
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": 2.19,
+    "alpha_nh3": 9.67,
+    "side_chain": 4.25,
+    "status": "provisional",
+    "refs": [
+     "lehninger7"
+    ]
+   },
+   "pi": 3.22,
+   "hydropathy_kd": -3.5,
+   "hydropathy_status": "partial",
+   "codons": [
+    "GAA",
+    "GAG"
+   ],
+   "codons_note": "",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "C",
+     "O",
+     "CB",
+     "CG",
+     "CD",
+     "OE1",
+     "OE2",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "O",
+     "C",
+     "C",
+     "C",
+     "O",
+     "O",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      1.199,
+      1.867,
+      -0.117
+     ],
+     [
+      1.138,
+      0.515,
+      0.453
+     ],
+     [
+      2.364,
+      -0.26,
+      0.041
+     ],
+     [
+      3.01,
+      0.096,
+      -0.916
+     ],
+     [
+      -0.113,
+      -0.2,
+      -0.062
+     ],
+     [
+      -1.36,
+      0.517,
+      0.461
+     ],
+     [
+      -2.593,
+      -0.187,
+      -0.046
+     ],
+     [
+      -2.485,
+      -1.161,
+      -0.753
+     ],
+     [
+      -3.811,
+      0.269,
+      0.287
+     ],
+     [
+      2.737,
+      -1.345,
+      0.737
+     ],
+     [
+      1.237,
+      1.834,
+      -1.125
+     ],
+     [
+      0.421,
+      2.427,
+      0.197
+     ],
+     [
+      1.098,
+      0.58,
+      1.54
+     ],
+     [
+      -0.117,
+      -0.187,
+      -1.152
+     ],
+     [
+      -0.113,
+      -1.231,
+      0.289
+     ],
+     [
+      -1.357,
+      0.504,
+      1.551
+     ],
+     [
+      -1.36,
+      1.548,
+      0.109
+     ],
+     [
+      -4.571,
+      -0.215,
+      -0.062
+     ],
+     [
+      3.53,
+      -1.809,
+      0.435
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "U",
+   "three": "Sec",
+   "name": "Selenocysteine",
+   "class": "other",
+   "essential": false,
+   "ids": {
+    "ccd": "SEC",
+    "pubchem_cid": 25076,
+    "chebi": "CHEBI:16633"
+   },
+   "smiles": "N[C@@H](C[SeH])C(=O)O",
+   "smiles_ph7": "[NH3+][C@@H](C[SeH])C(=O)[O-]",
+   "inchikey": "ZKZBPNGNEQAJSX-REOHCLBHSA-N",
+   "formula": "C3H7NO2Se",
+   "iupac_name": "(2R)-2-amino-3-selanylpropanoic acid",
+   "stereo": {
+    "alpha": "R",
+    "beta": null,
+    "other": [],
+    "text": "(2R)"
+   },
+   "mass": {
+    "mono": 168.9642,
+    "avg": 168.065,
+    "residue_mono": 150.953636,
+    "residue_avg": 150.05
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "unverified",
+    "avg_refs": [
+     "PubChem"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": null,
+    "alpha_nh3": null,
+    "side_chain": null,
+    "status": "none",
+    "refs": []
+   },
+   "pi": null,
+   "hydropathy_kd": null,
+   "hydropathy_status": null,
+   "codons": [],
+   "codons_note": "UGA (normally a stop codon) read as Sec when a SECIS element is present in the mRNA.",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "N",
+     "CA",
+     "CB",
+     "SE",
+     "C",
+     "O",
+     "OXT",
+     "H",
+     "H2",
+     "HA",
+     "HB2",
+     "HB3",
+     "HE",
+     "HXT"
+    ],
+    "symbols": [
+     "N",
+     "C",
+     "C",
+     "Se",
+     "C",
+     "O",
+     "O",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      -0.783,
+      1.676,
+      -0.339
+     ],
+     [
+      -0.938,
+      0.217,
+      -0.405
+     ],
+     [
+      0.042,
+      -0.445,
+      0.565
+     ],
+     [
+      1.879,
+      -0.092,
+      -0.02
+     ],
+     [
+      -2.349,
+      -0.156,
+      -0.027
+     ],
+     [
+      -3.03,
+      0.619,
+      0.602
+     ],
+     [
+      -2.848,
+      -1.348,
+      -0.389
+     ],
+     [
+      -1.373,
+      2.134,
+      -1.017
+     ],
+     [
+      -0.969,
+      2.018,
+      0.592
+     ],
+     [
+      -0.732,
+      -0.125,
+      -1.419
+     ],
+     [
+      -0.105,
+      -0.037,
+      1.565
+     ],
+     [
+      -0.134,
+      -1.521,
+      0.582
+     ],
+     [
+      2.691,
+      -0.839,
+      1.084
+     ],
+     [
+      -3.757,
+      -1.542,
+      -0.123
+     ]
+    ],
+    "alpha": 1,
+    "charge": 0
+   }
+  },
+  {
+   "one": "O",
+   "three": "Pyl",
+   "name": "Pyrrolysine",
+   "class": "other",
+   "essential": false,
+   "ids": {
+    "ccd": "PYL",
+    "pubchem_cid": 5460671,
+    "chebi": "CHEBI:21860"
+   },
+   "smiles": "C[C@@H]1CC=N[C@H]1C(=O)NCCCC[C@H](N)C(=O)O",
+   "smiles_ph7": "C[C@@H]1CC=N[C@H]1C(=O)NCCCC[C@H]([NH3+])C(=O)[O-]",
+   "inchikey": "ZFOMKMMPBOQKMC-KXUCPTDWSA-N",
+   "formula": "C12H21N3O3",
+   "iupac_name": "(2S)-2-amino-6-[[(2R,3R)-3-methyl-3,4-dihydro-2H-pyrrole-2-carbonyl]amino]hexanoic acid",
+   "stereo": {
+    "alpha": "S",
+    "beta": null,
+    "other": [
+     "R",
+     "R"
+    ],
+    "text": "(2S) + R,R in the side chain"
+   },
+   "mass": {
+    "mono": 255.158292,
+    "avg": 255.318,
+    "residue_mono": 237.147727,
+    "residue_avg": 237.303
+   },
+   "mass_check": {
+    "mono": "verified",
+    "mono_refs": [
+     "PubChem",
+     "ChEBI"
+    ],
+    "avg": "verified",
+    "avg_refs": [
+     "PubChem",
+     "ChEBI",
+     "CCD"
+    ]
+   },
+   "pka": {
+    "alpha_cooh": null,
+    "alpha_nh3": null,
+    "side_chain": null,
+    "status": "none",
+    "refs": []
+   },
+   "pi": null,
+   "hydropathy_kd": null,
+   "hydropathy_status": null,
+   "codons": [],
+   "codons_note": "UAG (normally a stop codon) read as Pyl in some archaea and bacteria.",
+   "structure_refs": [
+    "ccd",
+    "pubchem",
+    "chebi"
+   ],
+   "coords3d": {
+    "names": [
+     "CB2",
+     "CG2",
+     "CD2",
+     "CE2",
+     "N2",
+     "CA2",
+     "C2",
+     "O2",
+     "NZ",
+     "CE",
+     "CD",
+     "CG",
+     "CB",
+     "CA",
+     "C",
+     "OXT",
+     "O",
+     "N",
+     "HXT",
+     "HA",
+     "H",
+     "H2",
+     "HB3",
+     "HB2",
+     "HG3",
+     "HG2",
+     "HD3",
+     "HD2",
+     "HE3",
+     "HE2",
+     "HZ",
+     "HA2",
+     "HE22",
+     "HD32",
+     "HD22",
+     "HG22",
+     "HB12",
+     "HB22",
+     "HB32"
+    ],
+    "symbols": [
+     "C",
+     "C",
+     "C",
+     "C",
+     "N",
+     "C",
+     "C",
+     "O",
+     "N",
+     "C",
+     "C",
+     "C",
+     "C",
+     "C",
+     "C",
+     "O",
+     "O",
+     "N",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H",
+     "H"
+    ],
+    "coords": [
+     [
+      3.98,
+      2.442,
+      -0.324
+     ],
+     [
+      4.412,
+      1.125,
+      0.325
+     ],
+     [
+      5.952,
+      0.975,
+      0.313
+     ],
+     [
+      6.169,
+      -0.493,
+      0.022
+     ],
+     [
+      5.11,
+      -1.035,
+      -0.43
+     ],
+     [
+      3.995,
+      -0.087,
+      -0.54
+     ],
+     [
+      2.729,
+      -0.703,
+      -0.004
+     ],
+     [
+      2.784,
+      -1.7,
+      0.685
+     ],
+     [
+      1.535,
+      -0.146,
+      -0.288
+     ],
+     [
+      0.304,
+      -0.745,
+      0.234
+     ],
+     [
+      -0.9,
+      0.075,
+      -0.233
+     ],
+     [
+      -2.185,
+      -0.55,
+      0.312
+     ],
+     [
+      -3.389,
+      0.27,
+      -0.155
+     ],
+     [
+      -4.675,
+      -0.355,
+      0.39
+     ],
+     [
+      -5.849,
+      0.52,
+      0.034
+     ],
+     [
+      -6.114,
+      1.616,
+      0.762
+     ],
+     [
+      -6.552,
+      0.234,
+      -0.906
+     ],
+     [
+      -4.86,
+      -1.687,
+      -0.201
+     ],
+     [
+      -6.878,
+      2.146,
+      0.495
+     ],
+     [
+      -4.604,
+      -0.445,
+      1.474
+     ],
+     [
+      -5.668,
+      -2.148,
+      0.192
+     ],
+     [
+      -4.929,
+      -1.631,
+      -1.206
+     ],
+     [
+      -3.298,
+      1.292,
+      0.214
+     ],
+     [
+      -3.423,
+      0.279,
+      -1.244
+     ],
+     [
+      -2.277,
+      -1.572,
+      -0.057
+     ],
+     [
+      -2.152,
+      -0.558,
+      1.401
+     ],
+     [
+      -0.808,
+      1.097,
+      0.135
+     ],
+     [
+      -0.933,
+      0.084,
+      -1.323
+     ],
+     [
+      0.213,
+      -1.767,
+      -0.135
+     ],
+     [
+      0.338,
+      -0.753,
+      1.323
+     ],
+     [
+      1.491,
+      0.651,
+      -0.839
+     ],
+     [
+      3.859,
+      0.218,
+      -1.578
+     ],
+     [
+      7.102,
+      -1.015,
+      0.178
+     ],
+     [
+      6.391,
+      1.59,
+      -0.473
+     ],
+     [
+      6.371,
+      1.239,
+      1.284
+     ],
+     [
+      4.016,
+      1.041,
+      1.337
+     ],
+     [
+      4.346,
+      2.478,
+      -1.35
+     ],
+     [
+      2.892,
+      2.507,
+      -0.324
+     ],
+     [
+      4.395,
+      3.278,
+      0.239
+     ]
+    ],
+    "alpha": 13,
+    "charge": 0
+   }
+  }
+ ],
+ "ambiguous": [
+  {
+   "one": "B",
+   "three": "Asx",
+   "meaning": "Aspartate or asparagine",
+   "members": [
+    "D",
+    "N"
+   ]
+  },
+  {
+   "one": "Z",
+   "three": "Glx",
+   "meaning": "Glutamate or glutamine",
+   "members": [
+    "E",
+    "Q"
+   ]
+  },
+  {
+   "one": "J",
+   "three": "Xle",
+   "meaning": "Leucine or isoleucine (e.g. not distinguished by mass spectrometry)",
+   "members": [
+    "L",
+    "I"
+   ]
+  },
+  {
+   "one": "X",
+   "three": "Xaa",
+   "meaning": "Any or unknown amino acid",
+   "members": []
+  }
+ ]
+}

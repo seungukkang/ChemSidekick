@@ -2,7 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "chemsidekick",
   "title": "ChemSidekick",
-  "description": "Small chemistry tools, fast: elements, unit conversions, XYZ structures, stereoisomers, energy profiles.",
+  "description": "Small chemistry tools, fast: elements, unit conversions, XYZ structures, stereoisomers, energy profiles, amino acids.",
   "icon": "extension-icon.png",
   "license": "MIT",
   "categories": [
@@ -75,6 +75,31 @@
         "selectivity",
         "boltzmann",
         "conformer"
+      ]
+    },
+    {
+      "name": "aa",
+      "title": "Amino Acids",
+      "subtitle": "ChemSidekick",
+      "description": "The 20 (+2) amino acids as cards grouped by side-chain class: codes, 2D and 3D structures, masses, pKa, pI, hydropathy, codons.",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "type": "text",
+          "placeholder": "W, Trp, aromatic",
+          "required": false
+        }
+      ],
+      "keywords": [
+        "amino acid",
+        "residue",
+        "protein",
+        "one-letter code",
+        "three-letter code",
+        "side chain",
+        "codon",
+        "biochemistry"
       ]
     },
     {
