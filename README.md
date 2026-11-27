@@ -4,7 +4,7 @@ You can find most of this by googling or asking AI. But sometimes the AI's sense
 
 Use it from the terminal (`csk`), a local web interface, or Raycast.
 
-> **Status:** v0.2.1. Five tools; CLI, Streamlit web interface, and a Raycast extension. More tools coming soon!
+> **Status:** v0.2.2. Six tools; CLI, Streamlit web interface, and a Raycast extension. More tools coming soon!
 
 ## Tools
 
@@ -15,8 +15,9 @@ Use it from the terminal (`csk`), a local web interface, or Raycast.
 | STR-01 | `csk xyz` | Paste XYZ coordinates (one or many frames): formula, molecular weight, closest atoms, a 2D drawing from bonds inferred from the coordinates, and an interactive 3D view |
 | STR-02 | `csk stereo` | All stereoisomers of a SMILES (or a simple condensed formula): R/S, r/s and E/Z with IUPAC locants, enantiomer/diastereomer/meso relations, 2D drawings and 3D structures |
 | ENE-01 | `csk profile` | Energy profile A → TS → products: rate constants, half-lives, kinetic and equilibrium product ratios, diffusion-limited rates, the temperature for a target half-life, the ΔΔG‡ for a target selectivity; or Boltzmann populations of conformers |
+| BIO-01 | `csk aa` | The 20 amino acids plus Sec and Pyl, grouped by side-chain class: one- and three-letter codes, 2D and 3D structures, masses (free and residue), pKa and pI, Kyte–Doolittle hydropathy, codons; also the ambiguity codes B, Z, J, X |
 
-Every chemical value in `element` is cross-checked against one primary source and two authoritative compilations, and each value shows whether it was confirmed (see [`data/verification/elements.md`](data/verification/elements.md)). In `units`, conversions that use only defined constants are marked exact; the measured constants (hartree, Bohr radius, ε₀; CODATA 2022) are each checked against three references ([`data/verification/units.md`](data/verification/units.md)). The solvent viscosities used for diffusion-limited rates in `profile` are listed only when three references agree ([`data/verification/solvents.md`](data/verification/solvents.md)).
+Every chemical value in `element` is cross-checked against one primary source and two authoritative compilations, and each value shows whether it was confirmed (see [`data/verification/elements.md`](data/verification/elements.md)). In `units`, conversions that use only defined constants are marked exact; the measured constants (hartree, Bohr radius, ε₀; CODATA 2022) are each checked against three references ([`data/verification/units.md`](data/verification/units.md)). The solvent viscosities used for diffusion-limited rates in `profile` are listed only when three references agree ([`data/verification/solvents.md`](data/verification/solvents.md)). Amino-acid structures, formulas and masses in `aa` are checked against the wwPDB Chemical Component Dictionary, PubChem and ChEBI; pKa values are from one textbook table and marked provisional ([`data/verification/amino_acids.md`](data/verification/amino_acids.md)).
 
 ## Install
 
@@ -39,6 +40,7 @@ csk units 1 eV to kcal/mol     # one conversion; `csk units 300 nm` shows every 
 csk xyz molecule.xyz           # or paste coordinates: pbpaste | csk xyz
 csk stereo "CC(O)C(O)C(O)C"    # stereoisomers; also accepts CH3-CH(OH)-CH3
 csk profile --paths $'B 20.0 -3.0\nC 22.0 -5.0'   # energy profile: two competing paths
+csk aa Trp                     # amino-acid card; `csk aa aromatic` for a class, `csk aa` for all
 csk ui                         # web interface in the browser
 ```
 
@@ -69,6 +71,7 @@ npm run dev                     # loads the extension into Raycast; it stays aft
 | XYZ Viewer | Paste coordinates; 2D drawing and rotating 3D view side by side, then the details |
 | Stereoisomers | Type `stereo` and a SMILES; isomers as cards, Enter turns a card into a rotating 3D view |
 | Energy Profile | The paths on the left, the drawing and the answer on the right, redrawn as values change. Type `D 21 -4` (name, TS, product) in the search bar and press Enter to add a path; Enter on a path edits it. Reaction or Boltzmann populations beside the search bar; temperature (typed, in K) and unit in the list, the rest under More options; ⌘↵ shows the full result. The last input is remembered |
+| Amino Acids | Names and codes grouped by side-chain class on the left, the drawing and key values on the right. Pick the order beside the search bar (class, name, residue mass, hydropathy). ⌘I shows the full card, ⌘O the 3D structure, ⌘G all drawings as a grid |
 
 - If `csk` is somewhere else, set its path in the extension preferences.
 - After Python dependencies change, reinstall with `uv tool install --editable . --reinstall`.

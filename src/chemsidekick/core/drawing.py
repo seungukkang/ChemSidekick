@@ -21,15 +21,29 @@ BORDER_WIDTH = 2.0
 CORNER_RADIUS = 10
 
 
-def _rect(x: str, y: str, width: str, height: str) -> str:
+def _rect(
+    x: str,
+    y: str,
+    width: str,
+    height: str,
+    border: str = BORDER_COLOR,
+    stroke: float = BORDER_WIDTH,
+) -> str:
     return (
         f"<rect id='csk-backdrop' x='{x}' y='{y}' width='{width}' height='{height}' "
         f"rx='{CORNER_RADIUS}' ry='{CORNER_RADIUS}' fill='#ffffff' "
-        f"stroke='{BORDER_COLOR}' stroke-width='{BORDER_WIDTH:g}'/>"
+        f"stroke='{border}' stroke-width='{stroke:g}'/>"
     )
 
 
-def backdrop(x: float, y: float, width: float, height: float) -> str:
+def backdrop(
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+    border: str = BORDER_COLOR,
+    stroke: float = BORDER_WIDTH,
+) -> str:
     """The backdrop for a drawing whose viewBox is (x, y, width, height).
 
     The rectangle is inset by half the border width so the border is not cut
@@ -37,8 +51,10 @@ def backdrop(x: float, y: float, width: float, height: float) -> str:
     macOS's own SVG renderer (used by Raycast) draws width='100%' as a ~100 px
     square in the corner instead of the whole drawing. Browsers handle both.
     """
-    h = BORDER_WIDTH / 2
-    return _rect(f"{x + h:g}", f"{y + h:g}", f"{width - 2 * h:g}", f"{height - 2 * h:g}")
+    h = stroke / 2
+    return _rect(
+        f"{x + h:g}", f"{y + h:g}", f"{width - 2 * h:g}", f"{height - 2 * h:g}", border, stroke
+    )
 
 
 # For drawings without a viewBox: percentages work in browsers only (see
@@ -46,11 +62,16 @@ def backdrop(x: float, y: float, width: float, height: float) -> str:
 BACKDROP = _rect("0", "0", "100%", "100%")
 
 
-def with_backdrop(svg: str) -> str:
-    """The same SVG with a white backdrop drawn first (behind everything else)."""
+def with_backdrop(svg: str, border: str = BORDER_COLOR, stroke: float = BORDER_WIDTH) -> str:
+    """The same SVG with a white backdrop drawn first (behind everything else).
+
+    `border` and `stroke` change the border color and width (e.g. a class color)."""
     m = _SVG_OPEN.search(svg)
     if m is None:
         raise ValueError("not an SVG document")
     box = _VIEWBOX.search(m.group(0))
-    layer = backdrop(*(float(v) for v in box.groups())) if box else BACKDROP
+    if box:
+        layer = backdrop(*(float(v) for v in box.groups()), border=border, stroke=stroke)
+    else:
+        layer = _rect("0", "0", "100%", "100%", border, stroke)
     return svg[: m.end()] + layer + svg[m.end() :]
