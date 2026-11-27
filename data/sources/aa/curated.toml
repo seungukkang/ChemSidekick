@@ -1,0 +1,373 @@
+# Hand-entered amino-acid data for BIO-01 `aa` (plan 006).
+#
+# scripts/build_amino_acids.py checks every structure here against wwPDB CCD,
+# PubChem and ChEBI (InChIKey), computes masses from the verified element data,
+# and writes src/chemsidekick/tools/biochemistry/data/amino_acids.json.
+#
+# smiles      neutral L form (as in CCD, PubChem, ChEBI)
+# smiles_ph7  the form drawn in 2D: dominant charge state near pH 7 (plan 006 Q5).
+#             Must be the same molecule as `smiles` after neutralization.
+# class       side-chain class, Lehninger's five groups (plan 006 Q6) + "other"
+# pka         [alpha-COOH, alpha-NH3+, side chain or none]: PROVISIONAL, one
+#             textbook table (lehninger7), not yet cross-checked (plan 006 Q4)
+
+[references.jcbn1984]
+citation = "IUPAC-IUB Joint Commission on Biochemical Nomenclature (JCBN), Nomenclature and Symbolism for Amino Acids and Peptides (Recommendations 1983), Pure Appl. Chem. 1984, 56, 595–624."
+
+[references.ccd]
+citation = "wwPDB Chemical Component Dictionary (CCD), J. D. Westbrook et al., Bioinformatics 2015, 31, 1274–1278; files.rcsb.org/ligands."
+
+[references.pubchem]
+citation = "PubChem (NCBI), S. Kim et al., Nucleic Acids Res. 2025, 53, D1516–D1525; compound records by CID."
+
+[references.chebi]
+citation = "ChEBI (EMBL-EBI), A. Malik et al., Nucleic Acids Res. 2026; compound records by ChEBI ID."
+
+[references.kd1982]
+citation = "J. Kyte, R. F. Doolittle, A simple method for displaying the hydropathic character of a protein, J. Mol. Biol. 1982, 157, 105–132 (Table 2)."
+
+[references.expasy]
+citation = "ExPASy ProtScale, Amino acid scale: Hydropathicity (Kyte & Doolittle), SIB Swiss Institute of Bioinformatics, web.expasy.org/protscale."
+
+[references.ncbi_gc]
+citation = "NCBI, The Genetic Codes, Table 1 (Standard Code), www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi; gc.prt."
+
+[references.lehninger7]
+citation = "D. L. Nelson, M. M. Cox, Lehninger Principles of Biochemistry, 7th ed., W. H. Freeman, 2017, Table 3-1 and Fig. 3-5."
+
+[[amino_acid]]
+one = "G"
+three = "Gly"
+name = "Glycine"
+ccd = "GLY"
+pubchem_cid = 750
+chebi = 15428
+class = "nonpolar"
+essential = false
+smiles = "NCC(=O)O"
+smiles_ph7 = "[NH3+]CC(=O)[O-]"
+pka = [2.34, 9.60]
+
+[[amino_acid]]
+one = "A"
+three = "Ala"
+name = "Alanine"
+ccd = "ALA"
+pubchem_cid = 5950
+chebi = 16977
+class = "nonpolar"
+essential = false
+smiles = "C[C@H](N)C(=O)O"
+smiles_ph7 = "C[C@H]([NH3+])C(=O)[O-]"
+pka = [2.34, 9.69]
+
+[[amino_acid]]
+one = "P"
+three = "Pro"
+name = "Proline"
+ccd = "PRO"
+pubchem_cid = 145742
+chebi = 17203
+class = "nonpolar"
+essential = false
+smiles = "OC(=O)[C@@H]1CCCN1"
+smiles_ph7 = "[O-]C(=O)[C@@H]1CCC[NH2+]1"
+pka = [1.99, 10.96]
+
+[[amino_acid]]
+one = "V"
+three = "Val"
+name = "Valine"
+ccd = "VAL"
+pubchem_cid = 6287
+chebi = 16414
+class = "nonpolar"
+essential = true
+smiles = "CC(C)[C@H](N)C(=O)O"
+smiles_ph7 = "CC(C)[C@H]([NH3+])C(=O)[O-]"
+pka = [2.32, 9.62]
+
+[[amino_acid]]
+one = "L"
+three = "Leu"
+name = "Leucine"
+ccd = "LEU"
+pubchem_cid = 6106
+chebi = 15603
+class = "nonpolar"
+essential = true
+smiles = "CC(C)C[C@H](N)C(=O)O"
+smiles_ph7 = "CC(C)C[C@H]([NH3+])C(=O)[O-]"
+pka = [2.36, 9.60]
+
+[[amino_acid]]
+one = "I"
+three = "Ile"
+name = "Isoleucine"
+ccd = "ILE"
+pubchem_cid = 6306
+chebi = 17191
+class = "nonpolar"
+essential = true
+smiles = "CC[C@H](C)[C@H](N)C(=O)O"
+smiles_ph7 = "CC[C@H](C)[C@H]([NH3+])C(=O)[O-]"
+pka = [2.36, 9.68]
+
+[[amino_acid]]
+one = "M"
+three = "Met"
+name = "Methionine"
+ccd = "MET"
+pubchem_cid = 6137
+chebi = 16643
+class = "nonpolar"
+essential = true
+smiles = "CSCC[C@H](N)C(=O)O"
+smiles_ph7 = "CSCC[C@H]([NH3+])C(=O)[O-]"
+pka = [2.28, 9.21]
+
+[[amino_acid]]
+one = "F"
+three = "Phe"
+name = "Phenylalanine"
+ccd = "PHE"
+pubchem_cid = 6140
+chebi = 17295
+class = "aromatic"
+essential = true
+smiles = "N[C@@H](Cc1ccccc1)C(=O)O"
+smiles_ph7 = "[NH3+][C@@H](Cc1ccccc1)C(=O)[O-]"
+pka = [1.83, 9.13]
+
+[[amino_acid]]
+one = "Y"
+three = "Tyr"
+name = "Tyrosine"
+ccd = "TYR"
+pubchem_cid = 6057
+chebi = 17895
+class = "aromatic"
+essential = false
+smiles = "N[C@@H](Cc1ccc(O)cc1)C(=O)O"
+smiles_ph7 = "[NH3+][C@@H](Cc1ccc(O)cc1)C(=O)[O-]"
+pka = [2.20, 9.11, 10.07]
+
+[[amino_acid]]
+one = "W"
+three = "Trp"
+name = "Tryptophan"
+ccd = "TRP"
+pubchem_cid = 6305
+chebi = 16828
+class = "aromatic"
+essential = true
+smiles = "N[C@@H](Cc1c[nH]c2ccccc12)C(=O)O"
+smiles_ph7 = "[NH3+][C@@H](Cc1c[nH]c2ccccc12)C(=O)[O-]"
+pka = [2.38, 9.39]
+
+[[amino_acid]]
+one = "S"
+three = "Ser"
+name = "Serine"
+ccd = "SER"
+pubchem_cid = 5951
+chebi = 17115
+class = "polar"
+essential = false
+smiles = "N[C@@H](CO)C(=O)O"
+smiles_ph7 = "[NH3+][C@@H](CO)C(=O)[O-]"
+pka = [2.21, 9.15]
+
+[[amino_acid]]
+one = "T"
+three = "Thr"
+name = "Threonine"
+ccd = "THR"
+pubchem_cid = 6288
+chebi = 16857
+class = "polar"
+essential = true
+smiles = "C[C@@H](O)[C@H](N)C(=O)O"
+smiles_ph7 = "C[C@@H](O)[C@H]([NH3+])C(=O)[O-]"
+pka = [2.11, 9.62]
+
+[[amino_acid]]
+one = "C"
+three = "Cys"
+name = "Cysteine"
+ccd = "CYS"
+pubchem_cid = 5862
+chebi = 17561
+class = "polar"
+essential = false
+smiles = "N[C@@H](CS)C(=O)O"
+smiles_ph7 = "[NH3+][C@@H](CS)C(=O)[O-]"
+pka = [1.96, 10.28, 8.18]
+
+[[amino_acid]]
+one = "N"
+three = "Asn"
+name = "Asparagine"
+ccd = "ASN"
+pubchem_cid = 6267
+chebi = 17196
+class = "polar"
+essential = false
+smiles = "NC(=O)C[C@H](N)C(=O)O"
+smiles_ph7 = "NC(=O)C[C@H]([NH3+])C(=O)[O-]"
+pka = [2.02, 8.80]
+
+[[amino_acid]]
+one = "Q"
+three = "Gln"
+name = "Glutamine"
+ccd = "GLN"
+pubchem_cid = 5961
+chebi = 18050
+class = "polar"
+essential = false
+smiles = "NC(=O)CC[C@H](N)C(=O)O"
+smiles_ph7 = "NC(=O)CC[C@H]([NH3+])C(=O)[O-]"
+pka = [2.17, 9.13]
+
+[[amino_acid]]
+one = "K"
+three = "Lys"
+name = "Lysine"
+ccd = "LYS"
+pubchem_cid = 5962
+chebi = 18019
+class = "positive"
+essential = true
+smiles = "NCCCC[C@H](N)C(=O)O"
+smiles_ph7 = "[NH3+]CCCC[C@H]([NH3+])C(=O)[O-]"
+pka = [2.18, 8.95, 10.53]
+
+[[amino_acid]]
+one = "H"
+three = "His"
+name = "Histidine"
+ccd = "HIS"
+pubchem_cid = 6274
+chebi = 15971
+class = "positive"
+essential = true
+smiles = "N[C@@H](Cc1c[nH]cn1)C(=O)O"
+smiles_ph7 = "[NH3+][C@@H](Cc1c[nH]cn1)C(=O)[O-]"
+pka = [1.82, 9.17, 6.00]
+
+[[amino_acid]]
+one = "R"
+three = "Arg"
+name = "Arginine"
+ccd = "ARG"
+pubchem_cid = 6322
+chebi = 16467
+class = "positive"
+essential = false
+smiles = "NC(=N)NCCC[C@H](N)C(=O)O"
+smiles_ph7 = "NC(=[NH2+])NCCC[C@H]([NH3+])C(=O)[O-]"
+pka = [2.17, 9.04, 12.48]
+
+[[amino_acid]]
+one = "D"
+three = "Asp"
+name = "Aspartate"
+ccd = "ASP"
+pubchem_cid = 5960
+chebi = 17053
+class = "negative"
+essential = false
+smiles = "N[C@@H](CC(=O)O)C(=O)O"
+smiles_ph7 = "[NH3+][C@@H](CC(=O)[O-])C(=O)[O-]"
+pka = [1.88, 9.60, 3.65]
+
+[[amino_acid]]
+one = "E"
+three = "Glu"
+name = "Glutamate"
+ccd = "GLU"
+pubchem_cid = 33032
+chebi = 16015
+class = "negative"
+essential = false
+smiles = "N[C@@H](CCC(=O)O)C(=O)O"
+smiles_ph7 = "[NH3+][C@@H](CCC(=O)[O-])C(=O)[O-]"
+pka = [2.19, 9.67, 4.25]
+
+[[amino_acid]]
+one = "U"
+three = "Sec"
+name = "Selenocysteine"
+ccd = "SEC"
+pubchem_cid = 25076
+chebi = 16633
+class = "other"
+essential = false
+smiles = "N[C@@H](C[SeH])C(=O)O"
+smiles_ph7 = "[NH3+][C@@H](C[SeH])C(=O)[O-]"
+pka = []
+codons_note = "UGA (normally a stop codon) read as Sec when a SECIS element is present in the mRNA."
+
+[[amino_acid]]
+one = "O"
+three = "Pyl"
+name = "Pyrrolysine"
+ccd = "PYL"
+pubchem_cid = 5460671
+chebi = 21860
+class = "other"
+essential = false
+smiles = "C[C@@H]1CC=N[C@H]1C(=O)NCCCC[C@H](N)C(=O)O"
+smiles_ph7 = "C[C@@H]1CC=N[C@H]1C(=O)NCCCC[C@H]([NH3+])C(=O)[O-]"
+pka = []
+codons_note = "UAG (normally a stop codon) read as Pyl in some archaea and bacteria."
+
+# Ambiguity codes: no structure; the tool explains them (JCBN 1984, 3AA-1).
+[[ambiguous]]
+one = "B"
+three = "Asx"
+meaning = "Aspartate or asparagine"
+members = ["D", "N"]
+
+[[ambiguous]]
+one = "Z"
+three = "Glx"
+meaning = "Glutamate or glutamine"
+members = ["E", "Q"]
+
+[[ambiguous]]
+one = "J"
+three = "Xle"
+meaning = "Leucine or isoleucine (e.g. not distinguished by mass spectrometry)"
+members = ["L", "I"]
+
+[[ambiguous]]
+one = "X"
+three = "Xaa"
+meaning = "Any or unknown amino acid"
+members = []
+
+# Kyte–Doolittle hydropathy index, transcribed from kd1982 Table 2; compared with
+# the ExPASy ProtScale copy by the build script.
+[kd1982]
+A = 1.8
+R = -4.5
+N = -3.5
+D = -3.5
+C = 2.5
+Q = -3.5
+E = -3.5
+G = -0.4
+H = -3.2
+I = 4.5
+L = 3.8
+K = -3.9
+M = 1.9
+F = 2.8
+P = -1.6
+S = -0.8
+T = -0.7
+W = -0.9
+Y = -1.3
+V = 4.2

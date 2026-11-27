@@ -6,6 +6,7 @@ import { usePromise } from "@raycast/utils";
 import { ErrorView } from "./components/ErrorView";
 import { ResultView } from "./components/ResultView";
 import { ToolForm } from "./components/ToolForm";
+import { AminoAcidsView } from "./components/AminoAcidsView";
 import { ProfileCommand } from "./components/ProfileView";
 import { UnitsView } from "./components/UnitsView";
 import { getTransport } from "./connection";
@@ -21,6 +22,7 @@ const NO_INPUT = {};
 const DEDICATED_VIEWS: Record<string, () => React.ReactNode> = {
   units: () => <UnitsView />,
   profile: () => <ProfileCommand />,
+  aa: () => <AminoAcidsView />,
 };
 
 async function loadTools(): Promise<ToolListResponse> {

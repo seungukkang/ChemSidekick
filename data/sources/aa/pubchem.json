@@ -1,0 +1,204 @@
+{
+ "PropertyTable": {
+  "Properties": [
+   {
+    "CID": 750,
+    "MolecularFormula": "C2H5NO2",
+    "MolecularWeight": "75.07",
+    "SMILES": "C(C(=O)O)N",
+    "InChIKey": "DHMQDGOQFOQNFH-UHFFFAOYSA-N",
+    "IUPACName": "2-aminoacetic acid",
+    "MonoisotopicMass": "75.032028402"
+   },
+   {
+    "CID": 5950,
+    "MolecularFormula": "C3H7NO2",
+    "MolecularWeight": "89.09",
+    "SMILES": "C[C@@H](C(=O)O)N",
+    "InChIKey": "QNAYBMKLOCPYGJ-REOHCLBHSA-N",
+    "IUPACName": "(2S)-2-aminopropanoic acid",
+    "MonoisotopicMass": "89.047678466"
+   },
+   {
+    "CID": 145742,
+    "MolecularFormula": "C5H9NO2",
+    "MolecularWeight": "115.13",
+    "SMILES": "C1C[C@H](NC1)C(=O)O",
+    "InChIKey": "ONIBWKKTOPOVIA-BYPYZUCNSA-N",
+    "IUPACName": "(2S)-pyrrolidine-2-carboxylic acid",
+    "MonoisotopicMass": "115.063328530"
+   },
+   {
+    "CID": 6287,
+    "MolecularFormula": "C5H11NO2",
+    "MolecularWeight": "117.15",
+    "SMILES": "CC(C)[C@@H](C(=O)O)N",
+    "InChIKey": "KZSNJWFQEVHDMF-BYPYZUCNSA-N",
+    "IUPACName": "(2S)-2-amino-3-methylbutanoic acid",
+    "MonoisotopicMass": "117.078978594"
+   },
+   {
+    "CID": 6106,
+    "MolecularFormula": "C6H13NO2",
+    "MolecularWeight": "131.17",
+    "SMILES": "CC(C)C[C@@H](C(=O)O)N",
+    "InChIKey": "ROHFNLRQFUQHCH-YFKPBYRVSA-N",
+    "IUPACName": "(2S)-2-amino-4-methylpentanoic acid",
+    "MonoisotopicMass": "131.094628657"
+   },
+   {
+    "CID": 6306,
+    "MolecularFormula": "C6H13NO2",
+    "MolecularWeight": "131.17",
+    "SMILES": "CC[C@H](C)[C@@H](C(=O)O)N",
+    "InChIKey": "AGPKZVBTJJNPAG-WHFBIAKZSA-N",
+    "IUPACName": "(2S,3S)-2-amino-3-methylpentanoic acid",
+    "MonoisotopicMass": "131.094628657"
+   },
+   {
+    "CID": 6137,
+    "MolecularFormula": "C5H11NO2S",
+    "MolecularWeight": "149.21",
+    "SMILES": "CSCC[C@@H](C(=O)O)N",
+    "InChIKey": "FFEARJCKVFRZRR-BYPYZUCNSA-N",
+    "IUPACName": "(2S)-2-amino-4-methylsulfanylbutanoic acid",
+    "MonoisotopicMass": "149.05104977"
+   },
+   {
+    "CID": 6140,
+    "MolecularFormula": "C9H11NO2",
+    "MolecularWeight": "165.19",
+    "SMILES": "C1=CC=C(C=C1)C[C@@H](C(=O)O)N",
+    "InChIKey": "COLNVLDHVKWLRT-QMMMGPOBSA-N",
+    "IUPACName": "(2S)-2-amino-3-phenylpropanoic acid",
+    "MonoisotopicMass": "165.078978594"
+   },
+   {
+    "CID": 6057,
+    "MolecularFormula": "C9H11NO3",
+    "MolecularWeight": "181.19",
+    "SMILES": "C1=CC(=CC=C1C[C@@H](C(=O)O)N)O",
+    "InChIKey": "OUYCCCASQSFEME-QMMMGPOBSA-N",
+    "IUPACName": "(2S)-2-amino-3-(4-hydroxyphenyl)propanoic acid",
+    "MonoisotopicMass": "181.07389321"
+   },
+   {
+    "CID": 6305,
+    "MolecularFormula": "C11H12N2O2",
+    "MolecularWeight": "204.22",
+    "SMILES": "C1=CC=C2C(=C1)C(=CN2)C[C@@H](C(=O)O)N",
+    "InChIKey": "QIVBCDIJIAJPQS-VIFPVBQESA-N",
+    "IUPACName": "(2S)-2-amino-3-(1H-indol-3-yl)propanoic acid",
+    "MonoisotopicMass": "204.089877630"
+   },
+   {
+    "CID": 5951,
+    "MolecularFormula": "C3H7NO3",
+    "MolecularWeight": "105.09",
+    "SMILES": "C([C@@H](C(=O)O)N)O",
+    "InChIKey": "MTCFGRXMJLQNBG-REOHCLBHSA-N",
+    "IUPACName": "(2S)-2-amino-3-hydroxypropanoic acid",
+    "MonoisotopicMass": "105.042593085"
+   },
+   {
+    "CID": 6288,
+    "MolecularFormula": "C4H9NO3",
+    "MolecularWeight": "119.12",
+    "SMILES": "C[C@H]([C@@H](C(=O)O)N)O",
+    "InChIKey": "AYFVYJQAPQTCCC-GBXIJSLDSA-N",
+    "IUPACName": "(2S,3R)-2-amino-3-hydroxybutanoic acid",
+    "MonoisotopicMass": "119.058243149"
+   },
+   {
+    "CID": 5862,
+    "MolecularFormula": "C3H7NO2S",
+    "MolecularWeight": "121.16",
+    "SMILES": "C([C@@H](C(=O)O)N)S",
+    "InChIKey": "XUJNEKJLAYXESH-REOHCLBHSA-N",
+    "IUPACName": "(2R)-2-amino-3-sulfanylpropanoic acid",
+    "MonoisotopicMass": "121.01974964"
+   },
+   {
+    "CID": 6267,
+    "MolecularFormula": "C4H8N2O3",
+    "MolecularWeight": "132.12",
+    "SMILES": "C([C@@H](C(=O)O)N)C(=O)N",
+    "InChIKey": "DCXYFEDJOCDNAF-REOHCLBHSA-N",
+    "IUPACName": "(2S)-2,4-diamino-4-oxobutanoic acid",
+    "MonoisotopicMass": "132.05349212"
+   },
+   {
+    "CID": 5961,
+    "MolecularFormula": "C5H10N2O3",
+    "MolecularWeight": "146.14",
+    "SMILES": "C(CC(=O)N)[C@@H](C(=O)O)N",
+    "InChIKey": "ZDXPYRJPNDTMRX-VKHMYHEASA-N",
+    "IUPACName": "(2S)-2,5-diamino-5-oxopentanoic acid",
+    "MonoisotopicMass": "146.06914219"
+   },
+   {
+    "CID": 5962,
+    "MolecularFormula": "C6H14N2O2",
+    "MolecularWeight": "146.19",
+    "SMILES": "C(CCN)C[C@@H](C(=O)O)N",
+    "InChIKey": "KDXKERNSBIXSRK-YFKPBYRVSA-N",
+    "IUPACName": "(2S)-2,6-diaminohexanoic acid",
+    "MonoisotopicMass": "146.105527694"
+   },
+   {
+    "CID": 6274,
+    "MolecularFormula": "C6H9N3O2",
+    "MolecularWeight": "155.15",
+    "SMILES": "C1=C(NC=N1)C[C@@H](C(=O)O)N",
+    "InChIKey": "HNDVDQJCIGZPNO-YFKPBYRVSA-N",
+    "IUPACName": "(2S)-2-amino-3-(1H-imidazol-5-yl)propanoic acid",
+    "MonoisotopicMass": "155.069476538"
+   },
+   {
+    "CID": 6322,
+    "MolecularFormula": "C6H14N4O2",
+    "MolecularWeight": "174.20",
+    "SMILES": "C(C[C@@H](C(=O)O)N)CN=C(N)N",
+    "InChIKey": "ODKSFYDXXFIFQN-BYPYZUCNSA-N",
+    "IUPACName": "(2S)-2-amino-5-(diaminomethylideneamino)pentanoic acid",
+    "MonoisotopicMass": "174.11167570"
+   },
+   {
+    "CID": 5960,
+    "MolecularFormula": "C4H7NO4",
+    "MolecularWeight": "133.10",
+    "SMILES": "C([C@@H](C(=O)O)N)C(=O)O",
+    "InChIKey": "CKLJMWTZIZZHCS-REOHCLBHSA-N",
+    "IUPACName": "(2S)-2-aminobutanedioic acid",
+    "MonoisotopicMass": "133.03750770"
+   },
+   {
+    "CID": 33032,
+    "MolecularFormula": "C5H9NO4",
+    "MolecularWeight": "147.13",
+    "SMILES": "C(CC(=O)O)[C@@H](C(=O)O)N",
+    "InChIKey": "WHUUTDBJXJRKMK-VKHMYHEASA-N",
+    "IUPACName": "(2S)-2-aminopentanedioic acid",
+    "MonoisotopicMass": "147.05315777"
+   },
+   {
+    "CID": 25076,
+    "MolecularFormula": "C3H7NO2Se",
+    "MolecularWeight": "168.06",
+    "SMILES": "C([C@@H](C(=O)O)N)[SeH]",
+    "InChIKey": "ZKZBPNGNEQAJSX-REOHCLBHSA-N",
+    "IUPACName": "(2R)-2-amino-3-selanylpropanoic acid",
+    "MonoisotopicMass": "168.96420"
+   },
+   {
+    "CID": 5460671,
+    "MolecularFormula": "C12H21N3O3",
+    "MolecularWeight": "255.31",
+    "SMILES": "C[C@@H]1CC=N[C@H]1C(=O)NCCCC[C@@H](C(=O)O)N",
+    "InChIKey": "ZFOMKMMPBOQKMC-KXUCPTDWSA-N",
+    "IUPACName": "(2S)-2-amino-6-[[(2R,3R)-3-methyl-3,4-dihydro-2H-pyrrole-2-carbonyl]amino]hexanoic acid",
+    "MonoisotopicMass": "255.15829154"
+   }
+  ]
+ }
+}

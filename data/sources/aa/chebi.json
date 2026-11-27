@@ -1,0 +1,288 @@
+{
+ "15428": {
+  "accession": "CHEBI:15428",
+  "name": "glycine",
+  "stars": 3,
+  "smiles": "NCC(=O)O",
+  "inchikey": "DHMQDGOQFOQNFH-UHFFFAOYSA-N",
+  "chemical_data": {
+   "formula": "C2H5NO2",
+   "charge": 0,
+   "mass": "75.067",
+   "monoisotopic_mass": "75.03203"
+  }
+ },
+ "16977": {
+  "accession": "CHEBI:16977",
+  "name": "L-alanine",
+  "stars": 3,
+  "smiles": "C[C@H](N)C(=O)O",
+  "inchikey": "QNAYBMKLOCPYGJ-REOHCLBHSA-N",
+  "chemical_data": {
+   "formula": "C3H7NO2",
+   "charge": 0,
+   "mass": "89.094",
+   "monoisotopic_mass": "89.04768"
+  }
+ },
+ "17203": {
+  "accession": "CHEBI:17203",
+  "name": "L-proline",
+  "stars": 3,
+  "smiles": "O=C(O)[C@@H]1CCCN1",
+  "inchikey": "ONIBWKKTOPOVIA-BYPYZUCNSA-N",
+  "chemical_data": {
+   "formula": "C5H9NO2",
+   "charge": 0,
+   "mass": "115.132",
+   "monoisotopic_mass": "115.06333"
+  }
+ },
+ "16414": {
+  "accession": "CHEBI:16414",
+  "name": "L-valine",
+  "stars": 3,
+  "smiles": "CC(C)[C@H](N)C(=O)O",
+  "inchikey": "KZSNJWFQEVHDMF-BYPYZUCNSA-N",
+  "chemical_data": {
+   "formula": "C5H11NO2",
+   "charge": 0,
+   "mass": "117.148",
+   "monoisotopic_mass": "117.07898"
+  }
+ },
+ "15603": {
+  "accession": "CHEBI:15603",
+  "name": "L-leucine",
+  "stars": 3,
+  "smiles": "CC(C)C[C@H](N)C(=O)O",
+  "inchikey": "ROHFNLRQFUQHCH-YFKPBYRVSA-N",
+  "chemical_data": {
+   "formula": "C6H13NO2",
+   "charge": 0,
+   "mass": "131.175",
+   "monoisotopic_mass": "131.09463"
+  }
+ },
+ "17191": {
+  "accession": "CHEBI:17191",
+  "name": "L-isoleucine",
+  "stars": 3,
+  "smiles": "CC[C@H](C)[C@H](N)C(=O)O",
+  "inchikey": "AGPKZVBTJJNPAG-WHFBIAKZSA-N",
+  "chemical_data": {
+   "formula": "C6H13NO2",
+   "charge": 0,
+   "mass": "131.175",
+   "monoisotopic_mass": "131.09463"
+  }
+ },
+ "16643": {
+  "accession": "CHEBI:16643",
+  "name": "L-methionine",
+  "stars": 3,
+  "smiles": "CSCC[C@H](N)C(=O)O",
+  "inchikey": "FFEARJCKVFRZRR-BYPYZUCNSA-N",
+  "chemical_data": {
+   "formula": "C5H11NO2S",
+   "charge": 0,
+   "mass": "149.215",
+   "monoisotopic_mass": "149.05105"
+  }
+ },
+ "17295": {
+  "accession": "CHEBI:17295",
+  "name": "L-phenylalanine",
+  "stars": 3,
+  "smiles": "N[C@@H](Cc1ccccc1)C(=O)O",
+  "inchikey": "COLNVLDHVKWLRT-QMMMGPOBSA-N",
+  "chemical_data": {
+   "formula": "C9H11NO2",
+   "charge": 0,
+   "mass": "165.192",
+   "monoisotopic_mass": "165.07898"
+  }
+ },
+ "17895": {
+  "accession": "CHEBI:17895",
+  "name": "L-tyrosine",
+  "stars": 3,
+  "smiles": "N[C@@H](Cc1ccc(O)cc1)C(=O)O",
+  "inchikey": "OUYCCCASQSFEME-QMMMGPOBSA-N",
+  "chemical_data": {
+   "formula": "C9H11NO3",
+   "charge": 0,
+   "mass": "181.191",
+   "monoisotopic_mass": "181.07389"
+  }
+ },
+ "16828": {
+  "accession": "CHEBI:16828",
+  "name": "L-tryptophan",
+  "stars": 3,
+  "smiles": "N[C@@H](Cc1cnc2ccccc12)C(=O)O",
+  "inchikey": "QIVBCDIJIAJPQS-VIFPVBQESA-N",
+  "chemical_data": {
+   "formula": "C11H12N2O2",
+   "charge": 0,
+   "mass": "204.229",
+   "monoisotopic_mass": "204.08988"
+  }
+ },
+ "17115": {
+  "accession": "CHEBI:17115",
+  "name": "L-serine",
+  "stars": 3,
+  "smiles": "N[C@@H](CO)C(=O)O",
+  "inchikey": "MTCFGRXMJLQNBG-REOHCLBHSA-N",
+  "chemical_data": {
+   "formula": "C3H7NO3",
+   "charge": 0,
+   "mass": "105.093",
+   "monoisotopic_mass": "105.04259"
+  }
+ },
+ "16857": {
+  "accession": "CHEBI:16857",
+  "name": "L-threonine",
+  "stars": 3,
+  "smiles": "C[C@@H](O)[C@H](N)C(=O)O",
+  "inchikey": "AYFVYJQAPQTCCC-GBXIJSLDSA-N",
+  "chemical_data": {
+   "formula": "C4H9NO3",
+   "charge": 0,
+   "mass": "119.120",
+   "monoisotopic_mass": "119.05824"
+  }
+ },
+ "17561": {
+  "accession": "CHEBI:17561",
+  "name": "L-cysteine",
+  "stars": 3,
+  "smiles": "N[C@@H](CS)C(=O)O",
+  "inchikey": "XUJNEKJLAYXESH-REOHCLBHSA-N",
+  "chemical_data": {
+   "formula": "C3H7NO2S",
+   "charge": 0,
+   "mass": "121.161",
+   "monoisotopic_mass": "121.01975"
+  }
+ },
+ "17196": {
+  "accession": "CHEBI:17196",
+  "name": "L-asparagine",
+  "stars": 3,
+  "smiles": "NC(=O)C[C@H](N)C(=O)O",
+  "inchikey": "DCXYFEDJOCDNAF-REOHCLBHSA-N",
+  "chemical_data": {
+   "formula": "C4H8N2O3",
+   "charge": 0,
+   "mass": "132.119",
+   "monoisotopic_mass": "132.05349"
+  }
+ },
+ "18050": {
+  "accession": "CHEBI:18050",
+  "name": "L-glutamine",
+  "stars": 3,
+  "smiles": "NC(=O)CC[C@H](N)C(=O)O",
+  "inchikey": "ZDXPYRJPNDTMRX-VKHMYHEASA-N",
+  "chemical_data": {
+   "formula": "C5H10N2O3",
+   "charge": 0,
+   "mass": "146.146",
+   "monoisotopic_mass": "146.06914"
+  }
+ },
+ "18019": {
+  "accession": "CHEBI:18019",
+  "name": "L-lysine",
+  "stars": 3,
+  "smiles": "NCCCC[C@H](N)C(=O)O",
+  "inchikey": "KDXKERNSBIXSRK-YFKPBYRVSA-N",
+  "chemical_data": {
+   "formula": "C6H14N2O2",
+   "charge": 0,
+   "mass": "146.190",
+   "monoisotopic_mass": "146.10553"
+  }
+ },
+ "15971": {
+  "accession": "CHEBI:15971",
+  "name": "L-histidine",
+  "stars": 3,
+  "smiles": "N[C@@H](Cc1cncn1)C(=O)O",
+  "inchikey": "HNDVDQJCIGZPNO-YFKPBYRVSA-N",
+  "chemical_data": {
+   "formula": "C6H9N3O2",
+   "charge": 0,
+   "mass": "155.157",
+   "monoisotopic_mass": "155.06948"
+  }
+ },
+ "16467": {
+  "accession": "CHEBI:16467",
+  "name": "L-arginine",
+  "stars": 3,
+  "smiles": "N=C(N)NCCC[C@H](N)C(=O)O",
+  "inchikey": "ODKSFYDXXFIFQN-BYPYZUCNSA-N",
+  "chemical_data": {
+   "formula": "C6H14N4O2",
+   "charge": 0,
+   "mass": "174.204",
+   "monoisotopic_mass": "174.11168"
+  }
+ },
+ "17053": {
+  "accession": "CHEBI:17053",
+  "name": "L-aspartic acid",
+  "stars": 3,
+  "smiles": "N[C@@H](CC(=O)O)C(=O)O",
+  "inchikey": "CKLJMWTZIZZHCS-REOHCLBHSA-N",
+  "chemical_data": {
+   "formula": "C4H7NO4",
+   "charge": 0,
+   "mass": "133.103",
+   "monoisotopic_mass": "133.03751"
+  }
+ },
+ "16015": {
+  "accession": "CHEBI:16015",
+  "name": "L-glutamic acid",
+  "stars": 3,
+  "smiles": "N[C@@H](CCC(=O)O)C(=O)O",
+  "inchikey": "WHUUTDBJXJRKMK-VKHMYHEASA-N",
+  "chemical_data": {
+   "formula": "C5H9NO4",
+   "charge": 0,
+   "mass": "147.130",
+   "monoisotopic_mass": "147.05316"
+  }
+ },
+ "16633": {
+  "accession": "CHEBI:16633",
+  "name": "L-selenocysteine",
+  "stars": 3,
+  "smiles": "N[C@@H](C[SeH])C(=O)O",
+  "inchikey": "ZKZBPNGNEQAJSX-REOHCLBHSA-N",
+  "chemical_data": {
+   "formula": "C3H7NO2Se",
+   "charge": 0,
+   "mass": "168.054",
+   "monoisotopic_mass": "168.96420"
+  }
+ },
+ "21860": {
+  "accession": "CHEBI:21860",
+  "name": "L-pyrrolysine",
+  "stars": 3,
+  "smiles": "C[C@@H]1CC=N[C@H]1C(=O)NCCCC[C@H](N)C(=O)O",
+  "inchikey": "ZFOMKMMPBOQKMC-KXUCPTDWSA-N",
+  "chemical_data": {
+   "formula": "C12H21N3O3",
+   "charge": 0,
+   "mass": "255.318",
+   "monoisotopic_mass": "255.15829"
+  }
+ }
+}
